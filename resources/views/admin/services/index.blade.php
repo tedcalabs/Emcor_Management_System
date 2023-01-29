@@ -15,29 +15,53 @@
               <table class="table table-bordered">
                   <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Name</th>
-                        <th>Discription</th>
                         <th>Image</th>
-                        <th>Servicing fee</th>
+                        <th>Discription</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Action</th>
                       
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($services as $service)
                     <tr>
-                        <td>1</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ $service->name}}</td>
+                        <td>
+                      <img src="{{ Storage::url($service->image) }}" width="70px" height="70px" alt="Image">
+                        
+                        </td>
+                        <td>{{ $service->description}}</td>
+                        
+                        <td>
+                           
+                            category
+                             
+                       </td>
+
+                        <td>{{ $service->price}}</td>
+                        <td>
+
+                            <div class=" ">
+                                <a href="{{route('services.edit', $service->id) }}" class="btn btn-info">Edit</a>
+                                <form method="POST"
+                                        action="{{ route('services.destroy', $service->id) }}"
+                                        onsubmit="return confirm('Are you sure?');">
+                                    @csrf
+                                    @method('DELETE')
+
+                                <button type="submit" class="btn btn-red">Delete</button>
+                                
+                            </form>
+
+                            </div>
+
+                        </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                     
+                  
+                    @endforeach
                 </tbody>
               </table>
           </div>

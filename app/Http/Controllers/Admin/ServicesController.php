@@ -6,6 +6,8 @@ use App\Models\Service;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ServiceStoreRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ServicesController extends Controller
 {
@@ -37,9 +39,21 @@ class ServicesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ServiceStoreRequest $request)
     {
-        
+        $image = $request->file('image')->store('public/services');
+
+        $service = Service::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $image,
+            'price' => $request->price
+
+        ]);
+        if ($request->has('categories')) {
+            $service->categories()->attach($request->categories);
+        }
+        return to_route('services.index');
     }
 
     /**
@@ -48,9 +62,11 @@ class ServicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Service $service)
     {
-        //
+        $categories = Category::all();
+
+        return view('admin.services.index', compact('services', 'categories'));
     }
 
     /**
@@ -59,9 +75,10 @@ class ServicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Service $service)
     {
-        //
+        $categories = Category::all();
+        return view('admin.services.edit', compact('service', 'categories'));
     }
 
     /**
@@ -71,9 +88,26 @@ class ServicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Service $service)
     {
-        //
+        $request->validate(
+            [
+                'name' => 'required',
+                'description' => 'required'
+            ]
+        );
+        $image = $service->image;
+        if ($request->hasFile('image')) {
+            Storage::delete($service->image);
+            $image = $request->file('image')->store('public/services');
+        }
+
+        $service->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $image
+        ]);
+        return to_route('services.index');
     }
 
     /**
@@ -82,8 +116,11 @@ class ServicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Service $service)
     {
-        //
+        Storage::delete($service->image);
+        $service->delete();
+
+        return to_route('services.index');
     }
 }

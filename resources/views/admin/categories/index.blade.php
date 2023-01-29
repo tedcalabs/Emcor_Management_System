@@ -17,6 +17,7 @@
               <table class="table table-bordered">
                   <thead>
                     <tr>
+                        <th>Id</th>
                         <th>Name</th>
                         <th>Image</th>
                         <th>Discription</th>
@@ -27,6 +28,7 @@
                 <tbody>
                     @foreach ($categories as $category)
                     <tr>
+                        <td>{{ $category->id}}</td>
                         <td>{{ $category->name}}</td>
                         <td>
                       <img src="{{ Storage::url($category->image) }}" width="70px" height="70px" alt="Image">
