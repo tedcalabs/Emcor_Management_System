@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Service;
 use App\Models\Category;
@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ServiceStoreRequest;
 use Illuminate\Support\Facades\Storage;
 
-class ServicesController extends Controller
+class ServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +18,10 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
-        return view('admin.services.index', compact('services'));
+     
+        $data = Service::all();
+        $categories = Category::all(); 
+        return view('admin.services.index', compact('data', 'categories'));
     }
 
     /**
@@ -122,5 +124,28 @@ class ServicesController extends Controller
         $service->delete();
 
         return to_route('services.index');
+    }
+
+
+
+    public function get_popular_services(Request $request)
+    {
+
+        $list = Service::where('category_id', 1)->get();
+        foreach ($list as $item) {
+            $item['description'] = strip_tags($item['description']);
+            $item['description'] = $Content = preg_replace("/&#?[a-z0-9]+;/i", " ", $item['description']);
+            unset($item['selected_people']);
+            unset($item['people']);
+        }
+
+        $data =  [
+            'total_size' => $item->count(),
+            'category_id' => 2,
+            'offset' => 0,
+            'services' => $item
+        ];
+
+        return response()->json($data, 200);
     }
 }

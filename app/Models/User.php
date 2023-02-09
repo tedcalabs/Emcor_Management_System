@@ -44,12 +44,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-/*
-    protected function isAdmin(): Attribute
-    {
+
+    /*protected function role(): Attribute
+    {s
         return new Attribute(
-            get: fn () => $this->role_id == 2,
+            get: fn ($value) => ["user", "technician", "mechanic", "secretary", "manager", "admin"][$value]
         );
+    }*/
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'roles_users', 'users_id', 'roles_id');
     }
-    */
 }

@@ -113,22 +113,8 @@ top: 0; /* Position the navbar at the top of the page */
 
 
 .navbar .btn:hover {
-  background: #b3afaf;
+  background: #f08080;
   color: black;
-    
-}
-
-
- .btn-logout{
-  background: #3c3939;
-  color: rgb(241, 227, 227);
-    
-}
-
-
-.btn-red{
-  background: #FF1E1E;
-  color: rgb(241, 227, 227);
     
 }
 
@@ -148,12 +134,12 @@ top: 0; /* Position the navbar at the top of the page */
     {{-- VIEW OUTPUT--}}
     <main>
  
-      @yield ('categories')
-      @yield ('services')
-      @yield ('technicians')
-      @yield ('users')
+      @yield ('categoriesx')
+      @yield ('servicesx')
+      @yield ('techniciansx')
+    
       
-      @yield ('requests')
+      @yield ('requestsx')
 
       </main>   
         <!-- jquery -->
@@ -165,7 +151,12 @@ top: 0; /* Position the navbar at the top of the page */
         <!-- Fontawesome-->
         <script src="{{ asset('panel/assets/js/all.min.js')}}"></script>
 
-
+        <!-- chart -->
+<script src="{{ asset('panel/assets/plugins/chartjs-bar-chart/Chart.min.js')}}"></script>
+        <script src="{{ asset('panel/assets/plugins/chartjs-bar-chart/chart.js')}}"></script>
+        <!-- pie chart -->
+        <script src="{{ asset('panel/assets/plugins/pie_chart/chart.loader.js')}}"></script>
+        <script src="{{ asset('panel/assets/plugins/pie_chart/pie.active.js')}}"></script>
  
  
         <!-- Main js -->

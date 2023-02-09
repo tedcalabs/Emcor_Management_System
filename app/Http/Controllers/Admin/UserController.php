@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class TechnicianController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,9 @@ class TechnicianController extends Controller
      */
     public function index()
     {
-        return view('admin.technicians.index');
+        $data = User::all();
+        $roles = Role::all();
+        return view('admin.users.index', compact('data', 'roles'));
     }
 
     /**
@@ -24,7 +28,7 @@ class TechnicianController extends Controller
      */
     public function create()
     {
-      
+        return view('admin.users.create');
     }
 
     /**
@@ -46,7 +50,12 @@ class TechnicianController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = User::find($id);
+        $roles = Role::all();
+        return view('admin.users.index', [
+            'data' => $data,
+            'roles' => $roles
+        ]);
     }
 
     /**

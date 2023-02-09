@@ -25,7 +25,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($services as $service)
+                  
+                    @foreach ($data as $service)
                     <tr>
                         <td>{{ $service->name}}</td>
                         <td>
@@ -33,12 +34,12 @@
                         
                         </td>
                         <td>{{ $service->description}}</td>
-                        
                         <td>
-                           
-                            category
-                             
-                       </td>
+
+                            @foreach ($service->categories as $category)
+                            {{ $category->catname}}</td>
+                        @endforeach
+                        </td>
 
                         <td>{{ $service->price}}</td>
                         <td>
@@ -65,6 +66,9 @@
                 </tbody>
               </table>
           </div>
+
+         
+        </div>
       </div>
   </div> <!-- /table -->
 @endsection

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\AdminPanel;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
-class TechnicianController extends Controller
+class AdminUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,10 @@ class TechnicianController extends Controller
      */
     public function index()
     {
-        return view('admin.technicians.index');
+        $data = User::all();
+        return view ('admin.user.index',[
+            'data' => $data
+        ]);
     }
 
     /**
@@ -24,7 +28,7 @@ class TechnicianController extends Controller
      */
     public function create()
     {
-      
+        //
     }
 
     /**

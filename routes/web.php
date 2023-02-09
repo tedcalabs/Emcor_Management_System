@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\RequestController;
-use App\Http\Controllers\Admin\SalesController;
-use App\Http\Controllers\Admin\ServicesController;
-use App\Http\Controllers\Admin\TechnicianController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProfileController;
 use App\Models\Technician;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\SalesController;
+use App\Http\Controllers\Admin\RequestController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Api\V1\ServiceController;
+use App\Http\Controllers\Admin\TechnicianController;
+use App\Http\Controllers\AdminPanel\AdminUserController;
 
 
 /*---------Admin Route---------*/
@@ -40,9 +42,34 @@ Route::prefix('admin')->group(function () {
     Route::resource('/categories', CategoryController::class)->middleware('admin');
     Route::resource('/requests', RequestController::class)->middleware('admin');
     Route::resource('/sales', SalesController::class)->middleware('admin');
-    Route::resource('/services', ServicesController::class)->middleware('admin');
+    Route::resource('/services', ServiceController::class)->middleware('admin');
     Route::resource('/technicians', TechnicianController::class)->middleware('admin');
     Route::resource('/secretaries', TechnicianController::class)->middleware('admin');
+    Route::resource('/users', UserController::class)->middleware('admin');
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //USER ROUTES------------------------------- -----------------------  ------------------------
+
+
+    Route::prefix('/user')->name('user')->controller(AdminUserController::class)->group(function () {
+
+        Route::get('/', 'index')->name('index');
+        Route::get('/edit/{id}', 'show')->name('edit');
+        Route::get('/show/{id}', 'show')->name('show');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/destroy/{id}', 'destroy')->name('destroy');
+    });
 });
 
 
@@ -72,3 +99,34 @@ Route::middleware('auth')->group(function () {
 
 
 require __DIR__ . '/auth.php';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//USER ROUTES------------------------------- -----------------------  ------------------------
+/*
+
+Route::prefix('/user')->name('user')->controller(AdminUserController::class)->group(function () {
+
+  Route::get('/','index')->name('index');
+  Route::get('/edit/{id}','show')->name('edit');
+  Route::get('/show/{id}','show')->name('show');
+  Route::post('/update/{id}','update')->name('update');
+  Route::get('/destroy/{id}','destroy')->name('destroy');
+});*/

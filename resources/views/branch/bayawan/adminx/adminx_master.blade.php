@@ -4,22 +4,10 @@
 <head>
   <title>@yield('title')</title>
   <meta charset="utf-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
- <!-- metis menu -->
- <link rel="stylesheet" href="{{ asset('panel/assets/plugins/metismenu-3.0.4/assets/css/metisMenu.min.css')}}">
- <link rel="stylesheet" href="{{ asset('panel/assets/plugins/metismenu-3.0.4/assets/css/mm-vertical-hover.css')}}">
-
-
-
   <link rel="stylesheet" href="{{ asset('assets/styles.css') }}">
-  <link rel="stylesheet" href="{{ asset('panel/assets/css/bootstrap.min.css')}}">
-  <!--Custom CSS-->
-  <link rel="stylesheet" href="{{ asset('panel/assets/css/style.css')}}">
+  <link rel="stylesheet" href="{{asset('panel/assets/css/bootstrap.min.css')}}">
 
-  <link rel="stylesheet" href="{{ asset('panel/assets/css/all.min.css')}}">
   <style>
     body {
       margin: 0;
@@ -113,31 +101,10 @@ top: 0; /* Position the navbar at the top of the page */
 
 
 .navbar .btn:hover {
-  background: #b3afaf;
+  background: #f08080;
   color: black;
     
 }
-
-
- .btn-logout{
-  background: #3c3939;
-  color: rgb(241, 227, 227);
-    
-}
-
-
-.btn-red{
-  background: #FF1E1E;
-  color: rgb(241, 227, 227);
-    
-}
-
-
-
-
-
-
-
 
     </style>
 </head>
@@ -147,30 +114,17 @@ top: 0; /* Position the navbar at the top of the page */
 
     {{-- VIEW OUTPUT--}}
     <main>
- 
-      @yield ('categories')
-      @yield ('services')
-      @yield ('technicians')
-      @yield ('users')
-      
-      @yield ('requests')
-
+      @yield ('contentx')
+      @yield ('categoriesx')
+      @yield ('techniciansx')
+      @yield ('servicesx')
+      @yield ('sidenavx')
+     
       </main>   
-        <!-- jquery -->
-        <script src="{{ asset('panel/assets/js/jquery.min.js')}}"></script>
-        <!-- popper Min Js -->
-        <script src="{{ asset('panel/assets/js/popper.min.js')}}"></script>
-        <!-- Bootstrap Min Js -->
-        <script src="{{ asset('panel/assets/js/bootstrap.min.js')}}"></script>
-        <!-- Fontawesome-->
-        <script src="{{ asset('panel/assets/js/all.min.js')}}"></script>
 
 
- 
- 
-        <!-- Main js -->
-        <script src="{{ asset('panel/assets/js/main.js')}}"></script>
-
+   
+</body>
 
 </html>
 

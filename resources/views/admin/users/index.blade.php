@@ -9,7 +9,7 @@
        
           <div class="panel_title">
 
-         <a  href="{{ route('categories.create')}}" class="btn btn-info " >Create Category</a>
+         <a  href="{{ route('users.create')}}" class="btn btn-info " >Create User</a>
         </div>
       </div>
       <div class="panel_body">
@@ -19,30 +19,30 @@
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
-                        <th>Image</th>
-                        <th>Discription</th>
-                        <th>Edit</th>
+                        <th>Email</th>
+                        <th>password</th>
+                        <th>Roles</th>
+                        <th>Action</th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categories as $category)
+                    @foreach ($data as $user)
                     <tr>
-                        <td>{{ $category->id}}</td>
-                        <td>{{ $category->catname}}</td>
+                        <td>{{ $user->id}}</td>
+                        <td>{{ $user->name}}</td>
+                        <td>{{ $user->email}}</td>
+                        <td>{{ $user->password}}</td>
                         <td>
-                      <img src="{{ Storage::url($category->image) }}" width="70px" height="70px" alt="Image">
-                        
-                        </td>
-                        <td>{{ $category->description}}</td>
-
-
+                        @foreach ($user->roles as $role)
+                            {{ $role->name}}</td>
+                        @endforeach
+                       </td>
                         <td>
-
                             <div class=" ">
-                                <a href="{{route('categories.edit', $category->id) }}" class="btn btn-info">Edit</a>
+                                <a href="" class="btn btn-info">Edit</a>
                                 <form method="POST"
-                                        action="{{ route('categories.destroy', $category->id) }}"
+                                        action=""
                                         onsubmit="return confirm('Are you sure?');">
                                     @csrf
                                     @method('DELETE')
