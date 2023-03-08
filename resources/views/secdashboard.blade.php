@@ -22,9 +22,13 @@
        <div class="dashboard childs">
            <i class="fa-solid fa-house icons"></i><p class="text">Dashboard</p>
        </div></a>
+
+<a href="{{route('maintenance.index')}}">
        <div class="notifications childs">
            <i class="fa-solid fa-bell icons"></i><p class="text">Maintainance Request</p>
        </div>
+    </a>
+
        <div class="messages childs">
            <i class="fa-solid fa-envelope icons"></i><p class="text">Technicians</p>
        </div>

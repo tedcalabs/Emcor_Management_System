@@ -3,15 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminxController;
-use App\Http\Controllers\Profile1Controller;
 use App\Http\Controllers\SecretaryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SalesController;
 use App\Http\Controllers\Admin\RequestController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Api\V1\ServiceController;
-use App\Http\Controllers\Admin\TechnicianController;
 use App\Http\Controllers\AdminPanel\AdminUserController;
+use App\Http\Controllers\Secretary\MaintenanceController;
 
 
 
@@ -46,8 +45,6 @@ Route::prefix('admin')->group(function () {
     Route::resource('/requests', RequestController::class)->middleware('admin');
     Route::resource('/sales', SalesController::class)->middleware('admin');
     Route::resource('/services', ServiceController::class)->middleware('admin');
-    Route::resource('/technicians', TechnicianController::class)->middleware('admin');
-    Route::resource('/secretaries', TechnicianController::class)->middleware('admin');
     Route::resource('/users', UserController::class)->middleware('admin');
 
     //USER ROUTES------------------------------- -----------------------  ------------------------
@@ -79,21 +76,21 @@ Route::get('/dashboard', function () {
 // return view('admin.dashboard');
 //})->middleware(['auth', 'auth:admin', 'verified'])->name('admin.dashboard');
 
-
+/*
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [Profile1Controller::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [Profile1Controller::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [Profile1Controller::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 
-
+*/
 
 /*---------End of Admin Route---------*/
 
 
-
+/*
 //_____________------------------------ADMIN X (DUMAGUETE BRANCH ROUTE)-------------------------
 
 Route::prefix('adminx')->group(function () {
@@ -139,7 +136,7 @@ Route::prefix('adminx')->group(function () {
     });
 });
 
-
+*/
 
 // OFDUMAGUETE SECRETARY ROUTE//--------------------------------------------------------------------------------------
 
@@ -150,6 +147,10 @@ Route::prefix('secretary')->group(function () {
     Route::get('/dashboard', [SecretaryController::class, 'index'])->name(
         'secretary.dashboard'
     )->middleware('secretary');
+
+
+
+    Route::resource('/maintenance', MaintenanceController::class)->middleware('secretary');
 
 
 });
@@ -207,14 +208,14 @@ Route::get('/bsecdashboard', function () {
 
 
 
-
+/*
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [Profile1Controller::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [Profile1Controller::class, 'update'])->name('profile.update');
     Route::delete('/profile', [Profile1Controller::class, 'destroy'])->name('profile.destroy');
 });
-
+*/
 
 //_____________------------------------END OF ADMIN X (DUMAGUETE BRANCH ROUTE)-------------------------
 

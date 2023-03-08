@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Secretary\MaintenanceController;
 
 
 
@@ -15,11 +16,14 @@ Route::post('login', [LoginController::class, 'Login']);
 
 Route::post('register', [RegisterController::class, 'register']);
 
+Route::post('mreqs', [MaintenanceController::class, 'store']);
+
+Route::get('mreqs', [MaintenanceController::class, 'index']);
+
 
 Route::middleware('auth:api')->group(function () {
     Route::get('profile', [ProfileController::class, 'show']);
     Route::post('logout', [ProfileController::class, 'logout']);
-    Route::get('products', [ProductsController::class, 'index']);
 });
 
 

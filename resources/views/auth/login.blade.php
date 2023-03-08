@@ -288,7 +288,7 @@ color: #fff;
                         id="navcol-1">
                         <ul class="nav navbar-nav">
                              <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Branches</a>
-                                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Dumaguete City</a><a class="dropdown-item" role="presentation" href="{{ route('login_formx')}}">Bayawan City</a></div>
+                                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Dumaguete City</a><a class="dropdown-item" role="presentation" href="">Bayawan City</a></div>
                             </li>
                         </ul>   
                       <div class="collapse navbar-collapse">
