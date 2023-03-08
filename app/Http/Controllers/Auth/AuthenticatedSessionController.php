@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -44,7 +45,58 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        $user_role = Auth::user()->role;
+        $user_branch = Auth::user()->branch;
+
+
+        if ($user_role == 1 && $user_branch == 2) {
+
+            return redirect()->route('secretary.dashboard');
+        } else if ($user_role == 1 && $user_branch == 1) {
+
+            return redirect()->intended(RouteServiceProvider::MGRHOME);
+            
+        } else if ($user_role == 2 && $user_branch == 1) {
+
+            return redirect()->route('secretary.dashboard');
+        } else if ($user_role == 2 && $user_branch == 2) {
+
+            return redirect()->intended(RouteServiceProvider::BSECHOME);
+        } else if ($user_role == 3 && $user_branch == 1) {
+
+            return redirect()->intended(RouteServiceProvider::TECHOME);
+        }else{
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+
+        /*
+
+
+        switch ($user_role) {
+
+            case 1:
+                return redirect()->intended(RouteServiceProvider::MGRHOME);
+                break;
+
+            case 2:
+                return redirect()->intended(RouteServiceProvider::SECHOME);
+                break;
+
+            case 3:
+                return redirect()->intended(RouteServiceProvider::TECHOME);
+                break;
+
+
+            case 4:
+                return redirect()->intended(RouteServiceProvider::MECHOME);
+                break;
+
+            default:
+
+                return redirect()->intended(RouteServiceProvider::HOME);
+        }
+
+        */
     }
 
     /**

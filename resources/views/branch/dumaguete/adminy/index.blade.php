@@ -1,15 +1,15 @@
 
 
-@extends('admin.admin_master')
+@extends('adminy.adminy_master')
 
 
-@include('admin.topbar')
+@include('adminy.topbary')
 
-@section('content')    
+@section('contenty')    
 
 
     
-      <div class="sidebar">
+      <div class="sidebary">
          <ul class="space-y-2">
             <li>
                <a href="   " class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">

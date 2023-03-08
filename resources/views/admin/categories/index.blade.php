@@ -1,18 +1,9 @@
-@extends('admin.admin_base')
+@extends('admin.admin_master')
 @include('admin.index')
 @section('categories')
- <!-- table area -->
- <section class="table_area">
-  <div class="panel">
-
-      <div class="panel_header ">
-       
-          <div class="panel_title">
-
+<div class="table_area">
          <a  href="{{ route('categories.create')}}" class="btn btn-info " >Create Category</a>
-        </div>
-      </div>
-      <div class="panel_body">
+     
           <div class="table-responsive">
               <table class="table table-bordered">
                   <thead>
@@ -62,7 +53,6 @@
                     
                 </tbody>
               </table>
-          </div>
-      </div>
-  </div> <!-- /table -->
+            </div>
+        </div>
 @endsection

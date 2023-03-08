@@ -1,6 +1,6 @@
-@extends('admin.admin_base')
+@extends('admin.admin_master')
 @include('admin.index')
-@section('categories')
+@section('users')
 
 
 <div class= "contianer " style="  margin-top: 40px; margin-left: 235px; margin-right: 300px; ">

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Emcor - Admin Register</title>
+        <title>Bayawan Register</title>
         <link rel="stylesheet" href="{{asset('panel/assets/css/bootstrap.min.css')}}">    
         @vite('resources/css/app.css')
 
@@ -40,7 +40,7 @@
                                     </button>
                                   </div>
                                 @endif
-                                <h2> Register</h2>
+                                <h2>Bayawan  Register</h2>
                         
                         </div>
                         <div class="card-body">

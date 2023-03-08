@@ -1,62 +1,71 @@
 
 
 @extends('admin.admin_master')
-
-
 @include('admin.topbar')
 
-@section('content')    
+<section>
+   
+<div class="mainbody">
+    <div class="close slider ">
+        <div class="profile">
+            <img src=" {{asset('assets/images/user.png')}}" alt="profileImage" class="image">
+            <div class="profileText">
+                <p class="text maintext">{{Auth::guard('admin')->user()->name}}</p>
+            </div>
+        </div>
+        <div class="links">
+            <div class="search">
+            <i class="fa-solid fa-magnifying-glass icons"></i><input type="search" placeholder = "Search" class="searchbtn">
+        </div>
+ 
+        <a href="">
+        <div class="dashboard childs">
+            <i class="fa-solid fa-house icons"></i><p class="text">Dashboard</p>
+        </div></a>
+
+<a href="{{route('categories.index')}}">
+        <div class="notifications childs">
+            <i class="fa-solid fa-bell icons"></i><p class="text">Service Categories</p>
+        </div></a>
 
 
-    
-      <div class="sidebar">
-         <ul class="space-y-2">
-            <li>
-             
-                  <h5 style="margin-left: 4px;">Admin Dashboard</h5>
-                 
-              
-            </li>
-            <li>
-               <a href="{{route('categories.index')}}" active="{{request()->routeIs('categories.index')}}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                  <span class="flex-1 ml-3 whitespace-nowrap">Categories</span>
-               </a>
-            </li>
-            <li>
-               <a href="{{route('services.index')}}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                  <span class="flex-1 ml-3 whitespace-nowrap">Services</span>
-               </a>
-            </li>
-            <li>
-               <a href="{{route('technicians.index')}}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                  <span class="flex-1 ml-3 whitespace-nowrap">Technicians</span>
-               </a>
-            </li>
+<a href="{{route('services.index')}}">
+        <div class="messages childs">
+            <i class="fa-solid fa-envelope icons"></i><p class="text">Services</p>
+        </div></a>
+        <div class="heart childs">
+            <i class="fa-regular fa-heart icons"></i><p class="text">Maintainance Request</p>
+        </div>
+<a href="{{route('users.index')}}">
+        <div class="coins childs">
+            <i class="fa-solid fa-coins icons"></i><p class="text">User Management</p>
+        </div></a>
 
-            <li>
-               <a href="{{route('secretaries.index')}}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                  <span class="flex-1 ml-3 whitespace-nowrap">Secretary</span>
-               </a>
-            </li>
+        <div class="heart childs">
+            <i class="fa-regular fa-heart icons"></i><p class="text">Profile</p>
+        </div>
+        
 
-            <li>
-             
-               <a href="{{route('requests.index')}}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                  <span class="flex-1 ml-3 whitespace-nowrap">Request</span>
-               </a>
-            </li>
-            <li>
-             
-               <a href="{{route('users.index')}}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                  <span class="flex-1 ml-3 whitespace-nowrap">User</span>
-               </a>
-            </li>
-            <li>
-               <a href="" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                  <span class="flex-1 ml-3 whitespace-nowrap">profile</span>
-               </a>
-            </li>
-         </ul>
-      </div>
+ 
+        <div class="heart childs">
+ 
+          <form  method="get" action="{{ route('admin.logout')}}">
+             @csrf
+            
+             <i class="fa-solid fa-right-from-bracket icons"></i><button class="lgbutton" type="submit">Logout</button>
+ 
+         </form>
+      
+        </div>
 
-@endsection
+        </div>
+ </div>
+
+
+
+ 
+</section>
+
+
+
+

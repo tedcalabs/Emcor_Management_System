@@ -1,3 +1,100 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+body{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+
+
+
+
+.slider{
+    background-color:#084c61;
+    height: 100vh;
+    width:18.2rem;
+    position: fixed;
+    padding-top:1rem;
+}
+
+
+.image{
+    border-radius: 50%;
+    border: 5px solid white;
+    height: 6rem;
+    width:6rem;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+
+.maintext{
+    font-size: 1.2rem;
+    font-weight: 700;
+    color:white;
+}
+
+a{
+    text-decoration: none;
+    color:black !important;
+}
+.childs:hover >a{
+    color:white;
+}
+
+
+.profile{
+    display: flex;
+    /* border: 2px solid black; */
+    padding-left: 1.5rem;
+    align-items: center;
+    width:18rem;
+}
+
+
+
+
+.search , .notifications , .dashboard , .messages , .heart , .logout , .coins{
+    height: 3rem;
+    margin: 1rem;
+    border-radius: 0.4rem;
+    width:16rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.childs:hover{
+    background-color:#db3a34;
+    color:white;
+}
+.text{
+    margin-left:1.8rem;
+    color:white;
+}
+.search{
+    background-color: rgb(244, 237, 250);
+    transition: 0.3s ease;
+}
+.searchbtn{
+    background-color: transparent;
+    height: 3rem;
+    width:16rem;
+    border:none;
+    font-size: 1rem;
+    outline: none;
+    margin-left:0.8rem;
+}
+::-webkit-search-cancel-button{
+    display: none;
+}
+
+.lgbutton{
+    margin-left:1.8rem;
+    border: none;
+    background: transparent;
+   color: aliceblue;
+
+}

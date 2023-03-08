@@ -1,18 +1,10 @@
-@extends('admin.admin_base')
+@extends('admin.admin_master')
 @include('admin.index')
-@section('categories')
- <!-- table area -->
- <section class="table_area">
-  <div class="panel">
+@section('users')
 
-      <div class="panel_header ">
-       
-          <div class="panel_title">
-
+<div class="table_area">
          <a  href="{{ route('users.create')}}" class="btn btn-info " >Create User</a>
-        </div>
-      </div>
-      <div class="panel_body">
+      
           <div class="table-responsive">
               <table class="table table-bordered">
                   <thead>
@@ -20,23 +12,22 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>password</th>
-                        <th>Roles</th>
+                        <th>Role</th>
                         <th>Action</th>
 
                     </tr>
                 </thead>
-                <tbody>
+                <tbody> 
                     @foreach ($data as $user)
                     <tr>
                         <td>{{ $user->id}}</td>
                         <td>{{ $user->name}}</td>
                         <td>{{ $user->email}}</td>
-                        <td>{{ $user->password}}</td>
+                   
                         <td>
-                        @foreach ($user->roles as $role)
-                            {{ $role->name}}</td>
-                        @endforeach
+                       
+                            {{$user->role}}</td>
+                     
                        </td>
                         <td>
                             <div class=" ">
@@ -62,7 +53,10 @@
                     
                 </tbody>
               </table>
-          </div>
-      </div>
-  </div> <!-- /table -->
+            </div>
+        </div>
+ 
+
+
+    
 @endsection

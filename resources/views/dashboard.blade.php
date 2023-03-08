@@ -2,49 +2,57 @@
 
 @extends('layouts.app')
   
-@include('components.Topbar')
+@include('components.TopBar')
 @section('content')
         
+<div class="mainbody">
+   <div class="close slider ">
+       <div class="profile">
+           <img src=" {{asset('assets/images/user.png')}}" alt="profileImage" class="image">
+           <div class="profileText">
+               <p class="text maintext">{{Auth::user()->name}}</p>
+           </div>
+       </div>
   
-<div class="sidebar">
-   <ul class="space-y-2">
-      <li>
-         <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+       <div class="links">
+           <div class="search">
+           <i class="fa-solid fa-magnifying-glass icons"></i><input type="search" placeholder = "Search" class="searchbtn">
+       </div>
 
-            <span class="ml-3"> Dashboard</span>
-         </a>
-      </li>
-      <li>
-         <a href="" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-            <span class="flex-1 ml-3 whitespace-nowrap">Categories</span>
-         </a>
-      </li>
-      <li>
-         <a href=" " class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-            <span class="flex-1 ml-3 whitespace-nowrap">Services Offered</span>
-         </a>
-      </li>
-      <li>
-         <a href="" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-            <span class="flex-1 ml-3 whitespace-nowrap">Technicians</span>
-         </a>
-      </li>
-    
+       <a href="">
+       <div class="dashboard childs">
+           <i class="fa-solid fa-house icons"></i><p class="text">Dashboard</p>
+       </div></a>
+       <div class="notifications childs">
+           <i class="fa-solid fa-bell icons"></i><p class="text">Notifications</p>
+       </div>
+       <div class="messages childs">
+           <i class="fa-solid fa-envelope icons"></i><p class="text">Schedules</p>
+       </div>
+       <div class="heart childs">
+           <i class="fa-regular fa-heart icons"></i><p class="text">Likes</p>
+       </div>
+       <div class="coins childs">
+           <i class="fa-solid fa-coins icons"></i><p class="text">Money</p>
+       </div>
 
-      <li>
-       
-         <a href="" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-            <span class="flex-1 ml-3 whitespace-nowrap">Request</span>
-         </a>
-      </li>
 
-      <li>
-         <a href="" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-            <span class="flex-1 ml-3 whitespace-nowrap">profile</span>
-         </a>
-      </li>
-   </ul>
+       <div class="logout childs">
+
+         <form action="{{ route('logout')}}" method="post">
+            @csrf
+           
+            <i class="fa-solid fa-right-from-bracket icons"></i><button class="lgbutton" type="submit">Logout</button>
+
+        </form>
+     
+       </div>
+
+
+       </div>
 </div>
+</div>
+
 
 
 

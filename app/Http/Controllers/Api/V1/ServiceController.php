@@ -18,9 +18,9 @@ class ServiceController extends Controller
      */
     public function index()
     {
-     
+
         $data = Service::all();
-        $categories = Category::all(); 
+        $categories = Category::all();
         return view('admin.services.index', compact('data', 'categories'));
     }
 
@@ -43,7 +43,7 @@ class ServiceController extends Controller
      */
     public function store(ServiceStoreRequest $request)
     {
-        $image = $request->file('image')->store('public/services');
+        $image = $request->file('image')->store('public/images');
 
         $service = Service::create([
             'name' => $request->name,
@@ -128,10 +128,60 @@ class ServiceController extends Controller
 
 
 
+
+
     public function get_popular_services(Request $request)
     {
 
-        $list = Service::where('category_id', 1)->get();
+        $list = Service::where('type_id', 1)->take(5)->get();
+
+        foreach ($list as $item) {
+            $item['description'] = strip_tags($item['description']);
+            $item['description'] = $Content = preg_replace("/&#?[a-z0-9]+;/i", " ", $item['description']);
+        }
+
+        $data =  [
+            'total_size' => $list->count(),
+            'type_id' => 1,
+            'offset' => 0,
+            'products' => $list
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    public function get_recommended_services(Request $request)
+    {
+
+        $list = Service::where('type_id', 1)->take(4)->get();
+
+        foreach ($list as $item) {
+            $item['description'] = strip_tags($item['description']);
+            $item['description'] = $Content = preg_replace("/&#?[a-z0-9]+;/i", " ", $item['description']);
+        }
+
+        $data =  [
+            'total_size' => $list->count(),
+            'type_id' => 1,
+            'offset' => 0,
+            'products' => $list
+        ];
+
+        return response()->json($data, 200);
+    }
+
+
+
+    /*
+    public function get_popular_services(Request $request)
+    {
+
+
+        //$students = Student::with('courses')->get();
+
+        $list = Category::with('services')->whereHas('services', function ($query) {
+            $query->where('catname', 'Brownlines');
+        })->get();
         foreach ($list as $item) {
             $item['description'] = strip_tags($item['description']);
             $item['description'] = $Content = preg_replace("/&#?[a-z0-9]+;/i", " ", $item['description']);
@@ -141,11 +191,9 @@ class ServiceController extends Controller
 
         $data =  [
             'total_size' => $item->count(),
-            'category_id' => 2,
-            'offset' => 0,
             'services' => $item
         ];
 
         return response()->json($data, 200);
-    }
+    }*/
 }

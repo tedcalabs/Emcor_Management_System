@@ -2,6 +2,10 @@
 
 return [
 
+
+
+
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -44,6 +48,14 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+        'adminx' => [
+            'driver' => 'session',
+            'provider' => 'adminxs',
+        ],
+        'api' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+        ],
     ],
 
     /*
@@ -72,6 +84,12 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
+        'adminxs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Adminx::class,
+        ],
+
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -100,6 +118,18 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'adminxs' => [
+            'provider' => 'adminxs',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
     ],
 
     /*
@@ -114,5 +144,8 @@ return [
     */
 
     'password_timeout' => 10800,
+
+
+
 
 ];

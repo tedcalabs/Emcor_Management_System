@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Admin;
 use Carbon\Carbon;
+use App\Models\Admin;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -19,6 +21,11 @@ class AdminController extends Controller
 
     public function Dashboard()
     {
+
+
+        $admin = Auth::guard('admin')->user()->name;
+
+
         return view('admin.index');
     }
 
@@ -32,6 +39,7 @@ class AdminController extends Controller
         } else {
             return back()->with('error', 'Invalid Email or Password');
         }
+        
     }
 
     public function AdminLogout()

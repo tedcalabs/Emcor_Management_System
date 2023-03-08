@@ -18,6 +18,17 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/dashboard';
+    public const MGRHOME = '/mgrdashboard';
+    public const SECHOME = '/secdashboard';
+    public const TECHOME = '/tecdashboard';
+    public const MECHOME = '/mecdashboard';
+
+
+
+    public const BMGRHOME = '/bmgrdashboard';
+    public const BSECHOME = '/bsecdashboard';
+    public const BTECHOME = '/btecdashboard';
+    public const BMECHOME = '/bmecdashboard';
 
 
     protected $namespace = 'App\\Http\\Controllers';

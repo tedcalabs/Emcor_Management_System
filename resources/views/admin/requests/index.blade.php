@@ -1,4 +1,4 @@
-@extends('admin.admin_base')
+@extends('admin.admin_master')
 @include('admin.index')
 @section('requests')
  <!-- table area -->

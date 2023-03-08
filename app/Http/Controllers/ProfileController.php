@@ -2,66 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\Request;
+use Exception;
+
+use App\Traits\ResponseTrait;
+use App\Repositories\AuthRepository;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\RegisterRequest;
+use Illuminate\Http\JsonResponse;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
-     */
-    public function edit(Request $request)
+
+    use ResponseTrait;
+
+
+
+
+    public function __construct(private AuthRepository $auth)
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        $this->auth = $auth;
     }
 
-    /**
-     * Update the user's profile information.
-     *
-     * @param  \App\Http\Requests\ProfileUpdateRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(ProfileUpdateRequest $request)
+    public function show()
     {
-        $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        try {
+            return Auth::guard()->user();
+        } catch (Exception $exception) {
+            return $this->responseError([], $exception->getMessage());
         }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
-    /**
-     * Delete the user's account.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroy(Request $request)
+    public function logout():JsonResponse
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current-password'],
-        ]);
 
-        $user = $request->user();
+        try {
 
-        Auth::logout();
-
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+            Auth::guard()->user()->token()->revoke();
+            Auth::guard()->user()->token()->delete();
+            return $this->responseSuccess('', 'User logout success');
+        } catch (Exception $exception) {
+            return $this->responseError([], $exception->getMessage());
+        }
     }
 }

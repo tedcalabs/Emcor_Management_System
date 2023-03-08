@@ -7,23 +7,18 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>Emcor - Login</title>
-            <!--bootstrap-->
-            <link rel="stylesheet" href="{{asset('panel/assets/css/bootstrap.min.css')}}">    
-            @vite('resources/css/app.css')
-
-            <link rel="stylesheet" href="{{asset('panel/assets/css/bootstrap.min.css')}}">
-            
-            <link rel="stylesheet" href="{{asset('resources/css/app.css')}}">
-
-
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+       
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+      
+  
 <style>
 
     body{
-        background-image: url("/assets/images/");
+      background-image: url("/assets/images/emcor6.jpg");
+      background-size: cover;
        
     }
 
@@ -31,8 +26,6 @@
         text-align: center;
     }
     .header-blue {
-  background: linear-gradient(135deg, #fe2929, #ffb3c5);
-  background-color: #184e8e;
   padding-bottom: 80px;
   font-family: 'Source Sans Pro', sans-serif;
 }
@@ -158,23 +151,6 @@
   color: #d9d9d9;
 }
 
-.header-blue .navbar .form-inline .search-field {
-  display: inline-block;
-  width: 80%;
-  background: none;
-  border: none;
-  border-bottom: 1px solid transparent;
-  border-radius: 0;
-  color: #fff;
-  box-shadow: none;
-  color: inherit;
-  transition: border-bottom-color 0.3s;
-}
-
-.header-blue .navbar .form-inline .search-field:focus {
-  border-bottom: 1px solid #ccc;
-}
-
 .header-blue .hero {
   margin-top: 20px;
   text-align: center;
@@ -205,7 +181,7 @@
 }
 
 .header-blue .hero p {
-  color: rgba(255,255,255,0.8);
+  color: rgba(247, 237, 237, 0.995);
   font-size: 20px;
   margin-bottom: 30px;
   font-weight: 300;
@@ -254,6 +230,48 @@
   transform: rotate(-19deg);
   opacity: 0.2;
 }
+
+
+.card{
+
+    width: 400px;
+    height: 460px;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 5px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+}
+
+h2{
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+}
+
+
+.form-group label{
+float: left;
+color: #fff;
+}
+
+
+
+
+.form-group input {
+    width: 100%;
+    height: 50px;
+    font-size: 1em;
+    padding:0 35px 0 5px;
+    color: #0e0d0d;
+}
+
+
+
+
 </style>
 
     
@@ -261,6 +279,7 @@
 
 
 <body>
+
     <div>
         <div class="header-blue">
             <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
@@ -268,103 +287,92 @@
                     <div class="collapse navbar-collapse"
                         id="navcol-1">
                         <ul class="nav navbar-nav">
-                            <li class="nav-item" role="presentation"><a class="nav-link" href="#">Contact</a></li>
-                            <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Services</a>
-                                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Whitelines</a><a class="dropdown-item" role="presentation" href="#">Brownlines</a><a class="dropdown-item" role="presentation" href="#">Mechanic</a></div>
+                             <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Branches</a>
+                                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Dumaguete City</a><a class="dropdown-item" role="presentation" href="{{ route('login_formx')}}">Bayawan City</a></div>
                             </li>
-                            <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Branches</a>
-                                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Dumaguete City</a><a class="dropdown-item" role="presentation" href="#">Bayawan City</a></div>
-                            </li>
-                        </ul>
-                        <form class="form-inline mr-auto" target="_self">
-                            <div class="form-group"><label for="search-field"><i class="fa fa-search text-white"></i></label><input class="form-control search-field" type="search" id="search-field" name="search"></div>
-                        </form>
-                        <span class="navbar-text"> <a class="login" href="#">Log In</a></span><a class="btn btn-light action-button" type="submit" role="button" href="/register">Signup</a></div>
+                        </ul>   
+                      <div class="collapse navbar-collapse">
+                    
+                      </div>    
+                         <a class="btn btn-light action-button" type="submit" role="button" href="/register">Signup</a>
+                      </div>
                 </div>
             </nav>
+
+            <!--Emcor MVG-->
             <div class="container hero">
                 <div class="row">
                     <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
-                        <h1>Business goal designs</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br></p>
-                        <button
-                            class="btn btn-light btn-lg action-button" type="button">Learn More<i class="fa fa-long-arrow-right ml-2"></i></button>
-                    </div>
-                    <div class="col-md-5 col-lg-5 offset-lg-1 offset-xl-0 d-none d-lg-block phone-holder">
-                        <div class="iphone-mockup">
-						<img class="device" src="/assets/images/emcor1.png">
-                          <!--  <div class="screen">
-							</div>
-							
-							-->
-                        </div>
+                        <h1>Emcor</h1>
+                        <p>EMCOR is the most relevant, world-class, community-based organization that enables customers to achieve a better life by providing quality products and services through personalized care.<br></p>
                     </div>
 
-
-
-
-
-
-
+                    <!--Emcor Login form -->
+   
+                    <div class="col-12 col-lg-6 col-xl-5 offset-xl-1" style="margin-top:1in">
+                      <div class="card">
+                          <div class="card-header">
+                  <div class="card">
+                      <div class="card-header">
+                     <h2>Login</h2>
+                          
+                      </div>
+                      <div class="card-body">
+                          <form method="POST" action="{{ route('login') }}">
+                              @if(Session::get('success'))
+                              <div class="alert alert-success">{{ Session::get('success') }}</div>
+                              @endif
+                              @if(Session::get('fail'))
+                              <div class="alert alert-danger">{{ Session::get('fail') }}</div>
+                              @endif
+                              @csrf
+                              <div class="form-group">
+                                  <label for="InputEmail">Email address</label>
+                                  <input type="email"  id="InputEmail" name="email" placeholder="Enter email" value="{{ old ('email') }}">
+                                  @error('email')
+                                  <span class="text-danger">{{$message}}</span>
+                                  @enderror
+                              </div>
                     
-                </div>
-            </div>
-            
-    <div class= "contianer " style="  margin-top: 100px; opacity: 85%; ">
-        <div class="row">
-            
-            <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
-                <div class="card ">
-                    <div class="card-header">
-                         
-                       <h3>User Login</h3>
-                    </div>
-                    <div class="card-body">
-                        <form method="POST" action="{{route('login')}}">
-                            @if(Session::get('success'))
-                            <div class="alert alert-success">{{ Session::get('success') }}</div>
-                            @endif
-                            @if(Session::get('fail'))
-                            <div class="alert alert-danger">{{ Session::get('fail') }}</div>
-                            @endif
-                            @csrf
-                                <div class="form-group">
-                                <label for="InputEmail">Email address</label>
-                                <input type="email" class="form-control" id="InputEmail" name="email" placeholder="Enter email" value="{{ old ('email') }}">
-                                @error('email')
-                                <span class="text-danger">{{$message}}</span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" id="InputPassword" name="password" placeholder="Password" value="{{ old ('password') }}">
-                                @error('password')
-                                <span class="text-danger">{{$message}}</span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label class="chech_container">Remember me
-                                    <input type="checkbox" name="remember" 
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                            <a href="{{ route('login_form')}}" class="adl">Login as Admin</a>
-                        </form>
-                    </div>
-                </div>
-            
-        </div>
-    </div>
-        </div>
-    </div>
+                              <div class="form-group">
+                                  <label for="password">Password</label>
+                                  <input type="password"  id="InputPassword" name="password" placeholder="Password" value="{{ old ('password') }}">
+                                  @error('password')
+                                  <span class="text-danger">{{$message}}</span>
+                                  @enderror
+                              </div>
+                              <div class="form-group">
+                                  <label for="password2" class="inline-block text-lg mb-2">
+                                    Confirm Password
+                                  </label>
+                                  <input type="password" name="password_confirmation" placeholder="Confirm Password"
+                                    value="{{old('password_confirmation')}}" />
+                          
+                                  @error('password_confirmation')
+                                  <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                                  @enderror
+                                </div>
+                                
+                              <button type="submit" class="btn btn-primary sub float-left rounded-pill">Login</button>
+                              
+                                    <div class="dropdown show float-right">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              More Options
+                                        </a>
 
-
-
-</body>
-
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="{{ route('login_form')}}">Login as Admin</a>
+                                        </div>
+                                    </div>
+                                </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>             
+    </body>
 </html>
-
 
 
 

@@ -42,10 +42,10 @@
                                 </button>
                               </div>
                             @endif
-                      <h2>Admin Login</h2>
+                      <h2>Bayawan Branch Login</h2>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{route('admin.login')}}">
+                        <form method="POST" action="{{route('adminx.loginx')}}">
                             @if(Session::get('success'))
                             <div class="alert alert-success">{{ Session::get('success') }}</div>
                             @endif
@@ -75,7 +75,7 @@
                             </div>
                         
                             <div class="form-group">
-                    <a class="registration" href="{{ route('registeredA') }}">Create new account</a><br>
+                    <a class="registration" href="{{ route('registeredAx') }}">Create new account</a><br>
                                     <a href=" " class="text-zinc-900">I forgot my password</a><br>
                                     <a href="/" class="text-zinc-900">login as user</a><br>
                                    

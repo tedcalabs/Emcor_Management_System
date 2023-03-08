@@ -20,9 +20,6 @@ class Admin
        if(!Auth::guard('admin')->check()){ 
             return redirect()->route('login_form')->with('error','Please login first');
         }
-
-
-        
         
         return $next($request);
     }
