@@ -19,6 +19,7 @@ return new class extends Migration
             $table->longText('description');
             $table->string('image');
             $table->decimal('price', 10, 2);
+            $table->tinyInteger('type_id')->default(1);
             $table->timestamps();
         });
     }

@@ -1,43 +1,41 @@
-@import 'node_modules/bootstrap/scss/bootstrap';
+@import "node_modules/bootstrap/scss/bootstrap";
 /*
 @import 'node_modules/@popperjs/core/scss/@popperjs/core';
 
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Chilanka&family=Finlandica&family=Grenze+Gotisch&family=Hubballi&family=Inter:wght@500&family=Lato&family=Lobster&family=Lobster+Two:wght@700&family=Manrope:wght@300&family=Martel&family=Open+Sans&family=Poppins:wght@200;300&family=Quicksand&family=Roboto:wght@300;400&family=Sansita+Swashed:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Chilanka&family=Finlandica&family=Grenze+Gotisch&family=Hubballi&family=Inter:wght@500&family=Lato&family=Lobster&family=Lobster+Two:wght@700&family=Manrope:wght@300&family=Martel&family=Open+Sans&family=Poppins:wght@200;300&family=Quicksand&family=Roboto:wght@300;400&family=Sansita+Swashed:wght@300&display=swap");
 
+@import "navs/sidebar.scss";
 
+@import "table.scss";
 
-
-.navbar  {
-height: .6in;
-background:	#177e89;
-color: #f1f1f1;
-top: 0; /* Position the navbar at the top of the page */
-width: 79%; /* Full width */
-position: fixed;
-flex-wrap: wrap;
-align-items: center;
-justify-content: space-between;
-padding: 0.5rem 1rem;
-margin-left: 18.2rem;
-
-
+.navbar {
+    height: 0.6in;
+    background: #177e89;
+    color: #f1f1f1;
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    position: fixed;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    margin-left: 15rem;
 }
 .navbar li {
-float: left;
-
+    float: left;
 }
 
-.navbar .logo-img{
-  float: left;
-  height: 30px;
-  width: 200px;
-  margin-bottom: 1ch;
+.table_area {
+    margin-top: 7rem;
+    margin-left: 16rem;
+    margin-right: 3rem;
 }
 
-.table_area{
-  margin-top: 7rem;
-margin-left: 20rem;
-margin-right: 3rem;
+.navbar .logo-img {
+    float: left;
+    height: 30px;
+    width: 200px;
+    margin-bottom: 1ch;
 }

@@ -25,6 +25,8 @@ class MrRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
         ];
     }
 }

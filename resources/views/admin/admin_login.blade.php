@@ -281,7 +281,7 @@ color: #fff;
     <div>
         <div class="header-blue">
             <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
-                <div class="container-fluid"><a class="navbar-brand" href="#">EMCOR</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
               
             </nav>
 
@@ -300,7 +300,7 @@ color: #fff;
                           <div class="card-header">
                   <div class="card">
                       <div class="card-header">
-                     <h2>Login</h2>
+                     <h2>Admin Login</h2>
                           
                       </div>
                       <div class="card-body">

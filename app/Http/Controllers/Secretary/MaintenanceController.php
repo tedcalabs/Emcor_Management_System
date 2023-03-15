@@ -23,14 +23,20 @@ class MaintenanceController extends Controller
      */
     public function index()
     {
-
+        /*
         $mreqs = Maintenance::latest()->get();
 
         return response([
             'message' => 'success',
             'todos' =>   MreqResource::collection($mreqs),
         ], 200);
-        //return view('dumaguete.maintenance_request.index');
+        */
+$data = Maintenance::all();
+
+
+
+
+        return view('dumaguete.maintenance_request.index', compact('data'));
     }
 
     /**
@@ -56,6 +62,8 @@ class MaintenanceController extends Controller
 
         $saveData = Maintenance::create([
             'name' => $mrRequest->name,
+            'address' => $mrRequest->address,
+            'phone' => $mrRequest->phone,
             'description' => $mrRequest->description,
         ]);
 

@@ -2,13 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdminxController;
 use App\Http\Controllers\SecretaryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SalesController;
+use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\Admin\RequestController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Api\V1\ServiceController;
+use App\Http\Controllers\BranchB\BranchBController;
 use App\Http\Controllers\AdminPanel\AdminUserController;
 use App\Http\Controllers\Secretary\MaintenanceController;
 
@@ -45,7 +46,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('/requests', RequestController::class)->middleware('admin');
     Route::resource('/sales', SalesController::class)->middleware('admin');
     Route::resource('/services', ServiceController::class)->middleware('admin');
-    Route::resource('/users', UserController::class)->middleware('admin');
+   Route::resource('/users', UserController::class)->middleware('admin');
+    Route::resource('/profile', AdminProfileController::class)->middleware('admin');
+
 
     //USER ROUTES------------------------------- -----------------------  ------------------------
 
@@ -61,102 +64,87 @@ Route::prefix('admin')->group(function () {
 });
 
 
-/*---------End Admin Route---------*/
-
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    //BRANCH 2 ROUTES------------------------------- -----------------------  ------------------------
 
 
 
 
-//Route::get('/admin/dashboard', function () {
-// return view('admin.dashboard');
-//})->middleware(['auth', 'auth:admin', 'verified'])->name('admin.dashboard');
-
-/*
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-
-*/
-
-/*---------End of Admin Route---------*/
-
-
-/*
-//_____________------------------------ADMIN X (DUMAGUETE BRANCH ROUTE)-------------------------
-
-Route::prefix('adminx')->group(function () {
-
-    Route::get('/loginx', [AdminxController::class, 'Index'])->name('login_formx');
-
-    Route::post('/loginx/ownerx', [AdminxController::class, 'Loginx'])->name('adminx.loginx');
-
-    Route::get('/dashboardx', [AdminxController::class, 'Dashboardx'])->name(
-        'adminx.dashboardx'
-    )->middleware('adminx');
 
 
 
 
-    Route::get('/logoutx', [AdminxController::class, 'AdminLogoutx'])->name(
-        'admin.logoutx'
-    )->middleware('adminx');
 
-    Route::get('/registeredx', [AdminxController::class, 'Registerx'])->name('registeredAx');
-
-    Route::post('/registeredx/createx', [AdminxController::class, 'AdminRegisterCreatex'])->name('adminx.registerx.createx');
+    Route::prefix('bayawanBranch')->group(function () {
 
 
 
-    Route::resource('/categoriesx', CategoryxController::class)->middleware('adminx');
-    Route::resource('/requestsx', RequestxController::class)->middleware('adminx');
-    Route::resource('/servicesx', ServicexController::class)->middleware('adminx');
-    Route::resource('/techniciansx', TechnicianxController::class)->middleware('adminx');
-    Route::resource('/secretariesx', TechnicianxController::class)->middleware('adminx');
-    Route::resource('/usersx', UserController::class)->middleware('adminx');
+        Route::get('/register', [BranchBController::class, 'Register'])->name('branchb_registerForm');
 
-    //USER ROUTES------------------------------- -----------------------  ------------------------
+        Route::post('/registered/create', [BranchBController::class, 'BranchBRegisterCreate'])->name('branchb.register.create');
+    
+
+        Route::get('/login', [BranchBController::class, 'Index'])->name('branchb_loginform');
+    
+        Route::post('/login/branchb', [BranchBController::class, 'Login'])->name('branchb.login');
+    
+        Route::get('/dashboard', [BranchBController::class, 'Dashboard'])->name(
+            'branchb.dashboard'
+        )->middleware('branchb');
 
 
-    Route::prefix('/user')->name('user')->controller(AdminUserxController::class)->group(function () {
+        Route::get('/logout', [BranchBController::class, 'BranchBLogout'])->name(
+            'branchb.logout'
+        )->middleware('admin');
 
-        Route::get('/', 'index')->name('index');
-        Route::get('/edit/{id}', 'show')->name('edit');
-        Route::get('/show/{id}', 'show')->name('show');
-        Route::post('/update/{id}', 'update')->name('update');
-        Route::get('/destroy/{id}', 'destroy')->name('destroy');
     });
+
+
+//END OF BRANCH 2 ROUTES------------------------------- -----------------------  ------------------------
+
+
+
+
+    //ADMIN PROFILE ROUTES------------------------------- -----------------------  ------------------------
+
+Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'PreventBackHistory']], function () {
+    Route::get('profile', [AdminController::class, 'profile'])->name('admin.profile');
+
+
+    Route::post('update-admin-info', [AdminController::class, 'adminupdateInfo'])->name('adminUpdateInfo');
+ 
+    Route::post('change-password', [AdminController::class, 'adminChangePassword'])->name('adminCpass');
+   Route::put('update-photo', [AdminController::class, 'update'])->name('cphoto');
 });
 
-*/
-
-// OFDUMAGUETE SECRETARY ROUTE//--------------------------------------------------------------------------------------
 
 
-Route::prefix('secretary')->group(function () {
+    //SECRETARY PROFILE ROUTES------------------------------- -----------------------  ------------------------
+
+Route::group(['prefix' => 'secretary', 'middleware' => ['secretary', 'auth', 'PreventBackHistory']], function () {
+    
+    Route::get('dashboard', [SecretaryController::class, 'index'])->name('secretary.dashboard');
+    Route::get('profile', [SecretaryController::class, 'profile'])->name('secretary.profile');
+    Route::get('settings', [SecretaryController::class, 'settings'])->name('secretary.settings');
 
 
-    Route::get('/dashboard', [SecretaryController::class, 'index'])->name(
-        'secretary.dashboard'
-    )->middleware('secretary');
+    Route::post('update-secretary-info', [SecretaryController::class, 'updateInfo'])->name('secretaryUpdateInfo');
+
+    Route::post('change-password', [SecretaryController::class, 'changePassword'])->name('cpass');
+   Route::put('update-photo', [SecretaryController::class, 'update'])->name('cphoto');
 
 
-
-    Route::resource('/maintenance', MaintenanceController::class)->middleware('secretary');
-
-
+ 
+    //MAINTENANCE REQUESTS ROUTES------------------------------- -----------------------  ------------------------
+    
+    
+   Route::resource('/maintenance', MaintenanceController::class);
 });
 
 
-//END OFDUMAGUETE SECRETARY ROUTE//--------------------------------------------------------------------------------------
+
+
+
+//TEST ROUTES//--------------------------------------------------------------------------------------
 
 
 
@@ -190,9 +178,8 @@ Route::get('/mecdashboard', function () {
     return view('mecdashboard');
 })->middleware(['auth', 'verified'])->name('mecdashboard')->middleware('mechanic');
 
-//Route::get('/admin/dashboard', function () {
-// return view('admin.dashboard');
-//})->middleware(['auth', 'auth:admin', 'verified'])->name('admin.dashboard');
+
+
 
 Route::get('/bmgrdashboard', function () {
     return view('bmgrdashboard');
@@ -208,114 +195,6 @@ Route::get('/bsecdashboard', function () {
 
 
 
-/*
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [Profile1Controller::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [Profile1Controller::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [Profile1Controller::class, 'destroy'])->name('profile.destroy');
-});
-*/
-
-//_____________------------------------END OF ADMIN X (DUMAGUETE BRANCH ROUTE)-------------------------
-
-
-
-/*
-
-_____________------------------------ADMIN Y (BAYAWAN BRANCH ROUTE)-------------------------
-
-Route::prefix('admin')->group(function () {
-
-    Route::get('/login', [AdminController::class, 'Index'])->name('login_form');
-
-    Route::post('/login/owner', [AdminController::class, 'Login'])->name('admin.login');
-
-    Route::get('/dashboard', [AdminController::class, 'Dashboard'])->name(
-        'admin.dashboard'
-    )->middleware('admin');
-
-
-
-
-    Route::get('/logout', [AdminController::class, 'AdminLogout'])->name(
-        'admin.logout'
-    )->middleware('admin');
-
-    Route::get('/registered', [AdminController::class, 'Register'])->name('registeredA');
-
-    Route::post('/registered/create', [AdminController::class, 'AdminRegisterCreate'])->name('admin.register.create');
-
-
-
-    Route::resource('/categories', CategoryController::class)->middleware('admin');
-    Route::resource('/requests', RequestController::class)->middleware('admin');
-    Route::resource('/sales', SalesController::class)->middleware('admin');
-    Route::resource('/services', ServiceController::class)->middleware('admin');
-    Route::resource('/technicians', TechnicianController::class)->middleware('admin');
-    Route::resource('/secretaries', TechnicianController::class)->middleware('admin');
-    Route::resource('/users', UserController::class)->middleware('admin');
-
-    //USER ROUTES------------------------------- -----------------------  ------------------------
-
-
-    Route::prefix('/user')->name('user')->controller(AdminUserController::class)->group(function () {
-
-        Route::get('/', 'index')->name('index');
-        Route::get('/edit/{id}', 'show')->name('edit');
-        Route::get('/show/{id}', 'show')->name('show');
-        Route::post('/update/{id}', 'update')->name('update');
-        Route::get('/destroy/{id}', 'destroy')->name('destroy');
-    });
-});
-
-
-
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
-
-
-//Route::get('/admin/dashboard', function () {
-// return view('admin.dashboard');
-//})->middleware(['auth', 'auth:admin', 'verified'])->name('admin.dashboard');
-
-
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-
-_____________------------------------END OF ADMIN Y (BAYAWAN BRANCH ROUTE)-------------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 require __DIR__ . '/auth.php';
@@ -326,27 +205,3 @@ require __DIR__ . '/auth.php';
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//USER ROUTES------------------------------- -----------------------  ------------------------
-/*
-
-Route::prefix('/user')->name('user')->controller(AdminUserController::class)->group(function () {
-
-  Route::get('/','index')->name('index');
-  Route::get('/edit/{id}','show')->name('edit');
-  Route::get('/show/{id}','show')->name('show');
-  Route::post('/update/{id}','update')->name('update');
-  Route::get('/destroy/{id}','destroy')->name('destroy');
-});*/

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
     <head>
         <meta charset="utf-8">
@@ -74,62 +74,14 @@
   }
 }
 
-.header-blue .navbar .navbar-collapse span .login {
-  color: #fff;
-  margin-right: .5rem;
-  text-decoration: none;
-}
-
-.header-blue .navbar .navbar-collapse span .login:hover {
-  color: #fff;
-}
 
 .header-blue .navbar .navbar-toggler {
   border-color: rgba(255,255,255,0.3);
 }
 
-.header-blue .navbar .navbar-toggler:hover, .header-blue .navbar-toggler:focus {
-  background: none;
-}
 
-@media (min-width: 768px) {
-  .header-blue .navbar-nav .nav-link {
-    padding-left: .7rem;
-    padding-right: .7rem;
-  }
-}
 
-@media (min-width: 992px) {
-  .header-blue .navbar-nav .nav-link {
-    padding-left: 1.2rem;
-    padding-right: 1.2rem;
-  }
-}
 
-.header-blue .navbar.navbar-light .navbar-nav .nav-link {
-  color: #fff;
-}
-
-.header-blue .navbar.navbar-light .navbar-nav .nav-link:focus, .header-blue .navbar.navbar-light .navbar-nav .nav-link:hover {
-  color: #fcfeff !important;
-  background-color: transparent;
-}
-
-.header-blue .navbar .navbar-nav > li > .dropdown-menu {
-  margin-top: -5px;
-  box-shadow: 0 4px 8px rgba(0,0,0,.1);
-  background-color: #fff;
-  border-radius: 2px;
-}
-
-.header-blue .navbar .dropdown-menu .dropdown-item:focus, .header-blue .navbar .dropdown-menu .dropdown-item {
-  line-height: 2;
-  color: #37434d;
-}
-
-.header-blue .navbar .dropdown-menu .dropdown-item:focus, .header-blue .navbar .dropdown-menu .dropdown-item:hover {
-  background: #ebeff1;
-}
 
 .header-blue .action-button, .header-blue .action-button:not(.disabled):active {
   border: 1px solid rgb(255,255,255);
@@ -143,18 +95,7 @@
   outline: none;
 }
 
-.header-blue .action-button:hover {
-  color: #fff;
-}
 
-.header-blue .navbar .form-inline label {
-  color: #d9d9d9;
-}
-
-.header-blue .hero {
-  margin-top: 20px;
-  text-align: center;
-}
 
 @media (min-width:768px) {
   .header-blue .hero {
@@ -269,8 +210,14 @@ color: #fff;
     color: #0e0d0d;
 }
 
-
-
+.grnbuton{
+  background-color: #177e89;
+  float: left;
+  font-size: 20px;
+}
+.grnbuton:hover{
+  background-color: #db3a34;
+}
 
 </style>
 
@@ -283,14 +230,13 @@ color: #fff;
     <div>
         <div class="header-blue">
             <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
-                <div class="container-fluid"><a class="navbar-brand" href="#">EMCOR</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse"
+                <div class="container-fluid">
+                  
+                  <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+
+                   <div class="collapse navbar-collapse"
                         id="navcol-1">
-                        <ul class="nav navbar-nav">
-                             <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Branches</a>
-                                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Dumaguete City</a><a class="dropdown-item" role="presentation" href="">Bayawan City</a></div>
-                            </li>
-                        </ul>   
+                   
                       <div class="collapse navbar-collapse">
                     
                       </div>    
@@ -304,8 +250,12 @@ color: #fff;
                 <div class="row">
                     <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
                         <h1>Emcor</h1>
-                        <p>EMCOR is the most relevant, world-class, community-based organization that enables customers to achieve a better life by providing quality products and services through personalized care.<br></p>
-                    </div>
+
+                       <!--  <img class="logo-img" src="asset('assets/images/eclogo12.png')}}" alt="" class="logo"> -->
+                         <p>EMCOR is the most relevant, world-class, community-based organization that enables customers to achieve a better life by providing quality products and services through personalized care.<br></p>
+                    
+                   
+                        </div>
 
                     <!--Emcor Login form -->
    
@@ -353,7 +303,7 @@ color: #fff;
                                   @enderror
                                 </div>
                                 
-                              <button type="submit" class="btn btn-primary sub float-left rounded-pill">Login</button>
+                              <button type="submit" class="btn btn-primary grnbuton">Login</button>
                               
                                     <div class="dropdown show float-right">
                                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

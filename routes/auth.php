@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Barryvdh\Debugbar\Facades\Debugbar;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\VerifyEmailController;
@@ -39,7 +38,6 @@ Route::middleware('guest')->group(function () {
         ->name('password.store');
 
 
-    //     Debugbar::info('info');
 });
 
 Route::middleware('auth')->group(function () {

@@ -3,7 +3,7 @@
 @section('users')
 
 <div class="table_area">
-         <a  href="{{ route('users.create')}}" class="btn btn-info " >Create User</a>
+        <div class="title_user">Users List</div>
       
           <div class="table-responsive">
               <table class="table table-bordered">
@@ -11,6 +11,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
+                        <th>Phone</th>
                         <th>Email</th>
                         <th>Role</th>
                         <th>Action</th>
@@ -22,6 +23,7 @@
                     <tr>
                         <td>{{ $user->id}}</td>
                         <td>{{ $user->name}}</td>
+                        <td>{{ $user->phone}}</td>
                         <td>{{ $user->email}}</td>
                    
                         <td>
@@ -31,9 +33,9 @@
                        </td>
                         <td>
                             <div class=" ">
-                                <a href="" class="btn btn-info">Edit</a>
-                                <form method="POST"
-                                        action=""
+                                <a href="{{route('users.edit', $user->id) }}" class="btn btn-info">Edit</a>
+                                <form method="POST" 
+                                        action="{{route('users.destroy', $user->id) }}"
                                         onsubmit="return confirm('Are you sure?');">
                                     @csrf
                                     @method('DELETE')

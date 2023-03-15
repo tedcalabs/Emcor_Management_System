@@ -51,7 +51,7 @@ class AuthenticatedSessionController extends Controller
 
         if ($user_role == 1 && $user_branch == 2) {
 
-            return redirect()->route('secretary.dashboard');
+            return redirect()->route('manager.dashboard');
         } else if ($user_role == 1 && $user_branch == 1) {
 
             return redirect()->intended(RouteServiceProvider::MGRHOME);
@@ -61,42 +61,18 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('secretary.dashboard');
         } else if ($user_role == 2 && $user_branch == 2) {
 
-            return redirect()->intended(RouteServiceProvider::BSECHOME);
+            return redirect()->route('bsec.dashboard');
+
+
+
         } else if ($user_role == 3 && $user_branch == 1) {
 
-            return redirect()->intended(RouteServiceProvider::TECHOME);
+            return redirect()->route('technician.dashboard');
         }else{
-            return redirect()->intended(RouteServiceProvider::HOME);
+            return redirect('/');
         }
 
-        /*
 
-
-        switch ($user_role) {
-
-            case 1:
-                return redirect()->intended(RouteServiceProvider::MGRHOME);
-                break;
-
-            case 2:
-                return redirect()->intended(RouteServiceProvider::SECHOME);
-                break;
-
-            case 3:
-                return redirect()->intended(RouteServiceProvider::TECHOME);
-                break;
-
-
-            case 4:
-                return redirect()->intended(RouteServiceProvider::MECHOME);
-                break;
-
-            default:
-
-                return redirect()->intended(RouteServiceProvider::HOME);
-        }
-
-        */
     }
 
     /**

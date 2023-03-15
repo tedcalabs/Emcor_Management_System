@@ -55,6 +55,7 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'PreventBackHistory' => \App\Http\Middleware\PreventBackHistory::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
@@ -64,12 +65,11 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\Admin::class,
-        'adminx' => \App\Http\Middleware\Adminx::class,
-        'adminy' => \App\Http\Middleware\Adminy::class,
         'user-role' => \App\Http\Middleware\UserRoleMiddleware::class,
         'manager' => \App\Http\Middleware\Manager::class,
         'secretary' => \App\Http\Middleware\Secretary::class,
         'technician' => \App\Http\Middleware\Technician::class,
         'mechanic' => \App\Http\Middleware\Mechanic::class,
+        'branchb' => \App\Http\Middleware\BranchB::class,
     ];
 }

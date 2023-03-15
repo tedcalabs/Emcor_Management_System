@@ -13,9 +13,6 @@
                <p class="text maintext">Bayawan Secretary</p>
            </div>
        </div>
-       <div class="arrow">
-           <i class="fa-solid fa-arrow-right-long"></i>
-       </div>
        <div class="links">
            <div class="search">
            <i class="fa-solid fa-magnifying-glass icons"></i><input type="search" placeholder = "Search" class="searchbtn">
@@ -50,10 +47,7 @@
      
        </div>
 
-       <div class="toggle">
-           <input type="checkbox" class="checkbox">
-           <p class="text" id="toggleText">Dark Mode</p>
-       </div>
+   
        </div>
 </div>
 </div>

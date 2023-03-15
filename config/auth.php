@@ -48,10 +48,11 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
-        'adminx' => [
+        'branchb' => [
             'driver' => 'session',
-            'provider' => 'adminxs',
+            'provider' => 'branchbs',
         ],
+   
         'api' => [
             'driver' => 'passport',
             'provider' => 'users',
@@ -84,10 +85,12 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
-        'adminxs' => [
+
+        'branchbs' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Adminx::class,
+            'model' => App\Models\BranchB::class,
         ],
+
 
 
         // 'users' => [
@@ -124,12 +127,14 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        'adminxs' => [
-            'provider' => 'adminxs',
+
+        'branchbs' => [
+            'provider' => 'branchbs',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],
+     
     ],
 
     /*

@@ -8,7 +8,7 @@
 <div class="mainbody">
    <div class="close slider ">
        <div class="profile">
-           <img src=" {{asset('assets/images/user.png')}}" alt="profileImage" class="image">
+           <img src=" {{  asset('uploads/profile/'.Auth::user()->picture) }} " alt="profileImage" class="image">
            <div class="profileText">
                <p class="text maintext">{{Auth::user()->name}}</p>
            </div>
@@ -18,14 +18,14 @@
            <i class="fa-solid fa-magnifying-glass icons"></i><input type="search" placeholder = "Search" class="searchbtn">
        </div>
 
-       <a href="">
+       <a href="{{ route('secretary.dashboard') }}">
        <div class="dashboard childs">
            <i class="fa-solid fa-house icons"></i><p class="text">Dashboard</p>
        </div></a>
 
 <a href="{{route('maintenance.index')}}">
        <div class="notifications childs">
-           <i class="fa-solid fa-bell icons"></i><p class="text">Maintainance Request</p>
+           <i class="fa-solid fa-bell icons"></i><p class="text"> Request</p>
        </div>
     </a>
 
@@ -35,9 +35,14 @@
        <div class="heart childs">
            <i class="fa-regular fa-heart icons"></i><p class="text">Request Info</p>
        </div>
+       <a href="{{route('secretary.profile')}}">
        <div class="coins childs">
            <i class="fa-solid fa-coins icons"></i><p class="text">Profile</p>
-       </div><hr>
+       </div>
+       
+    </a>
+       
+       <hr>
 
 
        <div class="logout childs">

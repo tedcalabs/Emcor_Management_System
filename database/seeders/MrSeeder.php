@@ -17,6 +17,8 @@ class MrSeeder extends Seeder
     {
         Maintenance::create([
             'name' => 'Damage Aircon',
+            'address' => 'Duma',
+            'phone' => '32234452343',
             'description' => ' Needed Cleaning and check up'
         ]);
     }

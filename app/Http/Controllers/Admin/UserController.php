@@ -64,9 +64,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        //$categories = Category::all();
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -76,19 +77,41 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
-    }
+        $request->validate(
+            [
+                'name' => 'required',
+                'phone' => 'required',
+                'email' => 'required',
+                'role' => 'required',
+                'branch' => 'required',
+                'status' => 'required'
+            ]
+        );
 
+
+        $user->update([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'phone' => $request->phone,
+            'role' => $request->role,
+            'branch' => $request->branch,
+            'status' => $request->status,
+        ]);
+        return to_route('users.index');
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+     
+        $user->delete();
+
+        return to_route('users.index');
     }
 }

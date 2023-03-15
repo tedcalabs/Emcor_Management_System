@@ -9,6 +9,8 @@ import * as bootstrap from 'bootstrap'
 window.bootstrap = bootstrap
 
 
+import $ from 'jquery';
+window.$ = $;
 
 
 import axios from 'axios';

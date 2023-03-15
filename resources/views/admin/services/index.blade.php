@@ -2,15 +2,9 @@
 @include('admin.index')
 @section('services')
  <!-- table area -->
- <section class="table_area">
-  <div class="panel">
-      <div class="panel_header">
-          <div class="panel_title">
-            <span>Services Offered</span>
-            <a  href="{{ route('services.create')}}" class="btn btn-info  float-left bg-slate-400" >Create Services</a>
-        </div>
-      </div>
-      <div class="panel_body">
+ <div class="table_area">
+    <a  href="{{ route('services.create')}}" class="btn btn-info " >Create New Services</a>
+
           <div class="table-responsive">
               <table class="table table-bordered">
                   <thead>
@@ -66,9 +60,6 @@
                 </tbody>
               </table>
           </div>
-
-         
         </div>
-      </div>
-  </div> <!-- /table -->
+
 @endsection

@@ -6,13 +6,19 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Emcor_System') }}</title>
+        
+        @vite(['resources/scss/app.scss','resources/css/app.css','resources/js/app.js'])
 
-
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
+
+       
+
     </body>
+
+
+
 </html>

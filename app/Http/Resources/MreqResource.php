@@ -17,6 +17,8 @@ class MreqResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'address' => $this->address,
+            'phone' => $this->phone,
             'description' => $this->description,
             'created_at' => $this->created_at,
         ];

@@ -21,7 +21,8 @@ class Secretary
         if(!Auth::check()){
             return redirect('/');
         }
-
+        
+        $user_branch = Auth::user()->branch;
         $user =Auth::user();
         if($user->role==2){
             return $next($request);

@@ -21,8 +21,8 @@ class Admin extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'Apassword',
-        'status',
+        'password',
+
     ];
 
     /**
@@ -31,7 +31,7 @@ class Admin extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'Apassword',
+        'password',
         'remember_token',
     ];
 
@@ -44,7 +44,7 @@ class Admin extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-/*
+    /*
     protected function isAdmin(): Attribute
     {
         return new Attribute(

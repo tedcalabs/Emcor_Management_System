@@ -23,6 +23,7 @@ Route::get('mreqs', [MaintenanceController::class, 'index']);
 
 Route::middleware('auth:api')->group(function () {
     Route::get('profile', [ProfileController::class, 'show']);
+    Route::get('Uinfo', [ProfileController::class, 'info']);
     Route::post('logout', [ProfileController::class, 'logout']);
 });
 

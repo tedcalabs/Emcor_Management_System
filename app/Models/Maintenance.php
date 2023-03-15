@@ -9,6 +9,8 @@ class Maintenance extends Model
 {
     protected $fillable = [
         'name',
+        'address',
+        'phone',
         'description'
 
     ];

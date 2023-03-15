@@ -133,7 +133,7 @@ class ServiceController extends Controller
     public function get_popular_services(Request $request)
     {
 
-        $list = Service::where('type_id', 1)->take(5)->get();
+        $list = Service::where('type_id', 1)->take(2)->get();
 
         foreach ($list as $item) {
             $item['description'] = strip_tags($item['description']);
@@ -153,7 +153,7 @@ class ServiceController extends Controller
     public function get_recommended_services(Request $request)
     {
 
-        $list = Service::where('type_id', 1)->take(4)->get();
+        $list = Service::where('type_id', 1)->take(1)->get();
 
         foreach ($list as $item) {
             $item['description'] = strip_tags($item['description']);
