@@ -11,7 +11,13 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 
+
 Route::middleware('guest')->group(function () {
+
+
+Route::get('test-login', [AuthenticatedSessionController::class, 'test'])->name('test.login');
+Route::get('test-reg', [AuthenticatedSessionController::class, 'testreg'])->name('test.reg');
+
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
 
@@ -40,6 +46,8 @@ Route::middleware('guest')->group(function () {
 
 });
 
+
+
 Route::middleware('auth')->group(function () {
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
         ->name('verification.notice');
@@ -62,3 +70,8 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });
+
+
+
+
+

@@ -110,7 +110,7 @@ class BranchBController extends Controller
     public function BranchBLogout()
     {
         Auth::guard('branchb')->logout();
-        return redirect()->route('login_form')->with('error', 'Logout Successfully!');
+        return redirect()->route('branchb_loginform')->with('error', 'Logout Successfully!');
     }
 
     public function Register()

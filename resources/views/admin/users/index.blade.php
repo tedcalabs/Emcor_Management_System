@@ -3,6 +3,13 @@
 @section('users')
 
 <div class="table_area">
+
+         
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success">
+    <p>{{ $message }}</p>
+    </div>
+    @endif
         <div class="title_user">Users List</div>
       
           <div class="table-responsive">
@@ -40,7 +47,7 @@
                                     @csrf
                                     @method('DELETE')
 
-                                <button type="submit" class="btn btn-red">Delete</button>
+                                <button type="submit" class="btn btn-danger" style="margin-top: 3px">Delete</button>
                                 
                             </form>
 

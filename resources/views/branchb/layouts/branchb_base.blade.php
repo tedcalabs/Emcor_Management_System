@@ -21,6 +21,7 @@
       @yield ('topbarx')
       @yield('sidebarx')
       @yield('contentx')
+      @yield('requestb')
       </main>   
 
     

@@ -22,8 +22,8 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
-        return view('auth.register', compact('roles'));
+        //$roles = Role::all();
+        return view('auth.register');
     }
 
     /**

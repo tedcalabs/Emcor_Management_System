@@ -9,7 +9,7 @@
 <div class="container">
 
   
-<div class="item item-2"> 
+<div class="item item-1"> 
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>

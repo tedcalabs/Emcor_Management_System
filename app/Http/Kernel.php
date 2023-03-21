@@ -71,5 +71,7 @@ class Kernel extends HttpKernel
         'technician' => \App\Http\Middleware\Technician::class,
         'mechanic' => \App\Http\Middleware\Mechanic::class,
         'branchb' => \App\Http\Middleware\BranchB::class,
+        'bsecretary' =>\App\Http\Middleware\BSecretary::class,
+        'btechnician' =>\App\Http\Middleware\TechnicianB::class,
     ];
 }

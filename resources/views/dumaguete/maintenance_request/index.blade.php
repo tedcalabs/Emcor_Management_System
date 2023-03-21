@@ -1,20 +1,31 @@
 
-  
-@include('secdashboard')
+
+@extends('layouts.app')
+    
+    @include('components.topbar')
+    @include('components.sidebar')
+@section('request')
+
+<div class="container">
+    <div class="item item-5">
+      
+        <div class="" style=" margin-bottom:10px">
+            
+            <span class="head"> Request list</span>
+           
+            <a href="{{ route('accept') }}" class="btn btn-info float-right" style="">Acceted Request</a>
 
 
+        </div>
 
-
-<div class="table_area">
-    <div class="card-header">
-               
-        <h4>List of Request </h4>
-      </div>
-      <div class="hello">
-      <div class="test">Hello Jquery</div>
-      <button>Click me</button>
-    </div>
+       
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+        <p>{{ $message }}</p>
+        </div>
+        @endif
      <div class="table-responsive">
+ 
          <table class="table table-bordered">
              <thead>
                <tr>
@@ -23,31 +34,30 @@
                    <th>Address</th>
                    <th>Contact Number</th>
                    <th>Request Detail</th>
-                   <th>Date of Request</th>
                    <th>Action</th>
                    <th>Edit</th>
 
                </tr>
            </thead>
            <tbody> 
-            @foreach ($data as $mreq)
+            @foreach ($data as $data)
                <tr>
-                   <td>{{ $mreq->id}}</td>
-                   <td>{{ $mreq->name}}</td>
-                   <td>{{ $mreq->address}}</td>
+                   <td>{{ $data->id}}</td>
+                   <td>{{ $data->name}}</td>
+                   <td>{{ $data->address}}</td>
               
-                   <td>{{ $mreq->phone}}</td>
+                   <td>{{ $data->phone}}</td>
                 
-                   <td>{{ $mreq->description}}</td>
-                   <td>{{ $mreq->created_at}}</td>
+                   <td>{{ $data->description}}</td>
+                
                    <td>
                        <div class=" ">
-                           <a href="" class="btn btn-info" style="margin-bottom: 5px">Accept</a>
-                           <form method="POST"
+                           <a href="{{ route('updateReq', $data->id) }}" class="btn btn-info" style="margin-bottom: 5px">Accept</a>
+                           <form method=""
                                    action=""
                                    onsubmit="return confirm('Are you sure?');">
                                @csrf
-                               @method('DELETE')
+                           
 
                            <button type="submit" class="btn btn-danger text-black">Decline</button>
                            
@@ -58,9 +68,9 @@
                    </td>
                    <td>
                     <div class=" ">
-                        <a href="" class="btn btn-info "  style="margin-bottom: 5px">Edit</a>
-                        <form method="POST"
-                                action=""
+                        <a href="{{ route('upReq', $data->id) }}" class="btn btn-info "  style="margin-bottom: 5px">Edit</a>
+                        <form method="GET"
+                                action="{{ route('deleteReq', $data->id) }}"
                                 onsubmit="return confirm('Are you sure?');">
                             @csrf
                             @method('DELETE')
@@ -78,5 +88,25 @@
                @endforeach
            </tbody>
          </table>
-       </div>
-   </div>
+   
+        </div>
+        </div>
+ @endsection
+
+@section('script')
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            showRepair();
+
+            function showRepair(){
+           
+            }
+        })
+
+
+
+    </script>
+
+@endsection

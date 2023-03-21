@@ -32,6 +32,17 @@ class AuthenticatedSessionController extends Controller
 
 
 
+    public function testreg()
+    {
+        return view('auth.tesreg');
+    }
+
+
+
+    public function test()
+{
+   return view('auth.testlogin');
+}
 
     /**
      * Handle an incoming authentication request.
@@ -46,26 +57,20 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $user_role = Auth::user()->role;
-        $user_branch = Auth::user()->branch;
+     
 
 
-        if ($user_role == 1 && $user_branch == 2) {
+        if ($user_role == 1) {
 
             return redirect()->route('manager.dashboard');
-        } else if ($user_role == 1 && $user_branch == 1) {
+        } else if ($user_role == 1) {
 
             return redirect()->intended(RouteServiceProvider::MGRHOME);
             
-        } else if ($user_role == 2 && $user_branch == 1) {
+        } else if ($user_role == 2 ) {
 
             return redirect()->route('secretary.dashboard');
-        } else if ($user_role == 2 && $user_branch == 2) {
-
-            return redirect()->route('bsec.dashboard');
-
-
-
-        } else if ($user_role == 3 && $user_branch == 1) {
+        } else if ($user_role == 3 ) {
 
             return redirect()->route('technician.dashboard');
         }else{

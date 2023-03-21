@@ -96,9 +96,11 @@ grid-area: main;
 
 
 .item-1 {
-    background-color: brown;
+   //    background-color: brown;
 //justify-self: center;
 //align-self: stretch;
+grid-area: aside;
+margin-left: 10rem;
 }
 
 .item-2 {
@@ -107,10 +109,27 @@ grid-area: main;
 }
 
 .item-3 {
-    background-color: rgb(178, 179, 179);
+    grid-area: aside;
+    margin-left: 14rem;
  
 }
 .item-4 {
-    background-color: blue;
- 
+
+    justify-self: center;
+    
+}
+
+.item-5 {
+    grid-area: aside;
+    margin-left: 15rem;
+    
+}
+
+
+
+.item-6 {
+    margin-top: 5rem;
+    margin-left: 13rem;
+    margin-right: 20rem;
+    
 }

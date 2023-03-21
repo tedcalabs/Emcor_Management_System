@@ -27,6 +27,7 @@ class MrRequest extends FormRequest
             'name' => 'required',
             'address' => 'required',
             'phone' => 'required',
+            'branch' => 'required',
         ];
     }
 }

@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Emcor - Login</title>
+        <title>Emcor Login</title>
        
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -249,12 +249,12 @@ color: #fff;
             <div class="container hero">
                 <div class="row">
                     <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
-                        <h1>Emcor</h1>
+                    <!--         <h1>Emcor</h1>
 
-                       <!--  <img class="logo-img" src="asset('assets/images/eclogo12.png')}}" alt="" class="logo"> -->
+                    <img class="logo-img" src="asset('assets/images/eclogo12.png')}}" alt="" class="logo">
                          <p>EMCOR is the most relevant, world-class, community-based organization that enables customers to achieve a better life by providing quality products and services through personalized care.<br></p>
                     
-                   
+                    -->
                         </div>
 
                     <!--Emcor Login form -->
@@ -291,17 +291,7 @@ color: #fff;
                                   <span class="text-danger">{{$message}}</span>
                                   @enderror
                               </div>
-                              <div class="form-group">
-                                  <label for="password2" class="inline-block text-lg mb-2">
-                                    Confirm Password
-                                  </label>
-                                  <input type="password" name="password_confirmation" placeholder="Confirm Password"
-                                    value="{{old('password_confirmation')}}" />
-                          
-                                  @error('password_confirmation')
-                                  <p class="text-red-500 text-xs mt-1">{{$message}}</p>
-                                  @enderror
-                                </div>
+                            
                                 
                               <button type="submit" class="btn btn-primary grnbuton">Login</button>
                               
@@ -312,6 +302,7 @@ color: #fff;
 
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <a class="dropdown-item" href="{{ route('login_form')}}">Login as Admin</a>
+                                            <a class="dropdown-item" href="{{ route('branchb_loginform')}}">Bayawan Login</a>
                                         </div>
                                     </div>
                                 </form>

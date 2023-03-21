@@ -7,5 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Shedule extends Model
 {
+
     use HasFactory;
+    
+    protected $fillable = [
+        'rname',
+        'cname',
+        'caddress',
+        'cphone',
+        'rsched',
+        'status',    
+    ];
 }

@@ -1,10 +1,15 @@
 
 
-
+@extends('layouts.app')
   
-@include('secdashboard')
+@include('components.topbar')
+@include('components.sidebar')
 
 
+@section('secprofile')
+
+<div class="container">
+  <div class="item item-4">
     <!-- Content Header (Page header) -->
     <section class="content-header prof">
         <div class="container-fluid">
@@ -162,5 +167,6 @@
         </div><!-- /.container-fluid -->
       </section>
       <!-- /.content -->
-    
-
+    </div>
+  </div>
+@endsection

@@ -10,8 +10,6 @@
         <title>Emcor - Login</title>
        
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <style>
 
@@ -54,6 +52,7 @@
 
 .header-blue .navbar .navbar-brand {
   font-weight: bold;
+  font-size: 2rem;
   color: inherit;
 }
 
@@ -258,8 +257,6 @@ color: #fff;
 }
 
 
-
-
 .form-group input {
     width: 100%;
     height: 50px;
@@ -267,8 +264,6 @@ color: #fff;
     padding:0 35px 0 5px;
     color: #151414;
 }
-
-
 
 
 </style>
@@ -289,8 +284,6 @@ color: #fff;
             <div class="container hero">
                 <div class="row">
                     <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
-                        <h1>Emcor</h1>
-                        <p>EMCOR is the most relevant, world-class, community-based organization that enables customers to achieve a better life by providing quality products and services through personalized care.<br></p>
                     </div>
 
                     <!--Emcor Login form -->
@@ -327,18 +320,7 @@ color: #fff;
                                   <span class="text-danger">{{$message}}</span>
                                   @enderror
                               </div>
-                              <div class="form-group">
-                                  <label for="password2" class="inline-block text-lg mb-2">
-                                    Confirm Password
-                                  </label>
-                                  <input type="password" name="password_confirmation" placeholder="Confirm Password"
-                                    value="{{old('password_confirmation')}}" />
-                          
-                                  @error('password_confirmation')
-                                  <p class="text-red-500 text-xs mt-1">{{$message}}</p>
-                                  @enderror
-                                </div>
-                                
+                         
                               <button type="submit" class="btn btn-primary sub float-left rounded-pill">Login</button>
                               <a class="registration text-white float-right" href="{{ route('registeredA') }}">Create new account.</a>        
                  </form>

@@ -352,7 +352,7 @@ color: #fff;
                                 
                                     
                              
-                                <button type="submit" class="btn btn-primary rounded-pill">Sign Up</button><br>
+                                <button type="submit" class="btn btn-primary ">Sign Up</button><br>
                                 <span class="text text-white">Already have an account?</span><a href="/" class="href text-white"> Login</a>
                             </form>
                         </div>

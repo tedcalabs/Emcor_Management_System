@@ -281,7 +281,7 @@ color: #fff;
     <div>
         <div class="header-blue">
             <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
-                <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="container-fluid"><a class="navbar-brand" href="{{ route('login') }}">EMCOR</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
               
             </nav>
 
@@ -289,9 +289,9 @@ color: #fff;
             <div class="container hero">
                 <div class="row">
                     <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
-                        <h1>Emcor</h1>
+                  <!--      <h1>Emcor</h1>
                         <p>EMCOR is the most relevant, world-class, community-based organization that enables customers to achieve a better life by providing quality products and services through personalized care.<br></p>
-                    </div>
+                    -->  </div>
 
                     <!--Emcor Login form -->
    
@@ -300,7 +300,7 @@ color: #fff;
                           <div class="card-header">
                   <div class="card">
                       <div class="card-header">
-                     <h2>Bayawan Branch Login</h2>
+                     <h2>Bayawan Manager Login</h2>
                           
                       </div>
                       <div class="card-body">
@@ -327,20 +327,10 @@ color: #fff;
                                   <span class="text-danger">{{$message}}</span>
                                   @enderror
                               </div>
-                              <div class="form-group">
-                                  <label for="password2" class="inline-block text-lg mb-2">
-                                    Confirm Password
-                                  </label>
-                                  <input type="password" name="password_confirmation" placeholder="Confirm Password"
-                                    value="{{old('password_confirmation')}}" />
-                          
-                                  @error('password_confirmation')
-                                  <p class="text-red-500 text-xs mt-1">{{$message}}</p>
-                                  @enderror
-                                </div>
-                                
+                       
                               <button type="submit" class="btn btn-primary sub float-left rounded-pill">Login</button>
-                              <a class="registration text-white float-right" href="{{route('branchb_registerForm')}}">Create new account?</a>        
+                              <a class="registration text-white float-right" href="{{route('branchb_registerForm')}}">Create new account?</a> <br>
+                              <a class="registration text-white float-right" href="{{route('bsec_loginform')}}">Login as Secretary</a>   
                  </form>
                       </div>
                   </div>

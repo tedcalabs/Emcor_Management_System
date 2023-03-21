@@ -20,6 +20,7 @@ class MreqResource extends JsonResource
             'address' => $this->address,
             'phone' => $this->phone,
             'description' => $this->description,
+            'branch' => $this->branch,
             'created_at' => $this->created_at,
         ];
     }

@@ -24,7 +24,7 @@ class AdminController extends Controller
     {
 
 
-        $admin = Auth::guard('admin')->user()->name;
+        //$admin = Auth::guard('admin')->user()->name;
 
 
         return view('admin.index');

@@ -17,8 +17,8 @@ class UserController extends Controller
     public function index()
     {
         $data = User::all();
-        $roles = Role::all();
-        return view('admin.users.index', compact('data', 'roles'));
+       // $roles = Role::all();
+        return view('admin.users.index', compact('data'));
     }
 
     /**
@@ -51,10 +51,10 @@ class UserController extends Controller
     public function show($id)
     {
         $data = User::find($id);
-        $roles = Role::all();
+        //$roles = Role::all();
         return view('admin.users.index', [
             'data' => $data,
-            'roles' => $roles
+            //'roles' => $roles
         ]);
     }
 
@@ -94,12 +94,12 @@ class UserController extends Controller
         $user->update([
             'name' => $request->name,
             'phone' => $request->phone,
-            'phone' => $request->phone,
+            'email' => $request->email,
             'role' => $request->role,
             'branch' => $request->branch,
             'status' => $request->status,
         ]);
-        return to_route('users.index');
+        return to_route('users.index')->with('success','User updated successfully!');
     }
     /**
      * Remove the specified resource from storage.
@@ -114,4 +114,8 @@ class UserController extends Controller
 
         return to_route('users.index');
     }
+
+
+
+
 }

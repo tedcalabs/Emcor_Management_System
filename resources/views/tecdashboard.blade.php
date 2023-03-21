@@ -21,7 +21,7 @@
 
        <a href="">
        <div class="dashboard childs">
-           <i class="fa-solid fa-house icons"></i><p class="text">Dashboard</p>
+           <i class="fa-solid fa-house icons"></i><p class="text">Dash</p>
        </div></a>
        <div class="messages childs">
            <i class="fa-solid fa-envelope icons"></i><p class="text">Schedules</p>

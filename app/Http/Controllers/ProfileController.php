@@ -26,11 +26,18 @@ class ProfileController extends Controller
     public function show()
     {
 
+$data = Auth::user();
+
+return response()->json($data,200);
+
+
+
+/*
         try {
             return Auth::guard()->user();
         } catch (Exception $exception) {
             return $this->responseError([], $exception->getMessage());
-        }
+        }*/
     }
 
     public function logout():JsonResponse

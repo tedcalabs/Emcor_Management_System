@@ -52,6 +52,12 @@ return [
             'driver' => 'session',
             'provider' => 'branchbs',
         ],
+
+
+        'bsec' => [
+            'driver' => 'session',
+            'provider' => 'bsecs',
+        ],
    
         'api' => [
             'driver' => 'passport',
@@ -91,7 +97,10 @@ return [
             'model' => App\Models\BranchB::class,
         ],
 
-
+        'bsecs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\BSecretary::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
@@ -130,6 +139,12 @@ return [
 
         'branchbs' => [
             'provider' => 'branchbs',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'bsecs' => [
+            'provider' => 'bsecs',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

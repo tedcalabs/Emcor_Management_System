@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Secretary;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\MrRequest;
-use App\Http\Resources\MreqResource;
-use App\Models\Maintenance;
-use Illuminate\Http\JsonResponse;
 use Exception;
+use App\Models\User;
+use App\Models\Maintenance;
+use Illuminate\Http\Request;
+use App\Http\Requests\MrRequest;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\MreqResource;
 
 
 
@@ -31,13 +32,24 @@ class MaintenanceController extends Controller
             'todos' =>   MreqResource::collection($mreqs),
         ], 200);
         */
-$data = Maintenance::all();
 
 
 
+        $data = Maintenance::select("*")
+        ->where([
+            ["branch", "=", 1],
+            ["tech", "=", 2]
+        ])
+        ->get();
 
-        return view('dumaguete.maintenance_request.index', compact('data'));
+//dd($users);
+
+
+      //  $data = Maintenance::where('branch',1)->take(5)->get();
+       return view('dumaguete.maintenance_request.index', compact('data'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -64,6 +76,7 @@ $data = Maintenance::all();
             'name' => $mrRequest->name,
             'address' => $mrRequest->address,
             'phone' => $mrRequest->phone,
+            'branch' => $mrRequest->branch,
             'description' => $mrRequest->description,
         ]);
 
@@ -87,10 +100,20 @@ $data = Maintenance::all();
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function accept()
     {
-        //
+    
+      
+        $data = Maintenance::select("*")
+        ->where([
+            ["branch", "=", 1],
+            ["tech", "=", 5]
+        ])
+        ->get();
+        return view('dumaguete.maintenance_request.accept', compact('data'));
     }
+    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -98,9 +121,10 @@ $data = Maintenance::all();
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Maintenance $maintenance)
     {
-        //
+        $maintenance = Maintenance::where('branch', 1)->take(5)->get();
+        return view('dumaguete.maintenance_request.edit', compact('maintenance'));
     }
 
     /**
@@ -110,10 +134,6 @@ $data = Maintenance::all();
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -125,4 +145,67 @@ $data = Maintenance::all();
     {
         //
     }
+
+
+    public function deleteReq($id)
+    {
+        $data = Maintenance::where('branch', 1)->take(5)->find($id);
+        $data->delete();
+        return back();
+    }
+
+
+
+
+
+    public function updateReq($id)
+    {
+        
+        $technician = User::select("*")
+        ->where([
+            ["role", "=", 3],
+            ["status", "=", 1],
+            ["sched_status", "=", "available"],
+        ])
+        ->get();
+        $data = Maintenance::where('branch', 1)->take(5)->find($id);
+        return view('dumaguete.maintenance_request.edit', compact('data', 'technician'));
+    }
+
+
+    
+    public function upReq($id)
+    {
+        $data = Maintenance::where('branch', 1)->take(5)->find($id);
+        return view('dumaguete.maintenance_request.update', compact('data'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'description' => 'required',
+            'req_date' => 'required',            
+            'tech' => 'required',
+            
+            ]);
+
+
+            $data = Maintenance::find($id);
+            $data->name = $request->name;
+            $data->phone = $request->phone;
+            $data->address = $request->address;
+            $data->description = $request->description;
+            $data->req_date = $request->req_date;
+            $data->tech = $request->tech;
+            $data->technician = $request->technician;
+            $data->save();
+            return redirect()->route('mreq')
+            ->with('success','Request accepted!');
+       
+    }
+
+
 }
