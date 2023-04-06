@@ -22,15 +22,18 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'fname',
+        'lname',
+        'address',
+        'bdate',
+        'gender',
         'phone',
         'email',
+        'picture',
         'password',
         'role',
-        'picture',
         'status',
-        'branch'
-        //'role_id',
+        'sched_status'
     ];
 
     /**
@@ -53,12 +56,7 @@ class User extends Authenticatable
     ];
 
 
-    /*protected function role(): Attribute
-    {s
-        return new Attribute(
-            get: fn ($value) => ["user", "technician", "mechanic", "secretary", "manager", "admin"][$value]
-        );
-    }*/
+
 
     public function roles()
     {

@@ -4,9 +4,8 @@ namespace App\Http\Controllers\BranchB;
 
 use Illuminate\Http\Request;
 
-
-use App\Models\BSecretary;
 use App\Http\Controllers\Controller;
+use App\Models\BayawanUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
@@ -48,7 +47,7 @@ class TechnicianBController extends Controller
         $currentPasswordStatus = Hash::check($request->current_password, Auth::guard('bsec')->user()->password);
         if ($currentPasswordStatus) {
 
-            BSecretary::findOrFail(Auth::guard('bsec')->user()->id)->update([
+            BayawanUser::findOrFail(Auth::guard('bsec')->user()->id)->update([
                 'password' => Hash::make($request->password),
             ]);
 
@@ -76,7 +75,7 @@ class TechnicianBController extends Controller
         if (!$validator->passes()) {
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
-            $query = BSecretary::find(Auth::guard('bsec')->user()->id)->update([
+            $query = BayawanUser::find(Auth::guard('bsec')->user()->id)->update([
                 'name' => $request->name,
                 'email' => $request->email,
 
@@ -93,9 +92,9 @@ class TechnicianBController extends Controller
     public function update(Request $request)
     {
 
-        //$user =  User::find(Auth::user()->id);
+
         $user_id = Auth::guard('bsec')->user()->id;
-        $user = BSecretary::findOrFail($user_id);
+        $user = BayawanUser::findOrFail($user_id);
 
         if ($request->hasFile('picture')) {
           

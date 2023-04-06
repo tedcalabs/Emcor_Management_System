@@ -30,10 +30,13 @@
       @yield ('content')
       @yield ('secprofile')
       @yield ('request')
+      @yield ('requestf')
+      @yield ('requestm')
       @yield ('mAccept')
       @yield('updateReq')
       @yield('test')
       @yield('testr')
+      @yield('register')
       </main>   
 
       @yield ('script')   

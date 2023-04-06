@@ -1,8 +1,5 @@
 
 
-
-
-
 body {
     height: 100%;
     width: 100%;
@@ -76,7 +73,7 @@ a {
 }
 
 .childs:hover {
-    background-color: #db3a34;
+    background-color:   #db3a34;
     color: white;
 }
 

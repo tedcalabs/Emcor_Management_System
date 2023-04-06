@@ -99,7 +99,7 @@ return [
 
         'bsecs' => [
             'driver' => 'eloquent',
-            'model' => App\Models\BSecretary::class,
+            'model' => App\Models\BayawanUser::class,
         ],
 
         // 'users' => [

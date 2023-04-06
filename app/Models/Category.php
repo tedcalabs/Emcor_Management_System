@@ -11,7 +11,7 @@ class Category extends Model
     use HasFactory;
 
 
-    protected $fillable = ['catname', 'image', 'description'];
+    protected $fillable = ['catname', 'description'];
 
     public function services()
     {

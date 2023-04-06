@@ -80,7 +80,11 @@ class AuthRepository
     public function prepareDataForRegister(array $data): array
     {
         return [
-            'name' => $data['name'],
+            'fname' => $data['fname'],
+            'lname' => $data['lname'],
+            'address' => $data['address'],
+            'bdate' => $data['bdate'],
+            'gender' => $data['gender'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password'])

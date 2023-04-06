@@ -24,9 +24,12 @@ class BranchBSRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users',
+            'fname' => 'required|string',
+            'lname' => 'required|string',
+            'address' => 'required|string',
             'phone' => 'required|string',
+            'gender' => 'required|string',
+            'email' => 'required|email|unique:users',
             'password' => 'required|min:6'
         ];
     }

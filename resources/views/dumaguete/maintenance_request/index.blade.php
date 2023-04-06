@@ -11,7 +11,7 @@
       
         <div class="" style=" margin-bottom:10px">
             
-            <span class="head"> Request list</span>
+            <span class="head">Whitelines Request list</span>
            
             <a href="{{ route('accept') }}" class="btn btn-info float-right" style="">Acceted Request</a>
 

@@ -2,83 +2,111 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class TechnicianController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         return view('dumaguete.technician.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    function profile()
     {
-        //
+        return view('dumaguete.technician.profile.index');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+
+
+    public function tecChangePassword(Request $request)
     {
-        //
+        $request->validate([
+            'current_password' => ['required', 'string', 'min:8'],
+            'password' => ['required', 'string', 'min:8', 'confirmed']
+        ]);
+
+        $currentPasswordStatus = Hash::check($request->current_password, Auth::user()->password);
+        if ($currentPasswordStatus) {
+
+            User::findOrFail(Auth::user()->id)->update([
+                'password' => Hash::make($request->password),
+            ]);
+
+            return redirect()->back()->with('message', 'Password Updated Successfully');
+        } else {
+
+            return redirect()->back()->with('message', 'Current Password does not match with Old Password');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+
+    public function update(Request $request)
     {
-        //
+
+
+        $user_id = Auth::user()->id;
+        $user = User::findOrFail($user_id);
+
+        if ($request->hasFile('picture')) {
+          
+            $destination = 'uploads/profile/'. $user->picture;
+
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+
+            $file = $request->file('picture');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('uploads/profile/', $filename);
+            $user->picture = $filename;
+        }
+        $user->update();
+        return redirect()->back()->with('status','Ok');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    function tecupdateInfo(Request $request)
     {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        $validator = Validator::make($request->all(), [
+            'fname' => 'required',
+            'lname' => 'required',
+            'address' => 'required',
+            'bdate' => 'required',
+            'phone' => 'required',
+            'gender' => 'required',
+            'email' => 'required|email|unique:users,email,'. Auth::user()->id,
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $query = User::find(Auth::user()->id)->update([
+                'fname' => $request->fname,
+                'lname' => $request->lname,
+                'address' => $request->address,
+                'bdate' => $request->bdate,
+                'phone' => $request->phone,
+                'gender' => $request->gender,
+                'email' => $request->email,
+
+            ]);
+
+            if (!$query) {
+                return response()->json(['status' => 0, 'msg' => 'Something went wrong.']);
+            } else {
+                return response()->json(['status' => 1, 'msg' => 'Your profile info has been update successfuly.']);
+            }
+        }
     }
 }

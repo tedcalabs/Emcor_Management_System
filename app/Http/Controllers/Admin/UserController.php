@@ -81,7 +81,8 @@ class UserController extends Controller
     {
         $request->validate(
             [
-                'name' => 'required',
+                'fname' => 'required',
+                'lname' => 'required',
                 'phone' => 'required',
                 'email' => 'required',
                 'role' => 'required',
@@ -92,7 +93,8 @@ class UserController extends Controller
 
 
         $user->update([
-            'name' => $request->name,
+            'fname' => $request->fname,
+            'lname' => $request->lname,
             'phone' => $request->phone,
             'email' => $request->email,
             'role' => $request->role,

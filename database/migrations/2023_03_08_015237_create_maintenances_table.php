@@ -19,6 +19,12 @@ return new class extends Migration
             $table->string('address');
             $table->string('phone');
             $table->longText('description');
+            $table->string('branch');
+            $table->string('category');
+            $table->tinyInteger('acceptd')->nullable();
+            $table->datetime('req_date')->nullable();
+            $table->string('technician')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

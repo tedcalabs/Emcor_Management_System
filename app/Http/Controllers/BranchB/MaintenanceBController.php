@@ -8,46 +8,33 @@ use Illuminate\Http\Request;
 use App\Http\Requests\MrRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MreqResource;
-use App\Models\Bsecretary;
+use App\Models\BayawanUser;
 
 class MaintenanceBController extends Controller
 {
-   
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        /*
-        $mreqs = Maintenance::latest()->get();
-
-        return response([
-            'message' => 'success',
-            'todos' =>   MreqResource::collection($mreqs),
-        ], 200);
-        */
-
+      
 
         $data = Maintenance::select("*")
         ->where([
             ["branch", "=", 2],
-            ["tech", "=", 2]
+            ["acceptd", "=", 2]
         ])
         ->get();
-   // $data = Maintenance::where('branch', 2)->take(5)->get();
+
         return view('branchb.secretary.maintenanceRequest.index', compact('data'));
     }
 
-    public function accept()
+    public function acceptd()
     {
     
       
         $data = Maintenance::select("*")
         ->where([
             ["branch", "=", 2],
-            ["tech", "=", 5]
+            ["acceptd", "=", 5]
         ])
         ->get();
         return view('branchb.secretary.maintenanceRequest.accepted', compact('data'));
@@ -57,7 +44,7 @@ class MaintenanceBController extends Controller
     public function updateReq($id)
     {
         
-        $technician = Bsecretary::select("*")
+        $acceptnician = BayawanUser::select("*")
         ->where([
             ["role", "=", 3],
             ["status", "=", 1],
@@ -65,14 +52,9 @@ class MaintenanceBController extends Controller
         ])
         ->get();
         $data = Maintenance::where('branch', 2)->take(5)->find($id);
-        return view('branchb.secretary.maintenanceRequest.accept', compact('data', 'technician'));
+        return view('branchb.secretary.maintenanceRequest.acceptd', compact('data', 'acceptnician'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
@@ -83,12 +65,7 @@ class MaintenanceBController extends Controller
         $data = Maintenance::where('branch', 2)->take(5)->find($id);
         return view('dumaguete.maintenance_request.update', compact('data'));
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(MrRequest $mrRequest)
     {
 
@@ -98,6 +75,7 @@ class MaintenanceBController extends Controller
             'name' => $mrRequest->name,
             'address' => $mrRequest->address,
             'phone' => $mrRequest->phone,
+            'branch' => $mrRequest->branch,
             'description' => $mrRequest->description,
         ]);
 
@@ -114,38 +92,17 @@ class MaintenanceBController extends Controller
         }
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Maintenance $maintenance)
     {
         $maintenance = Maintenance::where('branch', 2)->take(5)->get();
         return view('dumaguete.maintenance_request.edit', compact('maintenance'));
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -154,7 +111,7 @@ class MaintenanceBController extends Controller
             'phone' => 'required',
             'description' => 'required',
             'req_date' => 'required',            
-            'tech' => 'required',
+            'acceptd' => 'required',
             
             ]);
 
@@ -165,21 +122,14 @@ class MaintenanceBController extends Controller
             $data->address = $request->address;
             $data->description = $request->description;
             $data->req_date = $request->req_date;
-            $data->tech = $request->tech;
-            $data->technician = $request->technician;
+            $data->acceptd = $request->acceptd;
+            $data->acceptnician = $request->acceptnician;
             $data->save();
             return redirect()->route('mreqb')
             ->with('success','Request accepted!');
        
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-  
      public function deleteReq($id)
      {
          $data = Maintenance::where('branch',2)->take(5)->find($id);

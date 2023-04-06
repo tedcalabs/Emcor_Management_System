@@ -70,8 +70,11 @@ class Kernel extends HttpKernel
         'secretary' => \App\Http\Middleware\Secretary::class,
         'technician' => \App\Http\Middleware\Technician::class,
         'mechanic' => \App\Http\Middleware\Mechanic::class,
+        'brownlines' => \App\Http\Middleware\Brownlines::class,
+        'workexpert' =>\App\Http\Middleware\WorkExpert::class,
         'branchb' => \App\Http\Middleware\BranchB::class,
         'bsecretary' =>\App\Http\Middleware\BSecretary::class,
         'btechnician' =>\App\Http\Middleware\TechnicianB::class,
+        'brownlinesb' =>\App\Http\Middleware\BrownlinesB::class,
     ];
 }

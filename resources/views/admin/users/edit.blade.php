@@ -20,12 +20,22 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="sm:col-span-6">
-                                    <label for="name" class="block text-sm font-medium text-gray-700"> Name </label>
+                                    <label for="fname" class="block text-sm font-medium text-gray-700">First Name</label>
                                     <div class="mt-1">
-                                        <input type="text" id="name" name="name" value="{{ $user->name }}"
-                                            class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('name') border-red-400 @enderror" />
+                                        <input type="text" id="fname" name="fname" value="{{ $user->fname }}"
+                                            class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('fname') border-red-400 @enderror" />
                                     </div>
-                                    @error('name')
+                                    @error('fname')
+                                        <div class="text-sm text-red-400">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="sm:col-span-6">
+                                    <label for="lname" class="block text-sm font-medium text-gray-700"> Last Name</label>
+                                    <div class="mt-1">
+                                        <input type="text" id="lname" name="lname" value="{{ $user->lname }}"
+                                            class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('lname') border-red-400 @enderror" />
+                                    </div>
+                                    @error('lname')
                                         <div class="text-sm text-red-400">{{ $message }}</div>
                                     @enderror
                                 </div>

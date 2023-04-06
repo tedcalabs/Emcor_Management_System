@@ -233,8 +233,9 @@
         .card{
         
             width: 400px;
-            height: 600px;
+            height: 650px;
             background: transparent;
+            background-color: #084c61;
             border: 2px solid rgba(255,255,255,0.5);
             border-radius: 5px;
             backdrop-filter: blur(10px);
@@ -274,7 +275,7 @@
         <div>
             <div class="header-blue">
                 <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
-                    <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                    <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR Servicing Request System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                       
   
                 </nav>
@@ -300,7 +301,7 @@
                                                     </button>
                                                   </div>
                                                 @endif
-                                                <h2>Bayawan Manager Register</h2>
+                                                <h2>Manager Register</h2>
                                         
                                         </div>
                                         <div class="card-body">
@@ -341,7 +342,7 @@
                                                 <label for="password2" class=" ">
                                                   Confirm Password
                                                 </label>
-                                                <input type="password" class=" form-control" name="password_confirmation"
+                                                <input type="password" class=" form-control" name="password_confirmation"  placeholder="Confirm Password"
                                                   value="{{old('password_confirmation')}}" />
                                         
                                                 @error('password_confirmation')

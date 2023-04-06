@@ -52,7 +52,7 @@
 
 .header-blue .navbar .navbar-brand {
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 25px;
   color: inherit;
 }
 
@@ -235,6 +235,7 @@
     width: 400px;
     height: 460px;
     background: transparent;
+    background-color: #084c61;
     border: 2px solid rgba(255,255,255,0.5);
     border-radius: 5px;
     backdrop-filter: blur(10px);
@@ -276,7 +277,7 @@ color: #fff;
     <div>
         <div class="header-blue">
             <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
-                <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR Servicing Request System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
               
             </nav>
 

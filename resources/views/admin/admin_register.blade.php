@@ -54,6 +54,7 @@
         
         .header-blue .navbar .navbar-brand {
           font-weight: bold;
+          font-size: 25px
           color: inherit;
         }
         
@@ -236,6 +237,7 @@
             width: 400px;
             height: 600px;
             background: transparent;
+            background-color: #084c61;
             border: 2px solid rgba(255,255,255,0.5);
             border-radius: 5px;
             backdrop-filter: blur(10px);
@@ -275,7 +277,7 @@
         <div>
             <div class="header-blue">
                 <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
-                    <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                    <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR Servicing Request System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                       
   
                 </nav>
@@ -284,8 +286,8 @@
                 <div class="container hero">
                     <div class="row">
                         <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
-                            <h1>Emcor</h1>
-                            <p>EMCOR is the most relevant, world-class, community-based organization that enables customers to achieve a better life by providing quality products and services through personalized care.<br></p>
+                            {{-- <h1>Emcor</h1>
+                            <p>Bringing comfort to you and your family<br></p> --}}
                         </div>
                        
                     <div class="col-12 col-lg-6 col-xl-5 offset-xl-1" style="margin-top:2rem">

@@ -34,44 +34,19 @@ Route::middleware('auth:api')->group(function () {
 
 Route::group(['namespace' => 'Api\V1'], function () {
 
-
-
-    /*
-http://127.0.0.1:8000/App/Http/Controllers/api/v1/services/popular
-*/
-
     Route::group(['prefix' => 'services'], function () {
         Route::get('popular', 'ServiceController@get_popular_services');
-        Route::get('recommended', 'ServiceController@get_recommended_services');
+        Route::get('whitelines', 'ServiceController@get_whitelines_services');
+        Route::get('brownlines', 'ServiceController@get_brownlines_services');
+        Route::get('mechanic', 'ServiceController@get_mechanic_services');
     });
 
-    //registration & login
-
-
-});
-
-
-/*
-Route::group(['namespace' => 'Auth'], function () {
-
-
-
-  
-
-    Route::group(['prefix' => 'services'], function () {
-        Route::post('register', 'RegisteredUserController@store');
-        Route::post('login', 'AuthenticatedSessionController@store');
+    Route::group(['prefix' => 'config'], function () {
+        //Route::get('/', 'ConfigController@configuration');
+        //Route::get('/get-zone-id', 'ConfigController@get_zone');
+        //Route::get('place-api-autocomplete', 'ConfigController@place_api_autocomplete');
+        // Route::get('distance-api', 'ConfigController@distance_api');
+        //Route::get('place-api-details', 'ConfigController@place_api_details');
+        Route::get('geocode-api', 'ConfigController@geocode_api');
     });
-
-    //registration & login
-
-
 });
-*/
-
-
-
-//Route::middleware('auth:api')->group(function () {
-   // Route::get('popular', 'ServiceController@get_popular_services');
- 
-//});

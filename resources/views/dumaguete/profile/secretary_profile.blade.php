@@ -2,8 +2,8 @@
 
 @extends('layouts.app')
   
-@include('components.topbar')
-@include('components.sidebar')
+@include('components.topBar')
+@include('components.sideBar')
 
 
 @section('secprofile')
@@ -82,9 +82,48 @@
                     <div class="active tab-pane" id="personal_info">
                       <form class="form-horizontal" method="POST" action="{{ route('secretaryUpdateInfo') }}" id="SecInfoForm">
                         <div class="form-group row">
-                          <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                          <label for="fname" class="col-sm-2 col-form-label">First Name</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" placeholder="Name" value="{{ Auth::user()->name }}" name="name">
+                            <input type="text" class="form-control" id="fname" placeholder="fname" value="{{Auth::user()->fname}}" name="fname">
+
+                            <span class="text-danger error-text name_error"></span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="lname" placeholder="lname" value="{{Auth::user()->lname}}" name="lname">
+
+                            <span class="text-danger error-text name_error"></span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="address" class="col-sm-2 col-form-label">Address</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="address" placeholder="address" value="{{Auth::user()->address}}" name="address">
+
+                            <span class="text-danger error-text name_error"></span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="bdate" class="col-sm-2 col-form-label">Birthday</label>
+                          <div class="col-sm-10">
+                            <input type="date" class="form-control" id="bdate" placeholder="bdate" value="{{Auth::user()->bdate}}" name="bdate">
+
+                            <span class="text-danger error-text name_error"></span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputPhone" class="col-sm-2 col-form-label">Phone no.</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="phone" placeholder="Phone" value="{{Auth::user()->phone}}" name="phone">
+                            <span class="text-danger error-text phone_error"></span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="gender" class="col-sm-2 col-form-label">Gender</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="gender" placeholder="gender" value="{{Auth::user()->gender }}" name="gender">
 
                             <span class="text-danger error-text name_error"></span>
                           </div>
@@ -92,17 +131,10 @@
                         <div class="form-group row">
                           <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="email" placeholder="Email" value="{{ Auth::user()->email }}" name="email">
+                            <input type="text" class="form-control" id="email" placeholder="Email" value="{{Auth::user()->email}}" name="email">
                             <span class="text-danger error-text email_error"></span>
                           </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="inputPhone" class="col-sm-2 col-form-label">Contact Number</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="phone" placeholder="Phone" value="{{ Auth::user()->phone }}" name="phone">
-                              <span class="text-danger error-text phone_error"></span>
-                            </div>
-                          </div>
                         <div class="form-group row">
                           <div class="offset-sm-2 col-sm-10">
                             <button type="submit" class="btn btn-success text-black">Save Changes</button>

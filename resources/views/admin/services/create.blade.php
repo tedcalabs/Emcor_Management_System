@@ -47,6 +47,7 @@
                             @enderror
                         </div>
 
+                      
                         <div class="sm:col-span-6 pt-5">
                             <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
                             <div class="mt-1">
@@ -61,9 +62,12 @@
                         <div class="sm:col-span-6 pt-5">
                             <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
                             <div class="mt-1">
-                                    <select id="categories" name="categories[]" class="form-multiselect block w-full mt-1" multiple>
+                                    <select  id="categories" name="categories[]" class="form-multiselect block w-full mt-1" multiple>
+                                   
                                         @foreach ($categories as $category)
+                                        
                                             <option value="{{$category->id}}" >{{$category->catname}}</option>
+                                          
                                         @endforeach
                                 </select>
 

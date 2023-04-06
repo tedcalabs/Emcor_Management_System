@@ -23,6 +23,7 @@
       @yield('contentT')
       @yield('schedule')
       @yield('updateReq')
+      @yield('tecprofile')
       </main>   
 
     

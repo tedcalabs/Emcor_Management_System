@@ -1,7 +1,6 @@
 @extends('admin.admin_master')
 @include('admin.index')
 @section('services')
- <!-- table area -->
  <div class="table_area">
     <a  href="{{ route('services.create')}}" class="btn btn-info " >Create New Services</a>
 
@@ -24,7 +23,7 @@
                     <tr>
                         <td>{{ $service->name}}</td>
                         <td>
-                      <img src="{{ Storage::url($service->image) }}" width="70px" height="70px" alt="Image">
+                      <img src="{{  asset('uploads/services/'.$service->image) }}" width="70px" height="70px" alt="Image">
                         
                         </td>
                         <td>{{ $service->description}}</td>

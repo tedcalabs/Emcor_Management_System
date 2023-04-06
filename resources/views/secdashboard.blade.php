@@ -1,15 +1,21 @@
 
 
 @extends('layouts.app')
-  
-@include('components.TopBar')
-@include('components.sidebar')
 
+    
+@include('components.topbar')
+@include('components.sidebar')
 
 @section('content')
         
 
-<h1>I'm Dashboard</h1>
+
+<div class="container">
+
+    <div class="item item-8">
+        <h1>Secretary Dashboard </h1>
+    </div>
+</div>
 
 
 @endsection

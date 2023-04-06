@@ -11,13 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     *
-     * @return \Illuminate\View\View
-     * 
-     *
-     */
+
     public function create()
     {
         return view('auth.login');
@@ -32,24 +26,19 @@ class AuthenticatedSessionController extends Controller
 
 
 
-    public function testreg()
-    {
-        return view('auth.tesreg');
-    }
+//     public function testreg()
+//     {
+//         return view('auth.tesreg');
+//     }
 
 
 
-    public function test()
-{
-   return view('auth.testlogin');
-}
+//     public function test()
+// {
+//    return view('auth.testlogin');
+// }
 
-    /**
-     * Handle an incoming authentication request.
-     *
-     * @param  \App\Http\Requests\Auth\LoginRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
+   
     public function store(LoginRequest $request)
     {
         $request->authenticate();
@@ -63,29 +52,31 @@ class AuthenticatedSessionController extends Controller
         if ($user_role == 1) {
 
             return redirect()->route('manager.dashboard');
-        } else if ($user_role == 1) {
-
-            return redirect()->intended(RouteServiceProvider::MGRHOME);
-            
-        } else if ($user_role == 2 ) {
+        }else if ($user_role == 2 ) {
 
             return redirect()->route('secretary.dashboard');
         } else if ($user_role == 3 ) {
 
             return redirect()->route('technician.dashboard');
-        }else{
+        } else if ($user_role == 4 ) {
+
+            return redirect()->route('mechanic.dashboard');
+        } else if ($user_role == 5) {
+
+            return redirect()->route('brownlines.dashboard');
+        }else if ($user_role == 6) {
+
+            return redirect()->route('workexpert.dashboard');
+        }
+               
+        else{
             return redirect('/');
         }
 
 
     }
 
-    /**
-     * Destroy an authenticated session.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
+  
     public function destroy(Request $request)
     {
         Auth::guard('web')->logout();

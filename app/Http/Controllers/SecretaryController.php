@@ -14,11 +14,7 @@ use Illuminate\Support\Facades\Validator;
 
 class SecretaryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  
     public function index()
     {
         $user = User::all();
@@ -66,7 +62,7 @@ class SecretaryController extends Controller
     public function update(Request $request)
     {
 
-        //$user =  User::find(Auth::user()->id);
+
         $user_id = Auth::user()->id;
         $user = User::findOrFail($user_id);
 
@@ -95,9 +91,13 @@ class SecretaryController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'fname' => 'required',
+            'lname' => 'required',
+            'address' => 'required',
+            'bdate' => 'required',
             'phone' => 'required',
-            'email' => 'required|email|unique:users,email,' . Auth::user()->id,
+            'gender' => 'required',
+            'email' => 'required|email|unique:users,email,'. Auth::user()->id,
 
         ]);
 
@@ -105,8 +105,12 @@ class SecretaryController extends Controller
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
             $query = User::find(Auth::user()->id)->update([
-                'name' => $request->name,
+                'fname' => $request->fname,
+                'lname' => $request->lname,
+                'address' => $request->address,
+                'bdate' => $request->bdate,
                 'phone' => $request->phone,
+                'gender' => $request->gender,
                 'email' => $request->email,
 
             ]);

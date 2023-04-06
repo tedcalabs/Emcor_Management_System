@@ -79,9 +79,48 @@
                     <div class="active tab-pane" id="personal_info">
                       <form class="form-horizontal" method="POST" action="{{ route('bsecretaryUpdateInfo') }}" id="SecInfoForm">
                         <div class="form-group row">
-                          <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                          <label for="fname" class="col-sm-2 col-form-label">First Name</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" placeholder="Name" value="{{Auth::guard('bsec')->user()->name}}" name="name">
+                            <input type="text" class="form-control" id="fname" placeholder="fname" value="{{Auth::guard('bsec')->user()->fname}}" name="fname">
+
+                            <span class="text-danger error-text name_error"></span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="lname" placeholder="lname" value="{{Auth::guard('bsec')->user()->lname}}" name="lname">
+
+                            <span class="text-danger error-text name_error"></span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="address" class="col-sm-2 col-form-label">Address</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="address" placeholder="address" value="{{Auth::guard('bsec')->user()->address}}" name="address">
+
+                            <span class="text-danger error-text name_error"></span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="bdate" class="col-sm-2 col-form-label">Birthday</label>
+                          <div class="col-sm-10">
+                            <input type="date" class="form-control" id="bdate" placeholder="bdate" value="{{Auth::guard('bsec')->user()->bdate}}" name="bdate">
+
+                            <span class="text-danger error-text name_error"></span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputPhone" class="col-sm-2 col-form-label">Phone no.</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="phone" placeholder="Phone" value="{{Auth::guard('bsec')->user()->phone}}" name="phone">
+                            <span class="text-danger error-text phone_error"></span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="gender" class="col-sm-2 col-form-label">Gender</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="gender" placeholder="gender" value="{{Auth::guard('bsec')->user()->gender }}" name="gender">
 
                             <span class="text-danger error-text name_error"></span>
                           </div>
@@ -93,13 +132,7 @@
                             <span class="text-danger error-text email_error"></span>
                           </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="inputPhone" class="col-sm-2 col-form-label">Contact Number</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="phone" placeholder="Phone" value="{{Auth::guard('bsec')->user()->phone}}" name="phone">
-                              <span class="text-danger error-text phone_error"></span>
-                            </div>
-                          </div>
+                     
                         <div class="form-group row">
                           <div class="offset-sm-2 col-sm-10">
                             <button type="submit" class="btn btn-success">Save Changes</button>

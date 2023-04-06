@@ -14,212 +14,215 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
       
   
-<style>
+        <style>
 
-    body{
-      background-image: url("/assets/images/emcor6.jpg");
-      background-size: cover;
-       
-    }
-
-    .card-header{
-        text-align: center;
-    }
-    .header-blue {
-  padding-bottom: 80px;
-  font-family: 'Source Sans Pro', sans-serif;
-}
-
-@media (min-width:768px) {
-  .header-blue {
-    padding-bottom: 120px;
-  }
-}
-
-.header-blue .navbar {
-  background: transparent;
-  padding-top: .75rem;
-  padding-bottom: .75rem;
+          body{
+            background-image: url("/assets/images/emcor6.jpg");
+            background-size: cover;
+             
+          }
+      
+          .card-header{
+              text-align: center;
+          }
+          .header-blue {
+        padding-bottom: 80px;
+        font-family: 'Source Sans Pro', sans-serif;
+      }
+      
+      @media (min-width:768px) {
+        .header-blue {
+          padding-bottom: 120px;
+        }
+      }
+      
+      .header-blue .navbar {
+        background: transparent;
+        padding-top: .75rem;
+        padding-bottom: .75rem;
+        color: #fff;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+      }
+      
+      @media (min-width:768px) {
+        .header-blue .navbar {
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+        }
+      }
+      
+      .header-blue .navbar .navbar-brand {
+        font-weight: bold;
+        color: inherit;
+      }
+      
+      .header-blue .navbar .navbar-brand:hover {
+        color: #f0f0f0;
+      }
+      
+      .header-blue .navbar .navbar-collapse {
+        border-top: 1px solid rgba(255,255,255,0.3);
+        margin-top: .5rem;
+      }
+      
+      @media (min-width:768px) {
+        .header-blue .navbar .navbar-collapse {
+          border-color: transparent;
+          margin: 0;
+        }
+      }
+      
+      
+      .header-blue .navbar .navbar-toggler {
+        border-color: rgba(255,255,255,0.3);
+      }
+      
+      .header-blue .navbar.navbar-light .navbar-nav .nav-link {
   color: #fff;
-  border-radius: 0;
-  box-shadow: none;
-  border: none;
 }
-
-@media (min-width:768px) {
-  .header-blue .navbar {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-}
-
-.header-blue .navbar .navbar-brand {
-  font-weight: bold;
-  color: inherit;
-}
-
-.header-blue .navbar .navbar-brand:hover {
-  color: #f0f0f0;
-}
-
-.header-blue .navbar .navbar-collapse {
-  border-top: 1px solid rgba(255,255,255,0.3);
-  margin-top: .5rem;
-}
-
-@media (min-width:768px) {
-  .header-blue .navbar .navbar-collapse {
-    border-color: transparent;
-    margin: 0;
-  }
-}
-
-
-.header-blue .navbar .navbar-toggler {
-  border-color: rgba(255,255,255,0.3);
-}
-
-
-
-
-
-.header-blue .action-button, .header-blue .action-button:not(.disabled):active {
-  border: 1px solid rgb(255,255,255);
-  border-radius: 40px;
-  color: #fff;
-  box-shadow: none;
-  text-shadow: none;
-  padding: .3rem .8rem;
-  background: transparent;
-  transition: background-color 0.25s;
-  outline: none;
-}
-
-
-
-@media (min-width:768px) {
-  .header-blue .hero {
-    margin-top: 60px;
-    text-align: left;
-  }
-}
-
-.header-blue .hero h1 {
-  color: #fff;
-  font-size: 40px;
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-weight: 300;
-  line-height: 1.4;
-}
-
-@media (min-width:992px) {
-  .header-blue .hero h1 {
-    margin-top: 190px;
-    margin-bottom: 24px;
-    line-height: 1.2;
-  }
-}
-
-.header-blue .hero p {
-  color: rgba(247, 237, 237, 0.995);
-  font-size: 20px;
-  margin-bottom: 30px;
-  font-weight: 300;
-}
-
-.header-blue .phone-holder {
-  text-align: right;
-}
-
-.header-blue div.iphone-mockup {
- position: relative;
-    max-width: 300px;
-    margin-top: 172px;
-    display: inline-block;
-}
-
-.header-blue .iphone-mockup img.device {
-  width: 100%;
-  height: auto;
-}
-
-.header-blue .iphone-mockup .screen {
-  position: absolute;
-  width: 88%;
-  height: 77%;
-  top: 12%;
-  border-radius: 2px;
-  left: 6%;
-  border: 1px solid #444;
-  background-color: #aaa;
-  overflow: hidden;
-  background: url("/assets/images/emcor1.png");
-       
-  background-size: cover;
-  background-position: center;
-}
-
-.header-blue .iphone-mockup .screen:before {
-  content: '';
-  background-color: #fff;
-  position: absolute;
-  width: 70%;
-  height: 140%;
-  top: -12%;
-  right: -60%;
-  transform: rotate(-19deg);
-  opacity: 0.2;
-}
-
-
-.card{
-
-    width: 400px;
-    height: 460px;
-    background: transparent;
-    border: 2px solid rgba(255,255,255,0.5);
-    border-radius: 5px;
-    backdrop-filter: blur(10px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  
-}
-
-h2{
-    font-size: 2em;
-    color: #fff;
-    text-align: center;
-}
-
-
-.form-group label{
-float: left;
-color: #fff;
-}
-
-
-
-
-.form-group input {
-    width: 100%;
-    height: 50px;
-    font-size: 1em;
-    padding:0 35px 0 5px;
-    color: #0e0d0d;
-}
-
-.grnbuton{
-  background-color: #177e89;
-  float: left;
-  font-size: 20px;
-}
-.grnbuton:hover{
-  background-color: #db3a34;
-}
-
-</style>
+      
+      
+      
+      .header-blue .action-button, .header-blue .action-button:not(.disabled):active {
+        border: 1px solid rgb(255,255,255);
+        border-radius: 40px;
+        color: #fff;
+        box-shadow: none;
+        text-shadow: none;
+        padding: .3rem .8rem;
+        background: transparent;
+        transition: background-color 0.25s;
+        outline: none;
+      }
+      
+      
+      
+      @media (min-width:768px) {
+        .header-blue .hero {
+          margin-top: 60px;
+          text-align: left;
+        }
+      }
+      
+      .header-blue .hero h1 {
+        color: #fff;
+        font-size: 40px;
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-weight: 300;
+        line-height: 1.4;
+      }
+      
+      @media (min-width:992px) {
+        .header-blue .hero h1 {
+          margin-top: 190px;
+          margin-bottom: 24px;
+          line-height: 1.2;
+        }
+      }
+      
+      .header-blue .hero p {
+        color: rgba(247, 237, 237, 0.995);
+        font-size: 20px;
+        margin-bottom: 30px;
+        font-weight: 300;
+      }
+      
+      .header-blue .phone-holder {
+        text-align: right;
+      }
+      
+      .header-blue div.iphone-mockup {
+       position: relative;
+          max-width: 300px;
+          margin-top: 172px;
+          display: inline-block;
+      }
+      
+      .header-blue .iphone-mockup img.device {
+        width: 100%;
+        height: auto;
+      }
+      
+      .header-blue .iphone-mockup .screen {
+        position: absolute;
+        width: 88%;
+        height: 77%;
+        top: 12%;
+        border-radius: 2px;
+        left: 6%;
+        border: 1px solid #444;
+        background-color: #aaa;
+        overflow: hidden;
+        background: url("/assets/images/emcor1.png");
+             
+        background-size: cover;
+        background-position: center;
+      }
+      
+      .header-blue .iphone-mockup .screen:before {
+        content: '';
+        background-color: #fff;
+        position: absolute;
+        width: 70%;
+        height: 140%;
+        top: -12%;
+        right: -60%;
+        transform: rotate(-19deg);
+        opacity: 0.2;
+      }
+      
+      
+      .card{
+      
+          width: 400px;
+          height: 440px;
+          background: transparent;
+          background-color: #084c61;
+          border: 2px solid rgba(255,255,255,0.5);
+          border-radius: 5px;
+          backdrop-filter: blur(10px);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        
+      }
+      
+      h2{
+          font-size: 2em;
+          color: #fff;
+          text-align: center;
+      }
+      
+      
+      .form-group label{
+      float: left;
+      color: #fff;
+      }
+      
+      
+      
+      
+      .form-group input {
+          width: 100%;
+          height: 50px;
+          font-size: 1em;
+          padding:0 35px 0 5px;
+          color: #0e0d0d;
+      }
+      
+      .grnbuton{
+        background-color: #177e89;
+        float: left;
+        font-size: 20px;
+      }
+      .grnbuton:hover{
+        background-color: #2d5f5b;
+      }
+      
+      </style>
 
     
     </head>
@@ -232,11 +235,15 @@ color: #fff;
             <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
                 <div class="container-fluid">
                   
-                  <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                  <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR Servicing Request System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
 
                    <div class="collapse navbar-collapse"
                         id="navcol-1">
-                   
+                        <ul class="nav navbar-nav">
+                          <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Branches</a>
+                             <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="/">Dumaguete City</a><a class="dropdown-item" role="presentation" href="{{route('userB_loginform')}}">Bayawan City</a></div>
+                         </li>
+                         </ul>
                       <div class="collapse navbar-collapse">
                     
                       </div>    

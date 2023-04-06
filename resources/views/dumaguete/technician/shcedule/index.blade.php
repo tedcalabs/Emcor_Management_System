@@ -25,8 +25,7 @@
                    <th>Address</th>
                    <th>Contact Number</th>
                    <th>Request Detail</th>
-                   <th>Servicing Schedule</th>
-                   <th>Assigned Technician</th>
+                   <th>Servicing Schedule</th>  
                    <th>Action</th>
                    
 
@@ -38,18 +37,15 @@
                    <td>{{ $mreq->id}}</td>
                    <td>{{ $mreq->name}}</td>
                    <td>{{ $mreq->address}}</td>
-              
                    <td>{{ $mreq->phone}}</td>
-                
                    <td>{{ $mreq->description}}</td>
                    <td>{{ $mreq->req_date}}</td>
-                   <td>{{ $mreq->technician}}</td>
             
                    <td>
                        <div class=" ">
                            <a href="{{ route('updateD', $mreq->id) }}" class="btn btn-info"  style="margin-bottom: 5px">Update</a>
-                           <form method="POST"
-                                   action=""
+                           <form method="GET"
+                                   action="{{ route('deleteZ',$mreq->id ) }}"
                                    onsubmit="return confirm('Are you sure?');">
                                @csrf    
                                @method('DELETE')

@@ -17,7 +17,7 @@ class BranchB extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $gaurd = 'bsec';
+    //protected $guard = 'bsec';
     protected $fillable = [
         'name',
         'email',

@@ -5,7 +5,7 @@
         <div class="profile">
             <img src="{{  asset('uploads/profile/'.Auth::guard('bsec')->user()->picture) }}" alt="profileImage" class="image">
             <div class="profileText">
-                <p class="text maintext">{{Auth::guard('bsec')->user()->name}}</p>
+                <p class="text maintext">{{Auth::guard('bsec')->user()->fname}}</p>
             </div>
         </div>
         <div class="links">

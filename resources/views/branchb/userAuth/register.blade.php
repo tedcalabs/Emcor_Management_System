@@ -16,7 +16,7 @@
 
 body{
       background-image: url("/assets/images/emcor6.jpg");
-      background-size: cover;
+     background-size: cover;
        
     }
 
@@ -230,9 +230,10 @@ body{
 
 .card{
 
-    width: 400px;
-    height: 650px;
+    width: 500px;
+    height: 750px;
     background: transparent;
+    background-color: #084c61;
     border: 2px solid rgba(255,255,255,0.5);
     border-radius: 5px;
     backdrop-filter: blur(10px);
@@ -276,7 +277,7 @@ color: #fff;
     <div>
         <div class="header-blue">
             <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
-                <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR Servicing Request System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                   
                     
                      
@@ -286,18 +287,16 @@ color: #fff;
             <!--Emcor MVG-->
             <div class="container hero">
                 <div class="row">
-                <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
-                <!--            <h1>Emcor Secretary 2</h1>
-                        <p>EMCOR is the most relevant, world-class, community-based organization that enables customers to achieve a better life by providing quality products and services through personalized care.<br></p>
-                 -->   </div>
-                  
+                    <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
+                    </div>
+  
                     <div class="col-12 col-lg-6 col-xl-5 offset-xl-1" style="margin-top:2rem">
                         <div class="card">
                             <div class="card-header">
                     <div class="card">
                         <div class="card-header">
-                       <h2>Bayawan Branch Register</h2>
-
+                       <h2>Sign Up</h2>
+                            
                         </div>
                         <div class="card-body">
                             <form method="POST" action="{{ route('bsec.register.create') }}">
@@ -308,37 +307,71 @@ color: #fff;
                                 <div class="alert alert-danger">{{ Session::get('fail') }}</div>
                                 @endif
                                 @csrf
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="{{ old ('name') }}">
-                                    @error('name')
+                                <div class="row">
+                                <div class="col-6  form-group">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter First Name" value="{{ old ('fname') }}">
+                                    @error('fname')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label for="phone">Contact Number</label>
-                                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter Phone Number" value="{{ old ('phone') }}">
-                                    @error('phone')
+                                <div class="col-6  form-group">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Last Name" value="{{ old ('lname') }}">
+                                    @error('lname')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
-                             
-                                <div class="form-group">
-                                    <label for="InputEmail">Email address</label>
-                                    <input type="email" class="form-control" id="InputEmail" name="email" placeholder="Enter email" value="{{ old ('email') }}">
+                              </div>
+                              <div class=" form-group">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" id="address" name="address" placeholder="Enter Complete Address" value="{{ old ('address') }}">
+                                @error('address')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="row">
+                                <div class="col-7  form-group">
+                                  <label for="phone">Contact Number</label>
+                                  <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter Phone Number" value="{{ old ('phone') }}">
+                                  @error('phone')
+                                  <span class="text-danger">{{$message}}</span>
+                                  @enderror
+                              </div>
+                              <div class="col-5  form-group">
+                                <label for="bdate">Birthday</label>
+                                <input type="date" class="form-control" id="bdate" name="bdate" value="{{ old ('bdate') }}">
+                                @error('bdate')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+                          </div>
+                          <div class="row">
+                                <div class="col-7 form-group">
+                                    <label for="email">Email address</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="{{ old ('email') }}">
                                     @error('email')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
-                      
-                                <div class="form-group">
+
+                                <div class="col-5  form-group">
+                                  <label for="gender">Gender</label>
+                                  <input type="text" class="form-control" id="gender" name="gender" value="{{ old ('gender') }}">
+                                  @error('gender  ')
+                                  <span class="text-danger">{{$message}}</span>
+                                  @enderror
+                              </div>
+                            </div>
+                      <div class="row">
+                                <div class="col-6 form-group">
                                     <label for="password">Password</label>
-                                    <input type="password" class="form-control" id="InputPassword" name="password" placeholder="Password" value="{{ old ('password') }}">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="{{ old ('password') }}">
                                     @error('password')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
-                                <div class="form-group">
+                                <div class="col-6 form-group">
                                     <label for="password2" class="inline-block text-lg mb-2">
                                       Confirm Password
                                     </label>
@@ -350,10 +383,10 @@ color: #fff;
                                     @enderror
                                   </div>
                                 
-                                    
+                                </div>   
                              
-                                <button type="submit" class="btn btn-primary rounded-pill">Sign Up</button><br>
-                                <span class="text text-white">Already have an account?</span><a href="{{route('bsec_loginform')}}" class="href text-white"> Login</a>
+                                <button type="submit" class="btn btn-primary ">Sign Up</button><br>
+                                <span class="text text-white">Already have an account?</span><a href="{{ route('userB_loginform') }}" class="href text-white"> Login</a>
                             </form>
                         </div>
                     </div>

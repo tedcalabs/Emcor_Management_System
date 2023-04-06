@@ -79,8 +79,9 @@
   border-color: rgba(255,255,255,0.3);
 }
 
-
-
+.header-blue .navbar.navbar-light .navbar-nav .nav-link {
+  color: #fff;
+}
 
 
 .header-blue .action-button, .header-blue .action-button:not(.disabled):active {
@@ -176,8 +177,9 @@
 .card{
 
     width: 400px;
-    height: 460px;
+    height: 440px;
     background: transparent;
+    background-color: #084c61;
     border: 2px solid rgba(255,255,255,0.5);
     border-radius: 5px;
     backdrop-filter: blur(10px);
@@ -216,7 +218,7 @@ color: #fff;
   font-size: 20px;
 }
 .grnbuton:hover{
-  background-color: #db3a34;
+  background-color: #2d5f5b;
 }
 
 </style>
@@ -232,11 +234,15 @@ color: #fff;
             <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
                 <div class="container-fluid">
                   
-                  <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                  <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR Servicing Request System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
 
                    <div class="collapse navbar-collapse"
                         id="navcol-1">
-                   
+                        <ul class="nav navbar-nav">
+                          <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Branches</a>
+                            <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="/">Dumaguete City</a><a class="dropdown-item" role="presentation" href="{{route('userB_loginform')}}">Bayawan City</a></div>
+                          </li>
+                     </ul> 
                       <div class="collapse navbar-collapse">
                     
                       </div>    
@@ -254,7 +260,7 @@ color: #fff;
                     <img class="logo-img" src="asset('assets/images/eclogo12.png')}}" alt="" class="logo">
                          <p>EMCOR is the most relevant, world-class, community-based organization that enables customers to achieve a better life by providing quality products and services through personalized care.<br></p>
                     
-                    -->
+                    --> 
                         </div>
 
                     <!--Emcor Login form -->
@@ -264,7 +270,7 @@ color: #fff;
                           <div class="card-header">
                   <div class="card">
                       <div class="card-header">
-                     <h2>Login</h2>
+                        <h2>Dumaguete Branch <br> Login</h2>
                           
                       </div>
                       <div class="card-body">
@@ -280,7 +286,7 @@ color: #fff;
                                   <label for="InputEmail">Email address</label>
                                   <input type="email"  id="InputEmail" name="email" placeholder="Enter email" value="{{ old ('email') }}">
                                   @error('email')
-                                  <span class="text-danger">{{$message}}</span>
+                                  <span class="text-white">{{$message}}</span>
                                   @enderror
                               </div>
                     
@@ -288,7 +294,7 @@ color: #fff;
                                   <label for="password">Password</label>
                                   <input type="password"  id="InputPassword" name="password" placeholder="Password" value="{{ old ('password') }}">
                                   @error('password')
-                                  <span class="text-danger">{{$message}}</span>
+                                  <span class="text-white">{{$message}}</span>
                                   @enderror
                               </div>
                             
@@ -302,7 +308,6 @@ color: #fff;
 
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <a class="dropdown-item" href="{{ route('login_form')}}">Login as Admin</a>
-                                            <a class="dropdown-item" href="{{ route('branchb_loginform')}}">Bayawan Login</a>
                                         </div>
                                     </div>
                                 </form>

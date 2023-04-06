@@ -35,13 +35,13 @@
                         <div class="sm:col-span-6">
                             <label for="name" class="block text-sm font-medium text-gray-700"> Phone </label>
                             <div class="mt-1">
-                                <input type="hidden" value="2" id="tech" name="tech">   
+                                <input type="hidden" value="0" id="acceptd" name="acceptd">   
                                 <input type="text" id="phone" name="phone" value="{{ $data->phone}}"
 
                                     class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('name') border-red-400 @enderror" />
                             </div>
                             @error('name')
-                                <div class="text-sm text-red-400">{{ $message }}</div>
+                                <div class="text-sm text-red-400">{{ $message }}</div>  
                             @enderror
                         </div>
                         <div class="sm:col-span-6">

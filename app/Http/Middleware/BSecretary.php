@@ -19,7 +19,7 @@ class BSecretary
     {
      
         if(!Auth::guard('bsec')->check()){ 
-            return redirect()->route('bsec_loginform')->with('error','Please login first');
+            return redirect()->route('userB_loginform')->with('error','Please login first');
         }
         $user =Auth::guard('bsec')->user();
         if($user->role==2){

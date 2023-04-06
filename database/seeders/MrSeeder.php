@@ -16,9 +16,10 @@ class MrSeeder extends Seeder
     public function run()
     {
         Maintenance::create([
-            'name' => 'Damage Aircon',
+            'jname' => 'Damage Aircon',
             'address' => 'Duma',
             'phone' => '32234452343',
+            'branch' => '1',
             'description' => ' Needed Cleaning and check up'
         ]);
     }
