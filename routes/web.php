@@ -56,26 +56,41 @@ Route::prefix('admin')->group(function () {
     Route::resource('/sales', SalesController::class)->middleware('admin');
     Route::resource('/services', ServiceController::class)->middleware('admin');
     Route::resource('/users', UserController::class)->middleware('admin');
-    Route::resource('/profile', AdminProfileController::class)->middleware('admin');
 
+    Route::get('profile', [AdminProfileController::class, 'profile'])->name('admin.profile')->middleware('admin');
+    Route::put('update-admin-photo', [AdminProfileController::class, 'update'])->name('admin.profile.update')->middleware('admin');
+    Route::post('update-admin-info', [AdminProfileController::class, 'updateInfo'])->name('UpdateInfo')->middleware('admin');
+    Route::post('update-admin-password', [AdminProfileController::class, 'changePassword'])->name('UpdateAdminPass')->middleware('admin');
 
     //USER ROUTES------------------------------- -----------------------  ------------------------
 
 
-    Route::prefix('/user')->name('user')->controller(AdminUserController::class)->group(function () {
-
-        Route::get('/', 'index')->name('index');
-        Route::get('/edit/{id}', 'show')->name('edit');
-        Route::get('/show/{id}', 'show')->name('show');
-        Route::post('/update/{id}', 'update')->name('update');
-        Route::get('/destroy/{id}', 'destroy')->name('destroy');
-    });
 });
 
 
 //MANAGER ROUTES
 
 
+
+// Route::group(['prefix' => 'manager', 'middleware' => ['manager']], function () {
+
+//     Route::get('/managerDashboard', [ManagerController::class, 'index'])->name('manager.dashboard');
+//     Route::get('/managerProfile', [ManagerController::class, 'profile'])->name('manager.profile');
+
+
+//     Route::get('/emSec', [ManagerController::class, 'emSec'])->name('secretary.employees');
+//     Route::get('/emWl', [ManagerController::class, 'emWl'])->name('whitelinestec.employees');
+//     Route::get('/emBl', [ManagerController::class, 'emBl'])->name('bltec.employees');
+//     Route::get('/emWe', [ManagerController::class, 'emWe'])->name('workex.employees');
+//     Route::get('/emMec', [ManagerController::class, 'emMec'])->name('mechanic.employees');
+
+//     Route::get('/whitelines-tran', [ManagerController::class, 'getwhitelines'])->name('whitelines.tansaction');
+//     Route::get('/brownlines-tran', [ManagerController::class, 'getBrownlines'])->name('brownlines.tansaction');
+
+//     Route::get('/customers-list', [ManagerController::class, 'getCustomerList'])->name('customerslist');
+//     Route::post('update-manager-info', [ManagerController::class, 'updateInfo'])->name('manager.UpdateInfo');
+//     Route::post('change-password', [ManagerController::class, 'changePassword'])->name('manager.changepass');
+// });
 
 
 
@@ -86,6 +101,18 @@ Route::group(['prefix' => 'manager', 'middleware' => ['manager']], function () {
 
     Route::get('/managerDashboard', [ManagerController::class, 'index'])->name('manager.dashboard');
     Route::get('/managerProfile', [ManagerController::class, 'profile'])->name('manager.profile');
+
+
+    Route::get('/emSec', [ManagerController::class, 'emSec'])->name('secretary.employees');
+    Route::get('/emWl', [ManagerController::class, 'emWl'])->name('whitelinestec.employees');
+    Route::get('/emBl', [ManagerController::class, 'emBl'])->name('bltec.employees');
+    Route::get('/emWe', [ManagerController::class, 'emWe'])->name('workex.employees');
+    Route::get('/emMec', [ManagerController::class, 'emMec'])->name('mechanic.employees');
+
+    Route::get('/whitelines-tran', [ManagerController::class, 'getwhitelines'])->name('whitelines.tansaction');
+    Route::get('/brownlines-tran', [ManagerController::class, 'getBrownlines'])->name('brownlines.tansaction');
+
+    Route::get('/customers-list', [ManagerController::class, 'getCustomerList'])->name('customerslist');
     Route::post('update-manager-info', [ManagerController::class, 'updateInfo'])->name('manager.UpdateInfo');
     Route::post('change-password', [ManagerController::class, 'changePassword'])->name('manager.changepass');
 });
@@ -275,14 +302,18 @@ Route::group(['prefix' => 'secretary', 'middleware' => ['secretary', 'auth', 'Pr
     //MAINTENANCE REQUESTS ROUTES------------------------------- -----------------------  ------------------------   
 
     Route::resource('/maintenance', MaintenanceController::class)->middleware('secretary');
-    // Route::put('/maintenance/{maintenance}',[MaintenanceController::class, 'updateX'])->name('updateX');
+    Route::put('/edit/{maintenance}',[MaintenanceController::class, 'updateX'])->name('updateX');
+    Route::put('/decline/{maintenance}',[MaintenanceController::class, 'declineRequest'])->name('decline');
     Route::get('brownlines-maintenance-req', [MaintenanceController::class, 'getBrownlines'])->name('brownlines.req');
     Route::get('mechanic-maintenance-req', [MaintenanceController::class, 'getMechanic'])->name('mechanic.req');
     Route::get('m-req', [MaintenanceController::class, 'index'])->name('mreq');
     Route::get('accept', [MaintenanceController::class, 'accept'])->name('accept');
+    Route::get('declinedlist', [MaintenanceController::class, 'getDeclinedRequest'])->name('declined.list');
     Route::get('/delete-req/{id}', [MaintenanceController::class, 'deleteReq'])->name('deleteReq');
     Route::get('/update-req/{id}', [MaintenanceController::class, 'updateReq'])->name('updateReq');
+    Route::get('/update-brown-req/{id}', [MaintenanceController::class, 'updateBrownReq'])->name('updateBrownReq');
     Route::get('/up-req/{id}', [MaintenanceController::class, 'upReq'])->name('upReq');
+    Route::get('/decline/{id}', [MaintenanceController::class, 'decline'])->name('decline.request');
     Route::post('/save-up-req/{id}', [MaintenanceController::class, 'saveReq'])->name('saveReq');
 });
 

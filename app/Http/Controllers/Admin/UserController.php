@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
         $data = User::all();
-       // $roles = Role::all();
+        // $roles = Role::all();
         return view('admin.users.index', compact('data'));
     }
 
@@ -86,7 +86,6 @@ class UserController extends Controller
                 'phone' => 'required',
                 'email' => 'required',
                 'role' => 'required',
-                'branch' => 'required',
                 'status' => 'required'
             ]
         );
@@ -98,10 +97,9 @@ class UserController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'role' => $request->role,
-            'branch' => $request->branch,
             'status' => $request->status,
         ]);
-        return to_route('users.index')->with('success','User updated successfully!');
+        return to_route('users.index')->with('success', 'User updated successfully!');
     }
     /**
      * Remove the specified resource from storage.
@@ -111,13 +109,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-     
+
         $user->delete();
 
         return to_route('users.index');
     }
-
-
-
-
 }

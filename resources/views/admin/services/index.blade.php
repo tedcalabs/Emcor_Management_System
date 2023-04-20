@@ -1,9 +1,17 @@
 @extends('admin.admin_master')
-@include('admin.index')
+@include('admin.components.topbar')
+@include('admin.components.sidebar')
 @section('services')
- <div class="table_area">
-    <a  href="{{ route('services.create')}}" class="btn btn-info " >Create New Services</a>
 
+
+<div class="container">
+<div class="item item-9">
+
+    <div class="" style=" margin-bottom:10px">
+  
+        <span class="head">Emcor Services</span>
+    <a  href="{{ route('services.create')}}" class="btn btn-info "  style=" float:right " >Create New Services</a>
+</div> 
           <div class="table-responsive">
               <table class="table table-bordered">
                   <thead>
@@ -30,7 +38,7 @@
                         <td>
 
                             @foreach ($service->categories as $category)
-                            {{ $category->catname}}</td>
+                            {{ $category->name}}</td>
                         @endforeach
                         </td>
 
@@ -38,7 +46,7 @@
                         <td>
 
                             <div class=" ">
-                                <a href="{{route('services.edit', $service->id) }}" class="btn btn-info">Edit</a>
+                                <a href="{{route('services.edit', $service->id) }}" class="btn btn-info edit-button">Edit</a>
                                 <form method="POST"
                                         action="{{ route('services.destroy', $service->id) }}"
                                         onsubmit="return confirm('Are you sure?');">
@@ -60,5 +68,6 @@
               </table>
           </div>
         </div>
-
+    </div>
+</div>
 @endsection

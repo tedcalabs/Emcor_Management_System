@@ -1,9 +1,11 @@
 @extends('admin.admin_master')
-@include('admin.index')
+@include('admin.components.topbar')
+@include('admin.components.sidebar')
 @section('users')
 
-
-<div class= "contianer " style="  margin-top: 40px; margin-left: 235px; margin-right: 300px; ">
+<div class="container">
+    <div class="item item-9">
+<div class= "contianer " style="">
     <div class="row">
     
         <div class="col">
@@ -58,7 +60,10 @@
    
 </div>
                 
-
+</div>
+   
+</div>
+      
 
         
 

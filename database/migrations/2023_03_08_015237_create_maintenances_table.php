@@ -23,8 +23,11 @@ return new class extends Migration
             $table->string('category');
             $table->tinyInteger('acceptd')->nullable();
             $table->datetime('req_date')->nullable();
+            $table->datetime('date_completed')->nullable();
             $table->string('technician')->nullable();
             $table->string('status')->nullable();
+            $table->string('message')->nullable();
+            $table->string('assessment')->nullable();
             $table->timestamps();
         });
     }

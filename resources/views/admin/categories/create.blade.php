@@ -1,9 +1,11 @@
 @extends('admin.admin_master')
-@include('admin.index')
+@include('admin.components.topbar')
+@include('admin.components.sidebar')
 @section('categories')
 
-
-<div class= "contianer " style="  margin-top: 40px; margin-left: 235px; margin-right: 300px; ">
+<div class="container">
+    <div class="item item-9">
+<div class= "contianer " style="">
     <div class="row">
     
         <div class="col">
@@ -17,16 +19,16 @@
                     <form method="POST" action="{{ route('categories.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="sm:col-span-6">
-                            <label for="catname" class="block text-sm font-medium text-gray-700"> CatName </label>
+                            <label for="name" class="block text-sm font-medium text-gray-700"> Category Name </label>
                             <div class="mt-1">
-                                <input type="text" id="catname" name="catname"
-                                    class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('catname') border-red-400 @enderror" />
+                                <input type="text" id="name" name="name"
+                                    class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('name') border-red-400 @enderror" />
                             </div>
-                            @error('catname')
+                            @error('name')
                                 <div class="text-sm text-red-400">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="sm:col-span-6">
+                        {{-- <div class="sm:col-span-6">
                             <label for="image" class="block text-sm font-medium text-gray-700"> Image </label>
                             <div class="mt-1">
                                 <input type="file" id="image" name="image"
@@ -35,7 +37,7 @@
                             @error('image')
                                 <div class="text-sm text-red-400">{{ $message }}</div>
                             @enderror
-                        </div>
+                        </div> --}}
                         <div class="sm:col-span-6 pt-5">
                             <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
                             <div class="mt-1">
@@ -68,7 +70,9 @@
         </div>
    
 </div>
-                
+</div>
+   
+</div>                
            
 
 @endsection

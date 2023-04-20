@@ -1,9 +1,12 @@
 @extends('admin.admin_master')
-@include('admin.index')
+@include('admin.components.topbar')
+@include('admin.components.sidebar')
 @section('categories')
 
 
-<div class= "contianer " style="  margin-top: 40px; margin-left: 235px; margin-right: 300px; ">
+<div class="container">
+    <div class="item item-9">
+<div class= "contianer " style="">
     <div class="row">
     
         <div class="col">
@@ -46,7 +49,7 @@
                             <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
                             <div class="mt-1">
                                 <textarea id="description" rows="3" name="description"
-                                    class="shadow-sm focus:ring-indigo-500 appearance-none bg-white border py-2 px-3 text-base leading-normal transition duration-150 ease-in-out focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md @error('name') border-red-400 @enderror">
+                                    class="shadow-sm     @error('name') border-red-400 @enderror">
                                 
                                 {{$service->description}}
                                 </textarea>
@@ -68,7 +71,10 @@
         </div>
    
 </div>
-                
+</div>
+   
+</div>
+                   
            
 
 @endsection

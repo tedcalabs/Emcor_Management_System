@@ -19,11 +19,6 @@
 
 <body>
 
-  <div class="loader"></div>
-
-
-
-    {{-- VIEW OUTPUT--}}
     <main>
       @yield ('sidebar') 
       @yield ('topbar')
@@ -34,16 +29,12 @@
       @yield ('requestm')
       @yield ('mAccept')
       @yield('updateReq')
+      @yield('updateBrownReq')
       @yield('test')
       @yield('testr')
       @yield('register')
+      @yield('declined')
       </main>   
-
-      @yield ('script')   
-
-
-
-
 
 </body>
 

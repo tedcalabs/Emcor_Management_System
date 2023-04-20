@@ -1,9 +1,12 @@
 @extends('admin.admin_master')
-@include('admin.index')
+@include('admin.components.topbar')
+@include('admin.components.sidebar')
 @section('categories')
 
 
-<div class= "contianer " style="margin-top: 1in; margin-left: 22rem; margin-right: 300px;">
+<div class="container">
+    <div class="item item-9">
+<div class= "contianer " style="">
     <div class="row">
     
         <div class="col">
@@ -66,7 +69,7 @@
                                    
                                         @foreach ($categories as $category)
                                         
-                                            <option value="{{$category->id}}" >{{$category->catname}}</option>
+                                            <option value="{{$category->id}}" >{{$category->name}}</option>
                                           
                                         @endforeach
                                 </select>
@@ -84,7 +87,9 @@
         </div>
    
 </div>
-                
+</div>
+   
+</div>             
            
 
 @endsection

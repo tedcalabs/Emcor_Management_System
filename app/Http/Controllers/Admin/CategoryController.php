@@ -28,10 +28,10 @@ class CategoryController extends Controller
 
     public function store(CategoryStoreRequest $request)
     {
-        $image = $request->file('image')->store('public/categories');
+        //$image = $request->file('image')->store('public/categories');
 
         Category::create([
-            'catname' => $request->name,
+            'name' => $request->name,
             'description' => $request->description,
 
         ]);

@@ -54,16 +54,16 @@
         
         .header-blue .navbar .navbar-brand {
           font-weight: bold;
-          font-size: 25px
-          color: inherit;
-        }
-        
-        .header-blue .navbar .navbar-brand:hover {
+          font-size: 25px;
           color: #f0f0f0;
         }
         
+        .header-blue .navbar .navbar-brand:hover {
+          color: #cceff4;
+        }
+        
         .header-blue .navbar .navbar-collapse {
-          border-top: 1px solid rgba(255,255,255,0.3);
+          border-top: 1px solid rgba(255, 255, 255, 0.3);
           margin-top: .5rem;
         }
         

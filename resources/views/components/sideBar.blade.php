@@ -2,13 +2,20 @@
 @section('sidebar')
         
 <div class="mainbody">
-    <div class="close slider ">
-        <p class="text headtext" >Secretary</p>
+    <div class="close slider">
+        <div class="profile">
+            <img src=" {{asset('assets/images/eclogo12.png')}}" alt="profileImage" class="emlog">
+        
+        </div>
         <div class="profile">
             <img src=" {{  asset('uploads/profile/'.Auth::user()->picture) }} " alt="profileImage" class="image">
             <div class="profileText">
                 <p class="text maintext">{{Auth::user()->fname}} {{Auth::user()->lname}}</p>
             </div>
+        </div>
+        <div class="user-label">
+           
+            <p class="text headtext" >Secretary</p>
         </div>
         <div class="links">
             <div class="search">

@@ -1,5 +1,6 @@
 @extends('admin.admin_master')
-@include('admin.index')
+@include('admin.components.topbar')
+@include('admin.components.sidebar')
 @section('requests')
  <!-- table area -->
  <section class="table_area">

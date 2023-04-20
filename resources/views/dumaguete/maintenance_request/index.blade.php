@@ -52,16 +52,8 @@
                 
                    <td>
                        <div class=" ">
-                           <a href="{{ route('updateReq', $data->id) }}" class="btn btn-info" style="margin-bottom: 5px">Accept</a>
-                           <form method=""
-                                   action=""
-                                   onsubmit="return confirm('Are you sure?');">
-                               @csrf
-                           
-
-                           <button type="submit" class="btn btn-danger text-black">Decline</button>
-                           
-                       </form>
+                           <a href="{{ route('updateReq', $data->id) }}" class="btn btn-info" style="margin-bottom: 5px">Accept</a> <br>
+                           <a href="{{ route('decline.request', $data->id) }}" class="btn btn-danger" style="margin-bottom: 5px">Decline</a>
 
                        </div>
 

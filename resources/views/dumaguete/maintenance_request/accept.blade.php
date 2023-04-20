@@ -31,10 +31,12 @@
                    <th>Address</th>
                    <th>Contact Number</th>
                    <th>Request Detail</th>
-                   <th>Schedule</th>   
+                   <th>Technician Assigned</th>
+                   <th>Schedule</th> 
+                   <th>Category</th> 
                    <th>Status</th>
                                    
-                   <th>Edit</th>
+                   <th>Action</th>
 
                </tr>
            </thead>
@@ -48,7 +50,9 @@
                    <td>{{ $data->phone}}</td>
                 
                    <td>{{ $data->description}}</td>
-                   <td>{{ $data->req_date}}</td>
+                   <td>{{ $data->technician}}</td>
+                   <td>{{ \Carbon\Carbon::parse($data->req_date)->format('d/m/Y g:i:s A')}}</td>        
+                   <td>{{ $data->category}}</td>
                    <td>{{ $data->status}}</td>
                    <td>
                     <div class=" ">

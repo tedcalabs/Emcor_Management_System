@@ -28,8 +28,9 @@ class AuthRepository
             $tokenInstance = $this->createAuthToken($user);
 
             return $this->getAuthData($user, $tokenInstance);
-
-            //    throw new Exception("Sorry, password doesnt match", 401);
+                    
+        }else{
+            throw new Exception("Sorry, password doesnt match", 401);
         }
     }
 

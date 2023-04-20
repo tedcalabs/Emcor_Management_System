@@ -6,13 +6,13 @@
 
 @section('managerDashboard')
         
-
-<div class="container">
-
-    <div class="item item-7">
-        <h1>Manager Dashboard </h1>
-    </div>
-</div>
+<div class="container request4">
+    <div class="item border-left-primary shadow  rounded total-request">All Request <br>{{ $total }}</div>
+    <div class="item border-left-primary shadow  rounded  pending-request">Pending Request<br>{{ $pending }}</div>
+    <div class="item border-left-primary shadow  rounded accepted-request">Accepted Request<br>{{ $accepted }}</div>
+    <div class="item border-left-primary shadow  rounded completed-request">Completed Request<br>{{ $completed}}</div>
+    <div class="item border-left-primary shadow  rounded declined-request">Declined Request<br>{{ $declined}}</div> 
+  </div>
 
 
 

@@ -1,13 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\V1\InforController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Secretary\MaintenanceController;
-
-
 
 
 
@@ -25,9 +24,9 @@ Route::middleware('auth:api')->group(function () {
     Route::get('profile', [ProfileController::class, 'show']);
     //Route::get('Uinfo', [ProfileController::class, 'info']);
     Route::post('logout', [ProfileController::class, 'logout']);
+    Route::post('change-password',[InforController::class,'change_password']);
+    Route::post('change-phone',[InforController::class,'updatePhone']);
 });
-
-
 
 
 

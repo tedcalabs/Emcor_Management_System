@@ -4,7 +4,7 @@
     
     @include('components.topbar')
     @include('components.sidebar')
-@section('requestf')
+@section('request')
 
 <div class="container">
     <div class="item item-5">
@@ -13,7 +13,7 @@
             
             <span class="head">Brownlines Request list</span>
            
-            <a href="{{ route('accept') }}" class="btn btn-info " style="float:right">Acceted Request</a>
+            <a href="{{ route('accept') }}" class="btn btn-info float-right" style="">Acceted Request</a>
 
 
         </div>
@@ -52,16 +52,8 @@
                 
                    <td>
                        <div class=" ">
-                           <a href="{{ route('updateReq', $data->id) }}" class="btn btn-info" style="margin-bottom: 5px">Accept</a>
-                           <form method=""
-                                   action=""
-                                   onsubmit="return confirm('Are you sure?');">
-                               @csrf
-                           
-
-                           <button type="submit" class="btn btn-danger text-black">Decline</button>
-                           
-                       </form>
+                           <a href="{{ route('updateBrownReq', $data->id) }}" class="btn btn-info" style="margin-bottom: 5px">Accept</a> <br>
+                           <a href="{{ route('decline.request', $data->id) }}" class="btn btn-danger" style="margin-bottom: 5px">Decline</a>
 
                        </div>
 

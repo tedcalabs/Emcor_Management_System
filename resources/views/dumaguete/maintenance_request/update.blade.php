@@ -18,7 +18,7 @@
                 </div>
                 <div class="card-body">
                 
-                    <form method="POST" action="{{ route('maintenance.update',$data->id)}} " enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('updateX',$data->id)}} " enctype="multipart/form-data">
                       
                         @csrf
                         @method('PUT')
@@ -35,7 +35,8 @@
                         <div class="sm:col-span-6">
                             <label for="name" class="block text-sm font-medium text-gray-700"> Phone </label>
                             <div class="mt-1">
-                                <input type="hidden" value="0" id="acceptd" name="acceptd">   
+                                <input type="hidden" value="{{ $data->acceptd}}" id="acceptd" name="acceptd">
+                                <input type="hidden" value="{{ $data->status}}" id="status" name="status"> 
                                 <input type="text" id="phone" name="phone" value="{{ $data->phone}}"
 
                                     class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('name') border-red-400 @enderror" />

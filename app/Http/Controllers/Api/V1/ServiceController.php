@@ -123,7 +123,7 @@ class ServiceController extends Controller
     public function get_popular_services(Request $request)
     {
 
-       $list = Service::whereRelation('categories', 'category_id', 6)
+       $list = Service::whereRelation('categories', 'category_id', 2)
         
         ->take(4)->get();
 
@@ -145,8 +145,8 @@ class ServiceController extends Controller
     public function get_whitelines_services(Request $request)
     {
 
-        $list = Service::whereRelation('categories', 'category_id', 7)
-        ->take(4)->get();
+        $list = Service::whereRelation('categories', 'category_id', 1)
+        ->take(10)->get();
         foreach ($list as $item) {
             $item['description'] = strip_tags($item['description']);
             $item['description'] = $Content = preg_replace("/&#?[a-z0-9]+;/i", " ", $item['description']);
@@ -165,8 +165,8 @@ class ServiceController extends Controller
     public function get_brownlines_services(Request $request)
     {
 
-        $list = Service::whereRelation('categories', 'category_id', 8)
-        ->take(4)->get();
+        $list = Service::whereRelation('categories', 'category_id', 3)
+        ->take(10)->get();
         foreach ($list as $item) {
             $item['description'] = strip_tags($item['description']);
             $item['description'] = $Content = preg_replace("/&#?[a-z0-9]+;/i", " ", $item['description']);
@@ -185,8 +185,8 @@ class ServiceController extends Controller
     public function get_mechanic_services(Request $request)
     {
 
-        $list = Service::whereRelation('categories', 'category_id', 9)
-        ->take(4)->get();
+        $list = Service::whereRelation('categories', 'category_id', 4)
+        ->take(10)->get();
         foreach ($list as $item) {
             $item['description'] = strip_tags($item['description']);
             $item['description'] = $Content = preg_replace("/&#?[a-z0-9]+;/i", " ", $item['description']);

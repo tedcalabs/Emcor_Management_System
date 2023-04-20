@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Exception;
-
 use App\Traits\ResponseTrait;
+
+use App\Http\Requests\ChReqeust;
+use Illuminate\Http\JsonResponse;
 use App\Repositories\AuthRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterRequest;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -52,4 +55,15 @@ return response()->json($data,200);
             return $this->responseError([], $exception->getMessage());
         }
     }
+
+// public function changePass(ChReqeust $request):JsonResponse
+// {
+//     try{
+//         $data =  $this->auth->register($request->all()); 
+//           return $this->responseSuccess($data, "User registered succesfuly");
+//       }catch(Exception $exception){
+//           return $this->responseError([],$exception->getMessage());
+//       }
+// }
+
 }

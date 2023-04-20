@@ -1,7 +1,7 @@
 
 @section('topbarMc')
 <nav class="navbar">
- <img class="logo-img" src="{{asset('assets/images/eclogo12.png')}}" alt="" class="logo">
+ <img class="logo-img" src="" alt="" class="logo">
                    
 </nav>
 @endsection

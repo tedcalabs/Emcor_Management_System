@@ -15,11 +15,14 @@ class Maintenance extends Model
         'phone',
         'description',
         'req_date',
+        'date_completed',
         'acceptd',
         'status',
         'branch',
         'category',
-        'technician'
+        'message',
+        'technician',
+        'assessment'
 
     ];
 

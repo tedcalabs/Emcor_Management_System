@@ -72,7 +72,7 @@
               <div class="card">
                 <div class="card-header p-2">
                   <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active bot" href="#personal_info" data-bs-toggle="tab">Personal Information</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#personal_info" data-bs-toggle="tab">Personal Information</a></li>
                     <li class="nav-item"><a class="nav-link " href="#change_password" data-bs-toggle="tab">Change Password</a></li>
                   </ul>
                 </div><!-- /.card-header -->

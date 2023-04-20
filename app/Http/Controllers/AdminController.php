@@ -22,10 +22,57 @@ class AdminController extends Controller
 
     public function Dashboard()
     {
-
-
-
-        return view('admin.index');
+//Dumaguete branch
+        $total = DB::table('maintenances')->where([
+            ["branch", "=", 1],
+        ])
+        ->count();
+        $pending = DB::table('maintenances')->where([
+            ["branch", "=", 1],
+            ["status", "=", "pending"],
+        ])
+        ->count();
+        $accepted = DB::table('maintenances')->where([
+            ["branch", "=", 1],
+            ["acceptd", "=", 1],
+        ])
+        ->count();
+        $completed = DB::table('maintenances')->where([
+            ["branch", "=", 1],
+            ["status", "=", "completed"],
+        ])
+        ->count();
+        $declined = DB::table('maintenances')->where([
+            ["branch", "=", 1],
+            ["acceptd", "=", 2],
+        ])
+        ->count();
+//Byawan Branch
+        $totalb = DB::table('maintenances')->where([
+            ["branch", "=", 2],
+        ])
+        ->count();
+        $pendingb = DB::table('maintenances')->where([
+            ["branch", "=", 2],
+            ["status", "=", "pending"],
+        ])
+        ->count();
+        $acceptedb = DB::table('maintenances')->where([
+            ["branch", "=", 2],
+            ["acceptd", "=", 1],
+        ])
+        ->count();
+        $completedb = DB::table('maintenances')->where([
+            ["branch", "=", 2],
+            ["status", "=", "completed"],
+        ])
+        ->count();
+        $declinedb = DB::table('maintenances')->where([
+            ["branch", "=", 2],
+            ["acceptd", "=", 2],
+        ])
+        ->count();
+        return view('admin.index',['total' => $total,'pending' => $pending,'accepted' => $accepted,'completed' => $completed, 'declined' => $declined, 'totalb' => $totalb,'pendingb' => $pendingb,'acceptedb' => $acceptedb,'completedb' => $completedb, 'declinedb' => $declinedb,]);
     }
 
 
@@ -35,61 +82,6 @@ class AdminController extends Controller
     {
         return view('admin.profile');
     }
-
-
-    public function adminChangePassword(Request $request)
-    {
-        $request->validate([
-            'current_password' => ['required', 'string', 'min:8'],
-            'password' => ['required', 'string', 'min:8', 'confirmed']
-        ]);
-
-        $currentPasswordStatus = Hash::check($request->current_password, Auth::guard('admin')->user()->password);
-        if ($currentPasswordStatus) {
-
-            Admin::findOrFail(Auth::guard('admin')->user()->id)->update([
-                'password' => Hash::make($request->password),
-            ]);
-
-            return redirect()->back()->with('message', 'Password Updated Successfully');
-        } else {
-
-            return redirect()->back()->with('message', 'Current Password does not match with Old Password');
-        }
-    }
-
-
-
-
-
-    function adminupdateInfo(Request $request)
-    {
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . Auth::guard('admin')->user()->id,
-
-        ]);
-
-        if (!$validator->passes()) {
-            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
-        } else {
-            $query = Admin::find(Auth::guard('admin')->user()->id)->update([
-                'name' => $request->name,
-                'email' => $request->email,
-
-            ]);
-
-            if (!$query) {
-                return response()->json(['status' => 0, 'msg' => 'Something went wrong.']);
-            } else {
-                return response()->json(['status' => 1, 'msg' => 'Your profile info has been update successfuly.']);
-            }
-        }
-    }
-
-
-
 
 
 

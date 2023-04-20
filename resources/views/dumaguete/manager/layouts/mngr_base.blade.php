@@ -24,6 +24,16 @@
       @yield('schedule')
       @yield('updateReq')
       @yield('Mprofile')
+      @yield('transactions')
+      @yield('emSec')
+      @yield('emWork')
+      @yield('emWl')
+      @yield('emBl')
+      @yield('emMec')
+      @yield('customer')
+      @yield('whitetrans')
+      @yield('browntrans')
+      @yield('mectrans')
       </main>   
 
     
