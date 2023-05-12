@@ -1,5 +1,6 @@
 @extends('admin.admin_master')
 @include('admin.components.topbar')
+@include('admin.components.footer')
 @include('admin.components.sidebar')
 @section('users')
 
@@ -64,7 +65,4 @@
    
 </div>
       
-
-        
-
 @endsection

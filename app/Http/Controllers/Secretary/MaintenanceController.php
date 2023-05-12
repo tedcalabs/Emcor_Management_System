@@ -17,48 +17,74 @@ class MaintenanceController extends Controller
 {
 
 
-    public function index()
+    public function index(Request $request)
     {
-
-
-        $data = Maintenance::select("*")
-            ->where([
-                ["branch", "=", 1],
-                ["acceptd", "=", 0],
-                ["category", "=", "Whitelines"]
-            ])
-            ->get();
-
-
+        $search = $request->input('search');
+    
+        $query = Maintenance::where([
+            ["branch", "=", 1],
+            ["acceptd", "=", 0],
+            ["category", "=", "Whitelines"]
+        ]);
+    
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'LIKE', '%' . $search . '%')
+                  ->orWhere('description', 'LIKE', '%' . $search . '%');
+                 
+                // Add more "orWhere" clauses for additional fields to be searched
+            });
+        }
+    
+        $data = $query->paginate(4);
+    
         return view('dumaguete.maintenance_request.index', compact('data'));
     }
-    public function getBrownlines()
+    
+    public function getBrownlines(Request $request)
     {
 
 
+        $search = $request->input('search');
 
-        $data = Maintenance::select("*")
-            ->where([
+        $query = Maintenance::where([
                 ["branch", "=", 1],
                 ["acceptd", "=", 0],
                 ["category", "=", "Brownlines"]
-            ])
-            ->get();
+            ]);
+            if (!empty($search)) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'LIKE', '%' . $search . '%')
+                      ->orWhere('description', 'LIKE', '%' . $search . '%');
+                     
+                    // Add more "orWhere" clauses for additional fields to be searched
+                });
+            }
+        
+            $data = $query->paginate(4);
 
         return view('dumaguete.maintenance_request.brownlines.index', compact('data'));
     }
 
-    public function getMechanic()
+    public function getMechanic(Request $request)
     {
 
-
-        $data = Maintenance::select("*")
-            ->where([
+        $search = $request->input('search');
+        $query = Maintenance::where([
                 ["branch", "=", 1],
                 ["acceptd", "=", 0],
                 ["category", "=", "Mechanic"]
-            ])
-            ->get();
+        ]);
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'LIKE', '%' . $search . '%')
+                  ->orWhere('description', 'LIKE', '%' . $search . '%');
+                 
+                // Add more "orWhere" clauses for additional fields to be searched
+            });
+        }
+    
+        $data = $query->paginate(4);
 
 
         return view('dumaguete.maintenance_request.mechanic.index', compact('data'));
@@ -79,6 +105,7 @@ class MaintenanceController extends Controller
             'description' => $mrRequest->description,
             'category' => $mrRequest->category,
             'acceptd' => $mrRequest->acceptd,
+            'device_token' => $mrRequest->device_token,
         ]);
         // $user = $mrRequest->user();
 
@@ -101,19 +128,26 @@ class MaintenanceController extends Controller
     }
 
 
-
-    public function accept()
+    public function accept(Request $request)
     {
-
-
+        $search = $request->input('search');
+    
         $data = Maintenance::select("*")
             ->where([
                 ["branch", "=", 1],
                 ["acceptd", "=", 1]
-            ])
-            ->get();
-        return view('dumaguete.maintenance_request.accept', compact('data'));
+            ]);
+    
+        if ($search) {
+            $data->where('name', 'like', '%' . $search . '%')
+                ->orWhere('description', 'like', '%' . $search . '%');
+        }
+    
+        $data = $data->paginate(4);
+    
+        return view('dumaguete.maintenance_request.accept', compact('data', 'search'));
     }
+    
     public function getDeclinedRequest()
     {
 
@@ -129,7 +163,7 @@ class MaintenanceController extends Controller
 
     public function deleteReq($id)
     {
-        $data = Maintenance::where('branch', 1)->take(5)->find($id);
+        $data = Maintenance::where('branch', 1)->findOrFail($id);
         $data->delete();
         return back();
     }
@@ -158,13 +192,27 @@ class MaintenanceController extends Controller
 
         $technician = User::select("*")
             ->where([
-                ["role", "=", 4],
+                ["role", "=", 5],
                 ["status", "=", 1],
                 ["sched_status", "=", "available"],
             ])
             ->get();
         $data = Maintenance::where('branch', 1)->take(5)->find($id);
         return view('dumaguete.maintenance_request.editbrown', compact('data', 'technician'));
+    }
+
+    public function updateMechReq($id)
+    {
+
+        $technician = User::select("*")
+            ->where([
+                ["role", "=", 4],
+                ["status", "=", 1],
+                ["sched_status", "=", "available"],
+            ])
+            ->get();
+        $data = Maintenance::where('branch', 1)->take(5)->find($id);
+        return view('dumaguete.maintenance_request.mechanic.edit', compact('data', 'technician'));
     }
 
 
@@ -237,7 +285,6 @@ class MaintenanceController extends Controller
             'req_date' => 'required',
             'acceptd' => 'required',
         ]);
-
 
         $data = Maintenance::find($id);
         $data->name = $request->name;

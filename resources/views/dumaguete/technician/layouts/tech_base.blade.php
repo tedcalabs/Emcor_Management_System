@@ -24,6 +24,7 @@
       @yield('schedule')
       @yield('updateReq')
       @yield('tecprofile')
+      @yield('footer')
       </main>   
 
     

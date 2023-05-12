@@ -1,6 +1,7 @@
 
 @extends('dumaguete.workexpert.layouts.workExpert_base')
 @include('dumaguete.workexpert.components.topbar')
+@include('dumaguete.workexpert.components.footer')
 @include('dumaguete.workexpert.components.sidebar')
 
 

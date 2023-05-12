@@ -1,8 +1,9 @@
 
 
-@extends('branchb.layouts.branchb_base')
-@include('branchb.components.topbar')
-@include('branchb.components.sidebar')
+@extends('branchb.workexpert.layouts.workExpert_base')
+@include('branchb.workexpert.components.topbar')
+@include('branchb.workexpert.components.footer')
+@include('branchb.workexpert.components.sidebar')
 @section('contentx')
 
 
@@ -22,7 +23,6 @@
                   <th>Date of Request</th>
                   <th>Action</th>
                   <th>Edit</th>
-
               </tr>
           </thead>
           <tbody> 

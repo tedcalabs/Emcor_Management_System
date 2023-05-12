@@ -1,16 +1,30 @@
-
-
 @extends('dumaguete.technician.layouts.tech_base')
 @include('dumaguete.technician.components.topbar')
+@include('dumaguete.technician.components.footer')
 @include('dumaguete.technician.components.sidebar')
 
 @section('schedule')
 <div class="container">
-    <div class="item item-5">
-        <div class="head">Maintenance Request</div>
+    <div class="item item-17">
 
-        
-       
+        <div class="row align-items-center">
+            <div class="col-8">        
+                <div class="head">
+                  <a href="{{ route('tech.sched') }}" style="text-decoration: none;">
+                    <span class="head" style="color: black;"> Servcing Request Schedule</span>
+                </a>
+                </div>
+            </div>
+            <div class="col-4">
+                <form method="GET" action="{{ route('tech.sched') }}">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search...">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>  
+
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
         <p>{{ $message }}</p>
@@ -20,21 +34,17 @@
          <table class="table table-bordered">
              <thead>
                <tr>
-                   <th>Id</th>
                    <th>Name</th>
                    <th>Address</th>
                    <th>Contact Number</th>
                    <th>Request Detail</th>
                    <th>Servicing Schedule</th>  
                    <th>Action</th>
-                   
-
                </tr>
            </thead>
            <tbody> 
             @foreach ($data as $mreq)
-               <tr>
-                   <td>{{ $mreq->id}}</td>
+               <tr>               
                    <td>{{ $mreq->name}}</td>
                    <td>{{ $mreq->address}}</td>
                    <td>{{ $mreq->phone}}</td>
@@ -43,29 +53,26 @@
             
                    <td>
                        <div class=" ">
-                           <a href="{{ route('updateD', $mreq->id) }}" class="btn btn-info"  style="margin-bottom: 5px">Update</a>
+                           <a href="{{ route('updateD', $mreq->id) }}" class="btn btn-info update-button"  style="margin-bottom: 5px">Update</a>
                            <form method="GET"
                                    action="{{ route('deleteZ',$mreq->id ) }}"
                                    onsubmit="return confirm('Are you sure?');">
                                @csrf    
                                @method('DELETE')
 
-                           <button type="submit" class="btn btn-danger text-black">Delete</button>
+                           <button type="submit" class="btn btn-danger">Delete</button>
                            
                        </form>
-
                        </div>
-
-                   </td>
-                  
-               </tr>
-
-            
+                   </td>                 
+               </tr>     
                @endforeach
            </tbody>
          </table>
    
         </div>
+        {{ $data->links() }}
+
         </div>
     </div>
  @endsection

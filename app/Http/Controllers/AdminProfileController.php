@@ -57,7 +57,7 @@ class AdminProfileController extends Controller
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
             $query = Admin::find(Auth::guard('admin')->user()->id)->update([
-                'name' => $request->fname,
+                'name' => $request->name,
                 'email' => $request->email,
 
             ]);

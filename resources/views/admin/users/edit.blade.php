@@ -1,6 +1,7 @@
 @extends('admin.admin_master')
 @include('admin.components.topbar')
 @include('admin.components.sidebar')
+@include('admin.components.footer')
 @section('users')
 
 

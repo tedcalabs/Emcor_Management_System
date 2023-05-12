@@ -30,6 +30,7 @@ class MrRequest extends FormRequest
             'branch' => 'required',
             'category' => 'required',
             'acceptd' => 'required',
+            'device_token'=>'required',
         ];
     }
 }

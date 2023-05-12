@@ -24,6 +24,8 @@
       @yield('blschedule')
       @yield('updateReqBl')
       @yield('blprofile')
+      @yield('schedule')
+      @yield('footer')
       </main>   
 
     

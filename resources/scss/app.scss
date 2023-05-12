@@ -25,10 +25,18 @@
 
 @import "status.scss";
 
+
+
+
+ body {
+    background-image: url("/assets/images/emcor6.jpg");
+    background-size: cover;
+
+ }
+
 .navbar {
-    height: 0.6in;
-    background: #177e89;
-    color: #f1f1f1;
+    height: 0.5in;
+    background: #F21313;
     top: 0; /* Position the navbar at the top of the page */
     width: 100%; /* Full width */
     position: fixed;
@@ -37,7 +45,25 @@
     justify-content: space-between;
     padding: 0.5rem 1rem;
     margin-left: 15rem;
+    z-index: 999;
+    
 }
+.blockcode {
+    position: fixed;
+    height: 100px;
+    bottom: 0;
+    width: 100%;
+    background-color:#0D0D0D;
+    height: 0.4in;
+    padding-bottom: .5rem;
+    align-items: center;
+padding-left: 7rem;
+}
+
+.fotext{
+    color:  #ffff; 
+}
+
 .navbar li {
     float: left;
 }
@@ -48,13 +74,18 @@
     margin-right: 3rem;
 }
 
-.navbar .logo-img {
-    float: left;
-    height: 30px;
-    width: 200px;
-    margin-bottom: 1ch;
+// .navbar .logo-img {
+//     float: left;
+//     height: 90px;
+//     width: 200px;
+//     margin-bottom: 1in;
+// }
+.toptext{
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    font-weight: 500;
+    font-size: 20px; 
 }
-
 
 .headtext{
 display: flex;
@@ -78,10 +109,11 @@ display: flex;
 
 
 .slider {
-    background-color: #084c61;
+    background-color: #F2F2F2;
     height: 100vh;
     width: 15rem;
     position: fixed;
+    z-index: 999;
    // flex-wrap: wrap;
 }
 
@@ -98,15 +130,16 @@ display: flex;
 
     height: 80px;
     width: 260px;
-    cursor: pointer;
+
 
 }
 
 .maintext {
     font-size: 1rem;
     font-weight: 700;
-    color: white;
+    color: #0E0F11;
     padding-right: 50px;
+    margin-left: 3px;
 }
 
 a {
@@ -129,14 +162,19 @@ a {
 
 
 .user-label {
+    color: #0E0F11;
     padding-top: 1rem;
     /* border: 2px solid black; */
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
+    margin-left: 1rem;
     align-items: center;
     width: 30rem;
     height: 20px;
 }
 
+.user-label:hover{
+    color: #0E0F11;
+}
 
 
 .search,
@@ -158,12 +196,17 @@ a {
 }
 
 .childs:hover {
-    background-color:   #db3a34;
+    background-color:#F21313;
     color: white;
 }
 
 .text {
-    margin-left: 1.8rem;
+    margin-left: 1.5rem;
+    margin-top: 13px;
+    color: #0E0F11;
+}
+
+.text:hover{
     color: white;
 }
 
@@ -190,7 +233,7 @@ a {
     margin-left: 1.8rem;
     border: none;
     background: transparent;
-    color: aliceblue;
+    color: #0E0F11;
 
 }
 

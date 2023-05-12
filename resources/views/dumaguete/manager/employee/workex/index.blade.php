@@ -1,13 +1,32 @@
 
 @extends('dumaguete.manager.layouts.mngr_base')
 @include('dumaguete.manager.components.topbar')
+@include('dumaguete.manager.components.footer')
 @include('dumaguete.manager.components.sidebar')
 
 
 @section('emWork')
 <div class="container">
   <div class="item item-9">
-      <div class="head">Whitelines Technicians</div>
+
+    <div class="row align-items-center">
+      <div class="col-8">        
+          <div class="head">
+            <a href="{{ route('workex.employees') }}" style="text-decoration: none;">
+              <span class="head" style="color: black;">Work Expert</span>
+          </a>
+          </div>
+      </div>
+      <div class="col-4">
+          <form method="GET" action="{{ route('workex.employees') }}">
+              <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search...">
+                  <button class="btn btn-outline-secondary" type="submit">Search</button>
+              </div>
+          </form>
+      </div>
+  </div>    
+
 
       
      
@@ -58,6 +77,7 @@
               </tbody>
             </table>
           </div>
+          {{ $wex->links() }}
         </div>
     </div>
 

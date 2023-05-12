@@ -4,6 +4,7 @@ namespace App\Http\Controllers\DumagueteB;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -15,7 +16,23 @@ class MechanicController extends Controller
       
     public function index()
     {
-        return view('dumaguete.mechanic.index');
+
+        $allsched = DB::table('maintenances')->where([
+            ["branch", "=", 1],
+            ["status", "=", "pending"],
+        ])
+            ->count();
+        $pending = DB::table('maintenances')->where([
+            ["branch", "=", 1],
+            ["acceptd", "=", 1],
+        ])
+            ->count();
+        $completed = DB::table('maintenances')->where([
+            ["branch", "=", 1],
+            ["status", "=", "completed"],
+        ])
+        ->count();
+        return view('dumaguete.mechanic.index',['allsched' => $allsched, 'pending' => $pending, 'completed' => $completed]);
     }
 
     

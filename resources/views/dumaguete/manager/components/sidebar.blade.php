@@ -16,13 +16,8 @@
         </div>
         <div class="user-label">
            
-            <p class="text headtext" >Manager</p>
+            <p class="headtext" >Manager</p>
         </div>
-        <div class="links">
-            <div class="search">
-            <i class="fa-solid fa-magnifying-glass icons"></i><input type="search" placeholder = "Search" class="searchbtn">
-        </div>
- 
         <a href="{{ route('manager.dashboard')}}">
         <div class="dashboard childs">
             <i class="fa-solid fa-house icons"></i><p class="text">Dashboard</p>
@@ -35,7 +30,7 @@
         <ul class="dropdown-menu">
         <li><a class="dropdown-item" href="{{ route('whitelines.tansaction')}}">Whitelines</a></li>
         <li><a class="dropdown-item" href="{{ route('brownlines.tansaction')}}">Brownlines</a></li>
-        <li><a class="dropdown-item" href="">Mechanic</a></li>
+        <li><a class="dropdown-item" href="{{ route('mechanic.tansaction')}}">Mechanic</a></li>
         </ul>
     </div>
 <div class="notifications childs">

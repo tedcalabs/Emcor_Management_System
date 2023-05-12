@@ -7,11 +7,11 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>Emcor - Login</title>
-       
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <style>
 
 body{
@@ -230,10 +230,10 @@ body{
 
 .card{
 
-    width: 500px;
+    width: 550px;
     height: 750px;
     background: transparent;
-    background-color: #084c61;
+    background-color: #F2F2F2;
     border: 2px solid rgba(255,255,255,0.5);
     border-radius: 5px;
     backdrop-filter: blur(10px);
@@ -245,14 +245,42 @@ body{
 
 h2{
     font-size: 2em;
-    color: #fff;
+    color: #040303;
     text-align: center;
 }
 
 
+    a{
+    color: #040303;
+    text-decoration: none;
+          }
+          .card-body:hover>a{
+            color: #040303;
+          
+          }
+          .huhu:hover{
+            color: #040303;
+            
+          }
+           
+.grnbuton{
+        position: relative;
+        background-color: #F21313;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 5px;
+        float: left;
+        font-size: 20px;
+        min-height: 30px;
+        min-width: 100px;
+        
+      }
+
+
 .form-group label{
 float: left;
-color: #fff;
+color: #040303;
 }
 
 
@@ -273,8 +301,6 @@ color: #fff;
 <body>
 
 
-
-    <div>
         <div class="header-blue">
             <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
                 <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR Servicing Request System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -285,14 +311,11 @@ color: #fff;
             </nav>
 
             <!--Emcor MVG-->
-            <div class="container hero">
+            <div class="">
                 <div class="row">
-                    <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
-                    </div>
-  
-                    <div class="col-12 col-lg-6 col-xl-5 offset-xl-1" style="margin-top:2rem">
-                        <div class="card">
-                            <div class="card-header">
+                  <div class="col-4"></div>
+                    <div class="col-8">
+      
                     <div class="card">
                         <div class="card-header">
                        <h2>Sign Up</h2>
@@ -372,25 +395,28 @@ color: #fff;
                                     @enderror
                                 </div>
                                 <div class="col-6 form-group">
-                                    <label for="password2" class="inline-block text-lg mb-2">
+                                    <label for="password2" class="inline-block ">
                                       Confirm Password
                                     </label>
                                     <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password"
                                       value="{{old('password_confirmation')}}" />
                             
                                     @error('password_confirmation')
-                                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                                    <p class="text-red-500 ">{{$message}}</p>
                                     @enderror
                                   </div>
                                 
                                 </div>   
                              
-                                <button type="submit" class="btn btn-primary ">Sign Up</button><br>
-                                <span class="text text-white">Already have an account?</span><a href="/" class="href text-white"> Login</a>
+                                <button type="submit" class="grnbuton">Sign Up</button><br>
+
+                                <a href="/" class="huhu">
+                                <span class="float-right">Already have an account?</span> </a>
                             </form>
                         </div>
                     </div>
                 </div>
+                <div class="col-2"></div>
              </div>
         </div>
       </div>

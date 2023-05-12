@@ -22,12 +22,11 @@
       @yield('sidebarMc')
       @yield('mechanicDashboard')
       @yield('Mschedule')
+      @yield('schedule')
       @yield('updateReqM')
       @yield('tecprofile')
-      </main>   
-
-    
+      @yield('footer')
+      </main>     
 </body>
-
 </html>
 

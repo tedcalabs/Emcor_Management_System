@@ -15,9 +15,9 @@ class AuthRepository
     public function login(array $data): array
     {
         //check the request if valid email
-        $user = $this->getUserByEmail($data['email']);
+        $user = $this->getUserByEmail($data['phone']);
         if (!$user) {
-            throw new Exception("Sorry, user does not exist", 404);
+            throw new Exception("Sorry, user does not exist", 400);
         }
 
 
@@ -53,9 +53,9 @@ class AuthRepository
 
 
 
-    public function getUserByEmail(string $email): ?User
+    public function getUserByEmail(string $phone): ?User
     {
-        return  User::where('email', $email)->first();
+        return  User::where('phone', $phone)->first();
     }
     public function isValidPassword(User $user, array $data): bool
     {
@@ -88,6 +88,7 @@ class AuthRepository
             'gender' => $data['gender'],
             'email' => $data['email'],
             'phone' => $data['phone'],
+            'device_token' => $data['device_token'],
             'password' => Hash::make($data['password'])
         ];
     }

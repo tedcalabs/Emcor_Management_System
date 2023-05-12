@@ -5,22 +5,16 @@
     <div class="close slider">
         <div class="profile">
             <img src=" {{asset('assets/images/eclogo12.png')}}" alt="profileImage" class="emlog">
-        
         </div>
         <div class="profile">
             <img src="{{  asset('uploads/profile/'.Auth::user()->picture) }}" alt="profileImage" class="image">
             <div class="profileText">
-                <p class="text maintext">{{Auth::user()->fname}} {{Auth::user()->lname}}</p>
+                <p class="maintext">{{Auth::user()->fname}} {{Auth::user()->lname}}</p>
             </div>
         </div>
         <div class="user-label">
-            <p class="text headtext" >Work Expert</p>
+            <p class="headtext" >Work Expert</p>
         </div>
-        <div class="links">
-            <div class="search">
-            <i class="fa-solid fa-magnifying-glass icons"></i><input type="search" placeholder = "Search" class="searchbtn">
-        </div>
- 
         <a href="{{ route('workexpert.dashboard') }}">
         <div class="dashboard childs">
             <i class="fa-solid fa-house icons"></i><p class="text">Dashboard</p>
@@ -28,13 +22,22 @@
     </a>
         <a href="{{ route('workexpert.sched') }}">
         <div class="messages childs">
-            <i class="fa-solid fa-envelope icons"></i><p class="text">Schedules</p>
+            <i class="fas fa-tools icons"></i><p class="text">Whitelines</p>
         </div>
     </a>
-
+    <a href="{{ route('getBrownlines.request') }}">
+        <div class="messages childs">
+            <i class="fas fa-tools icons"></i><p class="text">Brownlines</p>
+        </div>
+    </a>
+    <a href="{{ route('getMechanic.request') }}">
+        <div class="messages childs">
+            <i class="fas fa-tools icons"></i><p class="text">Mechanics</p>
+        </div>
+    </a>
     <a href="{{ route('workexpert.profile') }}">
         <div class="messages childs">
-            <i class="fa-solid fa-envelope icons"></i><p class="text">Profile</p>
+            <i class="fas fa-user icons"></i><p class="text">Profile</p>
         </div>
     </a>
         <div class="logout childs">

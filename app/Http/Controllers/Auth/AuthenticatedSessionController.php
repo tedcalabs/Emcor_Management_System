@@ -41,9 +41,11 @@ class AuthenticatedSessionController extends Controller
    
     public function store(LoginRequest $request)
     {
-        $request->authenticate();
 
-        $request->session()->regenerate();
+        $check = $request->all();
+        if (Auth::attempt(['email' => $check['email'], 'password' => $check['password']])) {
+     
+        
 
         $user_role = Auth::user()->role;
      
@@ -70,10 +72,12 @@ class AuthenticatedSessionController extends Controller
         }
                
         else{
-            return redirect('/');
+            return back()->with('error', 'Invalid Email or Password');
         }
 
-
+    } else {
+        return back()->with('error', 'Invalid Email or Password');
+    }
     }
 
   

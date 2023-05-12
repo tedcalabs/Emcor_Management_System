@@ -19,7 +19,7 @@
           body{
             background-image: url("/assets/images/emcor6.jpg");
             background-size: cover;
-             
+       
           }
       
           .card-header{
@@ -80,9 +80,8 @@
       }
       
       .header-blue .navbar.navbar-light .navbar-nav .nav-link {
-  color: #fff;
-}
-      
+        color: #fff;
+      }
       
       
       .header-blue .action-button, .header-blue .action-button:not(.disabled):active {
@@ -176,32 +175,31 @@
       
       
       .card{
-      
+        font-family: 'Roboto', sans-serif;
           width: 400px;
           height: 440px;
           background: transparent;
-          background-color: #084c61;
+          background-color: #F2F2F2;
           border: 2px solid rgba(255,255,255,0.5);
           border-radius: 5px;
           backdrop-filter: blur(10px);
-          display: flex;
-          justify-content: center;
-          align-items: center;
+        
+      
+      
         
       }
       
       h2{
           font-size: 2em;
-          color: #fff;
+          color: #040303;
           text-align: center;
       }
       
       
       .form-group label{
       float: left;
-      color: #fff;
+      color:#040303 ;
       }
-      
       
       
       
@@ -214,15 +212,24 @@
       }
       
       .grnbuton{
-        background-color: #177e89;
+        position: relative;
+        background-color: #F21313;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 5px;
         float: left;
         font-size: 20px;
+        min-height: 30px;
+        min-width: 100px;
+        
       }
       .grnbuton:hover{
-        background-color: #2d5f5b;
+        background-color: #aaaaaa;
       }
       
       </style>
+      
 
     
     </head>
@@ -255,20 +262,9 @@
             <!--Emcor MVG-->
             <div class="container hero">
                 <div class="row">
-                    <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
-                        <!--      <h1>Emcor</h1>
-
-                     <img class="logo-img" src="asset('assets/images/eclogo12.png')}}" alt="" class="logo"> 
-                         <p>EMCOR is the most relevant, world-class, community-based organization that enables customers to achieve a better life by providing quality products and services through personalized care.<br></p>
-                    
-                   -->
-                        </div>
-
-                    <!--Emcor Login form -->
+                  <div class="col-4"></div>
    
-                    <div class="col-12 col-lg-6 col-xl-5 offset-xl-1" style="margin-top:1in">
-                      <div class="card">
-                          <div class="card-header">
+                    <div class="col-4">
                   <div class="card">
                       <div class="card-header">
                      <h2>Bayawan Branch <br> Login</h2>
@@ -300,7 +296,7 @@
                               </div>
                      
                                 
-                              <button type="submit" class="btn btn-primary grnbuton">Login</button>
+                              <button type="submit" class="grnbuton">Login</button>
                               
                                     <div class="dropdown show float-right">
                                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -315,6 +311,7 @@
                            </div>
                         </div>
                      </div>
+                     <div class="col-4"></div>
                   </div>
                </div>
             </div>             

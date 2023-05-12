@@ -1,16 +1,32 @@
 
 @extends('dumaguete.manager.layouts.mngr_base')
 @include('dumaguete.manager.components.topbar')
+@include('dumaguete.manager.components.footer')
 @include('dumaguete.manager.components.sidebar')
 
 
 @section('emMec')
 <div class="container">
   <div class="item item-9">
-      <div class="head">Mechanics</div>
 
-      
-     
+
+    <div class="row align-items-center">
+      <div class="col-8">        
+          <div class="head">
+            <a href="{{ route('mechanic.employees') }}" style="text-decoration: none;">
+              <span class="head" style="color: black;">Mechanics</span>
+          </a>
+          </div>
+      </div>
+      <div class="col-4">
+          <form method="GET" action="{{ route('mechanic.employees') }}">
+              <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search...">
+                  <button class="btn btn-outline-secondary" type="submit">Search</button>
+              </div>
+          </form>
+      </div>
+  </div>        
       @if ($message = Session::get('success'))
       <div class="alert alert-success">
       <p>{{ $message }}</p>
@@ -58,6 +74,7 @@
               </tbody>
             </table>
           </div>
+          {{ $mec->links() }}
         </div>
     </div>
 

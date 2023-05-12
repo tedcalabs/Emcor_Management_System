@@ -18,10 +18,12 @@
 
     {{-- VIEW OUTPUT--}}
     <main>
+      @yield ('adminTopbar')
       @yield ('topbarx')
       @yield('sidebarx')
       @yield('contentx')
       @yield('requestb')
+      @yield ('footer')
       </main>   
 
     

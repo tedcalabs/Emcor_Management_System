@@ -17,7 +17,12 @@
 @vite(['resources/scss/app.scss','resources/css/app.css','resources/js/app.js']) 
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
-
+<style>
+  
+  body{
+  /* background-color: #0D0D0D; */
+    }
+  </style>
 </head>
 
 <body>
@@ -30,10 +35,13 @@
       @yield ('services')
       @yield ('technicians')
       @yield ('users')
-      @yield ('requests') 
+      @yield ('request') 
       @yield ('content')   
       @yield ('adminDashboard')
       @yield ('categories')
+      @yield ('usersbayawan')
+      @yield ('updateReqD')
+      @yield ('footer')
       </main> 
       @yield('script') 
     </body>

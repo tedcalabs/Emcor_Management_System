@@ -1,7 +1,7 @@
 @extends('admin.admin_master')
 @include('admin.components.topbar')
 @include('admin.components.sidebar')
-
+@include('admin.components.footer')
 @section('users')
 
 <div class="container">
@@ -12,8 +12,23 @@
     <p>{{ $message }}</p>
     </div>
     @endif
-        <div class="title_user">Users List</div>
-      
+    <div class="row">
+        <div class="col-8">
+            <a href="{{ route('users.index') }}" style="text-decoration: none;">
+                <span class="head" style="color: black;">Dumaguete Users list</span>
+            </a>
+        </div>
+        <div class="col-4" style="margin-bottom: 1rem; margin-left: 8rem; width:15rem; float:right;">
+            <form action="{{ route('users.index') }}" method="get">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search users...">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
           <div class="table-responsive">
               <table class="table table-bordered">
                   <thead>
@@ -56,15 +71,34 @@
                       @endif</td>
                   
                         <td>
-                            <div class=" ">
+                            <div class="">
                                 <a href="{{route('users.edit', $user->id) }}" class="btn btn-primary edit-button">Edit</a>
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete-modal">Delete</button>
-
-
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$user->id}}">Delete</button>
                             </div>
-
                         </td>
                     </tr>
+                     
+                    <!-- Delete User Modal -->
+                    <div class="modal fade" id="deleteModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{$user->id}}" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel{{$user->id}}">Delete User</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete this user?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <form method="POST" action="{{route('users.destroy', $user->id) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
                      
                   
                     @endforeach
@@ -73,34 +107,41 @@
                 </tbody>
               </table>
             </div>
+            {{$data->links()}}
         </div>
- 
+   
 
     </div>
-    
-@endsection
 
-@section('script')
+@endsection
+{{-- @section('script')
 <script>
-    // Get references to the form and the delete button
-    const deleteForm = document.querySelector('#delete-form');
-    const deleteButton = document.querySelector('#delete-button');
+// Get references to the form and the delete button
+const deleteForm = document.querySelector('#delete-form');
+const deleteButton = document.querySelector('#delete-button');
+
+// Add an event listener to the delete button
+deleteButton.addEventListener('click', () => {
+    // Retrieve the user ID from the button's data attribute
+    const userId = deleteButton.dataset.user;
     
-    // Add an event listener to the delete button
-    deleteButton.addEventListener('click', () => {
-        // Create a custom dialog box using the window.confirm method
-        const confirmed = window.confirm('Are you sure you want to delete this user?');
-        
-        // If the user confirmed, submit the form
-        if (confirmed) {
-            deleteForm.submit();
-        }
-    });
+    // Update the action attribute of the form with the user ID
+    deleteForm.action = `/users/${id}`;
+    
+    // Create a custom dialog box using the window.confirm method
+    const confirmed = window.confirm('Are you sure you want to delete this user?');
+    
+    // If the user confirmed, submit the form
+    if (confirmed) {
+        deleteForm.submit();
+    }
+});
+
 </script>
-@endsection
+@endsection  --}}
 
 
-<section>
+{{--     
 <div class="modal fade" id="confirm-delete-modal" tabindex="-1" role="dialog" aria-labelledby="confirm-delete-modal-label" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -115,7 +156,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <form method="POST" action="{{ route('users.destroy', $user->id) }}" id="delete-form">
+                <form method="POST" action="{{route('users.destroy', $user->id) }}" id="delete-form">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete</button>
@@ -123,5 +164,4 @@
             </div>
         </div>
     </div>
-</div>
-</section>
+</div> --}}

@@ -10,17 +10,14 @@
         <div class="profile">
             <img src=" {{  asset('uploads/profile/'.Auth::user()->picture) }} " alt="profileImage" class="image">
             <div class="profileText">
-                <p class="text maintext">{{Auth::user()->fname}} {{Auth::user()->lname}}</p>
+                <p class="maintext">{{Auth::user()->fname}} {{Auth::user()->lname}}</p>
             </div>
         </div>
         <div class="user-label">
-           
-            <p class="text headtext" >Secretary</p>
+
+            <p class="headtext" >Secretary</p>
         </div>
-        <div class="links">
-            <div class="search">
-            <i class="fa-solid fa-magnifying-glass icons"></i><input type="search" placeholder = "Search" class="searchbtn">
-        </div>
+       
  
         <a href="{{ route('secretary.dashboard') }}">
         <div class="dashboard childs">
@@ -36,9 +33,23 @@
             <li><a class="dropdown-item" href="{{ route('mechanic.req')}}">Mechanic</a></li>
             </ul>
         </div>
-        <a href="">
+        <div class="notifications childs">
+            <i class="fa-solid fa-bell icons"></i><p  class="text dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Technicians
+            </p>
+            <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ route('whitelinestecS')}}">Whitelines</a></li>
+            <li><a class="dropdown-item" href="{{ route('brownlinestecS')}}">Brownlines</a></li>
+            </ul>
+        </div>
+        <a href="{{ route('mechanicS')}}">
             <div class="messages childs">
-                <i class="fa-solid fa-envelope icons"></i><p class="text">Technicians</p>
+                <i class="fa-solid fa-envelope icons"></i><p class="text">Mechanics</p>
+            </div>
+        </a>
+        <a href="{{ route('cuslist')}}">
+            <div class="messages childs">
+                <i class="fa-solid fa-envelope icons"></i><p class="text">Customers</p>
             </div>
         </a>
             <a href="{{route('secretary.profile')}}">
@@ -51,7 +62,7 @@
             <hr>
     
  
-        <div class="logout childs">
+        <div class="heart childs">
  
           <form action="{{ route('logout')}}" method="post">
              @csrf

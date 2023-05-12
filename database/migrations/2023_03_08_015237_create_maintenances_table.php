@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('phone');
+            $table->string('model')->nullable();
+            $table->string('serial_no')->nullable();
+            $table->string('unit_info')->nullable();
             $table->longText('description');
             $table->string('branch');
             $table->string('category');

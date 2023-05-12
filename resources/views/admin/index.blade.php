@@ -2,6 +2,7 @@
 @include('admin.components.topbar')
 @include('admin.components.sidebar')
 
+@include('admin.components.footer')
 
 @section('adminDashboard')
 <div class="container request3">

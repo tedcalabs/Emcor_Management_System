@@ -7,20 +7,16 @@
         
         </div>
         <div class="profile">
-            <img src=" {{asset('assets/images/user.png')}}" alt="profileImage" class="image">
+            <img src="{{  asset('uploads/profile/'.Auth::guard('admin')->user()->picture) }}" alt="profileImage" class="image">
             <div class="profileText">
              
-                <p class="text maintext">{{Auth::guard('admin')->user()->name}}</p>
+                <p class="maintext">{{Auth::guard('admin')->user()->name}}</p>
               
             </div>
         </div>
         <div class="user-label">
            
-            <p class="text headtext" >Admin</p>
-        </div>
-        <div class="links">
-            <div class="search">
-            <i class="fa-solid fa-magnifying-glass icons"></i><input type="search" placeholder = "Search" class="searchbtn">
+            <p class="headtext" >Admin</p>
         </div>
  
         <a href="{{route('admin.dashboard')}}">
@@ -43,22 +39,18 @@
             Request
             </p>
             <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href=" ">Dumaguete Branch</a></li>
-            <li><a class="dropdown-item" href=" ">Bayawan Branch</a></li>
+            <li><a class="dropdown-item" href="{{route('duma.mtnc.request')}}">Dumaguete Branch</a></li>
+            <li><a class="dropdown-item" href="{{route('bayawan.mtnc.request')}}">Bayawan Branch</a></li>
             </ul>
         </div>
-<a href="{{route('users.index')}}">
-        <div class="coins childs">
-            <i class="fa-solid fa-coins icons"></i><p class="text">All Users</p>
-        </div></a>
 
         <div class="notifications childs">
             <i class="fa-solid fa-bell icons"></i><p  class="text dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             User Management
             </p>
             <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ route('secretary.employees')}}">Dumaguete Branch</a></li>
-            <li><a class="dropdown-item" href="{{ route('whitelinestec.employees')}}">Bayawan Branch</a></li>
+            <li><a class="dropdown-item" href="{{route('users.index')}}">Dumaguete Branch</a></li>
+            <li><a class="dropdown-item" href="{{route('usersbyn.index')}}">Bayawan Branch</a></li>
             </ul>
         </div>
 <a href="{{route('admin.profile')}}">

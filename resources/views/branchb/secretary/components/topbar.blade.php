@@ -1,7 +1,7 @@
 
-@section('topbarbs')
+@section('Topbar')
 <nav class="navbar">
- <img class="logo-img" src="{{asset('assets/images/eclogo12.png')}}" alt="" class="logo">
+<div class="toptext">Emcor Mobile-Based Servicing Request System</div>
                    
 </nav>
 @endsection

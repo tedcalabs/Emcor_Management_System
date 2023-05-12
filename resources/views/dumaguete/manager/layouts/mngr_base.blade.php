@@ -34,6 +34,7 @@
       @yield('whitetrans')
       @yield('browntrans')
       @yield('mectrans')
+      @yield('footer')
       </main>   
 
     

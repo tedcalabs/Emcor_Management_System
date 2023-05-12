@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\BranchB;
 
 
+use App\Models\BayawanUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\BranchBLRequest;
 use App\Http\Requests\BranchBSRequest;
-use App\Models\BayawanUser;
 use Illuminate\Support\Facades\Validator;
 
 class BSecretaryController extends Controller
@@ -19,14 +20,40 @@ class BSecretaryController extends Controller
 
     public function Index()
     {
+
+        
         return view('branchb.userAuth.login');
     }
 
     public function Dashboard()
     {
 
-
-        return view('branchb.secretary.index');
+        //Dumaguete branch
+        $total = DB::table('maintenances')->where([
+            ["branch", "=", 2],
+        ])
+            ->count();
+        $pending = DB::table('maintenances')->where([
+            ["branch", "=", 2],
+            ["status", "=", "pending"],
+        ])
+            ->count();
+        $accepted = DB::table('maintenances')->where([
+            ["branch", "=", 2],
+            ["acceptd", "=", 1],
+        ])
+            ->count();
+        $completed = DB::table('maintenances')->where([
+            ["branch", "=", 2],
+            ["status", "=", "completed"],
+        ])
+            ->count();
+        $declined = DB::table('maintenances')->where([
+            ["branch", "=", 2],
+            ["acceptd", "=", 2],
+        ])
+            ->count();
+        return view('branchb.secretary.index', ['total' => $total, 'pending' => $pending, 'accepted' => $accepted, 'completed' => $completed, 'declined' => $declined]);
     }
 
 
@@ -129,10 +156,12 @@ class BSecretaryController extends Controller
 
         $check = $request->all();
 
+        if (Auth::guard('bsec')->attempt(['email' => $check['email'], 'password' => $check['password'], 'role' => '1'])) {
 
-
-
-        if (Auth::guard('bsec')->attempt(['email' => $check['email'], 'password' => $check['password'], 'role' => '2'])) {
+            return redirect()->route('managerb.dashboard')->with('error', 'Admin Login Successfully');
+        }
+        
+        else if(Auth::guard('bsec')->attempt(['email' => $check['email'], 'password' => $check['password'], 'role' => '2'])) {
 
             return redirect()->route('bsec.dashboard')->with('error', 'Admin Login Successfully');
         } else if (Auth::guard('bsec')->attempt(['email' => $check['email'], 'password' => $check['password'], 'role' => '3'])) {
@@ -141,9 +170,14 @@ class BSecretaryController extends Controller
         }else if (Auth::guard('bsec')->attempt(['email' => $check['email'], 'password' => $check['password'], 'role' => '4'])) {
 
             return redirect()->route('brownlinesb.dashboard')->with('error', 'Admin Login Successfully');
+        }else if (Auth::guard('bsec')->attempt(['email' => $check['email'], 'password' => $check['password'], 'role' => '5'])) {
+
+            return redirect()->route('mechanicbywn.dashboard')->with('error', 'Mechanic Login Successfully');
+        }else if (Auth::guard('bsec')->attempt(['email' => $check['email'], 'password' => $check['password'], 'role' => '6'])) {
+
+            return redirect()->route('workexpertb.dashboard')->with('error', 'Mechanic Login Successfully');
         }
-        
-        
+   
         else {
             return back()->with('error', 'Invalid Email or Password');
         }
@@ -179,4 +213,74 @@ class BSecretaryController extends Controller
         ]);
         return redirect()->route('userB_loginform')->with('success', 'User Created Successfully!');
     }
+
+
+
+    public function SecWl(Request $request)
+    {
+        $keyword = $request->input('search');
+        $query = BayawanUser::select("*")
+            ->where([
+                ["role", "=", 3],
+            ]);
+        if ($keyword) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('fname', 'LIKE', "%$keyword%")
+                    ->orWhere('email', 'LIKE', "%$keyword%");
+            });
+        }
+        $data = $query->paginate(2);
+        return view('branchb.secretary.techlist.index', compact('data', 'keyword'));
+    }
+
+    public function SecBl(Request $request)
+    {
+        $keyword = $request->input('search');
+        $query = BayawanUser::select("*")->where([
+            ["role", "=", 4],
+        ]);
+        if ($keyword) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('fname', 'LIKE', "%$keyword%")
+                    ->orWhere('email', 'LIKE', "%$keyword%");
+            });
+        }
+        $wbl = $query->paginate(2);
+        return view('branchb.secretary.btechlist.index', compact('wbl', 'keyword'));
+    }
+
+
+    public function SemMec(Request $request)
+    {
+        $keyword = $request->input('search');
+        $query = BayawanUser::select("*")
+            ->where([
+                ["role", "=", 5]
+            ]);
+        if ($keyword) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('fname', 'LIKE', "%$keyword%")
+                    ->orWhere('email', 'LIKE', "%$keyword%");
+            });
+        }
+        $mec = $query->paginate(2);
+        return view('branchb.secretary.mechlist.index', compact('mec', 'keyword'));
+    }
+
+    public function getCList(Request $request)
+{
+    $keyword = $request->input('search');
+    $query = BayawanUser::select("*")
+        ->where([
+            ["role", "=", 0],
+        ]);
+    if ($keyword) {
+        $query->where(function($q) use ($keyword) {
+            $q->where('fname', 'LIKE', "%$keyword%")
+              ->orWhere('email', 'LIKE', "%$keyword%");
+        });
+    }
+    $customers = $query->paginate(2);
+    return view('branchb.secretary.customer.index', compact('customers', 'keyword'));
+}
 }

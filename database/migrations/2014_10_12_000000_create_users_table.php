@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('bdate');
             $table->string('gender');
             $table->string('phone');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->string('picture')->nullable();
             $table->string('password');
             $table->tinyInteger('role')->default(0);

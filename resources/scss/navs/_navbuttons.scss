@@ -11,6 +11,32 @@
     border-color: #048585; /* dark red border color */
   }
 
+  .accept-button{
+    color: #ffffff; 
+    background-color: #09aeae; 
+    border-color:  #09aeae;
+    padding-left: .8rem;
+    padding-right: .8rem;
+    margin-bottom: 3px;
+}
+.edit-button:hover {
+    background-color: #048585; /* dark red background color */
+    border-color: #048585; /* dark red border color */
+  }
+
 .nav-link{
     background-color: #09aeae;  
+}
+
+.update-button{
+  color: #ffffff; 
+  background-color: #09aeae; 
+  border-color:  #09aeae;
+  padding-left: 9px;
+  padding-right: 9px;
+  margin-bottom: 3px;
+}
+.update-button:hover {
+  background-color: #048585; /* dark red background color */
+  border-color: #048585; /* dark red border color */
 }

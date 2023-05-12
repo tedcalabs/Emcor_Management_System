@@ -1,8 +1,8 @@
 
 
 @extends('layouts.app')
-  
-@include('components.topBar')
+@include('admin.components.topbar')
+@include('admin.components.footer')
 @include('components.sideBar')
 
 
@@ -29,45 +29,31 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-3">
-  
               <!-- Profile Image -->
               <div class="card card-profile">
-                <div class="card-body box-profile">
-                  <div class="text-center">
-                       <img class="profile-user-img img-fluid img-circle admin_picture" src="{{  asset('uploads/profile/'.Auth::user()->picture) }}" alt="User profile picture"> 
-                  
-                 <p class="u_name">{{Auth::user()->name}}</p>
-                
-                 <form method="POST" action="{{ route('cphoto') }}" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-        
-                    <div class="sm:col-span-6">
-                   <input type="file" name="picture"   class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 "> <br>
-                 
-                    </div>
-        
-            <div class="">
-                <button type="submit"
-                    class="btn btn-info  float-left bg-slate-400">Update</button>
-            </div>
-        </form>
-                
-                
-                </div>
-  
-  
-                <!--   <p class="text-muted text-center">Secretary</p  -->
-
-           
-                  
-                </div>
-                <!-- /.card-body -->
+                  <div class="card-body box-profile">
+                      <div class="text-center">
+                          <img class="profile-user-img img-fluid img-circle admin_picture" src="{{ asset('uploads/profile/' . Auth::user()->picture) }}" alt="User profile picture"> 
+                          <p class="u_name">{{ Auth::user()->name }}</p>
+                          <form method="POST" action="{{ route('cphoto') }}" enctype="multipart/form-data">
+                              @csrf
+                              @method('PUT')
+                              <div class="sm:col-span-6">
+                                  <!-- Custom button to trigger file input field -->
+                                  <button type="button" class="btn btn-info" onclick="document.getElementById('profile-pic').click()">Select Image</button>
+                                  <!-- Hidden file input field -->
+                                  <input type="file" id="profile-pic" name="picture" class="visually-hidden" onchange="document.getElementById('submit-btn').click()">
+                              </div>
+                              <!-- Hidden submit button -->
+                              <button type="submit" id="submit-btn" class="visually-hidden"></button>
+                          </form>
+                      </div>
+                  </div>
               </div>
-              <!-- /.card -->
-  
+          </div>
           
-            </div>
+          
+          
             <!-- /.col -->
             <div class="col-md-9">
               <div class="card">

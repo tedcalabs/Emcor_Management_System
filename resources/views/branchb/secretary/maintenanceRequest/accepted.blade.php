@@ -2,18 +2,29 @@
 @extends('branchb.secretary.layouts.bsec_base')
 @include('branchb.secretary.components.topbar')
 @include('branchb.secretary.components.sidebar')
+@include('branchb.secretary.components.footer')
 @section('acceptedRequest')
 
 <div class="container">
-    <div class="item item-5">
-        <div class="" style=" margin-bottom:10px">
-            
-            <span class="head">Accepted Request list</span>
-           
-            <a href="{{ route('mreqb') }}" class="btn btn-info " style="float:right">Back</a>
+    <div class="item item-22">
 
-
-        </div>
+        <div class="row align-items-center">
+            <div class="col-8">        
+                <div class="head">
+                  <a href="{{ route('acceptb') }}" style="text-decoration: none;">
+                    <span class="head" style="color: black;">Accepted Request list</span>
+                </a>
+                </div>
+            </div>
+            <div class="col-4">
+                <form method="GET" action="{{ route('acceptb') }}">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search...">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>    
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
         <p>{{ $message }}</p>
@@ -23,36 +34,37 @@
  
          <table class="table table-bordered">
              <thead>
-               <tr>
-                   <th>Id</th>
+               <tr>             
                    <th>Name</th>
                    <th>Address</th>
                    <th>Contact Number</th>
                    <th>Request Detail</th>
-                   <th>Schedule</th>   
-                   <th>Status</th>
-                                   
-                   <th>Edit</th>
-
+                   <th>Technician Assigned</th>
+                   <th>Schedule</th> 
+                   <th>Category</th> 
+                   <th>Status</th>                         
+                   <th>Action</th>
                </tr>
            </thead>
            <tbody> 
-            @foreach ($data as $data)
+            @foreach ($data as $list)
                <tr>
-                   <td>{{ $data->id}}</td>
-                   <td>{{ $data->name}}</td>
-                   <td>{{ $data->address}}</td>
+               
+                   <td>{{ $list->name}}</td>
+                   <td>{{ $list->address}}</td>
               
-                   <td>{{ $data->phone}}</td>
+                   <td>{{ $list->phone}}</td>
                 
-                   <td>{{ $data->description}}</td>
-                   <td>{{ $data->req_date}}</td>
-                   <td>{{ $data->status}}</td>
+                   <td>{{ $list->description}}</td>
+                   <td>{{ $list->technician}}</td>
+                   <td>{{ \Carbon\Carbon::parse($list->req_date)->format('d/m/Y g:i:s A')}}</td>        
+                   <td>{{ $list->category}}</td>
+                   <td>{{ $list->status}}</td>
                    <td>
                     <div class=" ">
-                        <a href="{{ route('updateReq', $data->id) }}" class="btn btn-info "  style="margin-bottom: 5px">Edit</a>
+                        <a href="{{ route('updateReq', $list->id) }}" class="btn btn-info edit-button"  style="margin-bottom: 5px">Edit</a>
                         <form method="GET"
-                                action="{{ route('deleteReqb', $data->id) }}"
+                                action="{{ route('deleteReq', $list->id) }}"
                                 onsubmit="return confirm('Are you sure?');">
                             @csrf
                             @method('DELETE')
@@ -72,8 +84,16 @@
          </table>
    
         </div>
+        {{ $data->links() }}
         </div>
- @endsection
+       
+    </div>
+
+
+ 
+ 
+ 
+        @endsection
 
 @section('script')
 

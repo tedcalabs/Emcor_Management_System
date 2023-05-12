@@ -1,6 +1,7 @@
 
 @extends('dumaguete.manager.layouts.mngr_base')
 @include('dumaguete.manager.components.topbar')
+@include('dumaguete.manager.components.footer')
 @include('dumaguete.manager.components.sidebar')
 
 

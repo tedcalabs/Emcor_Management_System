@@ -1,6 +1,7 @@
 
 @extends('dumaguete.manager.layouts.mngr_base')
 @include('dumaguete.manager.components.topbar')
+@include('dumaguete.manager.components.footer')
 @include('dumaguete.manager.components.sidebar')
 
 
@@ -8,10 +9,23 @@
         
 <div class="container">
   <div class="item item-9">
-      <div class="head">Whitelines Technicians</div>
-
-      
-     
+    <div class="row align-items-center">
+      <div class="col-8">        
+          <div class="head">
+            <a href="{{ route('whitelinestec.employees') }}" style="text-decoration: none;">
+              <span class="head" style="color: black;">Whitelines Technicians</span>
+          </a>
+          </div>
+      </div>
+      <div class="col-4">
+          <form method="GET" action="{{ route('whitelinestec.employees') }}">
+              <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search...">
+                  <button class="btn btn-outline-secondary" type="submit">Search</button>
+              </div>
+          </form>
+      </div>
+  </div>   
       @if ($message = Session::get('success'))
       <div class="alert alert-success">
       <p>{{ $message }}</p>
@@ -59,6 +73,7 @@
               </tbody>
             </table>
           </div>
+          {{ $wtec->links() }}
         </div>
     </div>
 

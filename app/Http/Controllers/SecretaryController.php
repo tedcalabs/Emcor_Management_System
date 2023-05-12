@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
@@ -14,11 +15,36 @@ use Illuminate\Support\Facades\Validator;
 
 class SecretaryController extends Controller
 {
-  
+
     public function index()
     {
-        $user = User::all();
-        return view('secdashboard');
+        //Dumaguete branch
+        $total = DB::table('maintenances')->where([
+            ["branch", "=", 1],
+        ])
+            ->count();
+        $pending = DB::table('maintenances')->where([
+            ["branch", "=", 1],
+            ["status", "=", "pending"],
+        ])
+            ->count();
+        $accepted = DB::table('maintenances')->where([
+            ["branch", "=", 1],
+            ["acceptd", "=", 1],
+        ])
+            ->count();
+        $completed = DB::table('maintenances')->where([
+            ["branch", "=", 1],
+            ["status", "=", "completed"],
+        ])
+            ->count();
+        $declined = DB::table('maintenances')->where([
+            ["branch", "=", 1],
+            ["acceptd", "=", 2],
+        ])
+            ->count();
+        // return view('secdashboard');
+        return view('secdashboard', ['total' => $total, 'pending' => $pending, 'accepted' => $accepted, 'completed' => $completed, 'declined' => $declined]);
     }
 
     function profile()
@@ -34,6 +60,22 @@ class SecretaryController extends Controller
         //
     }
 
+
+    public function getTechList(Request $request)
+    {
+        $query = $request->input('q');
+
+        if ($query) {
+            $data = User::where('fname', 'like', "%$query%")
+                ->orWhere('lname', 'like', "%$query%")
+                ->orWhere('email', 'like', "%$query%")
+                ->paginate(4);
+        } else {
+            $data = User::paginate(4);
+        }
+
+        return view('dumaguete.secretary.techlist.index', compact('data'));
+    }
 
     public function changePassword(Request $request)
     {
@@ -67,10 +109,10 @@ class SecretaryController extends Controller
         $user = User::findOrFail($user_id);
 
         if ($request->hasFile('picture')) {
-          
-            $destination = 'uploads/profile/'. $user->picture;
 
-            if(File::exists($destination)){
+            $destination = 'uploads/profile/' . $user->picture;
+
+            if (File::exists($destination)) {
                 File::delete($destination);
             }
 
@@ -81,7 +123,7 @@ class SecretaryController extends Controller
             $user->picture = $filename;
         }
         $user->update();
-        return redirect()->back()->with('status','Ok');
+        return redirect()->back()->with('status', 'Ok');
     }
 
 
@@ -97,7 +139,7 @@ class SecretaryController extends Controller
             'bdate' => 'required',
             'phone' => 'required',
             'gender' => 'required',
-            'email' => 'required|email|unique:users,email,'. Auth::user()->id,
+            'email' => 'required|email|unique:users,email,' . Auth::user()->id,
 
         ]);
 
@@ -122,4 +164,75 @@ class SecretaryController extends Controller
             }
         }
     }
+
+
+
+
+    public function SecWl(Request $request)
+    {
+        $keyword = $request->input('search');
+        $query = User::select("*")
+            ->where([
+                ["role", "=", 3],
+            ]);
+        if ($keyword) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('fname', 'LIKE', "%$keyword%")
+                    ->orWhere('email', 'LIKE', "%$keyword%");
+            });
+        }
+        $data = $query->paginate(2);
+        return view('dumaguete.secretary.techlist.index', compact('data', 'keyword'));
+    }
+
+    public function SecBl(Request $request)
+    {
+        $keyword = $request->input('search');
+        $query = User::select("*")->where([
+            ["role", "=", 5],
+        ]);
+        if ($keyword) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('fname', 'LIKE', "%$keyword%")
+                    ->orWhere('email', 'LIKE', "%$keyword%");
+            });
+        }
+        $wbl = $query->paginate(2);
+        return view('dumaguete.secretary.btechlist.index', compact('wbl', 'keyword'));
+    }
+
+
+    public function SemMec(Request $request)
+    {
+        $keyword = $request->input('search');
+        $query = User::select("*")
+            ->where([
+                ["role", "=", 4]
+            ]);
+        if ($keyword) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('fname', 'LIKE', "%$keyword%")
+                    ->orWhere('email', 'LIKE', "%$keyword%");
+            });
+        }
+        $mec = $query->paginate(2);
+        return view('dumaguete.secretary.mechlist.index', compact('mec', 'keyword'));
+    }
+
+    public function getCList(Request $request)
+{
+    $keyword = $request->input('search');
+    $query = User::select("*")
+        ->where([
+            ["role", "=", 0],
+        ]);
+    if ($keyword) {
+        $query->where(function($q) use ($keyword) {
+            $q->where('fname', 'LIKE', "%$keyword%")
+              ->orWhere('email', 'LIKE', "%$keyword%");
+        });
+    }
+    $customers = $query->paginate(2);
+    return view('dumaguete.secretary.customer.index', compact('customers', 'keyword'));
+}
 }

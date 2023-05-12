@@ -13,6 +13,9 @@ class Maintenance extends Model
         'name',
         'address',
         'phone',
+        'model',
+        'serial_no',
+        'unit_info',
         'description',
         'req_date',
         'date_completed',
@@ -22,10 +25,15 @@ class Maintenance extends Model
         'category',
         'message',
         'technician',
+        'device_token',
         'assessment'
-
     ];
 
+
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class, 'device_token', 'device_token');
+    // }
 
     public function deleteReq($id)
     {

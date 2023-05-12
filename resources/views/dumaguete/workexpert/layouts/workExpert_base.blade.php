@@ -22,8 +22,11 @@
       @yield('sidebarW')
       @yield('WexpertDashboard')
       @yield('scheduleW')
+      @yield('requestblw')
+      @yield('requestwlwx')
       @yield('updateReq')
       @yield('wrkprofile')
+      @yield('footer')
       </main>   
 
     

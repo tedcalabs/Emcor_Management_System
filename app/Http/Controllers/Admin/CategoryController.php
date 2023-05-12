@@ -13,12 +13,19 @@ use App\Http\Requests\CategoryStoreRequest;
 class CategoryController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-
-        $categories = Category::all();
+        $query = $request->input('q');
+    
+        if ($query) {
+            $categories = Category::where('name', 'like', "%$query%")->get();
+        } else {
+            $categories = Category::all();
+        }
+    
         return view('admin.categories.index', compact('categories'));
     }
+    
 
     public function create()
     {

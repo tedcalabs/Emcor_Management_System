@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Admin;
+use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
@@ -74,6 +76,46 @@ class AdminController extends Controller
         ->count();
         return view('admin.index',['total' => $total,'pending' => $pending,'accepted' => $accepted,'completed' => $completed, 'declined' => $declined, 'totalb' => $totalb,'pendingb' => $pendingb,'acceptedb' => $acceptedb,'completedb' => $completedb, 'declinedb' => $declinedb,]);
     }
+    public function getDumaRequest(Request $request)
+    {
+        $search = $request->input('search');
+    
+        $data = Maintenance::select("*")
+            ->where([
+                ["branch", "=", 1],
+            ])
+            ->when($search, function ($query, $search) {
+                return $query->where(function ($query) use ($search) {
+                    $query->where('name', 'LIKE', "%$search%")
+                          ->orWhere('description', 'LIKE', "%$search%");
+                });
+            })
+            ->paginate(10);
+    
+        return view('admin.request.duma.index', compact('data'));
+    }
+    
+
+
+
+    public function getBayawanRequest(Request $request)
+    {
+        $search = $request->input('q');
+    
+        $data = Maintenance::select("*")
+            ->where([
+                ["branch", "=", 2],
+            ])
+            ->when($search, function ($query, $search) {
+                return $query->where(function ($query) use ($search) {
+                    $query->where('name', 'LIKE', "%$search%")
+                        ->orWhere('description', 'LIKE', "%$search%");
+                });
+            })
+            ->paginate(4);
+    
+        return view('admin.request.bayawan.index', compact('data'));
+    }
 
 
 
@@ -86,7 +128,7 @@ class AdminController extends Controller
 
 
 
-    public function Login(Request $request)
+    public function Login(LoginRequest $request)
     {
         // dd($request->all());
 
@@ -101,7 +143,7 @@ class AdminController extends Controller
     public function AdminLogout()
     {
         Auth::guard('admin')->logout();
-        return redirect()->route('login_form')->with('error', 'Logout Successfully!');
+        return redirect()->route('login_form')->with('success', 'Logout Successfully!');
     }
 
     public function Register()

@@ -1,7 +1,6 @@
 
 @section('topbarBl')
 <nav class="navbar">
- <img class="logo-img" src="" alt="" class="logo">
-                   
+    <div class="toptext">Emcor Mobile-Based Servicing Request System</div>         
 </nav>
 @endsection

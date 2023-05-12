@@ -12,14 +12,14 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-      
+
   
 <style>
 
     body{
       background-image: url("/assets/images/emcor6.jpg");
       background-size: cover;
-       
+ 
     }
 
     .card-header{
@@ -175,32 +175,31 @@
 
 
 .card{
-
+  font-family: 'Roboto', sans-serif;
     width: 400px;
     height: 440px;
     background: transparent;
-    background-color: #084c61;
+    background-color: #F2F2F2;
     border: 2px solid rgba(255,255,255,0.5);
     border-radius: 5px;
     backdrop-filter: blur(10px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  
+
+
   
 }
 
 h2{
     font-size: 2em;
-    color: #fff;
+    color: #040303;
     text-align: center;
 }
 
 
 .form-group label{
 float: left;
-color: #fff;
+color:#040303 ;
 }
-
 
 
 
@@ -213,12 +212,20 @@ color: #fff;
 }
 
 .grnbuton{
-  background-color: #177e89;
+  position: relative;
+  background-color: #F21313;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
   float: left;
   font-size: 20px;
+  min-height: 30px;
+  min-width: 100px;
+  
 }
 .grnbuton:hover{
-  background-color: #2d5f5b;
+  background-color: #aaaaaa;
 }
 
 </style>
@@ -254,20 +261,9 @@ color: #fff;
             <!--Emcor MVG-->
             <div class="container hero">
                 <div class="row">
-                    <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
-                    <!--         <h1>Emcor</h1>
-
-                    <img class="logo-img" src="asset('assets/images/eclogo12.png')}}" alt="" class="logo">
-                         <p>EMCOR is the most relevant, world-class, community-based organization that enables customers to achieve a better life by providing quality products and services through personalized care.<br></p>
-                    
-                    --> 
-                        </div>
-
-                    <!--Emcor Login form -->
-   
-                    <div class="col-12 col-lg-6 col-xl-5 offset-xl-1" style="margin-top:1in">
-                      <div class="card">
-                          <div class="card-header">
+                   
+   <div class="col-4"></div>
+                    <div class="col-4">
                   <div class="card">
                       <div class="card-header">
                         <h2>Dumaguete Branch <br> Login</h2>
@@ -278,15 +274,15 @@ color: #fff;
                               @if(Session::get('success'))
                               <div class="alert alert-success">{{ Session::get('success') }}</div>
                               @endif
-                              @if(Session::get('fail'))
-                              <div class="alert alert-danger">{{ Session::get('fail') }}</div>
+                              @if(Session::get('error'))
+                              <div class="alert alert-danger">{{ Session::get('error') }}</div>
                               @endif
                               @csrf
                               <div class="form-group">
                                   <label for="InputEmail">Email address</label>
                                   <input type="email"  id="InputEmail" name="email" placeholder="Enter email" value="{{ old ('email') }}">
                                   @error('email')
-                                  <span class="text-white">{{$message}}</span>
+                                  <span class="text-danger">{{$message}}</span>
                                   @enderror
                               </div>
                     
@@ -294,12 +290,12 @@ color: #fff;
                                   <label for="password">Password</label>
                                   <input type="password"  id="InputPassword" name="password" placeholder="Password" value="{{ old ('password') }}">
                                   @error('password')
-                                  <span class="text-white">{{$message}}</span>
+                                  <span class="text-danger">{{$message}}</span>
                                   @enderror
                               </div>
                             
                                 
-                              <button type="submit" class="btn btn-primary grnbuton">Login</button>
+                              <button type="submit" class="grnbuton">Login</button>
                               
                                     <div class="dropdown show float-right">
                                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -315,6 +311,7 @@ color: #fff;
                         </div>
                      </div>
                   </div>
+                  <div class="col-4"></div>
                </div>
             </div>             
     </body>

@@ -18,11 +18,17 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        $data = Service::all();
+        $query = $request->input('q');
+    
+        $data = Service::when($query, function ($query, $search) {
+            return $query->where('name', 'like', '%'.$search.'%');
+        })
+        ->paginate(4);
+    
         $categories = Category::all();
+    
         return view('admin.services.index', compact('data', 'categories'));
     }
 

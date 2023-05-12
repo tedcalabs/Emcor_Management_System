@@ -33,8 +33,8 @@ class RegisterRequest extends ApiFormRequest
             'bdate' => 'required|string',
             'address' => 'required|string',
             'gender' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'phone' => 'required|string',
+            'phone' => 'required|string|unique:users',
+            'device_token' => 'required|string',
             'password' => 'required|min:6'
         ];
     }

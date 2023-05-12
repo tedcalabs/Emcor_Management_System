@@ -2,8 +2,11 @@
 
 @extends('branchb.technician.layouts.Tec_base')
 @include('branchb.technician.components.topbar')
+@include('branchb.technician.components.footer')
 @include('branchb.technician.components.sidebar')
 @section('btecprofile')
+
+
 
 <div class="container">
   <div class="item item-4">
@@ -14,7 +17,7 @@
         
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="sech">Technician Profile</li>
+                <li class="sech">Whitelines Technician Profile</li>
               </ol>
             </div>
           </div>
@@ -25,47 +28,31 @@
       <section class="content">
         <div class="container-fluid">
           <div class="row">
+
+
             <div class="col-md-3">
-  
               <!-- Profile Image -->
               <div class="card card-profile">
-                <div class="card-body box-profile">
-                  <div class="text-center">
-                       <img class="profile-user-img img-fluid img-circle admin_picture" src="{{  asset('uploads/profile/'.Auth::guard('bsec')->user()->picture) }}" alt="User profile picture"> 
-                  
-                 <p class="u_name">{{Auth::guard('bsec')->user()->name}}</p>
-                
-                 <form method="POST" action="{{ route('update.tecb.photo') }}" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')  
-        
-                    <div class="sm:col-span-6">
-                   <input type="file" name="picture"   class=""> <br>
+                  <div class="card-body box-profile">
+                      <div class="text-center">
+                          <img class="profile-user-img img-fluid img-circle admin_picture" src="{{  asset('uploads/profile/'.Auth::guard('bsec')->user()->picture) }}" alt="User profile picture"> 
+                          <p class="u_name">{{Auth::guard('bsec')->user()->name}}</p>
+                          <form method="POST" action="{{ route('update.tecb.photo') }}" enctype="multipart/form-data">
+                              @csrf
+                              @method('PUT')
+                              <div class="sm:col-span-6">
+                                  <!-- Custom button to trigger file input field -->
+                                  <button type="button" class="btn btn-info" onclick="document.getElementById('admin-profile-pic').click()">Change Picture</button>
                  
-                    </div>
-        
-            <div class="">
-                <button type="submit"
-                    class="btn btn-info " style="margin-top: 3px">Update</button>
-            </div>
-        </form>
-                
-                
-                </div>
-  
-  
-                <!--   <p class="text-muted text-center">Secretary</p  -->
-
-           
-                  
-                </div>
-                <!-- /.card-body -->
+                                  <input type="file" id="admin-profile-pic" name="picture" class="visually-hidden" onchange="document.getElementById('admin-submit-btn').click()">
+                              </div>
+                              <button type="submit" id="admin-submit-btn" class="visually-hidden"></button>
+                          </form>
+                      </div>
+                  </div>
               </div>
-              <!-- /.card -->
-  
-          
-            </div>
-            <!-- /.col -->
+          </div>
+
             <div class="col-md-9">
               <div class="card">
                 <div class="card-header p-2">
@@ -79,9 +66,48 @@
                     <div class="active tab-pane" id="personal_info">
                       <form class="form-horizontal" method="POST" action="{{ route('btecnicianUpdateInfo') }}" id="SecInfoForm">
                         <div class="form-group row">
-                          <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                          <label for="fname" class="col-sm-2 col-form-label">First Name</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" placeholder="Name" value="{{Auth::guard('bsec')->user()->name}}" name="name">
+                            <input type="text" class="form-control" id="fname" placeholder="fname" value="{{Auth::guard('bsec')->user()->fname}}" name="fname">
+
+                            <span class="text-danger error-text name_error"></span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="lname" placeholder="lname" value="{{Auth::guard('bsec')->user()->lname}}" name="lname">
+
+                            <span class="text-danger error-text name_error"></span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="address" class="col-sm-2 col-form-label">Address</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="address" placeholder="address" value="{{Auth::guard('bsec')->user()->address}}" name="address">
+
+                            <span class="text-danger error-text name_error"></span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="bdate" class="col-sm-2 col-form-label">Birthday</label>
+                          <div class="col-sm-10">
+                            <input type="date" class="form-control" id="bdate" placeholder="bdate" value="{{Auth::guard('bsec')->user()->bdate}}" name="bdate">
+
+                            <span class="text-danger error-text name_error"></span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputPhone" class="col-sm-2 col-form-label">Phone no.</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="phone" placeholder="Phone" value="{{Auth::guard('bsec')->user()->phone}}" name="phone">
+                            <span class="text-danger error-text phone_error"></span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="gender" class="col-sm-2 col-form-label">Gender</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="gender" placeholder="gender" value="{{Auth::guard('bsec')->user()->gender }}" name="gender">
 
                             <span class="text-danger error-text name_error"></span>
                           </div>
@@ -93,13 +119,7 @@
                             <span class="text-danger error-text email_error"></span>
                           </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="inputPhone" class="col-sm-2 col-form-label">Contact Number</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="phone" placeholder="Phone" value="{{Auth::guard('bsec')->user()->phone}}" name="phone">
-                              <span class="text-danger error-text phone_error"></span>
-                            </div>
-                          </div>
+                     
                         <div class="form-group row">
                           <div class="offset-sm-2 col-sm-10">
                             <button type="submit" class="btn btn-success">Save Changes</button>

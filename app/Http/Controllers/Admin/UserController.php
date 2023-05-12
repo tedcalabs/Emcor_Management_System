@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\BayawanUser;
 
 class UserController extends Controller
 {
@@ -14,12 +15,24 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = User::all();
-        // $roles = Role::all();
+        $query = $request->input('q');
+    
+        if ($query) {
+            $data = User::where('fname', 'like', "%$query%")
+                        ->orWhere('lname', 'like', "%$query%")
+                        ->orWhere('email', 'like', "%$query%")
+                        ->paginate(4);
+        } else {
+            $data = User::paginate(4);
+
+        }
+    
         return view('admin.users.index', compact('data'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.

@@ -33,7 +33,8 @@ class User extends Authenticatable
         'password',
         'role',
         'status',
-        'sched_status'
+        'sched_status',
+        'device_token',
     ];
 
     /**
@@ -55,7 +56,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
+    // public function maintenance()
+    // {
+    //     return $this->hasMany(Maintenance::class, 'device_token', 'device_token');
+    // }
 
 
     public function roles()

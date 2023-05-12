@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\InforController;
+use App\Http\Controllers\Api\V1\RepairController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -26,6 +27,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('logout', [ProfileController::class, 'logout']);
     Route::post('change-password',[InforController::class,'change_password']);
     Route::post('change-phone',[InforController::class,'updatePhone']);
+    Route::get('ment', [RepairController::class, 'getMaintenanceByUserDeviceToken']);
 });
 
 
@@ -48,4 +50,15 @@ Route::group(['namespace' => 'Api\V1'], function () {
         //Route::get('place-api-details', 'ConfigController@place_api_details');
         Route::get('geocode-api', 'ConfigController@geocode_api');
     });
+
+    // Route::group(['prefix' => 'ment'], function () {
+    //     //Route::get('/', 'ConfigController@configuration');
+    //     //Route::get('/get-zone-id', 'ConfigController@get_zone');
+    //     //Route::get('place-api-autocomplete', 'ConfigController@place_api_autocomplete');
+    //     // Route::get('distance-api', 'ConfigController@distance_api');
+    //     //Route::get('place-api-details', 'ConfigController@place_api_details');
+    //     Route::get('men-req', 'RepairController@getMaintenanceByDeviceToken');
+    // });
+
+
 });

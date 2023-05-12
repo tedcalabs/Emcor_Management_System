@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\BranchB;
 
-use Illuminate\Http\Request;
-
-use App\Http\Controllers\Controller;
 use App\Models\BayawanUser;
+
+use App\Models\Maintenance;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
@@ -15,14 +17,32 @@ class TechnicianBController extends Controller
 {
     public function index()
     {
-        return view('branchb.technician.index');
+        $allsched = DB::table('maintenances')->where([
+            ["branch", "=", 2],
+            ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
+        ])
+            ->count();
+        $pending = DB::table('maintenances')->where([
+            ["branch", "=", 2],
+            ["acceptd", "=", 1],
+            ["status", "=", "pending"],
+            ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
+        ])
+            ->count();
+        $completed = DB::table('maintenances')->where([
+            ["branch", "=", 2],
+            ["status", "=", "completed"],
+            ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
+        ])
+        ->count();
+        return view('branchb.technician.index',['allsched' => $allsched, 'pending' => $pending, 'completed' => $completed]);
     }
 
 
-    public function BtecLogout()
+    public function Logout()
     {
         Auth::guard('bsec')->logout();
-        return redirect()->route('bsec_loginform')->with('error', 'Logout Successfully!');
+        return redirect()->route('userB_loginform')->with('success', 'Logout Successfully!');
     }
 
 
@@ -60,14 +80,29 @@ class TechnicianBController extends Controller
 
 
 
+    public function updateB($id)
+    {
+        
+        $data = Maintenance::where('branch', 2)->take(5)->find($id);
+        return view('branchb.technician.shcedule.update', compact('data'));
+    }
 
-
-
+    public function deleteReq($id)
+    {
+       $data = Maintenance::where('branch', 2)->findOrFail($id);
+        $data->delete();
+        return back();
+    }
     function btecUpdateInfo(Request $request)
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'fname' => 'required',
+            'lname' => 'required',
+            'address' => 'required',
+            'bdate' => 'required',
+            'phone' => 'required',
+            'gender' => 'required',
             'email' => 'required|email|unique:users,email,' . Auth::guard('bsec')->user()->id,
 
         ]); 
@@ -76,7 +111,12 @@ class TechnicianBController extends Controller
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
             $query = BayawanUser::find(Auth::guard('bsec')->user()->id)->update([
-                'name' => $request->name,
+                'fname' => $request->fname,
+                'lname' => $request->lname,
+                'address' => $request->address,
+                'bdate' => $request->bdate,
+                'phone' => $request->phone,
+                'gender' => $request->gender,
                 'email' => $request->email,
 
             ]);
@@ -115,6 +155,26 @@ class TechnicianBController extends Controller
     }
 
 
-
+    public function getWhiteSched(Request $request)
+    {
+        $search = $request->input('search');
+      
+        $data = Maintenance::where([
+            ["branch", "=", 2],
+            ["acceptd", "=", 1],
+            ["status", "=", "pending"],
+            ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
+        ])
+        ->when($search, function ($query, $search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('address', 'like', "%{$search}%");
+                // Add additional columns as needed
+            });
+        })
+        ->paginate(4); // Specify the number of items per page (e.g., 10)
+      
+        return view('branchb.technician.shcedule.index', compact('data', 'search'));
+    }
 
 }

@@ -28,7 +28,7 @@ class LoginRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
+            'phone' => 'required',
             'password' => 'required'
         ];
     }

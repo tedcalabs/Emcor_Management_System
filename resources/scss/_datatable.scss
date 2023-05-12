@@ -1,9 +1,10 @@
 .request {
+   
     display: grid;
     height: 150px;
     grid-template-columns: repeat(5, minmax(100px, 1fr));
     grid-template-columns: repeat(auto-fit, minmax(100px));
-   // background-color: grey;
+    // background-color: grey;
     margin-left: 12rem;
     justify-content: space-evenly;
     align-content: center;
@@ -13,10 +14,10 @@
     font-weight: 400;
     grid-gap: 1rem;
     word-wrap: break-word;
-  
+   
     .total-request {
-        background-color:  #c0f3f9;
-
+        background-color: #f27e88;
+        color: #f2f2f2;
         border: 1px solid rgba(248, 246, 246, 0.8);
         padding: 5px;
         font-size: 25px;
@@ -26,8 +27,8 @@
         z-index: 95;
     }
     .pending-request {
-        background-color: #aeebf1;
-        border: 1px solid rgba(248, 246, 246, 0.8);
+       background-color: #f2f2f2;
+       border: 1px solid rgba(248, 246, 246, 0.8);
         padding: 5px;
         font-size: 25px;
         text-align: center;
@@ -35,23 +36,23 @@
     }
 
     .accepted-request {
-        background-color: #9de7ef;
-        border: 1px solid rgba(248, 246, 246, 0.8);
+       background-color: #f2f2f2;
+       border: 1px solid rgba(248, 246, 246, 0.8);
         padding: 5px;
         font-size: 25px;
         text-align: center;
         z-index: 95;
     }
     .declined-request {
-        background-color: #beeff4;
-        border: 1px solid rgba(248, 246, 246, 0.8);
+        background-color: #f2f2f2;
+       border: 1px solid rgba(248, 246, 246, 0.8);
         padding: 5px;
         font-size: 25px;
         text-align: center;
         z-index: 95;
     }
     .completed-request {
-        background-color: #e0f7fa;
+        background-color: #f2f2f2;
         border: 1px solid rgba(248, 246, 246, 0.8);
         padding: 5px;
         font-size: 25px;
@@ -65,7 +66,7 @@
     height: 10px;
     grid-template-columns: repeat(5, minmax(100px, 1fr));
     grid-template-columns: repeat(auto-fit, minmax(100px));
-   // background-color: yellow;
+    // background-color: yellow;
     margin-left: 12rem;
     justify-content: space-evenly;
     align-content: center;
@@ -77,8 +78,8 @@
     word-wrap: break-word;
     z-index: 999;
     .total-request2 {
-        background-color: #c0f3f9;
-
+        background-color: #f27e88;
+        color: #f2f2f2;
         border: 1px solid rgba(248, 246, 246, 0.8);
         padding: 5px;
         font-size: 25px;
@@ -88,7 +89,7 @@
         z-index: 95;
     }
     .pending-request2 {
-        background-color: #aeebf1;
+        background-color: #f2f2f2;
         border: 1px solid rgba(248, 246, 246, 0.8);
         padding: 5px;
         font-size: 25px;
@@ -97,7 +98,7 @@
     }
 
     .accepted-request2 {
-        background-color: #9de7ef;
+        background-color: #f2f2f2;
         border: 1px solid rgba(248, 246, 246, 0.8);
         padding: 5px;
         font-size: 25px;
@@ -105,7 +106,7 @@
         z-index: 95;
     }
     .declined-request2 {
-        background-color: #beeff4;
+        background-color: #f2f2f2;
         border: 1px solid rgba(248, 246, 246, 0.8);
         padding: 5px;
         font-size: 25px;
@@ -113,7 +114,7 @@
         z-index: 95;
     }
     .completed-request2 {
-        background-color: #e0f7fa;
+        background-color: #f2f2f2;
         border: 1px solid rgba(248, 246, 246, 0.8);
         padding: 5px;
         font-size: 25px;
@@ -125,7 +126,7 @@
     display: grid;
     grid-template-columns: repeat(1, minmax(50px, 1fr));
     grid-template-columns: repeat(auto-fit, minmax(50px));
-   // background-color: rgb(145, 226, 203);
+    // background-color: rgb(145, 226, 203);
     margin-left: 12rem;
     // font-family: 'Open Sans', sans-serif;
     grid-auto-flow: column;
@@ -134,8 +135,8 @@
     grid-gap: 1rem;
     word-wrap: break-word;
     .total-request3 {
-       // background-color: #5ed6e3;
-        border: 1px solid rgba(248, 246, 246, 0.8);
+        // background-color: #5ed6e3;
+        border: none;
         padding: 5px;
         height: 5rem;
         font-size: 25px;
@@ -144,29 +145,28 @@
         margin-left: 4rem;
         margin-top: 4rem;
         z-index: 90;
-        color: #313131;
+  
     }
     .total-request4 {
-     // background-color: #5ed6e3;
-      border: 1px solid rgba(248, 246, 246, 0.8);
-      padding: 5px;
-      height: 5rem;
-      font-size: 25px;
-      font-weight: bold;
-      text-align: start;
-      margin-left: 4rem;
-      color: #313131;
-      z-index: 90;
-  }
-}
+        // background-color: #5ed6e3;
+        border: none; 
+        padding: 5px;
+        height: 5rem;
+        font-size: 25px;
+        font-weight: bold;
+        text-align: start;
+        margin-left: 4rem;
 
+        z-index: 90;
+    }
+}
 
 .request4 {
     display: grid;
     height: 300px;
     grid-template-columns: repeat(5, minmax(100px, 1fr));
     grid-template-columns: repeat(auto-fit, minmax(100px));
-   // background-color: grey;
+    // background-color: grey;
     margin-left: 12rem;
     justify-content: space-evenly;
     align-content: center;
@@ -176,11 +176,11 @@
     font-weight: 400;
     grid-gap: 1rem;
     word-wrap: break-word;
-  
-    .total-request {
-        background-color:  #c0f3f9;
 
-        border: 1px solid rgba(248, 246, 246, 0.8);
+    .total-request {
+        background-color: #f27e88;
+        color: #f2f2f2;
+        border: none;
         padding: 5px;
         font-size: 25px;
         font-weight: bold;
@@ -189,7 +189,7 @@
         z-index: 95;
     }
     .pending-request {
-        background-color: #aeebf1;
+        background-color: #f2f2f2;
         border: 1px solid rgba(248, 246, 246, 0.8);
         padding: 5px;
         font-size: 25px;
@@ -198,7 +198,7 @@
     }
 
     .accepted-request {
-        background-color: #9de7ef;
+        background-color: #f2f2f2;
         border: 1px solid rgba(248, 246, 246, 0.8);
         padding: 5px;
         font-size: 25px;
@@ -206,7 +206,7 @@
         z-index: 95;
     }
     .declined-request {
-        background-color: #beeff4;
+        background-color: #f2f2f2;
         border: 1px solid rgba(248, 246, 246, 0.8);
         padding: 5px;
         font-size: 25px;
@@ -214,7 +214,7 @@
         z-index: 95;
     }
     .completed-request {
-        background-color: #e0f7fa;
+        background-color: #f2f2f2;
         border: 1px solid rgba(248, 246, 246, 0.8);
         padding: 5px;
         font-size: 25px;
@@ -222,14 +222,6 @@
         z-index: 95;
     }
 }
-
-
-
-
-
-
-
-
 
 // .da{
 //   display: grid;
@@ -288,3 +280,59 @@
 // .mx-2 {
 //   margin-right: 0.5rem !important;
 // }
+.request5 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px));
+    // background-color: rgb(145, 226, 203);
+    margin-left: 12rem;
+    // font-family: 'Open Sans', sans-serif;
+    grid-auto-flow: column;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    grid-gap: 1rem;
+    word-wrap: break-word;
+    .total-request5 {
+     // background-color: #5ed6e3;
+     border: none;
+     height: 10rem;
+     font-size: 25px;
+     font-weight: bold;
+     text-align: start;
+     margin-left: 4rem;
+     margin-top: 3.5rem;
+     z-index: 90;
+    }
+    .total-request {
+        background-color: #f27e88;
+        color: #f2f2f2;
+        border: none;
+        height: 15rem;
+        padding: 5px;
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        margin-left: 4rem;
+        z-index: 95;
+       }
+    .pending-request {
+        height: 15rem;
+        background-color: #f2f2f2;
+        border: 1px solid rgba(248, 246, 246, 0.8);
+        padding: 5px;
+        font-size: 30px;
+        text-align: center;
+        z-index: 95;
+    }
+
+    .accepted-request {
+        height: 15rem;
+        background-color: #f2f2f2;
+        border: 1px solid rgba(248, 246, 246, 0.8);
+        padding: 5px;
+        font-size: 30px;
+        text-align: center;
+        z-index: 95;
+    }
+
+}

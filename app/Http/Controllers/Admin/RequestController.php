@@ -2,48 +2,91 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Maintenance;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class RequestController extends Controller
 {
-
-    public function index()
+    public function upReqD($id)
     {
-        return view('admin.requests.index');
+        $data = Maintenance::where('branch', 1)->take(5)->find($id);
+        return view('admin.request.duma.edit', compact('data'));
     }
 
-
-    public function create()
+    public function upReqB($id)
     {
-        //
+        $data = Maintenance::where('branch', 2)->take(5)->find($id);
+        return view('admin.request.bayawan.edit', compact('data'));
     }
 
-    public function store(Request $request)
+    public function destroyDr($id)
     {
-        //
+        $data = Maintenance::where('branch', 1)->findOrFail($id);
+        $data->delete();
+        return back();
+    }
+    
+
+    public function upReqDx(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'model' => 'required',
+            'unit_info' => 'required',
+            'description' => 'required',
+            'req_date' => 'required',
+        ]);
+
+        $data = Maintenance::find($id);
+        $data->name = $request->name;
+        $data->phone = $request->phone;
+        $data->model = $request->model;
+        $data->serial_no = $request->serial_no;
+        $data->unit_info = $request->unit_info;
+        $data->address = $request->address;
+        $data->description = $request->description;
+        $data->req_date = $request->req_date;
+        $data->save();
+        return redirect()->route('duma.mtnc.request')
+            ->with('success', 'Request Updated');
     }
 
-    public function show($id)
+    public function upReqBx(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'model' => 'required',
+            'unit_info' => 'required',
+            'description' => 'required',
+            'req_date' => 'required',
+            'acceptd' => 'required',
+        ]);
+
+        $data = Maintenance::find($id);
+        $data->name = $request->name;
+        $data->phone = $request->phone;
+        $data->model = $request->model;
+        $data->serial_no = $request->serial_no;
+        $data->unit_info = $request->unit_info;
+        $data->address = $request->address;
+        $data->description = $request->description;
+        $data->req_date = $request->req_date;
+        $data->acceptd = $request->acceptd;
+        $data->technician = $request->technician;
+        $data->save();
+        return redirect()->route('bayawan.mtnc.request')
+            ->with('success', 'Request Updated');
     }
 
-
-    public function edit($id)
+    public function destroyBr($id)
     {
-        //
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-
-    public function destroy($id)
-    {
-        //
+        $data = Maintenance::where('branch', 2)->findOrFail($id);
+        $data->delete();
+        return back();
     }
 }

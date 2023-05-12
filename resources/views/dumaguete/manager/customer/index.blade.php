@@ -7,7 +7,27 @@
 @section('customer')
 <div class="container">
   <div class="item item-9">
-      <div class="head">Customers</div>
+
+    <div class="row align-items-center">
+      <div class="col-8">        
+          <div class="head">
+            <a href="{{ route('customerslist') }}" style="text-decoration: none;">
+              <span class="head" style="color: black;">Customers</span>
+          </a>
+          </div>
+      </div>
+      <div class="col-4">
+          <form method="GET" action="{{ route('customerslist') }}">
+              <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search...">
+                  <button class="btn btn-outline-secondary" type="submit">Search</button>
+              </div>
+          </form>
+      </div>
+  </div> 
+
+
+
 
       
      
@@ -50,6 +70,8 @@
               </tbody>
             </table>
           </div>
+
+          {{ $customers->links() }}
         </div>
     </div>
 

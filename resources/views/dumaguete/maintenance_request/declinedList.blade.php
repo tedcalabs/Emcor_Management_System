@@ -1,8 +1,8 @@
 
 
 @extends('layouts.app')
-    
-    @include('components.topbar')
+@include('admin.components.topbar')
+ @include('admin.components.footer')
     @include('components.sidebar')
 @section('declined')
 

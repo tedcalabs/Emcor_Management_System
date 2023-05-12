@@ -3,6 +3,7 @@
 @extends('admin.admin_master')
 @include('admin.components.topbar')
 @include('admin.components.sidebar')
+@include('admin.components.footer')
 @section('content')
 
 
@@ -30,45 +31,29 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-3">
-  
               <!-- Profile Image -->
               <div class="card card-profile">
-                <div class="card-body box-profile">
-                  <div class="text-center">
-                       <img class="profile-user-img img-fluid img-circle admin_picture" src="{{  asset('uploads/profile/'.Auth::guard('admin')->user()->picture) }}" alt="User profile picture"> 
-                  
-                 <p class="u_name">{{Auth::guard('admin')->user()->name}}</p>
-                
-                 <form method="POST" action="{{ route('admin.profile.update') }}" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-        
-                    <div class="sm:col-span-6">
-                   <input type="file" name="picture"   class=""> <br>
-                 
-                    </div>
-        
-            <div class="">
-                <button type="submit"
-                    class="btn btn-info " style="margin-top: 3px">Update</button>
-            </div>
-        </form>
-                
-                
-                </div>
-  
-  
-                <!--   <p class="text-muted text-center">Secretary</p  -->
-
-           
-                  
-                </div>
-                <!-- /.card-body -->
+                  <div class="card-body box-profile">
+                      <div class="text-center">
+                          <img class="profile-user-img img-fluid img-circle admin_picture" src="{{ asset('uploads/profile/' . Auth::guard('admin')->user()->picture) }}" alt="User profile picture"> 
+                          <p class="u_name">{{ Auth::guard('admin')->user()->name }}</p>
+                          <form method="POST" action="{{ route('admin.profile.update') }}" enctype="multipart/form-data">
+                              @csrf
+                              @method('PUT')
+                              <div class="sm:col-span-6">
+                                  <!-- Custom button to trigger file input field -->
+                                  <button type="button" class="btn btn-info" onclick="document.getElementById('admin-profile-pic').click()">Change Picture</button>
+                                  <!-- Hidden file input field -->
+                                  <input type="file" id="admin-profile-pic" name="picture" class="visually-hidden" onchange="document.getElementById('admin-submit-btn').click()">
+                              </div>
+                              <!-- Hidden submit button -->
+                              <button type="submit" id="admin-submit-btn" class="visually-hidden"></button>
+                          </form>
+                      </div>
+                  </div>
               </div>
-              <!-- /.card -->
-  
+          </div>
           
-            </div>
             <!-- /.col -->
             <div class="col-md-9">
               <div class="card">
@@ -81,54 +66,16 @@
                 <div class="card-body">
                   <div class="tab-content">
                     <div class="active tab-pane" id="personal_info">
-                      <form class="form-horizontal" method="POST" action="{{ route('adminUpdateInfo') }}" id="SecInfoForm">
+                      <form class="form-horizontal" method="POST" action="{{ route('UpdateAdminInfo')}}" id="SecInfoForm">
                         <div class="form-group row">
-                          <label for="fname" class="col-sm-2 col-form-label">Name</label>
+                          <label for="name" class="col-sm-2 col-form-label">Name</label>
                           <div class="col-sm-10">
                             <input type="text" class="form-control" id="name" placeholder="name" value="{{Auth::guard('admin')->user()->name}}" name="name">
 
                             <span class="text-danger error-text name_error"></span> 
                           </div>
                         </div>
-                        {{-- <div class="form-group row">
-                          <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
-                          <div class="col-sm-10">
-                            <input type="text" class="form-control" id="lname" placeholder="lname" value="{{Auth::guard('admin')->user()->lname}}" name="lname">
-
-                            <span class="text-danger error-text name_error"></span>
-                          </div> --}}
-                        {{-- </div>
-                        <div class="form-group row">
-                          <label for="address" class="col-sm-2 col-form-label">Address</label>
-                          <div class="col-sm-10">
-                            <input type="text" class="form-control" id="address" placeholder="address" value="{{Auth::guard('admin')->user()->address}}" name="address">
-
-                            <span class="text-danger error-text name_error"></span>
-                          </div> --}}
-                        {{-- </div>
-                        <div class="form-group row">
-                          <label for="bdate" class="col-sm-2 col-form-label">Birthday</label>
-                          <div class="col-sm-10">
-                            <input type="date" class="form-control" id="bdate" placeholder="bdate" value="{{Auth::guard('admin')->user()->bdate}}" name="bdate">
-
-                            <span class="text-danger error-text name_error"></span>
-                          </div> --}}
-                        {{-- </div> --}}
-                        {{-- <div class="form-group row">
-                          <label for="inputPhone" class="col-sm-2 col-form-label">Phone no.</label>
-                          <div class="col-sm-10">
-                            <input type="text" class="form-control" id="phone" placeholder="Phone" value="{{Auth::guard('admin')->user()->phone}}" name="phone">
-                            <span class="text-danger error-text phone_error"></span>
-                          </div>
-                        </div> --}}
-                        {{-- <div class="form-group row">
-                          <label for="gender" class="col-sm-2 col-form-label">Gender</label>
-                          <div class="col-sm-10">
-                            <input type="text" class="form-control" id="gender" placeholder="gender" value="{{Auth::guard('admin')->user()->gender }}" name="gender">
-
-                            <span class="text-danger error-text name_error"></span>
-                          </div>
-                        </div> --}}
+                    
                         <div class="form-group row">
                           <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                           <div class="col-sm-10">

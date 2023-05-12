@@ -1,21 +1,31 @@
 
 
 @extends('layouts.app')
-    
-    @include('components.topbar')
+@include('admin.components.topbar')
+@include('admin.components.footer')
     @include('components.sidebar')
 @section('request')
 
 <div class="container">
     <div class="item item-5">
-        <div class="" style=" margin-bottom:10px">
-            
-            <span class="head">Accepted Request list</span>
-           
-            <a href="{{ route('mreq') }}" class="btn btn-info float-right" style="">Back</a>
 
-
-        </div>
+        <div class="row align-items-center">
+            <div class="col-8">        
+                <div class="head">
+                  <a href="{{ route('accept') }}" style="text-decoration: none;">
+                    <span class="head" style="color: black;">Accepted Request list</span>
+                </a>
+                </div>
+            </div>
+            <div class="col-4">
+                <form method="GET" action="{{ route('accept') }}">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search...">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>    
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
         <p>{{ $message }}</p>
@@ -25,8 +35,7 @@
  
          <table class="table table-bordered">
              <thead>
-               <tr>
-                   <th>Id</th>
+               <tr>             
                    <th>Name</th>
                    <th>Address</th>
                    <th>Contact Number</th>
@@ -34,36 +43,34 @@
                    <th>Technician Assigned</th>
                    <th>Schedule</th> 
                    <th>Category</th> 
-                   <th>Status</th>
-                                   
+                   <th>Status</th>                         
                    <th>Action</th>
-
                </tr>
            </thead>
            <tbody> 
-            @foreach ($data as $data)
+            @foreach ($data as $list)
                <tr>
-                   <td>{{ $data->id}}</td>
-                   <td>{{ $data->name}}</td>
-                   <td>{{ $data->address}}</td>
+               
+                   <td>{{ $list->name}}</td>
+                   <td>{{ $list->address}}</td>
               
-                   <td>{{ $data->phone}}</td>
+                   <td>{{ $list->phone}}</td>
                 
-                   <td>{{ $data->description}}</td>
-                   <td>{{ $data->technician}}</td>
-                   <td>{{ \Carbon\Carbon::parse($data->req_date)->format('d/m/Y g:i:s A')}}</td>        
-                   <td>{{ $data->category}}</td>
-                   <td>{{ $data->status}}</td>
+                   <td>{{ $list->description}}</td>
+                   <td>{{ $list->technician}}</td>
+                   <td>{{ \Carbon\Carbon::parse($list->req_date)->format('d/m/Y g:i:s A')}}</td>        
+                   <td>{{ $list->category}}</td>
+                   <td>{{ $list->status}}</td>
                    <td>
                     <div class=" ">
-                        <a href="{{ route('updateReq', $data->id) }}" class="btn btn-info "  style="margin-bottom: 5px">Edit</a>
+                        <a href="{{ route('updateReq', $list->id) }}" class="btn btn-info edit-button"  style="margin-bottom: 5px">Edit</a>
                         <form method="GET"
-                                action="{{ route('deleteReq', $data->id) }}"
+                                action="{{ route('deleteReq', $list->id) }}"
                                 onsubmit="return confirm('Are you sure?');">
                             @csrf
                             @method('DELETE')
 
-                        <button type="submit" class="btn btn-danger text-black" style="margin-bottom: 5px">Delete</button>
+                        <button type="submit" class="btn btn-danger" style="margin-bottom: 5px">Delete</button>
                         
                     </form>
 
@@ -78,10 +85,18 @@
          </table>
    
         </div>
+        {{ $data->links() }}
         </div>
+       
+    </div>
+
+
+    
  @endsection
 
-@section('script')
+
+
+ @section('script')
 
     <script type="text/javascript">
         $(document).ready(function(){
@@ -92,8 +107,6 @@
            
             }
         })
-
-
 
     </script>
 

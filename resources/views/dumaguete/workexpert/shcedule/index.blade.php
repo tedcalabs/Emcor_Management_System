@@ -2,10 +2,11 @@
 @extends('dumaguete.workexpert.layouts.workExpert_base')
 @include('dumaguete.workexpert.components.topbar')
 @include('dumaguete.workexpert.components.sidebar')
+@include('dumaguete.workexpert.components.footer')
 
 @section('scheduleW')
 <div class="container">
-    <div class="item item-5">
+    <div class="item item-19">
         <div class="head">Maintenance Request</div>
 
         
@@ -19,7 +20,7 @@
          <table class="table table-bordered">
              <thead>
                <tr>
-                   <th>Id</th>
+                
                    <th>Name</th>
                    <th>Address</th>
                    <th>Contact Number</th>
@@ -33,7 +34,7 @@
            <tbody> 
             @foreach ($data as $mreq)
                <tr>
-                   <td>{{ $mreq->id}}</td>
+                  
                    <td>{{ $mreq->name}}</td>
                    <td>{{ $mreq->address}}</td>
               
