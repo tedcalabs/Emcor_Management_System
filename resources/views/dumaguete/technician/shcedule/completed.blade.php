@@ -32,33 +32,27 @@
      <div class="table-responsive">
          <table class="table table-bordered">
              <thead>
-               <tr>
-                   <th>Name</th>
-                   <th>Address</th>
-                   <th>Contact Number</th>
-                   <th>Unit/Model</th>
-                   <th>Serial Number</th>
-                   <th>Unit Description</th>
-                   <th>Trouble</th>
-                   <th>Servicing Date</th>  
-                   <th>Date Completed</th> 
-                   <th>assessment</th>
-                   <th>Action</th>
-               </tr>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Contact Number</th>
+                    <th>Servicing Date</th>
+                    <th>Action</th>
+                   </tr>
            </thead>
            <tbody> 
             @foreach ($data as $mreq)
                <tr>               
+                <td>
+                    {{ $mreq->id}} <br>
+                   <a href="{{ route('ShowDumaRequestJHC', $mreq->id) }}"> <i class="fa-solid fa-book icons"  style="color: red;"></i></a><br>
+                </td>
                    <td>{{ $mreq->name}}</td>
                    <td>{{ $mreq->address}}</td>
                    <td>{{ $mreq->phone}}</td>
-                   <td>{{ $mreq->model}}</td>
-                   <td>{{ $mreq->serial_no}}</td>
-                   <td>{{ $mreq->unit_info}}</td>
-                   <td>{{ $mreq->description}}</td>
                    <td>{{ \Carbon\Carbon::parse($mreq->req_date)->format('d/m/Y g:i:s A')}}</td>
-                   <td>{{ \Carbon\Carbon::parse($mreq->req_date)->format('d/m/Y g:i:s A')}}</td>
-                   <td>{{ $mreq->assessment}}</td>
+                   
                    <td>
                        <div class=" ">
                            {{-- <a href="{{ route('updateD', $mreq->id) }}" class="btn btn-info update-button"  style="margin-bottom: 5px">Update</a> --}}

@@ -23,6 +23,8 @@
       @yield('mechanicDashboard')
       @yield('Mschedule')
       @yield('schedule')
+      @yield('ShowRequestW')
+      @yield('ShowRequestC')
       @yield('updateReqM')
       @yield('tecprofile')
       @yield('footer')

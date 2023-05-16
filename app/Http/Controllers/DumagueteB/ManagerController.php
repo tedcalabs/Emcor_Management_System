@@ -58,9 +58,24 @@ public function getWhitelines(Request $request)
               ->orWhere('description', 'LIKE', "%$keyword%");
         });
     }
-    $data = $query->paginate(2);
+    $data = $query->paginate(5);
     return view('dumaguete.manager.transaction.whitelines.index', compact('data', 'keyword'));
 }
+
+public function ViewData($id)
+{
+    $data = Maintenance::select("*")
+    ->where([
+        ["branch", "=", 1],
+        ["category", "=", "Whitelines"]
+    ])
+    
+    ->take(5)->find($id);
+    return view('dumaguete.manager.transaction.whitelines.show', compact('data'));
+}
+
+
+
 
 public function getBrownlines(Request $request)
 {
@@ -76,8 +91,20 @@ public function getBrownlines(Request $request)
               ->orWhere('description', 'LIKE', "%$keyword%");
         });
     }
-    $data = $query->paginate(2);
+    $data = $query->paginate(5);
     return view('dumaguete.manager.transaction.brownlines.index', compact('data', 'keyword'));
+}
+
+public function ViewDataMB($id)
+{
+    $data = Maintenance::select("*")
+    ->where([
+        ["branch", "=", 1],
+        ["category", "=", "Brownlines"]
+    ])
+    
+    ->take(5)->find($id);
+    return view('dumaguete.manager.transaction.brownlines.show', compact('data'));
 }
 
 public function getMechanic(Request $request)
@@ -94,11 +121,21 @@ public function getMechanic(Request $request)
               ->orWhere('description', 'LIKE', "%$keyword%");
         });
     }
-    $data = $query->paginate(2);
+    $data = $query->paginate(5);
     return view('dumaguete.manager.transaction.mechanic.index', compact('data', 'keyword'));
 }
 
-
+public function ViewDataMM($id)
+{
+    $data = Maintenance::select("*")
+    ->where([
+        ["branch", "=", 1],
+        ["category", "=", "Mechanic"]
+    ])
+    
+    ->take(5)->find($id);
+    return view('dumaguete.manager.transaction.mechanic.show', compact('data'));
+}
 
 
 public function emSec(Request $request)
@@ -168,7 +205,7 @@ public function emWe(Request $request)
               ->orWhere('email', 'LIKE', "%$keyword%");
         });
     }
-    $wex = $query->paginate(2);
+    $wex = $query->paginate(4);
     return view('dumaguete.manager.employee.workex.index', compact('wex', 'keyword'));
 }
 

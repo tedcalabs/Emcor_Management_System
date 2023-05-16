@@ -40,6 +40,7 @@
          <table class="table table-bordered">
              <thead>
                <tr>
+                <th>Id</th>
                    <th>Name</th>
                    <th>Address</th>
                    <th>Contact Number</th>
@@ -52,6 +53,11 @@
            <tbody> 
             @foreach ($data as $item)
                <tr>
+                <td>
+                    
+                    {{ $item->id}} <br>
+                   <a href="{{ route('ShowDumaRequestMWx', $item->id) }}"> <i class="fa-solid fa-book icons"  style="color: red;"></i></a><br>
+                </td>
                    <td>{{ $item->name}}</td>
                    <td>{{ $item->address}}</td>
               

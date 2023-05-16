@@ -48,8 +48,12 @@
            <tbody> 
             @foreach ($data as $item)
                <tr>
-                   <td>{{ $item->id}}</td>
-                   <td>{{ $item->name}}</td>
+                   <td>
+                    
+                    {{ $item->id}} <br>
+                   <a href="{{ route('ShowDumaRequest', $item->id) }}"> <i class="fa-solid fa-book icons"  style="color: red;"></i></a><br>
+                </td>
+                <td>{{ $item->name}}</td>
                    <td>{{ $item->address}}</td>
               
                    <td>{{ $item->phone}}</td>
@@ -101,21 +105,3 @@
     </div>
 
  @endsection
-
-{{-- @section('script')
-
-    <script type="text/javascript">
-        $(document).ready(function(){
-
-            showRepair();
-
-            function showRepair(){
-           
-            }
-        })
-
-
-
-    </script>
-
-@endsection --}}

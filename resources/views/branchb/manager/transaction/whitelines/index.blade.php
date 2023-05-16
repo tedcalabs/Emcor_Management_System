@@ -39,6 +39,7 @@
             <table class="table table-bordered">
                 <thead>
                   <tr>
+                    <th>Id</th>
                       <th>Customers Name</th>
                       <th>Address</th>
                       <th>Contact Number</th>
@@ -54,6 +55,7 @@
     
                   @foreach ($data as $wtrans)
                   <tr>
+                    <td>{{ $wtrans->id}}</td>
                       <td>{{ $wtrans->name}}</td>
                       <td>{{ $wtrans->address}}</td>
                       <td>{{ $wtrans->phone}}</td>

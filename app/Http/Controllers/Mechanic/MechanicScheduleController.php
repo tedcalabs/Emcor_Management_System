@@ -51,9 +51,32 @@ class MechanicScheduleController extends Controller
     
         return view('dumaguete.mechanic.shcedule.completed', compact('data', 'search'));
     }
+    public function ViewDataC($id)
+    {
+        $data = Maintenance::select("*")
+        ->where([
+            ["branch", "=", 1],
+            ["acceptd", "=", 1],
+            ["status", "=", "completed"],
+        ])
+        
+        ->take(5)->find($id);
+        return view('dumaguete.mechanic.shcedule.showCompleted', compact('data'));
+    }
 
-
-
+    public function ViewData($id)
+    {
+        $data = Maintenance::select("*")
+        ->where([
+            ["branch", "=", 1],
+            ["acceptd", "=", 1],
+            ["status", "=", "pending"],
+        ])
+        
+        ->take(5)->find($id);
+        return view('dumaguete.mechanic.shcedule.show', compact('data'));
+    }
+    
 
 
 

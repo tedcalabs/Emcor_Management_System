@@ -22,6 +22,8 @@
       @yield('sidebarBl')
       @yield('BlDashboard')
       @yield('blschedule')
+      @yield('ShowRequestW')
+      @yield('ShowRequestC')
       @yield('updateReqBl')
       @yield('blprofile')
       @yield('schedule')

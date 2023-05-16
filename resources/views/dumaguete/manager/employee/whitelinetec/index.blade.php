@@ -35,6 +35,7 @@
             <table class="table table-bordered">
                 <thead>
                   <tr>
+                    <th>Id</th>
                       <th>First Name</th>
                       <th>Last Name</th>
                       <th>Address</th>
@@ -50,6 +51,7 @@
     
                   @foreach ($wtec as $whitec)
                   <tr>
+                    <td>{{ $whitec->id}}</td>
                       <td>{{ $whitec->fname}}</td>
                       <td>{{ $whitec->lname}}</td>
                       <td>{{ $whitec->address}}</td>

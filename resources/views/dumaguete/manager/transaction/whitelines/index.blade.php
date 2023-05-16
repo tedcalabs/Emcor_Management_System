@@ -39,35 +39,28 @@
             <table class="table table-bordered">
                 <thead>
                   <tr>
+                    <th>Id</th>
                       <th>Customers Name</th>
                       <th>Address</th>
                       <th>Contact Number</th>
-                      <th>Request Detail</th>
                       <th>Technician Assigned</th>
-                      <th>Servicing Date</th>
-                      <th>Date Completed</th>
-                      <th>Assesment</th>
-
                   </tr>
               </thead>
               <tbody> 
     
                   @foreach ($data as $wtrans)
                   <tr>
+                    <td>
+                    
+                        {{ $wtrans->id}} <br>
+                       <a href="{{ route('ShowDumaRequestMW', $wtrans->id) }}"> <i class="fa-solid fa-book icons"  style="color: red;"></i></a><br>
+                    </td>
                       <td>{{ $wtrans->name}}</td>
                       <td>{{ $wtrans->address}}</td>
                       <td>{{ $wtrans->phone}}</td>
-                      <td>{{ $wtrans->description}}</td>
                       <td>{{ $wtrans->technician}}</td>
-                      <td>{{ $wtrans->req_date}}</td>
-                      <td>{{ $wtrans->date_completed}}</td>
-                      <td>{{$wtrans->assessment}}</td>
-                  </tr>
-                   
-                
+                  </tr>   
                   @endforeach
-               
-                  
               </tbody>
             </table>
           </div>

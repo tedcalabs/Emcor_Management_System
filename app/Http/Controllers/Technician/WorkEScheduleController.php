@@ -8,48 +8,79 @@ use App\Http\Controllers\Controller;
 
 class WorkEScheduleController extends Controller
 {   
-    
-    public function Index()
+    public function Index(Request $request)
     {
-      
-        $data = Maintenance::select("*")
-        ->where([
+        $query = Maintenance::query();
+        $query->where([
             ["branch", "=", 1],
             ["acceptd", "=", 1],
             ["status", "=", "pending"],
             ["category", "=", "Whitelines"],
-           
-        ])
-        ->get();
-      
+        ]);
+    
+        // Check if search keyword is provided
+        if ($request->has('search')) {
+            $searchKeyword = $request->input('search');
+            $query->where(function ($innerQuery) use ($searchKeyword) {
+                $innerQuery->where('name', 'like', '%' . $searchKeyword . '%');
+            });
+        }
+    
+        $data = $query->paginate(5);
+    
         return view('dumaguete.workexpert.shcedule.index', compact('data'));
     }
+    
 
-    public function getBrownlines()
+    public function getBrownlines(Request $request)
     {
-     
-        $data = Maintenance::select("*")
-        ->where([
+        $query = Maintenance::query();
+        $query->where([
             ["branch", "=", 1],
             ["acceptd", "=", 1],
             ["status", "=", "pending"],
-            ["category", "=", "Brownlines"]
-        ])
-        ->get();
-
-       return view('dumaguete.workexpert.shcedule.brownlines.index', compact('data'));
+            ["category", "=", "Brownlines"],
+        ]);
+    
+        // Check if search keyword is provided
+        if ($request->has('search')) {
+            $searchKeyword = $request->input('search');
+            $query->where(function ($innerQuery) use ($searchKeyword) {
+                $innerQuery->where('name', 'like', '%' . $searchKeyword . '%');
+                     
+                // Add more columns as needed for your search
+            });
+        }
+    
+        $data = $query->paginate(5);
+    
+        return view('dumaguete.workexpert.shcedule.brownlines.index', compact('data'));
     }
+    
 
-    public function getMechanic()
+    public function getMechanic(Request $request)
     {
-        $data = Maintenance::select("*")
-        ->where([
+        $query = Maintenance::query();
+        $query->where([
             ["branch", "=", 1],
             ["acceptd", "=", 1],
             ["status", "=", "pending"],
             ["category", "=", "Mechanic"]
-        ])
-        ->get();
-       return view('dumaguete.workexpert.shcedule.mechanic.index', compact('data'));
+        ]);
+    
+        // Check if search keyword is provided
+        if ($request->has('search')) {
+            $searchKeyword = $request->input('search');
+            $query->where(function ($innerQuery) use ($searchKeyword) {
+                $innerQuery->where('name', 'like', '%' . $searchKeyword . '%');
+                      
+                // Add more columns as needed for your search
+            });
+        }
+    
+        $data = $query->paginate(5);
+    
+        return view('dumaguete.workexpert.shcedule.mechanic.index', compact('data'));
     }
+    
 }

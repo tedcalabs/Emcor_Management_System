@@ -30,6 +30,7 @@
       @yield('emWl')
       @yield('emBl')
       @yield('emMec')
+      @yield('ShowRequestW')
       @yield('customer')
       @yield('whitetrans')
       @yield('browntrans')

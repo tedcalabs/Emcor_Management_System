@@ -88,7 +88,9 @@ Route::group(['prefix' => 'manager', 'middleware' => ['manager']], function () {
     Route::get('/managerProfile', [ManagerController::class, 'profile'])->name('manager.profile');
     Route::put('update-photo', [ManagerController::class, 'update'])->name('update.mgr.photo');
 
-
+    Route::get('/show-reqd/{id}', [ManagerController::class, 'ViewData'])->name('ShowDumaRequestMW');
+    Route::get('/show-reqdmb/{id}', [ManagerController::class, 'ViewDataMB'])->name('ShowDumaRequestMB');
+    Route::get('/show-req-mechmm/{id}', [ManagerController::class, 'ViewDataMM'])->name('ShowDumaRequestMM');
     Route::get('/emSec', [ManagerController::class, 'emSec'])->name('secretary.employees');
     Route::get('/emWl', [ManagerController::class, 'emWl'])->name('whitelinestec.employees');
     Route::get('/emBl', [ManagerController::class, 'emBl'])->name('bltec.employees');
@@ -356,6 +358,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'PreventBackHistory
     Route::delete('/delete-reqdr/{id}', [RequestController::class, 'destroyDr'])->name('destroyDr');
 
     Route::get('/up-reqd/{id}', [RequestController::class, 'upReqD'])->name('upReqD');
+
+
+    Route::get('/show-reqd/{id}', [RequestController::class, 'ViewData'])->name('ShowDumaRequest');
+
+
+    Route::get('/show-reqbd/{id}', [RequestController::class, 'ViewDataB'])->name('ShowDumaRequestB');
+
     Route::get('/up-reqb/{id}', [RequestController::class, 'upReqB'])->name('upReqB');
     Route::put('/edit/{maintenance}',[RequestController::class, 'upReqDx'])->name('upReqDx');
     Route::put('/editb/{maintenanceb}',[RequestController::class, 'upReqBx'])->name('upReqBx');
@@ -381,6 +390,14 @@ Route::group(['prefix' => 'secretary', 'middleware' => ['secretary', 'auth', 'Pr
 
 
     //MAINTENANCE REQUESTS ROUTES------------------------------- -----------------------  ------------------------   
+
+
+
+    Route::get('/show-reqd/{id}', [MaintenanceController::class, 'ViewData'])->name('ShowDumaRequestMWx');
+
+    Route::get('/show-reqdbh/{id}', [MaintenanceController::class, 'ViewDataBL'])->name('ShowDumaRequestMBds');
+
+    Route::get('/show-reqdbmh/{id}', [MaintenanceController::class, 'ViewDataML'])->name('ShowDumaRequestMBL');
 
     Route::resource('/maintenance', MaintenanceController::class)->middleware('secretary');
     Route::put('/edit/{maintenance}',[MaintenanceController::class, 'updateX'])->name('updateX');
@@ -422,6 +439,10 @@ Route::group(['prefix' => 'technician', 'middleware' => ['technician', 'auth']],
     Route::get('/update/{id}', [ScheduleController::class, 'updateD'])->name('updateD');
     Route::get('/delete-req/{id}', [ScheduleController::class, 'deleteReq'])->name('deleteZ');
     Route::resource('/maintenances', ScheduleController::class)->middleware('technician');
+
+    Route::get('/show-reqdtd/{id}', [ScheduleController::class, 'ViewDataC'])->name('ShowDumaRequestJHC');
+    
+    Route::get('/show-reqd/{id}', [ScheduleController::class, 'ViewData'])->name('ShowDumaRequestJH');
 });
 
 Route::group(['prefix' => 'tecnician', 'middleware' => ['technician', 'auth', 'PreventBackHistory']], function () {
@@ -451,7 +472,9 @@ Route::group(['prefix' => 'mechanic', 'middleware' => ['mechanic', 'auth']], fun
 
     Route::get('/completed-mecschedule', [MechanicScheduleController::class, 'getCompletedMec'])->name('completed.sched.mec');
 
+    Route::get('/show-reqd/{id}', [MechanicScheduleController::class, 'ViewData'])->name('ShowDumaRequestMWXC');
 
+    Route::get('/show-reqdc/{id}', [MechanicScheduleController::class, 'ViewDataC'])->name('ShowDumaRequestCMT');
 
 
     Route::get('schedule', [MechanicScheduleController::class, 'Index'])->name('mec.sched');
@@ -477,6 +500,12 @@ Route::group(['prefix' => 'brownlines', 'middleware' => ['brownlines', 'auth']],
     Route::post('change-password', [BrowlinesTechController::class, 'blChangePassword'])->name('brownlines.changepass');
     Route::put('update-photo', [BrowlinesTechController::class, 'update'])->name('update.brownlines.photo');
 
+
+
+    
+    Route::get('/show-reqdtd/{id}', [BlTechnicianScheduleController::class, 'ViewDataC'])->name('ShowDumaRequestIC');
+    
+    Route::get('/show-reqd/{id}', [BlTechnicianScheduleController::class, 'ViewData'])->name('ShowDumaRequestLN');
 
  Route::get('/completedbrn-schedule', [BlTechnicianScheduleController::class, 'getCompletedbrn'])->name('completed.sched.brwn');
     Route::get('schedule', [BlTechnicianScheduleController::class, 'Index'])->name('bl.sched');

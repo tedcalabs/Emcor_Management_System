@@ -22,6 +22,8 @@
       @yield('sidebarT')
       @yield('contentT')
       @yield('schedule')
+      @yield('ShowRequestW')
+      @yield('ShowRequestC')
       @yield('updateReq')
       @yield('tecprofile')
       @yield('footer')

@@ -39,6 +39,7 @@
             <table class="table table-bordered">
                 <thead>
                   <tr>
+                    <th>Id</th>
                       <th>First Name</th>
                       <th>Last Name</th>
                       <th>Address</th>
@@ -54,6 +55,7 @@
     
                   @foreach ($wex as $workex)
                   <tr>
+                    <td>{{ $workex->id}}</td>
                       <td>{{ $workex->fname}}</td>
                       <td>{{ $workex->lname}}</td>
                       <td>{{ $workex->address}}</td>

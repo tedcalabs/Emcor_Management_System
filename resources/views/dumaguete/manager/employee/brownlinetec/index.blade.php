@@ -37,6 +37,7 @@
             <table class="table table-bordered">
                 <thead>
                   <tr>
+                    <th>Id</th>
                       <th>First Name</th>
                       <th>Last Name</th>
                       <th>Address</th>
@@ -52,6 +53,7 @@
     
                   @foreach ($wbl as $bltec)
                   <tr>
+                    <td>{{ $bltec->id}}</td>
                       <td>{{ $bltec->fname}}</td>
                       <td>{{ $bltec->lname}}</td>
                       <td>{{ $bltec->address}}</td>

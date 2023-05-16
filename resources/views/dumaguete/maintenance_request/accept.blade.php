@@ -35,7 +35,8 @@
  
          <table class="table table-bordered">
              <thead>
-               <tr>             
+               <tr>
+                <th>Id</th>          
                    <th>Name</th>
                    <th>Address</th>
                    <th>Contact Number</th>
@@ -50,7 +51,7 @@
            <tbody> 
             @foreach ($data as $list)
                <tr>
-               
+                 <td>{{ $list->id}}</td>
                    <td>{{ $list->name}}</td>
                    <td>{{ $list->address}}</td>
               

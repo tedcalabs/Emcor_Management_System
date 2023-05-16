@@ -39,6 +39,7 @@
             <table class="table table-bordered">
                 <thead>
                   <tr>
+                    <th>Id</th>
                       <th>First Name</th>
                       <th>Last Name</th>
                       <th>Address</th>
@@ -54,6 +55,7 @@
     
                   @foreach ($secretaries as $sec)
                   <tr>
+                    <td>{{ $sec->Id}}</td>
                       <td>{{ $sec->fname}}</td>
                       <td>{{ $sec->lname}}</td>
                       <td>{{ $sec->address}}</td>

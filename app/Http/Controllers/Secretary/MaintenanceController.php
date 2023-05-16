@@ -40,6 +40,19 @@ class MaintenanceController extends Controller
     
         return view('dumaguete.maintenance_request.index', compact('data'));
     }
+
+    public function ViewData($id)
+{
+    $data = Maintenance::select("*")
+    ->where([
+        ["branch", "=", 1],
+        ["category", "=", "Whitelines"]
+    ])
+    
+    ->take(5)->find($id);
+    return view('dumaguete.maintenance_request.show', compact('data'));
+}
+
     
     public function getBrownlines(Request $request)
     {
@@ -66,6 +79,20 @@ class MaintenanceController extends Controller
         return view('dumaguete.maintenance_request.brownlines.index', compact('data'));
     }
 
+    public function ViewDataBL($id)
+{
+    $data = Maintenance::select("*")
+    ->where([
+        ["branch", "=", 1],
+        ["category", "=", "Brownlines"]
+    ])
+    
+    ->take(5)->find($id);
+    return view('dumaguete.maintenance_request.brownlines.show', compact('data'));
+}
+
+
+
     public function getMechanic(Request $request)
     {
 
@@ -90,7 +117,17 @@ class MaintenanceController extends Controller
         return view('dumaguete.maintenance_request.mechanic.index', compact('data'));
     }
 
-
+    public function ViewDataML($id)
+{
+    $data = Maintenance::select("*")
+    ->where([
+        ["branch", "=", 1],
+        ["category", "=", "Mechanic"]
+    ])
+    
+    ->take(5)->find($id);
+    return view('dumaguete.maintenance_request.mechanic.show', compact('data'));
+}
 
     public function store(MrRequest $mrRequest)
     {

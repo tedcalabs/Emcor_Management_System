@@ -14,6 +14,18 @@ class RequestController extends Controller
         return view('admin.request.duma.edit', compact('data'));
     }
 
+    public function ViewData($id)
+    {
+        $data = Maintenance::where('branch', 1)->take(5)->find($id);
+        return view('admin.request.duma.show', compact('data'));
+    }
+
+    public function ViewDataB($id)
+    {
+        $data = Maintenance::where('branch', 2)->take(5)->find($id);
+        return view('admin.request.bayawan.show', compact('data'));
+    }
+
     public function upReqB($id)
     {
         $data = Maintenance::where('branch', 2)->take(5)->find($id);

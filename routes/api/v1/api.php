@@ -21,21 +21,21 @@ Route::post('mreqs', [MaintenanceController::class, 'store']);
 Route::get('mreqs', [MaintenanceController::class, 'index']);
 
 
+
+
 Route::middleware('auth:api')->group(function () {
     Route::get('profile', [ProfileController::class, 'show']);
     //Route::get('Uinfo', [ProfileController::class, 'info']);
     Route::post('logout', [ProfileController::class, 'logout']);
-    Route::post('change-password',[InforController::class,'change_password']);
-    Route::post('change-phone',[InforController::class,'updatePhone']);
+    Route::post('change-password', [InforController::class, 'change_password']);
+    Route::post('change-phone', [InforController::class, 'updatePhone']);
     Route::get('ment', [RepairController::class, 'getMaintenanceByUserDeviceToken']);
 });
-
-
-
 
 Route::group(['namespace' => 'Api\V1'], function () {
 
     Route::group(['prefix' => 'services'], function () {
+        Route::post('upload', 'RepairController@upload');
         Route::get('popular', 'ServiceController@get_popular_services');
         Route::get('whitelines', 'ServiceController@get_whitelines_services');
         Route::get('brownlines', 'ServiceController@get_brownlines_services');
@@ -43,22 +43,6 @@ Route::group(['namespace' => 'Api\V1'], function () {
     });
 
     Route::group(['prefix' => 'config'], function () {
-        //Route::get('/', 'ConfigController@configuration');
-        //Route::get('/get-zone-id', 'ConfigController@get_zone');
-        //Route::get('place-api-autocomplete', 'ConfigController@place_api_autocomplete');
-        // Route::get('distance-api', 'ConfigController@distance_api');
-        //Route::get('place-api-details', 'ConfigController@place_api_details');
         Route::get('geocode-api', 'ConfigController@geocode_api');
     });
-
-    // Route::group(['prefix' => 'ment'], function () {
-    //     //Route::get('/', 'ConfigController@configuration');
-    //     //Route::get('/get-zone-id', 'ConfigController@get_zone');
-    //     //Route::get('place-api-autocomplete', 'ConfigController@place_api_autocomplete');
-    //     // Route::get('distance-api', 'ConfigController@distance_api');
-    //     //Route::get('place-api-details', 'ConfigController@place_api_details');
-    //     Route::get('men-req', 'RepairController@getMaintenanceByDeviceToken');
-    // });
-
-
 });

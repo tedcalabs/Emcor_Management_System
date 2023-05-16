@@ -35,6 +35,7 @@
       @yield ('services')
       @yield ('technicians')
       @yield ('users')
+      @yield ('ShowRequest')
       @yield ('request') 
       @yield ('content')   
       @yield ('adminDashboard')
@@ -42,6 +43,7 @@
       @yield ('usersbayawan')
       @yield ('updateReqD')
       @yield ('footer')
+     
       </main> 
       @yield('script') 
     </body>

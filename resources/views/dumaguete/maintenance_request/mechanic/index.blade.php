@@ -40,7 +40,7 @@
          <table class="table table-bordered">
              <thead>
                <tr>
-                
+                <th>Id</th>
                    <th>Name</th>
                    <th>Address</th>
                    <th>Contact Number</th>
@@ -53,14 +53,14 @@
            <tbody> 
             @foreach ($data as $item)
                <tr>
-                   
+                <td>
+                    {{ $item->id}} <br>
+                   <a href="{{ route('ShowDumaRequestMBL', $item->id) }}"> <i class="fa-solid fa-book icons"  style="color: red;"></i></a><br>
+                </td>
                    <td>{{ $item->name}}</td>
                    <td>{{ $item->address}}</td>
-              
                    <td>{{ $item->phone}}</td>
-                
                    <td>{{ $item->description}}</td>
-                
                    <td>
                        <div class=" ">
                            <a href="{{ route('updateMechReq', $item->id) }}" class="btn btn-info accept-button" style="margin-bottom: 5px">Accept</a>

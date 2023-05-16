@@ -19,17 +19,20 @@ class MechanicController extends Controller
 
         $allsched = DB::table('maintenances')->where([
             ["branch", "=", 1],
-            ["status", "=", "pending"],
+            ["acceptd", "=", 1],
+            ["technician", "=", Auth::user()->fname." ".Auth::user()->lname],
         ])
             ->count();
         $pending = DB::table('maintenances')->where([
             ["branch", "=", 1],
-            ["acceptd", "=", 1],
+            ["status", "=", "pending"],
+            ["technician", "=", Auth::user()->fname." ".Auth::user()->lname],
         ])
             ->count();
         $completed = DB::table('maintenances')->where([
             ["branch", "=", 1],
             ["status", "=", "completed"],
+            ["technician", "=", Auth::user()->fname." ".Auth::user()->lname],
         ])
         ->count();
         return view('dumaguete.mechanic.index',['allsched' => $allsched, 'pending' => $pending, 'completed' => $completed]);

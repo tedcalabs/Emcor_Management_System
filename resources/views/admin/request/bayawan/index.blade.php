@@ -51,7 +51,11 @@
            <tbody> 
             @foreach ($data as $item)
                <tr>
-                   <td>{{ $item->id}}</td>
+                <td>
+                    
+                    {{ $item->id}} <br>
+                   <a href="{{ route('ShowDumaRequestB', $item->id) }}"> <i class="fa-solid fa-book icons"  style="color: red;"></i></a><br>
+                </td>
                    <td>{{ $item->name}}</td>
                    <td>{{ $item->address}}</td>
               
