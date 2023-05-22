@@ -21,7 +21,7 @@
             <div class="col-4" style="margin-bottom: 1rem; margin-left: 8rem; width:15rem; float:right;">
                 <form method="GET" action="{{ route('bayawan.mtnc.request') }}">
                     <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search...">
+                        <input type="text" name="search" class="form-control" placeholder="Search...">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="submit">Search</button>
                         </div>

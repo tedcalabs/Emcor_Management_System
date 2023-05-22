@@ -9,8 +9,10 @@
         <meta name="author" content="">
         <title>Emcor - Login</title>
        
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
             <style>
 
               body{
@@ -230,7 +232,7 @@
             
           }
           .grnbuton:hover{
-            background-color: #aaaaaa;
+            background-color:  #e00d0d;
           }
           
           </style>
@@ -239,62 +241,63 @@
 
 
 <body>
-    <div>
-        <div class="header-blue">
-            <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
-                <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR Servicing Request System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-              
-            </nav>
-
-         
-            <div class="container hero">
-              <div class="row">
-                 
- <div class="col-4"></div>
-                    <div class="col-4">
-                      <div class="card">
-                          <div class="card-header">
-                     <h2>Admin Login</h2>
-                          
-                      </div>
-                      <div class="card-body">
-                          <form method="POST" action="{{route('admin.login')}}">
-                              @if(Session::get('success'))
-                              <div class="alert alert-success">{{ Session::get('success') }}</div>
-                              @endif
-                              @if(Session::get('error'))
-                              <div class="alert alert-danger">{{ Session::get('error') }}</div>
-                              @endif
-                              @csrf
-                              <div class="form-group">
-                                  <label for="InputEmail">Email address</label>
-                                  <input type="email"  id="InputEmail" name="email" placeholder="Enter email" value="{{ old ('email') }}">
-                                  @error('email')
-                                  <span class="text-danger float-right">{{$message}}</span>
-                                  @enderror
-                              </div>
-                    
-                              <div class="form-group">
-                                  <label for="password">Password</label>
-                                  <input type="password"  id="InputPassword" name="password" placeholder="Password" value="{{ old ('password') }}">
-                                  @error('password')
-                                  <span class="text-danger float-right">{{$message}}</span>
-                                  @enderror
-                              </div>
-                         
-                              <button type="submit" class="grnbuton">Login</button>
-                             <a class="huhu" href="{{ route('registeredA') }}">
-                             
-                              <span class="float-right" >Create new account.</span> </a>      
-                 </form>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-4"></div>
-          </div>
-      </div>
-              </div>
+  <div>
+    <div class="header-blue">
+        <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">EMCOR Servicing Request System</a>
+                <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </div>
+        </nav>
+
+        <div class="container hero">
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Admin Login</h2>
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" action="{{ route('admin.login') }}">
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success">{{ Session::get('success') }}</div>
+                                @endif
+                                @if(Session::has('error'))
+                                    <div class="alert alert-danger">{{ Session::get('error') }}</div>
+                                @endif
+                                @csrf
+                                <div class="form-group">
+                                    <label for="email">Username</label>
+                                    <input type="text" id="email" class="form-control" name="email" placeholder="Enter Username" value="{{ old('email') }}">
+                                    @error('email')
+                                        <span class="text-danger float-right">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                    @error('password')
+                                        <span class="text-danger float-right">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <button type="submit" class="grnbuton">Login</button>
+                                <a class="huhu" href="/">
+                                    <span class="float-right">User Login</span>
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
 

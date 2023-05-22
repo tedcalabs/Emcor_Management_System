@@ -26,6 +26,8 @@ class Maintenance extends Model
         'message',
         'technician',
         'device_token',
+        'image',
+        'reference_no',
         'assessment'
     ];
 
@@ -47,5 +49,16 @@ class Maintenance extends Model
     {
         $req = $this->find($id);
         $req->update($data);
+    }
+
+    public function customer()
+{
+    return $this->belongsTo(User::class, 'customer_id');
+}
+
+
+    public function technician()
+    {
+        return $this->belongsTo(User::class, 'technician_id');
     }
 }

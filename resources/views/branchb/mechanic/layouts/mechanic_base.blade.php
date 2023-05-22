@@ -23,7 +23,7 @@
 
 <body>
 
-    {{-- VIEW OUTPUT--}}
+  
     <main>
       @yield ('topbarMc')
       @yield('sidebarMc')
@@ -31,6 +31,8 @@
       @yield('Mschedule')
       @yield('schedule')
       @yield('updateReqM')
+      @yield('ShowRequestW')
+      @yield('ShowRequestC')
       @yield('tecprofile')
       @yield('footer')
       </main>     

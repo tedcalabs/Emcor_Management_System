@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\BayawanUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\BayawanUser;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -50,10 +51,6 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -126,5 +123,36 @@ class UserController extends Controller
         $user->delete();
 
         return to_route('users.index');
+    }
+
+
+    public function store(Request $request)
+    {
+        $request->validate([
+
+            'fname' => ['required', 'string', 'max:255'],
+            'lname' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
+            'bdate' => ['required', 'date', 'max:255'],
+            'phone' => ['required', 'String', 'min:11'],
+            'email' => ['required', 'string', 'max:255', 'unique:' . User::class],
+            'password' => ['required', 'min:8'],
+        ]);
+
+
+        User::create([
+            'role' => $request->role,
+            'status' => $request->status,
+            'fname' => $request->fname,
+            'lname' => $request->lname,
+            'address' => $request->address,
+            'bdate' => $request->bdate,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+ 
+        return to_route('users.index')->with('success', 'User Created Successfully!');
     }
 }

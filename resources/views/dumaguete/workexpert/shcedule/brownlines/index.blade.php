@@ -59,10 +59,8 @@
                     
                        <td>{{ $mreq->description}}</td>
                        <td>{{ \Carbon\Carbon::parse($mreq->req_date)->format('d/m/Y g:i:s A')}}</td>
-                       <td>
-                        {{ $mreq->technician}}
-    
-                       </td>
+                       <td>{{ $mreq->technician_fname }} {{ $mreq->technician_lname }}</td>
+
                       
                    </tr>
     

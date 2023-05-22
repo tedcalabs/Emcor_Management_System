@@ -37,6 +37,18 @@ class MaintenanceBController extends Controller
         return view('branchb.secretary.maintenanceRequest.index', compact('data'));
     }
 
+    public function ViewData($id)
+{
+    $data = Maintenance::select("*")
+    ->where([
+        ["branch", "=", 2],
+        ["category", "=", "Whitelines"]
+    ])
+    
+    ->take(5)->find($id);
+    return view('branchb.secretary.maintenanceRequest.show', compact('data'));
+}
+
     public function acceptd(Request $request)
     {
         $search = $request->input('search');
@@ -192,6 +204,20 @@ class MaintenanceBController extends Controller
  
          return view('branchb.secretary.maintenanceRequest.mechanic.index', compact('data'));
      }
+
+     
+    public function ViewDataML($id)
+    {
+        $data = Maintenance::select("*")
+        ->where([
+            ["branch", "=", 2],
+            ["category", "=", "Mechanic"]
+        ])
+        
+        ->take(5)->find($id);
+        return view('branchb.secretary.maintenanceRequest.mechanic.show', compact('data'));
+    }
+    
  
      public function updateXB(Request $request, $id)
      {
@@ -240,6 +266,19 @@ class MaintenanceBController extends Controller
  
          return view('branchb.secretary.maintenanceRequest.brownlines.index', compact('data'));
      }
+
+     public function ViewDataBL($id)
+     {
+         $data = Maintenance::select("*")
+         ->where([
+             ["branch", "=", 2],
+             ["category", "=", "Brownlines"]
+         ])
+         
+         ->take(5)->find($id);
+         return view('branchb.secretary.maintenanceRequest.brownlines.show', compact('data'));
+     }
+
 
      public function updateBrownReq($id)
      {

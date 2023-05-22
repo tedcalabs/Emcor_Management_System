@@ -54,18 +54,23 @@ class AuthenticatedSessionController extends Controller
         if ($user_role == 1) {
 
             return redirect()->route('manager.dashboard');
+
         }else if ($user_role == 2 ) {
 
             return redirect()->route('secretary.dashboard');
+
         } else if ($user_role == 3 ) {
 
             return redirect()->route('technician.dashboard');
+
         } else if ($user_role == 4 ) {
 
             return redirect()->route('mechanic.dashboard');
+
         } else if ($user_role == 5) {
 
             return redirect()->route('brownlines.dashboard');
+            
         }else if ($user_role == 6) {
 
             return redirect()->route('workexpert.dashboard');

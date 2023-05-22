@@ -132,5 +132,30 @@ class BrownlinesTController extends Controller
             ->with('success','Updated Successfully!');
     }
 
+    public function ViewDataC($id)
+    {
+        $data = Maintenance::select("*")
+        ->where([
+            ["branch", "=", 2],
+            ["acceptd", "=", 1],
+            ["status", "=", "completed"],
+        ])
+        
+        ->take(5)->find($id);
+        return view('branchb.brownlinestech.shcedule.showCompleted', compact('data'));
+    }
+
+    public function ViewData($id)
+    {
+        $data = Maintenance::select("*")
+        ->where([
+            ["branch", "=", 2],
+            ["acceptd", "=", 1],
+            ["status", "=", "pending"],
+        ])
+        
+        ->take(5)->find($id);
+        return view('branchb.brownlinestech.shcedule.show', compact('data'));
+    }
 
 }

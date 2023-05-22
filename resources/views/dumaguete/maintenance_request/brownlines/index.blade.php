@@ -10,10 +10,11 @@
     <div class="item item-15">
         <div class="row">
             <div class="col-4" style="">
-                <a href="{{ route('accept') }}" class="btn btn-info" style="float:left">Acceted Request</a>
+                <a href="{{ route('accept') }}" class="btn btn-primary edit-button" style="float:left">Acceted Request</a>
             </div>
             <div class="col-4" style="">
-                <span class="head">Brownlines Request list</span>
+                <a href="{{ route('brownlines.req')}}">
+                <span class="head" style="color: black;">Brownlines Request list</span></a>
             </div>
           
             <div class="col-4" style="margin-bottom: 1rem; margin-left: 8rem; width:15rem; float:right;">

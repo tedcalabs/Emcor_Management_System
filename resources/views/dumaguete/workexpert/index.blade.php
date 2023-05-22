@@ -7,14 +7,15 @@
 
 @section('WexpertDashboard')
         
-
-<div class="container">
-
-    <div class="item item-8">
-        <h1>Work Expert Dashboard </h1>
-    </div>
-</div>
-
+       
+<div class="container request5">
+    <div class="item total-request5"></div> 
+  </div>
+<div class="container request5">
+    <div class="item border-left-primary shadow  rounded total-request">All Schedules<br> <br></div>
+    <div class="item border-left-primary shadow  rounded  pending-request">Pending Schedules<br> <br></div>
+    <div class="item border-left-primary shadow  rounded accepted-request">Completed Schedules<br> <br></div>
+  </div>
 
 
 @endsection

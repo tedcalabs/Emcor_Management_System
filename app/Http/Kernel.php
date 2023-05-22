@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \App\Http\Middleware\CorsMiddleware::class,
     ];
 
     /**
@@ -71,13 +72,13 @@ class Kernel extends HttpKernel
         'technician' => \App\Http\Middleware\Technician::class,
         'mechanic' => \App\Http\Middleware\Mechanic::class,
         'brownlines' => \App\Http\Middleware\Brownlines::class,
-        'workexpert' =>\App\Http\Middleware\WorkExpert::class,
+        'workexpert' => \App\Http\Middleware\WorkExpert::class,
         'branchb' => \App\Http\Middleware\BranchB::class,
-        'bsecretary' =>\App\Http\Middleware\BSecretary::class,
-        'btechnician' =>\App\Http\Middleware\TechnicianB::class,
-        'brownlinesb' =>\App\Http\Middleware\BrownlinesB::class,
-        'mechanicb' =>\App\Http\Middleware\MechanicB::class,
-        'workexpertb' =>\App\Http\Middleware\WorrkExpertB::class,
-        'managerb' =>\App\Http\Middleware\ManagerB::class,
+        'bsecretary' => \App\Http\Middleware\BSecretary::class,
+        'btechnician' => \App\Http\Middleware\TechnicianB::class,
+        'brownlinesb' => \App\Http\Middleware\BrownlinesB::class,
+        'mechanicb' => \App\Http\Middleware\MechanicB::class,
+        'workexpertb' => \App\Http\Middleware\WorrkExpertB::class,
+        'managerb' => \App\Http\Middleware\ManagerB::class,
     ];
 }

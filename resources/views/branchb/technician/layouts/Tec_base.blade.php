@@ -32,6 +32,8 @@
       @yield('requestb')
       @yield('updateReqB')
       @yield('schedule')
+      @yield('ShowRequestW')
+      @yield('ShowRequestC')
       @yield('btecprofile')
       @yield('footer')
       </main>   

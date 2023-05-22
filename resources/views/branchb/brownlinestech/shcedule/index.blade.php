@@ -2,7 +2,7 @@
 @extends('branchb.brownlinestech.layouts.bltech_base')
 @include('branchb.brownlinestech.components.topbar')
 @include('branchb.brownlinestech.components.sidebar')
-
+@include('branchb.brownlinestech.components.footer')
 @section('blschedule')
 {{-- <div class="container">
     <div class="item item-5">
@@ -93,13 +93,13 @@
             <div class="row align-items-center">
                 <div class="col-8">        
                     <div class="head">
-                      <a href="{{ route('whitebtech.sched') }}" style="text-decoration: none;">
+                      <a href="{{ route('getBrownSchedBl.sched') }}" style="text-decoration: none;">
                         <span class="head" style="color: black;"> Servcing Request Schedule</span>
                     </a>
                     </div>
                 </div>
                 <div class="col-4">
-                    <form method="GET" action="{{ route('whitebtech.sched') }}">
+                    <form method="GET" action="{{ route('getBrownSchedBl.sched') }}">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control" placeholder="Search...">
                             <button class="btn btn-outline-secondary" type="submit">Search</button>
@@ -117,22 +117,26 @@
              <table class="table table-bordered">
                  <thead>
                    <tr>
-                       <th>Name</th>
-                       <th>Address</th>
-                       <th>Contact Number</th>
-                       <th>Request Detail</th>
-                       <th>Servicing Schedule</th>  
-                       <th>Action</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Contact Number</th>
+                    <th>Servicing Schedule</th>  
+                    <th>Action</th>
                    </tr>
                </thead>
                <tbody> 
                 @foreach ($data as $mreq)
                    <tr>               
+                    <td>
+                        {{ $mreq->id}} <br>
+                       <a href="{{ route('BLShowDumaRequestJH', $mreq->id) }}"> <i class="fa-solid fa-book icons"  style="color: red;"></i></a><br>
+                    </td>
                        <td>{{ $mreq->name}}</td>
                        <td>{{ $mreq->address}}</td>
                        <td>{{ $mreq->phone}}</td>
-                       <td>{{ $mreq->description}}</td>
-                       <td>{{ $mreq->req_date}}</td>
+    
+                       <td>{{ \Carbon\Carbon::parse($mreq->req_date)->format('d/m/Y g:i:s A')}}</td>
                 
                        <td>
                            <div class=" ">

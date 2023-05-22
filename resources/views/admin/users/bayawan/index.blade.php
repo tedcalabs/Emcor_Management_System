@@ -17,6 +17,7 @@
             <a href="{{ route('usersbyn.index') }}" style="text-decoration: none;">
                 <span class="head" style="color: black;">Bayawan Users list</span>
             </a>
+            <a href="{{ route('usersbyn.create')}}"><button class="btn btn-primary edit-button" type="submit">Create New User</button></a>
         </div>
         <div class="col-4" style="margin-bottom: 1rem; margin-left: 8rem; width:15rem; float:right;">
             <form action="{{ route('usersbyn.index') }}" method="get">
@@ -39,7 +40,7 @@
                         <th>Address</th>
                         <th>Birthday</th>
                         <th>Contact Number</th>
-                        <th>Email</th>
+                        <th>Username</th>
                         <th>Role</th>
                         <th>Status</th>
                         <th>Action</th>

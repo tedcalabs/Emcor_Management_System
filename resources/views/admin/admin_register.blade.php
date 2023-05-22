@@ -235,10 +235,10 @@
         .card{
         
             width: 400px;
-            height: 600px;
+            height: 640px;
             background: transparent;
-            background-color: #084c61;
-            border: 2px solid rgba(255,255,255,0.5);
+            background-color: #F2F2F2;
+              border: 2px solid rgba(255,255,255,0.5);
             border-radius: 5px;
             backdrop-filter: blur(10px);
             display: flex;
@@ -247,19 +247,35 @@
           
         }
         
+           
         h2{
-            font-size: 2em;
-            color: #fff;
-            text-align: center;
-        }
-        
-        
-        .form-group label{
-        float: left;
-        color: #fff;
-        }
-        
-        
+              font-size: 2em;
+              color: #040303;
+              text-align: center;
+          }
+          
+          a{
+            color: #040303;
+          }
+          .card-body:hover>a{
+            text-decoration: none;
+            color: #040303;
+          }
+          .form-group label{
+          float: left;
+          color:#040303 ;
+          }
+          .huhu:hover{
+            color: #040303;
+          }
+     
+          .form-group input {
+              width: 100%;
+              height: 50px;
+              font-size: 1em;
+              padding:0 35px 0 5px;
+              color: #0e0d0d;
+          }
         
         
         .form-group input {
@@ -270,90 +286,101 @@
             color: #151414;
         }
             
+
+        .grnbuton{
+            position: relative;
+            background-color: #F21313;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 5px;
+            float: right;
+            font-size: 20px;
+            min-height: 30px;
+            min-width: 100px;
+            
+          }
+          .grnbuton:hover{
+            background-color:  #e00d0d;
+          }
         </style>
     </head>
     <body>
 
-        <div>
-            <div class="header-blue">
-                <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
-                    <div class="container-fluid"><a class="navbar-brand" href="/">EMCOR Servicing Request System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                      
-  
-                </nav>
+      <div>
+        <div class="header-blue">
+            <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">EMCOR Servicing Request System</a>
+                    <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </nav>
     
-                <!--Emcor MVG-->
-                <div class="container hero">
-                    <div class="row">
-                        <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
-                            {{-- <h1>Emcor</h1>
-                            <p>Bringing comfort to you and your family<br></p> --}}
-                        </div>
-                       
+            <!--Emcor MVG-->
+            <div class="container hero">
+                <div class="row">
+                    <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
+                        {{-- <h1>Emcor</h1>
+                        <p>Bringing comfort to you and your family<br></p> --}}
+                    </div>
                     <div class="col-12 col-lg-6 col-xl-5 offset-xl-1" style="margin-top:2rem">
                         <div class="card">
                             <div class="card-header">
-                                        @if(Session::has('error'))
-                                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                                    <strong>{{ session::get('error')}}</strong>
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                      <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                  </div>
-                                                @endif
-                                                <h2>Admin Register</h2>
-                                        
-                                        </div>
-                                        <div class="card-body">
-                                        
-                                        <form  method="POST" action="{{ route('admin.register.create')}}" >
-                                            @if(Session::get('success'))
-                                            <div class="alert alert-success">{{ Session::get('success') }}</div>
-                                            @endif
-                                            @if(Session::get('fail'))
-                                            <div class="alert alert-danger">{{ Session::get('fail') }}</div>
-                                            @endif
-                                            @csrf
-                                            <div class="form-group">
-                                                <label for="name">Name</label>
-                                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="{{ old ('name') }}">
-                                                @error('name')
-                                                <span class="text-danger">{{$message}}</span>
-                                                @enderror
-                                            </div>
-                                         
-                                            <div class="form-group">
-                                                <label for="InputEmail">Email address</label>
-                                                <input type="email" class="form-control" id="InputEmail" name="email" placeholder="Enter email" value="{{ old ('email') }}">
-                                                <small id="email" class="form-text text-white">We'll never share your email with anyone else.</small>
-                                                @error('email')
-                                                <span class="text-danger">{{$message}}</span>
-                                                @enderror
-                                            </div>
-                                  
-                                            <div class="form-group">
-                                                <label for="password">Password</label>
-                                                <input type="password" class="form-control" id="InputPassword" name="password" placeholder="Password" value="{{ old ('password') }}">
-                                                @error('password')
-                                                <span class="text-danger">{{$message}}</span>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="password2" class=" ">
-                                                  Confirm Password
-                                                </label>
-                                                <input type="password" class=" form-control" name="password_confirmation"
-                                                  value="{{old('password_confirmation')}}" />
-                                        
-                                                @error('password_confirmation')
-                                                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
-                                                @enderror
-                                              </div>
+                                @if(Session::has('error'))
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <strong>{{ session('error') }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
+                                <h2>Admin Register</h2>
+                            </div>
+                            <div class="card-body">
+                                <form method="POST" action="{{ route('admin.register.create') }}">
+                                    @if(Session::has('success'))
+                                        <div class="alert alert-success">{{ Session::get('success') }}</div>
+                                    @endif
+                                    @if(Session::has('fail'))
+                                        <div class="alert alert-danger">{{ Session::get('fail') }}</div>
+                                    @endif
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="{{ old('name') }}">
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Username</label>
+                                        <input type="text" class="form-control" id="email" name="email" placeholder="Enter Username" value="{{ old('email') }}">
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                        @error('password')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password_confirmation">Confirm Password</label>
+                                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password">
+                                        @error('password_confirmation')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                               
                                             <div class="form-group">
                                                 <a class="registration text-white" href=" {{ route('login_form') }}">Already have an account?</a><br>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Submit</button>    
+                                            <button type="submit" class="grnbuton">Submit</button>    
                                         </form>
                                         
                                     </div>

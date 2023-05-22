@@ -37,6 +37,8 @@
                     <strong>Servicing Date:</strong>   {{ $data->req_date}} <br>
                     <strong>Date Completed:</strong>   {{ $data->date_completed}} <br>
                     <strong>Assessment:</strong>   {{ $data->assessment}} <br>
+                    <strong> Reference Number:</strong>&nbsp;&nbsp;{{ $data->reference_no}} <br>
+                    <strong>Proof of Payment:</strong>&nbsp;&nbsp;<img src="{{ asset('uploads/proof/' . $data->image) }}" alt="Proof of Payment" width="220" height="300">
                 </td>         
                </tr>
       

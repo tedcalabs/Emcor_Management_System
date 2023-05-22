@@ -31,7 +31,7 @@
                         @enderror
                       </div>
                       <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Store</button>
+                        <button type="submit" class="btn btn-primary float-end submit-button">Store</button>
                       </div>
                     </form>
                   </div>

@@ -2,7 +2,7 @@
 @extends('dumaguete.brownlinestech.layouts.bltech_base')
 @include('dumaguete.brownlinestech.components.topbar')
 @include('dumaguete.brownlinestech.components.sidebar')
-
+@include('dumaguete.brownlinestech.components.footer')
 @section('blprofile')
 
 
@@ -41,7 +41,7 @@
                               @method('PUT')
                               <div class="sm:col-span-6">
                                   <!-- Custom button to trigger file input field -->
-                                  <button type="button" class="btn btn-info" onclick="document.getElementById('admin-profile-pic').click()">Change Picture</button>
+                                  <button type="button" class="btn btn-success" onclick="document.getElementById('admin-profile-pic').click()">Change Picture</button>
                  
                                   <input type="file" id="admin-profile-pic" name="picture" class="visually-hidden" onchange="document.getElementById('admin-submit-btn').click()">
                               </div>

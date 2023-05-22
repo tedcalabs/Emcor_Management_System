@@ -31,6 +31,7 @@
             <li><a class="dropdown-item" href="{{ route('mreq')}}">Whitelines</a></li>
             <li><a class="dropdown-item" href="{{ route('brownlines.req')}}">Brownlines</a></li>
             <li><a class="dropdown-item" href="{{ route('mechanic.req')}}">Mechanic</a></li>
+            <li><a class="dropdown-item" href="{{ route('declined.list')}}">Declined Request</a></li>
             </ul>
         </div>
         <div class="notifications childs">

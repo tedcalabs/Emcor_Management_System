@@ -34,7 +34,7 @@ class WorkExpertController extends Controller
             'bdate' => 'required',
             'phone' => 'required',
             'gender' => 'required',
-            'email' => 'required|email|unique:users,email,'. Auth::user()->id,
+            'email' => 'required|unique:users,email,'. Auth::user()->id,
 
         ]);
 

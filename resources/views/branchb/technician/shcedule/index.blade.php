@@ -36,23 +36,26 @@
          <table class="table table-bordered">
              <thead>
                <tr>
-                   <th>Name</th>
-                   <th>Address</th>
-                   <th>Contact Number</th>
-                   <th>Request Detail</th>
-                   <th>Servicing Schedule</th>  
-                   <th>Action</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Contact Number</th>
+                <th>Servicing Schedule</th>  
+                <th>Action</th>
                </tr>
            </thead>
            <tbody> 
             @foreach ($data as $mreq)
                <tr>               
+                <td>
+                    {{ $mreq->id}} <br>
+                   <a href="{{ route('BShowDumaRequestJH', $mreq->id) }}"> <i class="fa-solid fa-book icons"  style="color: red;"></i></a><br>
+                </td>
                    <td>{{ $mreq->name}}</td>
                    <td>{{ $mreq->address}}</td>
                    <td>{{ $mreq->phone}}</td>
-                   <td>{{ $mreq->description}}</td>
-                   <td>{{ $mreq->req_date}}</td>
-            
+
+                   <td>{{ \Carbon\Carbon::parse($mreq->req_date)->format('d/m/Y g:i:s A')}}</td>
                    <td>
                        <div class=" ">
                            <a href="{{ route('updateB', $mreq->id) }}" class="btn btn-info update-button"  style="margin-bottom: 5px">Update</a>

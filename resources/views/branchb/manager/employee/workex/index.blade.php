@@ -39,6 +39,7 @@
             <table class="table table-bordered">
                 <thead>
                   <tr>
+                    <th>Id</th>
                       <th>First Name</th>
                       <th>Last Name</th>
                       <th>Address</th>
@@ -47,13 +48,13 @@
                       <th>Phone</th>
                       <th>Email</th>
                       <th>Status</th>
-
                   </tr>
               </thead>
               <tbody> 
     
                   @foreach ($wex as $workex)
                   <tr>
+                    <td>{{ $workex->id}}</td>
                       <td>{{ $workex->fname}}</td>
                       <td>{{ $workex->lname}}</td>
                       <td>{{ $workex->address}}</td>
@@ -69,11 +70,9 @@
                         <span class="">{{$workex->status}}</span>
                       @endif</td>
                   </tr>
-                   
-                
-                  @endforeach
-               
                   
+                  @endforeach
+       
               </tbody>
             </table>
           </div>

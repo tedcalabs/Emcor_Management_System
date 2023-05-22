@@ -65,6 +65,31 @@ class ScheduleBController extends Controller
         return view('branchb.technician.shcedule.completed', compact('data', 'search'));
     }
 
+    public function ViewDataC($id)
+    {
+        $data = Maintenance::select("*")
+        ->where([
+            ["branch", "=", 2],
+            ["acceptd", "=", 1],
+            ["status", "=", "completed"],
+        ])
+        
+        ->take(5)->find($id);
+        return view('branchb.technician.shcedule.showCompleted', compact('data'));
+    }
+
+    public function ViewData($id)
+    {
+        $data = Maintenance::select("*")
+        ->where([
+            ["branch", "=", 2],
+            ["acceptd", "=", 1],
+            ["status", "=", "pending"],
+        ])
+        
+        ->take(5)->find($id);
+        return view('branchb.technician.shcedule.show', compact('data'));
+    }
 
 
 }

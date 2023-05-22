@@ -8,51 +8,82 @@
 
 <div class="container">
     <div class="item item-6">
-    <div class="row">
-    
-        <div class="col">
-            <div class="card">
-                <div class="card-header font-bold text-2xl text-emerald-900">
-               
-                  <h2>Decline Service Request</h2>
-                </div>
-                <div class="card-body">
-                
-                    <form method="POST" action="{{ route('decline',$data->id)}} " enctype="multipart/form-data">
-                      
-                        @csrf
-                        @method('PUT')
-                   
-                        <div class="sm:col-span-6">
-                            <label for="name" class="block text-sm font-medium text-gray-700">Decline detail</label>
-                            <div class="mt-1">
-                                <input type="hidden" value="2" id="acceptd" name="acceptd">
-                                <input type="hidden" value="{{ $data->status}}" id="status" name="status"> 
-                                    <textarea type="text" id="message" name="message" value="{{ $data->message}}"
-                                        class="" @error('name')@enderror"></textarea>
-                                    </div>
-                            @error('name')
-                                <div class="text-sm text-red-400">{{ $message }}</div>  
-                            @enderror
-                        </div>
-                   
-               
-                      
-                     
-                        <div class="mt-6 p-4">
-                            <button type="submit"
-                                class="btn btn-danger  float-left bg-slate-400">Decline</button>
-                        </div>
-
-                        
-                    </form>
-               
+         <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title font-bold text-2xl text-emerald-900">Decline Request</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('decline', $data->id) }}" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+        
+                            
+                            <div class="row mb-3">
+                                <label for="name" class="col-sm-4 col-form-label">Name</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="name" name="name" value="{{ $data->name }}"
+                                        class="form-control @error('name') is-invalid @enderror" />
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+        
+                            <div class="row mb-3">
+                                <label for="phone" class="col-sm-4 col-form-label">Phone</label>
+                                <div class="col-sm-8">
+                                    <input type="hidden" value="2" id="acceptd" name="acceptd">
+                                    <input type="hidden" value="declined" id="status" name="status">
+                                    <input type="text" id="phone" name="phone" value="{{ $data->phone }}"
+                                        class="form-control @error('phone') is-invalid @enderror" />
+                                    @error('phone')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>  
+        
+                            <div class="row mb-3">
+                                <label for="address" class="col-sm-4 col-form-label">Address</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="address" name="address" value="{{ $data->address }}"
+                                        class="form-control @error('address') is-invalid @enderror" />
+                                    @error('address')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="description" class="col-sm-4 col-form-label">Request Detail</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="description" name="description" value="{{ $data->description }}"
+                                        class="form-control @error('description') is-invalid @enderror" />
+                                    @error('description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="message" class="col-sm-4 col-form-label">Reason for Decline</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="message" name="message"
+                                        class="form-control @error('message') is-invalid @enderror" />
+                                    @error('message')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col">
+                                    <button type="submit" class="btn btn-info float-end submit-button">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-   
-</div>
-                
+        </div>              
 </div>  
 </div>
 @endsection

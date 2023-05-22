@@ -18,18 +18,21 @@ class MechanicBController extends Controller
     {
 
         $allsched = DB::table('maintenances')->where([
-            ["branch", "=", 1],
-            ["status", "=", "pending"],
+            ["branch", "=", 2],
+            ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
         ])
             ->count();
         $pending = DB::table('maintenances')->where([
-            ["branch", "=", 1],
+            ["branch", "=", 2],
             ["acceptd", "=", 1],
+            ["status", "=", "pending"],
+            ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
         ])
             ->count();
         $completed = DB::table('maintenances')->where([
-            ["branch", "=", 1],
+            ["branch", "=", 2],
             ["status", "=", "completed"],
+            ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
         ])
         ->count();
         return view('branchb.mechanic.index',['allsched' => $allsched, 'pending' => $pending, 'completed' => $completed]);

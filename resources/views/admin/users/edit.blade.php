@@ -42,12 +42,12 @@
                             </div>    
                     <div class="row">
                             <div class="col-4  form-group">
-                                <label for="phone" class="form-label">Birthday</label>
+                                <label for="bdate" class="form-label">Birthday</label>
                                 <div class="mt-1">
-                                    <input type="text" id="phone" name="phone" value="{{ $user->bdate }}"
-                                    class="form-control @error('phone') border-red-400 @enderror" />
+                                    <input type="text" id="bdate" name="bdate" value="{{ $user->bdate }}"
+                                    class="form-control @error('bdate') border-red-400 @enderror" />
                             </div>
-                            @error('phone')
+                            @error('bdate')
                                 <div class="text-sm text-red-400">{{ $message }}</div>
                             @enderror
                         </div>  
@@ -63,7 +63,7 @@
                             </div>
                               
                             <div class="col-4  form-group">
-                                <label for="email" class="form-label"> Email </label>
+                                <label for="email" class="form-label"> Email/Username</label>
                                 <div class="mt-1">
                                     <input type="email" id="email" name="email" value="{{ $user->email }}"
                                     class="form-control @error('email') border-red-400 @enderror" />

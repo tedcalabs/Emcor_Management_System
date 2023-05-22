@@ -10,10 +10,10 @@
       
         <div class="row">
             <div class="col-4" style="">
-                <a href="{{ route('accept') }}" class="btn btn-info" style="float:left">Acceted Request</a>
+                <a href="{{ route('accept') }}" class="btn btn-primary edit-button" style="float:left">Acceted Request</a>
             </div>
             <div class="col-4" style="">
-                <span class="head">Whitelines Request list</span>
+               <a href="{{ route('mreq')}}"> <span class="head" style="color: black;">Whitelines Request list</span></a>
             </div>
           
             <div class="col-4" style="margin-bottom: 1rem; margin-left: 8rem; width:15rem; float:right;">
@@ -40,14 +40,13 @@
          <table class="table table-bordered">
              <thead>
                <tr>
-                <th>Id</th>
+                    <th>Id</th>
                    <th>Name</th>
                    <th>Address</th>
                    <th>Contact Number</th>
                    <th>Request Detail</th>
                    <th>Action</th>
                    <th>Edit</th>
-
                </tr>
            </thead>
            <tbody> 
@@ -68,7 +67,7 @@
                    <td>
                        <div class=" ">
                            <a href="{{ route('updateReq', $item->id) }}" class="btn btn-info accept-button" style="margin-bottom: 5px">Accept</a> <br>
-                           <a href="{{ route('decline.request', $item->id) }}" class="btn btn-danger" style="margin-bottom: 5px">Decline</a>
+                           <a href="{{ route('declinew.request', $item->id) }}" class="btn btn-danger" style="margin-bottom: 5px">Decline</a>
 
                        </div>
 

@@ -66,4 +66,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class, 'roles_users', 'roles_id', 'users_id');
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(Maintenance::class, 'technician_id');
+    }
+
+    public function requests()
+    {
+        return $this->hasMany(Maintenance::class, 'customer_id');
+    }
 }

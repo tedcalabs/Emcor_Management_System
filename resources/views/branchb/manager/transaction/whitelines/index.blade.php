@@ -15,14 +15,14 @@
           <div class="head">
             
             
-            <a href="{{ route('whitelines.tansaction') }}" style="text-decoration: none;">
+            <a href="{{ route('whitelinesb.tansaction') }}" style="text-decoration: none;">
               <span class="head" style="color: black;">  Whitelines Transactions</span>
           </a>
           
           </div>
       </div>
       <div class="col-4">
-          <form method="GET" action="{{ route('whitelines.tansaction') }}">
+          <form method="GET" action="{{ route('whitelinesb.tansaction') }}">
               <div class="input-group">
                   <input type="text" name="search" class="form-control" placeholder="Search...">
                   <button class="btn btn-outline-secondary" type="submit">Search</button>
@@ -42,32 +42,25 @@
                     <th>Id</th>
                       <th>Customers Name</th>
                       <th>Address</th>
-                      <th>Contact Number</th>
-                      <th>Request Detail</th>
-                      <th>Technician Assigned</th>
                       <th>Servicing Date</th>
-                      <th>Date Completed</th>
-                      <th>Assesment</th>
-
+                      <th>Technician Assigned</th>
                   </tr>
               </thead>
               <tbody> 
     
-                  @foreach ($data as $wtrans)
-                  <tr>
-                    <td>{{ $wtrans->id}}</td>
-                      <td>{{ $wtrans->name}}</td>
-                      <td>{{ $wtrans->address}}</td>
-                      <td>{{ $wtrans->phone}}</td>
-                      <td>{{ $wtrans->description}}</td>
-                      <td>{{ $wtrans->technician}}</td>
-                      <td>{{ $wtrans->req_date}}</td>
-                      <td>{{ $wtrans->date_completed}}</td>
-                      <td>{{$wtrans->assessment}}</td>
-                  </tr>
-                   
-                
-                  @endforeach
+                @foreach ($data as $wtrans)
+                <tr>
+                  <td>
+                  
+                      {{ $wtrans->id}} <br>
+                     <a href="{{ route('BShowDumaRequestMW', $wtrans->id) }}"> <i class="fa-solid fa-book icons"  style="color: red;"></i></a><br>
+                  </td>
+                    <td>{{ $wtrans->name}}</td>
+                    <td>{{ $wtrans->address}}</td>
+                    <td>{{ $wtrans->reqdate}}</td>
+                    <td>{{ $wtrans->technician}}</td>
+                </tr>   
+                @endforeach
                
                   
               </tbody>

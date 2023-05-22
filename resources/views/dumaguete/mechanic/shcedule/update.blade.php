@@ -129,6 +129,7 @@
                     <div class="col-12 form-group">
                         <label for="description" class="form-label">Trouble</label>
                         <div class="mt-1">
+                            <input type="hidden" value="completed" id="status" name="status">
                             <input type="text" id="description" name="description" value="{{$data->description}}"
                                    class="form-control @error('description') is-invalid @enderror" />
                         </div>
@@ -139,17 +140,7 @@
                 </div>
                 <div class="row">
 
-                    <div class="col-4 form-group">
-                        <label for="technician" class="form-label">Technician</label>
-                        <div class="mt-1">
-                            <input type="hidden" value="completed" id="status" name="status">
-                            <input type="technician" id="technician" name="technician" value="{{$data->technician}}"
-                                   class="form-control @error('technician') is-invalid @enderror" />
-                        </div>
-                        @error('technician')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+           
                     <div class="col-4 form-group">
                         <label for="req_date" class="form-label">Servicing Date</label>
                         <div class="mt-1">

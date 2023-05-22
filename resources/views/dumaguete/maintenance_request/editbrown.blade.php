@@ -21,9 +21,9 @@
                             <div class="row mb-3">
                                 <label for="technician" class="col-sm-4 col-form-label">Choose Technician</label>
                                 <div class="col-sm-8">
-                                    <select class="form-select" id="technician" name="technician" aria-label="Choose Technician">
+                                    <select class="form-select" id="technician_id" name="technician_id" aria-label="Choose Technician">
                                         @foreach ($technician as $tech)
-                                            <option value="{{ $tech->fname }} {{ $tech->lname }}">{{ $tech->fname }} {{ $tech->lname }}</option>
+                                            <option value="{{ $tech->id}}">{{ $tech->fname }} {{ $tech->lname }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -88,7 +88,7 @@
             
                             <div class="row mt-4">
                                 <div class="col">
-                                    <button type="submit" class="btn btn-info float-start">Submit</button>
+                                    <button type="submit" class="btn btn-info float-end submit-button">Submit</button>
                                 </div>
                             </div>
                         </form>

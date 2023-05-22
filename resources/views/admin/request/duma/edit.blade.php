@@ -75,7 +75,7 @@
                     </div>
                     
                     <div class="mb-3 row">
-                      <label for="req_date" class="col-sm-4 col-form-label">Date</label>
+                      <label for="req_date" class="col-sm-4 col-form-label">Date of servicing</label>
                       <div class="col-sm-8">
                         <input type="datetime-local" id="req_date" name="req_date" class="form-control" value="{{ $data->req_date }}" />
                       </div>
@@ -91,7 +91,7 @@
                       </div>
                     </div>
                     <div class="mt-6 p-4">
-                      <button type="submit" class="btn btn-info float-start bg-slate-400">Update</button>
+                      <button type="submit" class="btn btn-primary  float-end submit-button">Submit</button>
                     </div>
                   </form>
                 </div>

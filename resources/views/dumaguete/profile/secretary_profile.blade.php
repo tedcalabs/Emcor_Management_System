@@ -40,7 +40,7 @@
                               @method('PUT')
                               <div class="sm:col-span-6">
                                   <!-- Custom button to trigger file input field -->
-                                  <button type="button" class="btn btn-info" onclick="document.getElementById('profile-pic').click()">Select Image</button>
+                                  <button type="button" class="btn btn-success" onclick="document.getElementById('profile-pic').click()">Change Photo</button>
                                   <!-- Hidden file input field -->
                                   <input type="file" id="profile-pic" name="picture" class="visually-hidden" onchange="document.getElementById('submit-btn').click()">
                               </div>
@@ -115,7 +115,7 @@
                           </div>
                         </div>
                         <div class="form-group row">
-                          <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                          <label for="inputEmail" class="col-sm-2 col-form-label">Username</label>
                           <div class="col-sm-10">
                             <input type="text" class="form-control" id="email" placeholder="Email" value="{{Auth::user()->email}}" name="email">
                             <span class="text-danger error-text email_error"></span>
@@ -123,7 +123,7 @@
                         </div>
                         <div class="form-group row">
                           <div class="offset-sm-2 col-sm-10">
-                            <button type="submit" class="btn btn-success text-black">Save Changes</button>
+                            <button type="submit" class="btn btn-success">Save Changes</button>
                           </div>
                         </div>
                       </form>

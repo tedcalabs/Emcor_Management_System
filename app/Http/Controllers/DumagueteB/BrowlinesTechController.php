@@ -15,23 +15,24 @@ class BrowlinesTechController extends Controller
 {
     public function index()
     {
+        $technician = Auth::user();
         $allsched = DB::table('maintenances')->where([
             ["branch", "=", 1],
             ["acceptd", "=", 1],
-            ["technician", "=", Auth::user()->fname." ".Auth::user()->lname],
+            ["technician_id", "=", $technician->id]
         ])
             ->count();
         $pending = DB::table('maintenances')->where([
             ["branch", "=", 1],
             ["acceptd", "=", 1],
             ["status", "=", "pending"],
-            ["technician", "=", Auth::user()->fname." ".Auth::user()->lname],
+            ["technician_id", "=", $technician->id]
         ])
             ->count();
         $completed = DB::table('maintenances')->where([
             ["branch", "=", 1],
             ["status", "=", "completed"],
-            ["technician", "=", Auth::user()->fname." ".Auth::user()->lname],
+            ["technician_id", "=", $technician->id]
         ])
         ->count();
         return view('dumaguete.brownlinestech.index',['allsched' => $allsched, 'pending' => $pending, 'completed' => $completed]);
@@ -84,7 +85,7 @@ class BrowlinesTechController extends Controller
             'bdate' => 'required',
             'phone' => 'required',
             'gender' => 'required',
-            'email' => 'required|email|unique:users,email,'. Auth::user()->id,
+            'email' => 'required|unique:users,email,'. Auth::user()->id,
 
         ]);
 

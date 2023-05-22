@@ -54,7 +54,7 @@
                   <td>{{ $wtrans->name}}</td>
                   <td>{{ $wtrans->address}}</td>
                   <td>{{ $wtrans->phone}}</td>
-                  <td>{{ $wtrans->technician}}</td>
+                  <td>{{ $wtrans->technician_fname }} {{ $wtrans->technician_lname }}</td>
               </tr>   
               @endforeach
           </tbody>

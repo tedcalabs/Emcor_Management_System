@@ -9,7 +9,7 @@
     <div class="item item-9">
         <div class="row">
             <div class="col-4" style="">
-                <a href="{{ route('categories.create')}}" class="btn btn-info" style="float:left">Create Category</a>
+                <a href="{{ route('categories.create')}}" class="btn btn-primary edit-button" style="float:left">Create Category</a>
             </div>
             <div class="col-4" style="">
                 <span class="head">Categories</span>
@@ -30,7 +30,7 @@
               <table class="table table-bordered">
                   <thead>
                     <tr>
-                       
+                        <th>Id</th>
                         <th>Name</th>
                         <th>Discription</th>
                         <th>Action</th>
@@ -40,7 +40,7 @@
                 <tbody>
                     @foreach ($categories as $category)
                     <tr>
-                      
+                        <td>{{ $category->id}}</td>
                         <td>{{ $category->name}}</td>
                         {{-- <td>
                       <img src="{{ Storage::url($category->image) }}" width="70px" height="70px" alt="Image">

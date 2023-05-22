@@ -27,10 +27,15 @@ return new class extends Migration
             $table->tinyInteger('acceptd')->nullable();
             $table->datetime('req_date')->nullable();
             $table->datetime('date_completed')->nullable();
+            $table->unsignedBigInteger('technician_id')->nullable();
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->foreign('technician_id')->references('id')->on('users');
             $table->string('technician')->nullable();
             $table->string('status')->nullable();
             $table->string('message')->nullable();
             $table->string('assessment')->nullable();
+            $table->string('image')->nullable();
+            $table->string('reference_no')->nullable();
             $table->timestamps();
         });
     }

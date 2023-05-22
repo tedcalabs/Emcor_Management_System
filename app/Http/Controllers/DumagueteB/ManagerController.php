@@ -44,30 +44,53 @@ public function index()
     return view('dumaguete.manager.index', ['total' => $total,'pending' => $pending,'accepted' => $accepted,'completed' => $completed, 'declined' => $declined, ]);   
 }
 
+// public function getWhitelines(Request $request)
+// {
+//     $keyword = $request->input('search');
+//     $query = Maintenance::select("*")
+//         ->where([
+//             ["branch", "=", 1],
+//             ["category", "=", "Whitelines"]
+//         ]);
+//     if ($keyword) {
+//         $query->where(function($q) use ($keyword) {
+//             $q->where('name', 'LIKE', "%$keyword%")
+//               ->orWhere('description', 'LIKE', "%$keyword%");
+//         });
+//     }
+//     $data = $query->paginate(5);
+//     return view('dumaguete.manager.transaction.whitelines.index', compact('data', 'keyword'));
+// }
 public function getWhitelines(Request $request)
 {
     $keyword = $request->input('search');
-    $query = Maintenance::select("*")
+    
+    $query = Maintenance::select("maintenances.*", "users.fname as technician_fname", "users.lname as technician_lname")
+        ->leftJoin('users', 'maintenances.technician_id', '=', 'users.id')
         ->where([
-            ["branch", "=", 1],
-            ["category", "=", "Whitelines"]
+            ["maintenances.branch", "=", 1],
+            ["maintenances.category", "=", "Whitelines"]
         ]);
+    
     if ($keyword) {
-        $query->where(function($q) use ($keyword) {
-            $q->where('name', 'LIKE', "%$keyword%")
-              ->orWhere('description', 'LIKE', "%$keyword%");
+        $query->where(function ($q) use ($keyword) {
+            $q->where('maintenances.name', 'LIKE', "%$keyword%")
+                ->orWhere('maintenances.description', 'LIKE', "%$keyword%")
+                ->orWhere('users.fname', 'LIKE', "%$keyword%")
+                ->orWhere('users.lname', 'LIKE', "%$keyword%");
         });
     }
+    
     $data = $query->paginate(5);
     return view('dumaguete.manager.transaction.whitelines.index', compact('data', 'keyword'));
 }
-
 public function ViewData($id)
 {
-    $data = Maintenance::select("*")
+    $data = Maintenance::select("maintenances.*", "users.fname as technician_fname", "users.lname as technician_lname")
+    ->leftJoin('users', 'maintenances.technician_id', '=', 'users.id')
     ->where([
-        ["branch", "=", 1],
-        ["category", "=", "Whitelines"]
+        ["maintenances.branch", "=", 1],
+        ["maintenances.category", "=", "Whitelines"]
     ])
     
     ->take(5)->find($id);
@@ -80,27 +103,34 @@ public function ViewData($id)
 public function getBrownlines(Request $request)
 {
     $keyword = $request->input('search');
-    $query = Maintenance::select("*")
+    
+    $query = Maintenance::select("maintenances.*", "users.fname as technician_fname", "users.lname as technician_lname")
+        ->leftJoin('users', 'maintenances.technician_id', '=', 'users.id')
         ->where([
-            ["branch", "=", 1],
-            ["category", "=", "Brownlines"]
+            ["maintenances.branch", "=", 1],
+            ["maintenances.category", "=", "Brownlines"]
         ]);
+    
     if ($keyword) {
-        $query->where(function($q) use ($keyword) {
-            $q->where('name', 'LIKE', "%$keyword%")
-              ->orWhere('description', 'LIKE', "%$keyword%");
+        $query->where(function ($q) use ($keyword) {
+            $q->where('maintenances.name', 'LIKE', "%$keyword%")
+                ->orWhere('maintenances.description', 'LIKE', "%$keyword%")
+                ->orWhere('users.fname', 'LIKE', "%$keyword%")
+                ->orWhere('users.lname', 'LIKE', "%$keyword%");
         });
     }
+    
     $data = $query->paginate(5);
     return view('dumaguete.manager.transaction.brownlines.index', compact('data', 'keyword'));
 }
 
 public function ViewDataMB($id)
 {
-    $data = Maintenance::select("*")
+    $data = Maintenance::select("maintenances.*", "users.fname as technician_fname", "users.lname as technician_lname")
+    ->leftJoin('users', 'maintenances.technician_id', '=', 'users.id')
     ->where([
-        ["branch", "=", 1],
-        ["category", "=", "Brownlines"]
+        ["maintenances.branch", "=", 1],
+        ["maintenances.category", "=", "Brownlines"]
     ])
     
     ->take(5)->find($id);
@@ -110,27 +140,34 @@ public function ViewDataMB($id)
 public function getMechanic(Request $request)
 {
     $keyword = $request->input('search');
-    $query = Maintenance::select("*")
+    
+    $query = Maintenance::select("maintenances.*", "users.fname as technician_fname", "users.lname as technician_lname")
+        ->leftJoin('users', 'maintenances.technician_id', '=', 'users.id')
         ->where([
-            ["branch", "=", 1],
-            ["category", "=", "Mechanic"]
+            ["maintenances.branch", "=", 1],
+            ["maintenances.category", "=", "Mechanic"]
         ]);
+    
     if ($keyword) {
-        $query->where(function($q) use ($keyword) {
-            $q->where('name', 'LIKE', "%$keyword%")
-              ->orWhere('description', 'LIKE', "%$keyword%");
+        $query->where(function ($q) use ($keyword) {
+            $q->where('maintenances.name', 'LIKE', "%$keyword%")
+                ->orWhere('maintenances.description', 'LIKE', "%$keyword%")
+                ->orWhere('users.fname', 'LIKE', "%$keyword%")
+                ->orWhere('users.lname', 'LIKE', "%$keyword%");
         });
     }
+    
     $data = $query->paginate(5);
     return view('dumaguete.manager.transaction.mechanic.index', compact('data', 'keyword'));
 }
 
 public function ViewDataMM($id)
 {
-    $data = Maintenance::select("*")
+    $data = Maintenance::select("maintenances.*", "users.fname as technician_fname", "users.lname as technician_lname")
+    ->leftJoin('users', 'maintenances.technician_id', '=', 'users.id')
     ->where([
-        ["branch", "=", 1],
-        ["category", "=", "Mechanic"]
+        ["maintenances.branch", "=", 1],
+        ["maintenances.category", "=", "Mechanic"]
     ])
     
     ->take(5)->find($id);
@@ -169,7 +206,7 @@ public function emWl(Request $request)
               ->orWhere('email', 'LIKE', "%$keyword%");
         });
     }
-    $wtec = $query->paginate(2);
+    $wtec = $query->paginate(4);
     return view('dumaguete.manager.employee.whitelinetec.index', compact('wtec', 'keyword'));
 }
 
@@ -187,7 +224,7 @@ public function emBl(Request $request)
               ->orWhere('email', 'LIKE', "%$keyword%");
         });
     }
-    $wbl = $query->paginate(2);
+    $wbl = $query->paginate(4);
     return view('dumaguete.manager.employee.brownlinetec.index', compact('wbl', 'keyword'));
 }
 
@@ -222,7 +259,7 @@ public function emMec(Request $request)
               ->orWhere('email', 'LIKE', "%$keyword%");
         });
     }
-    $mec = $query->paginate(2);
+    $mec = $query->paginate(4);
     return view('dumaguete.manager.employee.mechanic.index', compact('mec', 'keyword'));
 }
 
@@ -240,7 +277,7 @@ public function getCustomerList(Request $request)
               ->orWhere('email', 'LIKE', "%$keyword%");
         });
     }
-    $customers = $query->paginate(2);
+    $customers = $query->paginate(5);
     return view('dumaguete.manager.customer.index', compact('customers', 'keyword'));
 }
 
@@ -290,7 +327,7 @@ function updateInfo(Request $request)
         'bdate' => 'required',
         'phone' => 'required',
         'gender' => 'required',
-        'email' => 'required|email|unique:users,email,'. Auth::user()->id,
+        'email' => 'required|unique:users,email,'. Auth::user()->id,
 
     ]);
 

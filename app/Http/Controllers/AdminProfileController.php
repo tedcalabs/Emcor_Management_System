@@ -49,7 +49,7 @@ class AdminProfileController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,'. Auth::guard('admin')->user()->id,
+            'email' => 'required|unique:users,email,'. Auth::guard('admin')->user()->id,
 
         ]);
 

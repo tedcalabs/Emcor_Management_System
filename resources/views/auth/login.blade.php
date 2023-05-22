@@ -253,7 +253,7 @@ color:#040303 ;
                       <div class="collapse navbar-collapse">
                     
                       </div>    
-                         <a class="btn btn-light action-button" type="submit" role="button" href="/register">Signup</a>
+                         {{-- <a class="btn btn-light action-button" type="submit" role="button" href="/register">Signup</a> --}}
                       </div>
                 </div>
             </nav>
@@ -279,8 +279,8 @@ color:#040303 ;
                               @endif
                               @csrf
                               <div class="form-group">
-                                  <label for="InputEmail">Email address</label>
-                                  <input type="email"  id="InputEmail" name="email" placeholder="Enter email" value="{{ old ('email') }}">
+                                  <label for="InputEmail">Username</label>
+                                  <input type="text"  id="email" name="email" class="form-control" placeholder="Enter Username" value="{{ old ('email') }}">
                                   @error('email')
                                   <span class="text-danger">{{$message}}</span>
                                   @enderror
@@ -288,7 +288,7 @@ color:#040303 ;
                     
                               <div class="form-group">
                                   <label for="password">Password</label>
-                                  <input type="password"  id="InputPassword" name="password" placeholder="Password" value="{{ old ('password') }}">
+                                  <input type="password"  id="InputPassword"  class="form-control"  name="password" placeholder=" Enter Password" value="{{ old ('password') }}">
                                   @error('password')
                                   <span class="text-danger">{{$message}}</span>
                                   @enderror

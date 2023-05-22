@@ -1,7 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\BaywanUser;
 use App\Http\Controllers\SecretaryController;
 use App\Http\Controllers\Admin\UserController;
@@ -22,7 +21,6 @@ use App\Http\Controllers\BranchB\BrownlinesTController;
 use App\Http\Controllers\BranchB\TechnicianBController;
 use App\Http\Controllers\DumagueteB\MechanicController;
 use App\Http\Controllers\Technician\ScheduleController;
-use App\Http\Controllers\AdminPanel\AdminUserController;
 use App\Http\Controllers\BranchB\MaintenanceBController;
 use App\Http\Controllers\DumagueteB\WorkExpertController;
 use App\Http\Controllers\Secretary\MaintenanceController;
@@ -57,6 +55,7 @@ Route::prefix('admin')->group(function () {
         'bayawan.mtnc.request'
     )->middleware('admin');
 
+    //Route::post('/register-new-user', [RegisteredUserController::class, 'store'])->middleware('admin');
 
     Route::get('/duma-request', [AdminController::class, 'getDumaRequest'])->name(
         'duma.mtnc.request'
@@ -147,6 +146,11 @@ Route::prefix('bayawan')->group(function () {
 Route::group(['prefix' => 'bsecretary', 'middleware' => ['bsecretary']], function () {
 
 
+    Route::get('/show-reqd/{id}', [MaintenanceBController::class, 'ViewData'])->name('BShowDumaRequestMWx');
+
+    Route::get('/show-reqdbh/{id}', [MaintenanceBController::class, 'ViewDataBL'])->name('BShowDumaRequestMBds');
+
+    Route::get('/show-reqdbmh/{id}', [MaintenanceBController::class, 'ViewDataML'])->name('BShowDumaRequestMBL');
     
     Route::get('/scustomers-list', [BSecretaryController::class, 'getCList'])->name('cuslistb');
     Route::get('/SemMec', [BSecretaryController::class, 'SemMec'])->name('mechanicSb');
@@ -211,18 +215,14 @@ Route::group(['prefix' => 'workexpertbwyn', 'middleware' => ['workexpertb']], fu
     Route::get('/brownline-request', [WorkExBScheduleController::class, 'getBrownlines'])->name('getBrownlinesb.request');
 });
 
-
-
-
-
-
-
-
-
-
-
 //MECHANIC ROUTES
 Route::group(['prefix' => 'mechanicbyn', 'middleware' => ['mechanicb']], function () {
+
+
+  
+    Route::get('/show-reqdtd/{id}', [MechanicBScheduleController::class, 'ViewDataC'])->name('BShowDumaRequestJHCX');
+    
+    Route::get('/show-reqd/{id}', [MechanicBScheduleController::class, 'ViewData'])->name('BShowDumaRequestJHX'); 
 
     Route::get('/mechanic-bywn-Dashboard', [MechanicBController::class, 'index'])->name('mechanicbywn.dashboard');
     Route::get('/mechanicProfile', [MechanicBController::class, 'profile'])->name('mechanicbywn.profile');
@@ -248,6 +248,13 @@ Route::group(['prefix' => 'mechanicbyn', 'middleware' => ['mechanicb']], functio
 //TECHNICIAN PROFILE ROUTES
 
 Route::group(['prefix' => 'technicianb', 'middleware' => ['btechnician', 'PreventBackHistory']], function () {
+
+
+
+  
+    Route::get('/show-reqdtd/{id}', [ScheduleBController::class, 'ViewDataC'])->name('BShowDumaRequestJHC');
+    
+    Route::get('/show-reqd/{id}', [ScheduleBController::class, 'ViewData'])->name('BShowDumaRequestJH');  
 
     //Route::get('dashboard', [TechnicianBController::class, 'index'])->name('secretary.dashboard');
     Route::get('profile', [TechnicianBController::class, 'profile'])->name('technicianb.profile');
@@ -289,6 +296,13 @@ Route::group(['prefix' => 'secretaryb', 'middleware' => ['bsecretary', 'PreventB
 
 Route::group(['prefix' => 'brownlinesTech', 'middleware' => ['brownlinesb']], function () {
 
+
+    
+
+  
+    Route::get('/show-reqdtd/{id}', [BrownlinesTController::class, 'ViewDataC'])->name('BLShowDumaRequestJHC');
+    
+    Route::get('/show-reqd/{id}', [BrownlinesTController::class, 'ViewData'])->name('BLShowDumaRequestJH');  
 
     Route::post('/change-password', [BrownLineTechProfileController::class, 'ChangePassword'])->name('BrownlinBywnChangePass');
     Route::post('update-browlinesTech-info', [BrownLineTechProfileController::class, 'UpdateInfo'])->name('BrownlinBywnUpdateInfo');
@@ -336,6 +350,13 @@ Route::group(['prefix' => 'managerb', 'middleware' => ['managerb']], function ()
     Route::get('/customers-list', [ManagerBController::class, 'getCustomerList'])->name('customerslistb');
     Route::post('update-manager-info', [ManagerBController::class, 'updateInfo'])->name('managerb.UpdateInfo');
     Route::post('change-password', [ManagerBController::class, 'changePassword'])->name('managerb.changepass');
+
+
+
+    Route::get('/show-reqd/{id}', [ManagerBController::class, 'ViewData'])->name('BShowDumaRequestMW');
+    Route::get('/show-reqdmb/{id}', [ManagerBController::class, 'ViewDataMB'])->name('BShowDumaRequestMB');
+    Route::get('/show-req-mechmm/{id}', [ManagerBController::class, 'ViewDataMM'])->name('BShowDumaRequestMM');
+
 
     Route::get('/logout', [ManagerBController::class, 'Logout'])->name('bbmanager.logout');
 });
@@ -391,7 +412,9 @@ Route::group(['prefix' => 'secretary', 'middleware' => ['secretary', 'auth', 'Pr
 
     //MAINTENANCE REQUESTS ROUTES------------------------------- -----------------------  ------------------------   
 
+    Route::get('/show-ac/{id}', [MaintenanceController::class, 'ViewDataAC'])->name('ShowDumaRequestAC');
 
+    Route::get('/show-dec/{id}', [MaintenanceController::class, 'ViewDataDC'])->name('ShowDumaRequestDC');
 
     Route::get('/show-reqd/{id}', [MaintenanceController::class, 'ViewData'])->name('ShowDumaRequestMWx');
 
@@ -410,7 +433,12 @@ Route::group(['prefix' => 'secretary', 'middleware' => ['secretary', 'auth', 'Pr
 
     Route::delete('/delete-req/{id}', [MaintenanceController::class, 'deleteReq'])->name('deleteReq');
 
-    //Route::get('/delete-req/{id}', [MaintenanceController::class, 'deleteReq'])->name('deleteReq');
+    Route::get('/declinew/{id}', [MaintenanceController::class, 'declinew'])->name('declinew.request');
+    Route::put('/declinew/{maintenancexzy}',[MaintenanceController::class, 'declineRequestw'])->name('declinew');
+
+
+
+
     Route::get('/update-req/{id}', [MaintenanceController::class, 'updateReq'])->name('updateReq');
     Route::get('/update-brown-req/{id}', [MaintenanceController::class, 'updateBrownReq'])->name('updateBrownReq');
     Route::get('/update-mech-req/{id}', [MaintenanceController::class, 'updateMechReq'])->name('updateMechReq');

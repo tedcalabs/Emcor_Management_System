@@ -7,7 +7,7 @@
 @section('request')
 
 <div class="container">
-    <div class="item item-5">
+    <div class="item item-15">
 
         <div class="row align-items-center">
             <div class="col-8">        
@@ -36,35 +36,30 @@
          <table class="table table-bordered">
              <thead>
                <tr>
-                <th>Id</th>          
-                   <th>Name</th>
-                   <th>Address</th>
-                   <th>Contact Number</th>
-                   <th>Request Detail</th>
-                   <th>Technician Assigned</th>
-                   <th>Schedule</th> 
-                   <th>Category</th> 
-                   <th>Status</th>                         
-                   <th>Action</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Contact Number</th>
+                <th>Request Detail</th>
+                <th>Action</th>
+            
                </tr>
            </thead>
            <tbody> 
             @foreach ($data as $list)
                <tr>
-                 <td>{{ $list->id}}</td>
+                <td>
+                    {{ $list->id}} <br>
+                   <a href="{{ route('ShowDumaRequestAC', $list->id) }}"> <i class="fa-solid fa-book icons"  style="color: red;"></i></a><br>
+                </td>
                    <td>{{ $list->name}}</td>
                    <td>{{ $list->address}}</td>
-              
                    <td>{{ $list->phone}}</td>
-                
                    <td>{{ $list->description}}</td>
-                   <td>{{ $list->technician}}</td>
-                   <td>{{ \Carbon\Carbon::parse($list->req_date)->format('d/m/Y g:i:s A')}}</td>        
-                   <td>{{ $list->category}}</td>
-                   <td>{{ $list->status}}</td>
+                  
                    <td>
                     <div class=" ">
-                        <a href="{{ route('updateReq', $list->id) }}" class="btn btn-info edit-button"  style="margin-bottom: 5px">Edit</a>
+                     
                         <form method="GET"
                                 action="{{ route('deleteReq', $list->id) }}"
                                 onsubmit="return confirm('Are you sure?');">

@@ -22,6 +22,7 @@
              <table class="table table-bordered">
                  <thead>
                    <tr>
+                    <th>Id</th>
                        <th>Name</th>
                        <th>Address</th>
                        <th>Contact Number</th>
@@ -35,6 +36,7 @@
                <tbody> 
                 @foreach ($data as $mreq)
                    <tr>
+                    <td>{{ $mreq->id}}</td>
                        <td>{{ $mreq->name}}</td>
                        <td>{{ $mreq->address}}</td>
                   
@@ -58,21 +60,3 @@
             </div>
         </div>
  @endsection
-
-@section('script')
-
-    <script type="text/javascript">
-        $(document).ready(function(){
-
-            showRepair();
-
-            function showRepair(){
-           
-            }
-        })
-
-
-
-    </script>
-
-@endsection

@@ -1,20 +1,17 @@
-
-
 @extends('layouts.app')
 @include('admin.components.topbar')
- @include('admin.components.footer')
-    @include('components.sidebar')
+@include('admin.components.footer')
+@include('components.sidebar')
+
 @section('declined')
 
 <div class="container">
-    <div class="item item-5">
+    <div class="item item-15">
         <div class="" style=" margin-bottom:10px">
             
-            <span class="head">Declined Request list</span>
+         <a href="{{ route('declined.list')}}"> <span class="head" style="color: black;">Declined Request list</span></a>  
            
-            <a href="{{ route('mreq') }}" class="btn btn-info float-right" style="">Back</a>
-
-
+            <a href="{{ route('mreq') }}" class="btn btn-primary submit-button" style="float:right;">Back</a>
         </div>
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -26,39 +23,36 @@
          <table class="table table-bordered">
              <thead>
                <tr>
-                   <th>Id</th>
-                   <th>Name</th>
-                   <th>Address</th>
-                   <th>Contact Number</th>
-                   <th>Request Detail</th>
-                   <th>Schedule</th>   
-                   <th>Status</th>
-                                   
-                   <th>Action</th>
-
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Contact Number</th>
+                <th>Request Detail</th>
+                <th>Action</th>
                </tr>
            </thead>
            <tbody> 
-            @foreach ($data as $data)
+            @foreach ($data as $item)
                <tr>
-                   <td>{{ $data->id}}</td>
-                   <td>{{ $data->name}}</td>
-                   <td>{{ $data->address}}</td>
+                <td>
+                    {{ $item->id}} <br>
+                   <a href="{{ route('ShowDumaRequestDC', $item->id) }}"> <i class="fa-solid fa-book icons"  style="color: red;"></i></a><br>
+                  </td>
+                   <td>{{ $item->name}}</td>
+                   <td>{{ $item->address}}</td>
               
-                   <td>{{ $data->phone}}</td>
+                   <td>{{ $item->phone}}</td>
                 
-                   <td>{{ $data->description}}</td>
-                   <td>{{ $data->req_date}}</td>
-                   <td>{{ $data->status}}</td>
+                   <td>{{ $item->description}}</td>
                    <td>
                     <div class=" ">
                         <form method="GET"
-                                action="{{ route('deleteReq', $data->id) }}"
+                                action="{{ route('deleteReq', $item->id) }}"
                                 onsubmit="return confirm('Are you sure?');">
                             @csrf
                             @method('DELETE')
 
-                        <button type="submit" class="btn btn-danger text-black" style="margin-bottom: 5px">Delete</button>
+                        <button type="submit" class="btn btn-danger" style="margin-bottom: 5px">Delete</button>
                         
                     </form>
 
@@ -73,7 +67,11 @@
          </table>
    
         </div>
+        {{ $data->links() }}
+    </div>
+
         </div>
+    </div>
  @endsection
 
 @section('script')

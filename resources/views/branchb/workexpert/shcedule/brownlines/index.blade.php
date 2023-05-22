@@ -23,12 +23,13 @@
                  <thead>
                    <tr>
     
-                       <th>Name</th>
-                       <th>Address</th>
-                       <th>Contact Number</th>
-                       <th>Request Detail</th>
-                       <th>Servicing Schedule</th>  
-                       <th>Assigned Technician </th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Contact Number</th>
+                    <th>Request Detail</th>
+                    <th>Servicing Schedule</th>  
+                    <th>Assigned Technician </th>
                        
     
                    </tr>
@@ -37,6 +38,7 @@
                 @foreach ($data as $mreq)
                    <tr>
          
+                    <td>{{ $mreq->id}}</td>
                        <td>{{ $mreq->name}}</td>
                        <td>{{ $mreq->address}}</td>
                   

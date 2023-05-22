@@ -16,7 +16,7 @@
             </div>
           
             <div class="col-4" style="margin-bottom: 1rem; margin-left: 8rem; width:15rem; float:right;">
-                <form method="GET" action="{{ route('brownlines.req')}}">
+                <form method="GET" action="{{ route('brownlines.req.bwyn')}}">
                     <div class="input-group">
                         <input type="text" name="search" class="form-control" placeholder="Search...">
                         <div class="input-group-append">
@@ -36,27 +36,33 @@
  
          <table class="table table-bordered">
              <thead>
-               <tr>
-                  
-                   <th>Name</th>
-                   <th>Address</th>
-                   <th>Contact Number</th>
-                   <th>Request Detail</th>
-                   <th>Action</th>
-                   <th>Edit</th>
-
-               </tr>
+             
+                <tr>
+                    <th>Id</th>
+                       <th>Name</th>
+                       <th>Address</th>
+                       <th>Contact Number</th>
+                       <th>Request Detail</th>
+                       <th>Action</th>
+                       <th>Edit</th>
+    
+                   </tr>
            </thead>
            <tbody> 
             @foreach ($data as $item)
                <tr>
-                
+                <td>
+                    
+                    {{ $item->id}} <br>
+                   <a href="{{ route('BShowDumaRequestMBds', $item->id) }}"> <i class="fa-solid fa-book icons"  style="color: red;"></i></a><br>
+                </td>
                    <td>{{ $item->name}}</td>
                    <td>{{ $item->address}}</td>
               
                    <td>{{ $item->phone}}</td>
                 
                    <td>{{ $item->description}}</td>
+                
                 
                    <td>
                        <div class=" ">

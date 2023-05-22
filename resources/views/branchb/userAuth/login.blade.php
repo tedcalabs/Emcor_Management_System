@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{str_replace('_', '-', app()->getLocale())}}">
 
     <head>
         <meta charset="utf-8">
@@ -254,7 +254,7 @@
                       <div class="collapse navbar-collapse">
                     
                       </div>    
-                         <a class="btn btn-light action-button" type="submit" role="button" href="{{ route('bsec_registerForm') }}">Signup</a>
+                         {{-- <a class="btn btn-light action-button" type="submit" role="button" href="{{ route('bsec_registerForm') }}">Signup</a> --}}
                       </div>
                 </div>
             </nav>
@@ -281,7 +281,7 @@
                               @csrf
                               <div class="form-group">
                                   <label for="InputEmail">Email address</label>
-                                  <input type="email"  id="InputEmail" name="email" placeholder="Enter email" value="{{ old ('email') }}">
+                                  <input type="email"  id="InputEmail" name="email" class="form-control" placeholder="Enter email" value="{{ old ('email') }}">
                                   @error('email')
                                   <span class="text-danger">{{$message}}</span>
                                   @enderror
@@ -289,7 +289,7 @@
                     
                               <div class="form-group">
                                   <label for="password">Password</label>
-                                  <input type="password"  id="InputPassword" name="password" placeholder="Password" value="{{ old ('password') }}">
+                                  <input type="password"  id="InputPassword" class="form-control" name="password" placeholder="Password" value="{{ old ('password') }}">
                                   @error('password')
                                   <span class="text-danger">{{$message}}</span>
                                   @enderror

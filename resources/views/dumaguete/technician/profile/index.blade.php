@@ -30,7 +30,31 @@
       <section class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-3">
+
+                  <div class="col-md-3">
+              <!-- Profile Image -->
+              <div class="card card-profile">
+                  <div class="card-body box-profile">
+                      <div class="text-center">
+                          <img class="profile-user-img img-fluid img-circle admin_picture" src="{{  asset('uploads/profile/'.Auth::user()->picture) }}" alt="User profile picture"> 
+                          <p class="u_name"></p>
+                          <form method="POST" action="{{ route('tech.cphoto') }}" enctype="multipart/form-data">
+                              @csrf
+                              @method('PUT')
+                              <div class="sm:col-span-6">
+                                  <!-- Custom button to trigger file input field -->
+                                  <button type="button" class="btn btn-success" onclick="document.getElementById('admin-profile-pic').click()">Change Picture</button>
+                                  <!-- Hidden file input field -->
+                                  <input type="file" id="admin-profile-pic" name="picture" class="visually-hidden" onchange="document.getElementById('admin-submit-btn').click()">
+                              </div>
+                              <!-- Hidden submit button -->
+                              <button type="submit" id="admin-submit-btn" class="visually-hidden"></button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+            {{-- <div class="col-md-3">
   
               <!-- Profile Image -->
               <div class="card card-profile">
@@ -69,7 +93,7 @@
               <!-- /.card -->
   
           
-            </div>
+            </div> --}}
             <!-- /.col -->
             <div class="col-md-9">
               <div class="card">
@@ -131,7 +155,7 @@
                           </div>
                         </div>
                         <div class="form-group row">
-                          <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                          <label for="inputEmail" class="col-sm-2 col-form-label">Username</label>
                           <div class="col-sm-10">
                             <input type="text" class="form-control" id="email" placeholder="Email" value="{{Auth::user()->email}}" name="email">
                             <span class="text-danger error-text email_error"></span>

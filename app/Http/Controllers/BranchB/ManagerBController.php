@@ -57,10 +57,23 @@ class ManagerBController extends Controller
                   ->orWhere('description', 'LIKE', "%$keyword%");
             });
         }
-        $data = $query->paginate(2);
+        $data = $query->paginate(5);
         return view('branchb.manager.transaction.whitelines.index', compact('data', 'keyword'));
     }
     
+
+    public function ViewData($id)
+    {
+        $data = Maintenance::select("*")
+        ->where([
+            ["branch", "=", 2],
+            ["category", "=", "Whitelines"]
+        ])
+        
+        ->take(5)->find($id);
+        return view('branchb.manager.transaction.whitelines.show', compact('data'));
+    }
+
     public function getBrownlines(Request $request)
     {
         $keyword = $request->input('search');
@@ -75,8 +88,20 @@ class ManagerBController extends Controller
                   ->orWhere('description', 'LIKE', "%$keyword%");
             });
         }
-        $data = $query->paginate(2);
+        $data = $query->paginate(5);
         return view('branchb.manager.transaction.brownlines.index', compact('data', 'keyword'));
+    }
+
+    public function ViewDataMB($id)
+    {
+        $data = Maintenance::select("*")
+        ->where([
+            ["branch", "=", 2],
+            ["category", "=", "Brownlines"]
+        ])
+        
+        ->take(5)->find($id);
+        return view('branchb.manager.transaction.brownlines.show', compact('data'));
     }
     
 
@@ -102,11 +127,21 @@ class ManagerBController extends Controller
                   ->orWhere('description', 'LIKE', "%$keyword%");
             });
         }
-        $data = $query->paginate(2);
+        $data = $query->paginate(5);
         return view('branchb.manager.transaction.mechanic.index', compact('data', 'keyword'));
     }
     
+    public function ViewDataMM($id)
+{
+    $data = Maintenance::select("*")
+    ->where([
+        ["branch", "=", 2],
+        ["category", "=", "Mechanic"]
+    ])
     
+    ->take(5)->find($id);
+    return view('branchb.manager.transaction.mechanic.show', compact('data'));
+}
     
     
     public function emSec(Request $request)
@@ -140,7 +175,7 @@ class ManagerBController extends Controller
                   ->orWhere('email', 'LIKE', "%$keyword%");
             });
         }
-        $wtec = $query->paginate(2);
+        $wtec = $query->paginate(5);
         return view('branchb.manager.employee.whitelinetec.index', compact('wtec', 'keyword'));
     }
     

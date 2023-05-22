@@ -32,7 +32,7 @@
                         @enderror
                       </div>
                       <div class="mt-4">
-                        <button type="submit" class="btn btn-info">Update</button>
+                        <button type="submit" class="btn btn-info float-end submit-button">Update</button>
                       </div>
                     </form>
                   </div>

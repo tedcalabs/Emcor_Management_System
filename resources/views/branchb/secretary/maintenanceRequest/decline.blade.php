@@ -24,14 +24,14 @@
                         @method('PUT')
                    
                         <div class="sm:col-span-6">
-                            <label for="name" class="block text-sm font-medium text-gray-700">Decline detail</label>
+                            <label for="message" class="block text-sm font-medium text-gray-700">Decline detail</label>
                             <div class="mt-1">
                                 <input type="hidden" value="2" id="acceptd" name="acceptd">
                                 <input type="hidden" value="{{ $data->status}}" id="status" name="status"> 
-                                    <textarea type="text" id="message" name="message" value="{{ $data->message}}"
-                                        class="" @error('name')@enderror"></textarea>
+                                    <textarea type="text" id="message" name="message" 
+                                        class="" @error('message')@enderror"></textarea>
                                     </div>
-                            @error('name')
+                            @error('message')
                                 <div class="text-sm text-red-400">{{ $message }}</div>  
                             @enderror
                         </div>

@@ -177,4 +177,6 @@ class TechnicianBController extends Controller
         return view('branchb.technician.shcedule.index', compact('data', 'search'));
     }
 
+    
+
 }

@@ -36,7 +36,6 @@ class MechanicBScheduleController extends Controller
     
         $data = Maintenance::where([
             ["branch", "=", 2],
-            ["acceptd", "=", 1],
             ["status", "=", "completed"],
             ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
         ])
@@ -97,4 +96,31 @@ class MechanicBScheduleController extends Controller
         $data->delete();
         return back();
     }
+
+    public function ViewDataC($id)
+    {
+        $data = Maintenance::select("*")
+        ->where([
+            ["branch", "=", 2],
+            ["acceptd", "=", 1],
+            ["status", "=", "completed"],
+        ])
+        
+        ->take(5)->find($id);
+        return view('branchb.mechanic.shcedule.showCompleted', compact('data'));
+    }
+
+    public function ViewData($id)
+    {
+        $data = Maintenance::select("*")
+        ->where([
+            ["branch", "=", 2],
+            ["acceptd", "=", 1],
+            ["status", "=", "pending"],
+        ])
+        
+        ->take(5)->find($id);
+        return view('branchb.mechanic.shcedule.show', compact('data'));
+    }
+    
 }

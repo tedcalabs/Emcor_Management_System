@@ -6,9 +6,10 @@ use Carbon\Carbon;
 use App\Models\Admin;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
+use App\Rules\PasswordValidator;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Validator;
@@ -78,21 +79,29 @@ class AdminController extends Controller
     }
     public function getDumaRequest(Request $request)
     {
-        $search = $request->input('search');
+
+        $keyword = $request->input('search');
     
-        $data = Maintenance::select("*")
+        $q = Maintenance::select("maintenances.*", "users.fname as technician_fname", "users.lname as technician_lname")
+            ->leftJoin('users', 'maintenances.technician_id', '=', 'users.id')
             ->where([
-                ["branch", "=", 1],
-            ])
-            ->when($search, function ($query, $search) {
-                return $query->where(function ($query) use ($search) {
-                    $query->where('name', 'LIKE', "%$search%")
-                          ->orWhere('description', 'LIKE', "%$search%");
-                });
-            })
-            ->paginate(10);
+                ["maintenances.branch", "=", 1],
+             
+            ]);
+        
+        if ($keyword) {
+            $q->where(function ($query) use ($keyword) {
+                $query->where('maintenances.name', 'LIKE', "%$keyword%")
+                    ->orWhere('maintenances.description', 'LIKE', "%$keyword%")
+                    ->orWhere('users.fname', 'LIKE', "%$keyword%")
+                    ->orWhere('users.lname', 'LIKE', "%$keyword%");
+            });
+        }
+        
+        $data = $q->paginate(5);
     
-        return view('admin.request.duma.index', compact('data'));
+    
+        return view('admin.request.duma.index', compact('data','keyword'));
     }
     
 
@@ -100,19 +109,25 @@ class AdminController extends Controller
 
     public function getBayawanRequest(Request $request)
     {
-        $search = $request->input('q');
+        $keyword = $request->input('search');
     
-        $data = Maintenance::select("*")
+        $q = Maintenance::select("maintenances.*", "users.fname as technician_fname", "users.lname as technician_lname")
+            ->leftJoin('users', 'maintenances.technician_id', '=', 'users.id')
             ->where([
-                ["branch", "=", 2],
-            ])
-            ->when($search, function ($query, $search) {
-                return $query->where(function ($query) use ($search) {
-                    $query->where('name', 'LIKE', "%$search%")
-                        ->orWhere('description', 'LIKE', "%$search%");
-                });
-            })
-            ->paginate(4);
+                ["maintenances.branch", "=", 2],
+             
+            ]);
+        
+        if ($keyword) {
+            $q->where(function ($query) use ($keyword) {
+                $query->where('maintenances.name', 'LIKE', "%$keyword%")
+                    ->orWhere('maintenances.description', 'LIKE', "%$keyword%")
+                    ->orWhere('users.fname', 'LIKE', "%$keyword%")
+                    ->orWhere('users.lname', 'LIKE', "%$keyword%");
+            });
+        }
+        
+        $data = $q->paginate(5);
     
         return view('admin.request.bayawan.index', compact('data'));
     }
@@ -152,17 +167,23 @@ class AdminController extends Controller
     }
 
 
-
     public function AdminRegisterCreate(Request $request)
     {
-        //dd($request->all());
-        Admin::insert([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'created_at' => Carbon::now(),
-
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:admins',
+           // 'password' => 'required|min:8|confirmed',
+           'password' => ['required', 'confirmed', new PasswordValidator],
         ]);
+    
+        Admin::insert([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+            'created_at' => Carbon::now(),
+        ]);
+    
         return redirect()->route('login_form')->with('success', 'User Created Successfully!');
     }
+    
 }

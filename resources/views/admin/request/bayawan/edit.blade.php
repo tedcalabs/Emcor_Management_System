@@ -30,18 +30,11 @@
                     <div class="mb-3 row">
                       <label for="phone" class="col-sm-4 col-form-label">Phone</label>
                       <div class="col-sm-8">
-                        <input type="hidden" value="{{ $data->acceptd }}" id="acceptd" name="acceptd">
-                        <input type="hidden" value="{{ $data->status }}" id="status" name="status">
+                      
                         <input type="text" id="phone" name="phone" value="{{ $data->phone }}" class="form-control @error('phone') is-invalid  @enderror" />
                         @error('phone')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                      </div>
-                    </div>
-                    <div class="mb-3 row">
-                      <label for="req_date" class="col-sm-4 col-form-label">Date</label>
-                      <div class="col-sm-8">
-                        <input type="datetime-local" id="req_date" name="req_date" class="form-control" value="{{ $data->req_date }}" />
                       </div>
                     </div>
                     <div class="mb-3 row">
@@ -54,7 +47,42 @@
                       </div>
                     </div>
                     <div class="mb-3 row">
-                      <label for="description" class="col-sm-4 col-form-label">Description</label>
+                      <label for="model" class="col-sm-4 col-form-label">Model</label>
+                      <div class="col-sm-8">
+                        <input type="text" id="model" name="model" value="{{ $data->model }}" class="form-control @error('model') is-invalid  @enderror" />
+                        @error('model')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="serial_no" class="col-sm-4 col-form-label">Serial Number</label>
+                      <div class="col-sm-8">
+                        <input type="text" id="serial_no" name="serial_no" value="{{ $data->serial_no }}" class="form-control @error('serial_no') is-invalid  @enderror" />
+                        @error('serial_no')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="unit_info" class="col-sm-4 col-form-label">Unit Description</label>
+                      <div class="col-sm-8">
+                        <input type="text" id="unit_info" name="unit_info" value="{{ $data->unit_info }}" class="form-control @error('unit_info') is-invalid  @enderror" />
+                        @error('unit_info')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                      </div>
+                    </div>
+                    
+                    <div class="mb-3 row">
+                      <label for="req_date" class="col-sm-4 col-form-label">Date of servicing</label>
+                      <div class="col-sm-8">
+                        <input type="datetime-local" id="req_date" name="req_date" class="form-control" value="{{ $data->req_date }}" />
+                      </div>
+                    </div>
+                  
+                    <div class="mb-3 row">
+                      <label for="description" class="col-sm-4 col-form-label">Trouble</label>
                       <div class="col-sm-8">
                         <input type="text" id="description" name="description" value="{{ $data->description }}" class="form-control @error('description') is-invalid  @enderror" />
                         @error('description')
@@ -63,7 +91,7 @@
                       </div>
                     </div>
                     <div class="mt-6 p-4">
-                      <button type="submit" class="btn btn-info float-start bg-slate-400">Update</button>
+                      <button type="submit" class="btn btn-primary  float-end submit-button ">Submit</button>
                     </div>
                   </form>
                 </div>

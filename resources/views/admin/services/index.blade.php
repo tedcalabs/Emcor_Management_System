@@ -9,7 +9,7 @@
 <div class="item item-9">
     <div class="row">
         <div class="col-4" style="">
-            <a href="{{ route('services.create')}}" class="btn btn-info" style="float:left">Create New Services</a>
+            <a href="{{ route('services.create')}}" class="btn btn-primary edit-button" style="float:left">Create New Services</a>
         </div>
         <div class="col-4" style="">
             <span class="head">Emcor Services</span>
@@ -32,6 +32,7 @@
               <table class="table table-bordered">
                   <thead>
                     <tr>
+                        <th>Id</th>
                         <th>Name</th>
                         <th>Image</th>
                         <th>Discription</th>
@@ -44,7 +45,7 @@
                 <tbody>
                   
                     @foreach ($data as $service)
-                    <tr>
+                    <tr> <td>{{ $service->id}}</td>
                         <td>{{ $service->name}}</td>
                         <td>
                       <img src="{{  asset('uploads/services/'.$service->image) }}" width="70px" height="70px" alt="Image">

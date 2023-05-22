@@ -16,13 +16,25 @@ class RequestController extends Controller
 
     public function ViewData($id)
     {
-        $data = Maintenance::where('branch', 1)->take(5)->find($id);
+        $data = Maintenance::select("maintenances.*", "users.fname as technician_fname", "users.lname as technician_lname")
+        ->leftJoin('users', 'maintenances.technician_id', '=', 'users.id')
+        ->where([
+            ["maintenances.branch", "=", 1],
+        ])
+        
+        ->take(5)->find($id);
         return view('admin.request.duma.show', compact('data'));
     }
 
     public function ViewDataB($id)
     {
-        $data = Maintenance::where('branch', 2)->take(5)->find($id);
+        $data = Maintenance::select("maintenances.*", "users.fname as technician_fname", "users.lname as technician_lname")
+        ->leftJoin('users', 'maintenances.technician_id', '=', 'users.id')
+        ->where([
+            ["maintenances.branch", "=", 2],
+        ])
+        
+        ->take(5)->find($id);
         return view('admin.request.bayawan.show', compact('data'));
     }
 
@@ -76,7 +88,7 @@ class RequestController extends Controller
             'unit_info' => 'required',
             'description' => 'required',
             'req_date' => 'required',
-            'acceptd' => 'required',
+           
         ]);
 
         $data = Maintenance::find($id);
@@ -88,8 +100,7 @@ class RequestController extends Controller
         $data->address = $request->address;
         $data->description = $request->description;
         $data->req_date = $request->req_date;
-        $data->acceptd = $request->acceptd;
-        $data->technician = $request->technician;
+   
         $data->save();
         return redirect()->route('bayawan.mtnc.request')
             ->with('success', 'Request Updated');

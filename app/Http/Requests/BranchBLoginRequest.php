@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PasswordValidator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BranchBLoginRequest extends FormRequest
@@ -25,7 +26,7 @@ class BranchBLoginRequest extends FormRequest
     {
         return [
             'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            'password' => ['required', new PasswordValidator],
         ];
     }
 }
