@@ -25,7 +25,7 @@
       <section class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-3">
+            {{-- <div class="col-md-3">
   
               <!-- Profile Image -->
               <div class="card card-profile">
@@ -64,7 +64,31 @@
               <!-- /.card -->
   
           
-            </div>
+            </div> --}}
+
+            
+            <div class="col-md-3">
+              <!-- Profile Image -->
+              <div class="card card-profile">
+                  <div class="card-body box-profile">
+                      <div class="text-center">
+                          <img class="profile-user-img img-fluid img-circle admin_picture" src="{{  asset('uploads/profile/'.Auth::guard('bsec')->user()->picture) }}" alt="User profile picture"> 
+                          <p class="u_name">{{Auth::guard('bsec')->user()->name}}</p>
+                          <form method="POST" action="{{ route('update.secb.photo') }}" enctype="multipart/form-data">
+                              @csrf
+                              @method('PUT')
+                              <div class="sm:col-span-6">
+                                  <!-- Custom button to trigger file input field -->
+                                  <button type="button" class="btn btn-success" onclick="document.getElementById('admin-profile-pic').click()">Change Picture</button>
+                 
+                                  <input type="file" id="admin-profile-pic" name="picture" class="visually-hidden" onchange="document.getElementById('admin-submit-btn').click()">
+                              </div>
+                              <button type="submit" id="admin-submit-btn" class="visually-hidden"></button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
             <!-- /.col -->
             <div class="col-md-9">
               <div class="card">

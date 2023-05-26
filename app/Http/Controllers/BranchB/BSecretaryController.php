@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BranchB;
 
 
+use App\Models\User;
 use App\Models\BayawanUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -125,7 +126,7 @@ class BSecretaryController extends Controller
             'bdate' => 'required',
             'phone' => 'required',
             'gender' => 'required',
-            'email' => 'required|email|unique:users,email,' . Auth::guard('bsec')->user()->id,
+            'email' => 'required|unique:users,email,' . Auth::guard('bsec')->user()->id,
 
         ]);
 
@@ -158,24 +159,27 @@ class BSecretaryController extends Controller
 
         if (Auth::guard('bsec')->attempt(['email' => $check['email'], 'password' => $check['password'], 'role' => '1'])) {
 
-            return redirect()->route('managerb.dashboard')->with('error', 'Admin Login Successfully');
+            return redirect()->route('managerb.dashboard')->with('error', 'Manager Login Successfully');
         }
         
         else if(Auth::guard('bsec')->attempt(['email' => $check['email'], 'password' => $check['password'], 'role' => '2'])) {
 
-            return redirect()->route('bsec.dashboard')->with('error', 'Admin Login Successfully');
+            return redirect()->route('bsec.dashboard')->with('error', 'Secretary Login Successfully');
         } else if (Auth::guard('bsec')->attempt(['email' => $check['email'], 'password' => $check['password'], 'role' => '3'])) {
 
-            return redirect()->route('btec.dashboard')->with('error', 'Admin Login Successfully');
+            return redirect()->route('btec.dashboard')->with('error', 'Whitelines Technician Login Successfully');
+
         }else if (Auth::guard('bsec')->attempt(['email' => $check['email'], 'password' => $check['password'], 'role' => '4'])) {
 
-            return redirect()->route('brownlinesb.dashboard')->with('error', 'Admin Login Successfully');
+            return redirect()->route('brownlinesb.dashboard')->with('error', 'Brownlines Technician Login Successfully');
+
         }else if (Auth::guard('bsec')->attempt(['email' => $check['email'], 'password' => $check['password'], 'role' => '5'])) {
 
             return redirect()->route('mechanicbywn.dashboard')->with('error', 'Mechanic Login Successfully');
+
         }else if (Auth::guard('bsec')->attempt(['email' => $check['email'], 'password' => $check['password'], 'role' => '6'])) {
 
-            return redirect()->route('workexpertb.dashboard')->with('error', 'Mechanic Login Successfully');
+            return redirect()->route('workexpertb.dashboard')->with('error', 'Work Expert Login Successfully');
         }
    
         else {
@@ -229,7 +233,7 @@ class BSecretaryController extends Controller
                     ->orWhere('email', 'LIKE', "%$keyword%");
             });
         }
-        $data = $query->paginate(2);
+        $data = $query->paginate(10);
         return view('branchb.secretary.techlist.index', compact('data', 'keyword'));
     }
 
@@ -245,7 +249,7 @@ class BSecretaryController extends Controller
                     ->orWhere('email', 'LIKE', "%$keyword%");
             });
         }
-        $wbl = $query->paginate(2);
+        $wbl = $query->paginate(10);
         return view('branchb.secretary.btechlist.index', compact('wbl', 'keyword'));
     }
 
@@ -263,14 +267,14 @@ class BSecretaryController extends Controller
                     ->orWhere('email', 'LIKE', "%$keyword%");
             });
         }
-        $mec = $query->paginate(2);
+        $mec = $query->paginate(10);
         return view('branchb.secretary.mechlist.index', compact('mec', 'keyword'));
     }
 
     public function getCList(Request $request)
 {
     $keyword = $request->input('search');
-    $query = BayawanUser::select("*")
+    $query = User::select("*")
         ->where([
             ["role", "=", 0],
         ]);
@@ -280,7 +284,7 @@ class BSecretaryController extends Controller
               ->orWhere('email', 'LIKE', "%$keyword%");
         });
     }
-    $customers = $query->paginate(2);
+    $customers = $query->paginate(10);
     return view('branchb.secretary.customer.index', compact('customers', 'keyword'));
 }
 }

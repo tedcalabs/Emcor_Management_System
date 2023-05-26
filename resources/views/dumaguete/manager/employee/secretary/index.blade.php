@@ -46,7 +46,7 @@
                       <th>Gender</th>
                       <th>Birthday</th>
                       <th>Phone</th>
-                      <th>Email</th>
+                      <th>Username</th>
                       <th>Status</th>
 
                   </tr>
@@ -55,7 +55,7 @@
     
                   @foreach ($secretaries as $sec)
                   <tr>
-                    <td>{{ $sec->Id}}</td>
+                    <td>{{ $sec->id}}</td>
                       <td>{{ $sec->fname}}</td>
                       <td>{{ $sec->lname}}</td>
                       <td>{{ $sec->address}}</td>

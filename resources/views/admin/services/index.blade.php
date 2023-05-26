@@ -35,7 +35,7 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Image</th>
-                        <th>Discription</th>
+                        <th>Description</th>
                         <th>Category</th>
                         <th>Price</th>
                         <th>Action</th>
@@ -44,8 +44,14 @@
                 </thead>
                 <tbody>
                   
-                    @foreach ($data as $service)
-                    <tr> <td>{{ $service->id}}</td>
+                    @foreach ($services as $service)
+                    <tr> 
+                      
+                        <td>
+                    
+                            {{ $service->id}} <br>
+                           <a href="{{ route('showService', $service->id) }}"> <i class="fa-solid fa-book icons"  style="color: red;"></i></a><br>
+                        </td>
                         <td>{{ $service->name}}</td>
                         <td>
                       <img src="{{  asset('uploads/services/'.$service->image) }}" width="70px" height="70px" alt="Image">
@@ -98,10 +104,11 @@
                 </tbody>
               </table>
           </div>
-          {{ $data->links() }}
+          <div class="pagination-links">
+            {{ $services->links() }}
         </div>
-     
+        
+        </div>
     </div>
-</div>
 
 @endsection

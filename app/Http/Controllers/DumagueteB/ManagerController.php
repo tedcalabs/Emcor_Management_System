@@ -44,23 +44,7 @@ public function index()
     return view('dumaguete.manager.index', ['total' => $total,'pending' => $pending,'accepted' => $accepted,'completed' => $completed, 'declined' => $declined, ]);   
 }
 
-// public function getWhitelines(Request $request)
-// {
-//     $keyword = $request->input('search');
-//     $query = Maintenance::select("*")
-//         ->where([
-//             ["branch", "=", 1],
-//             ["category", "=", "Whitelines"]
-//         ]);
-//     if ($keyword) {
-//         $query->where(function($q) use ($keyword) {
-//             $q->where('name', 'LIKE', "%$keyword%")
-//               ->orWhere('description', 'LIKE', "%$keyword%");
-//         });
-//     }
-//     $data = $query->paginate(5);
-//     return view('dumaguete.manager.transaction.whitelines.index', compact('data', 'keyword'));
-// }
+
 public function getWhitelines(Request $request)
 {
     $keyword = $request->input('search');
@@ -81,7 +65,7 @@ public function getWhitelines(Request $request)
         });
     }
     
-    $data = $query->paginate(5);
+    $data = $query->paginate(10);
     return view('dumaguete.manager.transaction.whitelines.index', compact('data', 'keyword'));
 }
 public function ViewData($id)
@@ -120,7 +104,7 @@ public function getBrownlines(Request $request)
         });
     }
     
-    $data = $query->paginate(5);
+    $data = $query->paginate(10);
     return view('dumaguete.manager.transaction.brownlines.index', compact('data', 'keyword'));
 }
 
@@ -157,7 +141,7 @@ public function getMechanic(Request $request)
         });
     }
     
-    $data = $query->paginate(5);
+    $data = $query->paginate(10);
     return view('dumaguete.manager.transaction.mechanic.index', compact('data', 'keyword'));
 }
 
@@ -188,7 +172,7 @@ public function emSec(Request $request)
               ->orWhere('email', 'LIKE', "%$keyword%");
         });
     }
-    $secretaries = $query->paginate(2);
+    $secretaries = $query->paginate(10);
     return view('dumaguete.manager.employee.secretary.index', compact('secretaries', 'keyword'));
 }
 
@@ -206,7 +190,7 @@ public function emWl(Request $request)
               ->orWhere('email', 'LIKE', "%$keyword%");
         });
     }
-    $wtec = $query->paginate(4);
+    $wtec = $query->paginate(10);
     return view('dumaguete.manager.employee.whitelinetec.index', compact('wtec', 'keyword'));
 }
 
@@ -224,7 +208,7 @@ public function emBl(Request $request)
               ->orWhere('email', 'LIKE', "%$keyword%");
         });
     }
-    $wbl = $query->paginate(4);
+    $wbl = $query->paginate(10);
     return view('dumaguete.manager.employee.brownlinetec.index', compact('wbl', 'keyword'));
 }
 
@@ -242,7 +226,7 @@ public function emWe(Request $request)
               ->orWhere('email', 'LIKE', "%$keyword%");
         });
     }
-    $wex = $query->paginate(4);
+    $wex = $query->paginate(10);
     return view('dumaguete.manager.employee.workex.index', compact('wex', 'keyword'));
 }
 
@@ -259,7 +243,7 @@ public function emMec(Request $request)
               ->orWhere('email', 'LIKE', "%$keyword%");
         });
     }
-    $mec = $query->paginate(4);
+    $mec = $query->paginate(10);
     return view('dumaguete.manager.employee.mechanic.index', compact('mec', 'keyword'));
 }
 
@@ -376,5 +360,9 @@ public function changePassword(Request $request)
 }
 
 
-
+public function Logout()
+{
+    Auth::logout();
+    return redirect()->route('loginform')->with('success', 'Logout Successfully!');
+}
 }

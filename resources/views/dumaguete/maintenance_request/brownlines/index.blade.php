@@ -73,38 +73,34 @@
                    </td>
                    <td>
                     <div class=" ">
-                        <a href="{{ route('upReq', $item->id) }}" class="btn btn-info edit-button" style="margin-bottom: 5px">Edit</a>
+                        <a href="{{ route('upReq', $item->id) }}" class="btn btn-info edit-button">Edit</a>
                         <form method="POST" action="{{ route('deleteReq', $item->id) }}">
                             @csrf
                             @method('DELETE')
-                    
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" style="margin-bottom: 5px">Delete</button>
-                        </form>
-                    </div>
-                    
-                    <!-- Delete Confirmation Modal -->
-                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    Are you sure you want to delete this item?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                    <form method="POST" action="{{ route('deleteReq', $item->id) }}" style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$item->id}}">
+                                Delete
+                            </button>
+                            <!-- Delete Modal -->
+                            <div class="modal fade" id="deleteModal{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete this item?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
 
                 </td>

@@ -98,7 +98,7 @@ class AdminController extends Controller
             });
         }
         
-        $data = $q->paginate(5);
+        $data = $q->paginate(10);
     
     
         return view('admin.request.duma.index', compact('data','keyword'));
@@ -127,7 +127,7 @@ class AdminController extends Controller
             });
         }
         
-        $data = $q->paginate(5);
+        $data = $q->paginate(10);
     
         return view('admin.request.bayawan.index', compact('data'));
     }

@@ -22,12 +22,13 @@
                                 <label for="technician" class="col-sm-4 col-form-label">Choose Mechanic</label>
                                 <div class="col-sm-8">
                                     <select class="form-select" id="technician_id" name="technician_id" aria-label="Choose Mechanic">
-                                        @foreach ($technician as $tech)
-                                            <option value="{{ $tech->id }}">{{ $tech->fname }} {{ $tech->lname }}</option>
+                                        <option value="">Select a technician</option>
+                                        @foreach ($availableTechnicians as $technician)
+                                            <option value="{{ $technician->id }}">{{ $technician->fname }} {{ $technician->lname }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
+                            </div>                            
         
                             <div class="mb-3 row">
                                 <label for="name" class="col-sm-4 col-form-label">Name</label>
@@ -53,8 +54,8 @@
                                 </div>
                             </div>
         
-                            <div class="mb-3 row">
-                                <label for="req_date" class="col-sm-4 col-form-label">Date</label>
+                            <div class="row mb-3">
+                                <label for="req_date" class="col-sm-4 col-form-label">Servicing Date</label>
                                 <div class="col-sm-8">
                                     <input type="datetime-local" id="req_date" name="req_date"
                                         class="form-control @error('req_date') is-invalid @enderror" />
@@ -63,7 +64,16 @@
                                     @enderror
                                 </div>
                             </div>
-        
+                            <div class="row mb-3">
+                                <label for="task_due_date" class="col-sm-4 col-form-label">Service Duration Date and Time</label>
+                                <div class="col-sm-8">
+                                    <input type="datetime-local" id="task_due_date" name="task_due_date"
+                                        class="form-control @error('task_due_date') is-invalid @enderror" />
+                                    @error('task_due_date')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>  
                             <div class="mb-3 row">
                                 <label for="address" class="col-sm-4 col-form-label">Address</label>
                                 <div class="col-sm-8">

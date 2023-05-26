@@ -30,6 +30,7 @@ use App\Http\Controllers\Technician\WorkEScheduleController;
 use App\Http\Controllers\BranchB\MechanicBScheduleController;
 use App\Http\Controllers\Mechanic\MechanicScheduleController;
 use App\Http\Controllers\BranchB\BrownLineTechProfileController;
+use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\Technician\BlTechnicianScheduleController;
 
 /*---------Admin Route---------*/
@@ -65,8 +66,11 @@ Route::prefix('admin')->group(function () {
     Route::resource('/requests', RequestController::class)->middleware('admin');
     Route::resource('/sales', SalesController::class)->middleware('admin');
     Route::resource('/services', ServiceController::class)->middleware('admin');
+    Route::resource('/policies', PolicyController::class)->middleware('admin');
     Route::resource('/users', UserController::class)->middleware('admin');
    Route::resource('/usersbyn', BaywanUser::class)->middleware('admin');
+
+   Route::get('/show-service/{id}', [ServiceController::class, 'ViewData'])->name('showService');
 
     Route::get('profile', [AdminProfileController::class, 'profile'])->name('admin.profile')->middleware('admin');
     Route::put('update-admin-photo', [AdminProfileController::class, 'update'])->name('admin.profile.update')->middleware('admin');
@@ -160,6 +164,11 @@ Route::group(['prefix' => 'bsecretary', 'middleware' => ['bsecretary']], functio
     Route::get('/dashboard', [BSecretaryController::class, 'Dashboard'])->name('bsec.dashboard');
     Route::get('/logout', [BSecretaryController::class, 'BsecBLogout'])->name('bsec.logout');
 
+    Route::get('declinedlist', [MaintenanceBController::class, 'getDeclinedRequest'])->name('bdeclined.list');
+
+    Route::get('/decline/{id}', [MaintenanceBController::class, 'decline'])->name('bdecline.request');
+    Route::put('/decline/{maintenance}',[MaintenanceBController::class, 'declineRequest'])->name('bdecline');
+
 
     //MAINTENANCE ROUTE
     Route::get('maintenance-req', [MaintenanceBController::class, 'index'])->name('mreqb');
@@ -201,7 +210,6 @@ Route::prefix('btechnician')->group(function () {
 
 
 
-
 Route::group(['prefix' => 'workexpertbwyn', 'middleware' => ['workexpertb']], function () {
 
     Route::get('/workexpertDashboard', [WorkExBController::class, 'index'])->name('workexpertb.dashboard');
@@ -209,6 +217,9 @@ Route::group(['prefix' => 'workexpertbwyn', 'middleware' => ['workexpertb']], fu
     Route::post('update-workexpert-info', [WorkExBController::class, 'updateInfo'])->name('workexpertb.UpdateInfo');
     Route::post('change-password', [WorkExBController::class, 'ChangePassword'])->name('workexpertb.changepass');
     Route::put('update-photo', [WorkExBController::class, 'update'])->name('update.workexpertb.photo');
+
+    Route::get('/logout', [WorkExBController::class, 'BWexLogout'])->name('bbWexcbywn.logout');
+
 
     Route::get('schedule', [WorkExBScheduleController::class, 'Index'])->name('workexpertb.sched');
     Route::get('/mechanic-request', [WorkExBScheduleController::class, 'getMechanic'])->name('getMechanicb.request');
@@ -236,6 +247,7 @@ Route::group(['prefix' => 'mechanicbyn', 'middleware' => ['mechanicb']], functio
     Route::get('/update/{id}', [MechanicBScheduleController::class, 'Mecupdate'])->name('mechanicbywn.update');
    // Route::get('/delete-req/{id}', [MechanicBScheduleController::class, 'deleteReq'])->name('mecdelete.mechanicbywn');
     
+   Route::get('/logout', [MechanicBController::class, 'BMechLogout'])->name('bbmechcbywn.logout');
     Route::delete('/delete-req/{id}', [MechanicBScheduleController::class, 'deleteReq'])->name('deleteReqb.mechanicbywn');
     Route::resource('/maintenancesmbf', MechanicBScheduleController::class);
 });
@@ -432,7 +444,8 @@ Route::group(['prefix' => 'secretary', 'middleware' => ['secretary', 'auth', 'Pr
     Route::get('declinedlist', [MaintenanceController::class, 'getDeclinedRequest'])->name('declined.list');
 
     Route::delete('/delete-req/{id}', [MaintenanceController::class, 'deleteReq'])->name('deleteReq');
-
+    Route::delete('/delete-req-accepted/{id}', [MaintenanceController::class, 'deleteReqAc'])->name('deleteReqAc');
+    
     Route::get('/declinew/{id}', [MaintenanceController::class, 'declinew'])->name('declinew.request');
     Route::put('/declinew/{maintenancexzy}',[MaintenanceController::class, 'declineRequestw'])->name('declinew');
 
@@ -541,10 +554,6 @@ Route::group(['prefix' => 'brownlines', 'middleware' => ['brownlines', 'auth']],
     Route::get('/delete-req/{id}', [BlTechnicianScheduleController::class, 'deleteReq'])->name('bldelete');
     Route::resource('/maintenancesbl', BlTechnicianScheduleController::class);
 });
-
-
-
-//END OF BROWNLINES  ROUTES
 
 
 

@@ -9,7 +9,7 @@
     <div class="item item-15">
         <div class="row">
             <div class="col-4" style="">
-                <a href="{{ route('accept') }}" class="btn btn-info" style="float:left">Acceted Request</a>
+                <a href="{{ route('acceptb') }}" class="btn btn-secondary edit-button" style="float:left">Accepted Request</a>
             </div>
             <div class="col-4" style="">
                 <span class="head">Brownlines Request list</span>
@@ -67,7 +67,7 @@
                    <td>
                        <div class=" ">
                            <a href="{{ route('updateBrownReq.bywn', $item->id) }}" class="btn btn-info accept-button" style="margin-bottom: 5px">Accept</a> <br>
-                           <a href="{{ route('decline.request', $item->id) }}" class="btn btn-danger" style="margin-bottom: 5px">Decline</a>
+                           <a href="{{ route('bdecline.request', $item->id) }}" class="btn btn-danger" style="margin-bottom: 5px">Decline</a>
 
                        </div>
 

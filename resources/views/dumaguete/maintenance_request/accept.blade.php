@@ -39,8 +39,8 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Address</th>
-                <th>Contact Number</th>
                 <th>Request Detail</th>
+                <th>Servicing Date</th>
                 <th>Action</th>
             
                </tr>
@@ -54,24 +54,43 @@
                 </td>
                    <td>{{ $list->name}}</td>
                    <td>{{ $list->address}}</td>
-                   <td>{{ $list->phone}}</td>
                    <td>{{ $list->description}}</td>
+                   <td>{{ \Carbon\Carbon::parse($list->req_date)->format('d/m/Y g:i:s A')}}</td>
                   
                    <td>
                     <div class=" ">
-                     
-                        <form method="GET"
-                                action="{{ route('deleteReq', $list->id) }}"
-                                onsubmit="return confirm('Are you sure?');">
+                        <form method="POST" action="{{ route('deleteReqAc', $list->id) }}">
                             @csrf
                             @method('DELETE')
-
-                        <button type="submit" class="btn btn-danger" style="margin-bottom: 5px">Delete</button>
-                        
-                    </form>
-
+                    
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" style="margin-bottom: 5px">Delete</button>
+                        </form>
                     </div>
-
+                    
+                    <!-- Delete Confirmation Modal -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete this item?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <form method="POST" action="{{ route('deleteReqAc', $list->id) }}" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
                </tr>
 

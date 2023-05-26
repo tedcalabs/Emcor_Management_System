@@ -9,7 +9,7 @@
     <div class="item item-15">
         <div class="row">
             <div class="col-4" style="">
-                <a href="{{ route('accept') }}" class="btn btn-info" style="float:left">Acceted Request</a>
+                <a href="{{ route('acceptb') }}" class="btn btn-secondary edit-button" style="float:left">Accepted Request</a>
             </div>
             <div class="col-4" style="">
                 <a href="{{ route('getmechanic.bywn.req') }}" style="text-decoration: none;">
@@ -70,23 +70,15 @@
                 
                    <td>
                        <div class=" ">
-                           <a href="{{ route('updateMechReq.bywn.req', $item->id) }}" class="btn btn-info accept-button" style="margin-bottom: 5px">Accept</a>
-                           <form method=""
-                                   action=""
-                                   onsubmit="return confirm('Are you sure?');">
-                               @csrf
-                           
-
-                           <button type="submit" class="btn btn-danger">Decline</button>
-                           
-                       </form>
+                           <a href="{{ route('updateMechReq.bywn.req', $item->id) }}" class="btn btn-info accept-button" style="margin-bottom: 5px">Accept</a> <br>
+                           <a href="{{ route('bdecline.request', $item->id) }}" class="btn btn-danger" style="margin-bottom: 5px">Decline</a>
 
                        </div>
 
                    </td>
                    <td>
                     <div class=" ">
-                        <a href="{{ route('upReq', $item->id) }}" class="btn btn-info edit-button" style="margin-bottom: 5px">Edit</a>
+                        <a href="{{ route('upReqb', $item->id) }}" class="btn btn-info edit-button" style="margin-bottom: 5px">Edit</a>
                         <form method="POST" action="{{ route('deleteReqb.mechanicbywn', $item->id) }}">
                             @csrf
                             @method('DELETE')

@@ -16,6 +16,12 @@ return new class extends Migration
         Schema::create('maintenances', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('house_no')->nullable();
+            $table->string('purok')->nullable();
+            $table->string('barangay')->nullable();
+            $table->string('city_m')->nullable();
+            $table->string('w_status')->nullable();
+
             $table->string('address');
             $table->string('phone');
             $table->string('model')->nullable();
@@ -28,6 +34,7 @@ return new class extends Migration
             $table->datetime('req_date')->nullable();
             $table->datetime('date_completed')->nullable();
             $table->unsignedBigInteger('technician_id')->nullable();
+            $table->unsignedBigInteger('technicianb_id')->nullable();
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->foreign('technician_id')->references('id')->on('users');
             $table->string('technician')->nullable();

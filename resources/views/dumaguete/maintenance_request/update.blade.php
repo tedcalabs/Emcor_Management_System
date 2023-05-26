@@ -39,13 +39,43 @@
                       </div>
                     </div>
                     <div class="mb-3 row">
-                      <label for="req_date" class="col-sm-4 col-form-label">Date</label>
+                      <label for="house_no" class="col-sm-4 col-form-label">House Number</label>
                       <div class="col-sm-8">
-                        <input type="datetime-local" id="req_date" name="req_date" class="form-control" value="{{ $data->req_date }}" />
+                        <input type="text" id="house_no" name="house_no" value="{{ $data->house_no }}" class="form-control @error('house_no') is-invalid  @enderror" />
+                        @error('house_no')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                       </div>
                     </div>
                     <div class="mb-3 row">
-                      <label for="address" class="col-sm-4 col-form-label">Address</label>
+                      <label for="purok" class="col-sm-4 col-form-label">Purok/street</label>
+                      <div class="col-sm-8">
+                        <input type="text" id="purok" name="purok" value="{{ $data->purok }}" class="form-control @error('purok') is-invalid  @enderror" />
+                        @error('purok')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="barangay" class="col-sm-4 col-form-label">Barangay</label>
+                      <div class="col-sm-8">
+                        <input type="text" id="barangay" name="barangay" value="{{ $data->barangay }}" class="form-control @error('barangay') is-invalid  @enderror" />
+                        @error('barangay')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="city_m" class="col-sm-4 col-form-label">City/Municipality</label>
+                      <div class="col-sm-8">
+                        <input type="text" id="city_m" name="city_m" value="{{ $data->city_m }}" class="form-control @error('city_m') is-invalid  @enderror" />
+                        @error('city_m')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="address" class="col-sm-4 col-form-label">Province</label>
                       <div class="col-sm-8">
                         <input type="text" id="address" name="address" value="{{ $data->address }}" class="form-control @error('address') is-invalid  @enderror" />
                         @error('address')

@@ -280,8 +280,8 @@
                               @endif
                               @csrf
                               <div class="form-group">
-                                  <label for="InputEmail">Email address</label>
-                                  <input type="email"  id="InputEmail" name="email" class="form-control" placeholder="Enter email" value="{{ old ('email') }}">
+                                  <label for="InputEmail">Username</label>
+                                  <input type="text"  id="InputEmail" name="email" class="form-control" placeholder="Enter Username" value="{{ old ('email') }}">
                                   @error('email')
                                   <span class="text-danger">{{$message}}</span>
                                   @enderror
@@ -289,7 +289,7 @@
                     
                               <div class="form-group">
                                   <label for="password">Password</label>
-                                  <input type="password"  id="InputPassword" class="form-control" name="password" placeholder="Password" value="{{ old ('password') }}">
+                                  <input type="password"  id="InputPassword" class="form-control" name="password" placeholder="Enter Password" value="{{ old ('password') }}">
                                   @error('password')
                                   <span class="text-danger">{{$message}}</span>
                                   @enderror

@@ -9,7 +9,24 @@
 <div class="container">
     <div class="container">
         <div class="item item-19">
-            <div class="head">Maintenance Request</div>
+            <div class="row align-items-center">
+                <div class="col-8">        
+                    <div class="head">
+                      <a href="{{ route('getBrownlinesb.request') }}" style="text-decoration: none;">
+                        <span class="head" style="color: black;" >Brownlines Maintenance Request</span>
+                    </a>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <form method="GET" action="{{ route('workexpertb.sched') }}">
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control" placeholder="Search...">
+                            <button class="btn btn-outline-secondary" type="submit">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>  
+    
     
             
            
@@ -46,10 +63,9 @@
                     
                        <td>{{ $mreq->description}}</td>
                        <td>{{ \Carbon\Carbon::parse($mreq->req_date)->format('d/m/Y g:i:s A')}}</td>
-                       <td>
-                        {{ $mreq->technician}}
+                       
+                        <td>{{ $mreq->technician_fname }} {{ $mreq->technician_lname }}</td>
     
-                       </td>
                       
                    </tr>
     

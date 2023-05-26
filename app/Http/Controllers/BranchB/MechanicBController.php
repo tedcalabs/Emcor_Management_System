@@ -16,23 +16,24 @@ class MechanicBController extends Controller
 {
     public function index()
     {
+        $technician = Auth::guard('bsec')->user();
 
         $allsched = DB::table('maintenances')->where([
             ["branch", "=", 2],
-            ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
+            ["technicianb_id", "=", $technician->id],
         ])
             ->count();
         $pending = DB::table('maintenances')->where([
             ["branch", "=", 2],
             ["acceptd", "=", 1],
             ["status", "=", "pending"],
-            ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
+            ["technicianb_id", "=", $technician->id],
         ])
             ->count();
         $completed = DB::table('maintenances')->where([
             ["branch", "=", 2],
             ["status", "=", "completed"],
-            ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
+            ["technicianb_id", "=", $technician->id],
         ])
         ->count();
         return view('branchb.mechanic.index',['allsched' => $allsched, 'pending' => $pending, 'completed' => $completed]);
@@ -85,7 +86,7 @@ class MechanicBController extends Controller
             'bdate' => 'required',
             'phone' => 'required',
             'gender' => 'required',
-            'email' => 'required|email|unique:users,email,' . Auth::guard('bsec')->user()->id,
+            'email' => 'required|unique:users,email,' . Auth::guard('bsec')->user()->id,
 
         ]);
 
@@ -112,6 +113,11 @@ class MechanicBController extends Controller
     }
 
 
+    public function BMechLogout()
+    {
+        Auth::guard('bsec')->logout();
+        return redirect()->route('userB_loginform')->with('success', 'Logout Successfully!');
+    }
     
 
     public function mecChangePassword(Request $request)

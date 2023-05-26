@@ -11,6 +11,11 @@ class Maintenance extends Model
 
     protected $fillable = [
         'name',
+        'house_no',
+        'purok',
+        'barangay',
+        'city_m',
+        'w_stat',
         'address',
         'phone',
         'model',
@@ -18,6 +23,7 @@ class Maintenance extends Model
         'unit_info',
         'description',
         'req_date',
+        'task_due_date',
         'date_completed',
         'acceptd',
         'status',
@@ -28,14 +34,11 @@ class Maintenance extends Model
         'device_token',
         'image',
         'reference_no',
+        'pay_stat',
         'assessment'
     ];
 
 
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class, 'device_token', 'device_token');
-    // }
 
     public function deleteReq($id)
     {
@@ -52,9 +55,16 @@ class Maintenance extends Model
     }
 
     public function customer()
-{
+    {
     return $this->belongsTo(User::class, 'customer_id');
-}
+    }
+
+
+    
+    public function branch()
+    {
+    return $this->belongsTo(Branch::class, 'branch');
+    }
 
 
     public function technician()

@@ -46,18 +46,24 @@ class ManagerBController extends Controller
     public function getWhitelines(Request $request)
     {
         $keyword = $request->input('search');
-        $query = Maintenance::select("*")
+    
+        $query = Maintenance::select("maintenances.*", "bayawan_users.fname as technician_fname", "bayawan_users.lname as technician_lname")
+            ->leftJoin('bayawan_users', 'maintenances.technicianb_id', '=', 'bayawan_users.id')
             ->where([
-                ["branch", "=", 2],
-                ["category", "=", "Whitelines"]
+                ["maintenances.branch", "=", 2],
+                ["maintenances.category", "=", "Whitelines"]
             ]);
+        
         if ($keyword) {
-            $query->where(function($q) use ($keyword) {
-                $q->where('name', 'LIKE', "%$keyword%")
-                  ->orWhere('description', 'LIKE', "%$keyword%");
+            $query->where(function ($q) use ($keyword) {
+                $q->where('maintenances.name', 'LIKE', "%$keyword%")
+                    ->orWhere('maintenances.description', 'LIKE', "%$keyword%")
+                    ->orWhere('bayawan_users.fname', 'LIKE', "%$keyword%")
+                    ->orWhere('bayawan_users.lname', 'LIKE', "%$keyword%");
             });
         }
-        $data = $query->paginate(5);
+        
+        $data = $query->paginate(10);
         return view('branchb.manager.transaction.whitelines.index', compact('data', 'keyword'));
     }
     
@@ -77,18 +83,24 @@ class ManagerBController extends Controller
     public function getBrownlines(Request $request)
     {
         $keyword = $request->input('search');
-        $query = Maintenance::select("*")
+    
+        $query = Maintenance::select("maintenances.*", "bayawan_users.fname as technician_fname", "bayawan_users.lname as technician_lname")
+            ->leftJoin('bayawan_users', 'maintenances.technicianb_id', '=', 'bayawan_users.id')
             ->where([
-                ["branch", "=", 2],
-                ["category", "=", "Brownlines"]
+                ["maintenances.branch", "=", 2],
+                ["maintenances.category", "=", "Brownlines"]
             ]);
+        
         if ($keyword) {
-            $query->where(function($q) use ($keyword) {
-                $q->where('name', 'LIKE', "%$keyword%")
-                  ->orWhere('description', 'LIKE', "%$keyword%");
+            $query->where(function ($q) use ($keyword) {
+                $q->where('maintenances.name', 'LIKE', "%$keyword%")
+                    ->orWhere('maintenances.description', 'LIKE', "%$keyword%")
+                    ->orWhere('bayawan_users.fname', 'LIKE', "%$keyword%")
+                    ->orWhere('bayawan_users.lname', 'LIKE', "%$keyword%");
             });
         }
-        $data = $query->paginate(5);
+        
+        $data = $query->paginate(10);
         return view('branchb.manager.transaction.brownlines.index', compact('data', 'keyword'));
     }
 
@@ -116,18 +128,24 @@ class ManagerBController extends Controller
     public function getMechanic(Request $request)
     {
         $keyword = $request->input('search');
-        $query = Maintenance::select("*")
+    
+        $query = Maintenance::select("maintenances.*", "bayawan_users.fname as technician_fname", "bayawan_users.lname as technician_lname")
+            ->leftJoin('bayawan_users', 'maintenances.technicianb_id', '=', 'bayawan_users.id')
             ->where([
-                ["branch", "=", 2],
-                ["category", "=", "Mechanic"]
+                ["maintenances.branch", "=", 2],
+                ["maintenances.category", "=", "Mechanic"]
             ]);
+        
         if ($keyword) {
-            $query->where(function($q) use ($keyword) {
-                $q->where('name', 'LIKE', "%$keyword%")
-                  ->orWhere('description', 'LIKE', "%$keyword%");
+            $query->where(function ($q) use ($keyword) {
+                $q->where('maintenances.name', 'LIKE', "%$keyword%")
+                    ->orWhere('maintenances.description', 'LIKE', "%$keyword%")
+                    ->orWhere('bayawan_users.fname', 'LIKE', "%$keyword%")
+                    ->orWhere('bayawan_users.lname', 'LIKE', "%$keyword%");
             });
         }
-        $data = $query->paginate(5);
+        
+        $data = $query->paginate(10);
         return view('branchb.manager.transaction.mechanic.index', compact('data', 'keyword'));
     }
     
@@ -157,7 +175,7 @@ class ManagerBController extends Controller
                   ->orWhere('email', 'LIKE', "%$keyword%");
             });
         }
-        $secretaries = $query->paginate(2);
+        $secretaries = $query->paginate(10);
         return view('branchb.manager.employee.secretary.index', compact('secretaries', 'keyword'));
     }
     
@@ -175,7 +193,7 @@ class ManagerBController extends Controller
                   ->orWhere('email', 'LIKE', "%$keyword%");
             });
         }
-        $wtec = $query->paginate(5);
+        $wtec = $query->paginate(10);
         return view('branchb.manager.employee.whitelinetec.index', compact('wtec', 'keyword'));
     }
     
@@ -193,7 +211,7 @@ class ManagerBController extends Controller
                   ->orWhere('email', 'LIKE', "%$keyword%");
             });
         }
-        $wbl = $query->paginate(2);
+        $wbl = $query->paginate(10);
         return view('branchb.manager.employee.brownlinetec.index', compact('wbl', 'keyword'));
     }
     
@@ -211,7 +229,7 @@ class ManagerBController extends Controller
                   ->orWhere('email', 'LIKE', "%$keyword%");
             });
         }
-        $wex = $query->paginate(2);
+        $wex = $query->paginate(10);
         return view('branchb.manager.employee.workex.index', compact('wex', 'keyword'));
     }
     
@@ -228,7 +246,7 @@ class ManagerBController extends Controller
                   ->orWhere('email', 'LIKE', "%$keyword%");
             });
         }
-        $mec = $query->paginate(2);
+        $mec = $query->paginate(10);
         return view('branchb.manager.employee.mechanic.index', compact('mec', 'keyword'));
     }
     
@@ -246,7 +264,7 @@ class ManagerBController extends Controller
                   ->orWhere('email', 'LIKE', "%$keyword%");
             });
         }
-        $customers = $query->paginate(2);
+        $customers = $query->paginate(7);
         return view('branchb.manager.customer.index', compact('customers', 'keyword'));
     }
     
@@ -295,7 +313,7 @@ class ManagerBController extends Controller
             'bdate' => 'required',
             'phone' => 'required',
             'gender' => 'required',
-            'email' => 'required|email|unique:users,email,' . Auth::guard('bsec')->user()->id,
+            'email' => 'required|unique:users,email,' . Auth::guard('bsec')->user()->id,
 
         ]); 
 

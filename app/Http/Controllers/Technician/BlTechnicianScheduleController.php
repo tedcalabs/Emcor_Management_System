@@ -29,7 +29,7 @@ class BlTechnicianScheduleController extends Controller
                 // Add additional columns as needed
             });
         })
-        ->paginate(4);
+        ->paginate(10);
       
         return view('dumaguete.brownlinestech.shcedule.index', compact('data'));
     }
@@ -53,7 +53,7 @@ class BlTechnicianScheduleController extends Controller
                 // Add additional columns as needed
             });
         })
-        ->paginate(4);
+        ->paginate(10);
     
         return view('dumaguete.brownlinestech.shcedule.completed', compact('data', 'search'));
     }

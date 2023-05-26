@@ -27,7 +27,7 @@ class MechanicScheduleController extends Controller
                 // Add additional columns as needed
             });
         })
-        ->paginate(4);
+        ->paginate(10);
 
         return view('dumaguete.mechanic.shcedule.index', compact('data'));
     }
@@ -49,7 +49,7 @@ class MechanicScheduleController extends Controller
                 // Add additional columns as needed
             });
         })
-        ->paginate(4);
+        ->paginate(10);
     
         return view('dumaguete.mechanic.shcedule.completed', compact('data', 'search'));
     }

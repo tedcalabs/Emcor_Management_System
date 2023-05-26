@@ -19,7 +19,6 @@ class ScheduleBController extends Controller
             'phone' => 'required',
             'model' => 'required',
             'unit_info' => 'required',
-            'technician' => 'required',
             'date_completed' => 'required',
             'description' => 'required',
             'status' => 'required',
@@ -34,7 +33,6 @@ class ScheduleBController extends Controller
             $data->unit_info = $request->unit_info;
             $data->address = $request->address;
             $data->description = $request->description;
-            $data->technician = $request->technician;
             $data->assessment = $request->assessment;
             $data->date_completed = $request->date_completed;
             $data->status = $request->status;       
@@ -45,13 +43,15 @@ class ScheduleBController extends Controller
 
     public function getCompleted(Request $request)
     {
+
+        $technician = Auth::guard('bsec')->user();
         $search = $request->input('search');
     
         $data = Maintenance::where([
             ["branch", "=", 2],
             ["acceptd", "=", 1],
             ["status", "=", "completed"],
-            ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
+            ["technicianb_id", "=", $technician->id]
         ])
         ->when($search, function ($query, $search) {
             $query->where(function ($query) use ($search) {
@@ -60,7 +60,7 @@ class ScheduleBController extends Controller
                 // Add additional columns as needed
             });
         })
-        ->paginate(4);
+        ->paginate(10);
     
         return view('branchb.technician.shcedule.completed', compact('data', 'search'));
     }

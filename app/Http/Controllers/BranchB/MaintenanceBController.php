@@ -15,26 +15,28 @@ class MaintenanceBController extends Controller
 
     public function index(Request $request)
     {
-        $search = $request->input('search');
+        $keyword = $request->input('search');
     
-        $query = Maintenance::where([
-            ["branch", "=", 2],
-            ["acceptd", "=", 0],
-            ["category", "=", "Whitelines"]
-        ]);
-    
-        if (!empty($search)) {
-            $query->where(function ($q) use ($search) {
-                $q->where('name', 'LIKE', '%' . $search . '%')
-                  ->orWhere('description', 'LIKE', '%' . $search . '%');
-                 
-                // Add more "orWhere" clauses for additional fields to be searched
+        $query = Maintenance::select("maintenances.*", "bayawan_users.fname as technician_fname", "bayawan_users.lname as technician_lname")
+            ->leftJoin('bayawan_users', 'maintenances.technicianb_id', '=', 'bayawan_users.id')
+            ->where([
+                ["maintenances.branch", "=", 2],
+                ["maintenances.acceptd", "=", 0],
+                ["maintenances.category", "=", "Whitelines"]
+            ]);
+        
+        if ($keyword) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('maintenances.name', 'LIKE', "%$keyword%")
+                    ->orWhere('maintenances.description', 'LIKE', "%$keyword%")
+                    ->orWhere('bayawan_users.fname', 'LIKE', "%$keyword%")
+                    ->orWhere('bayawan_users.lname', 'LIKE', "%$keyword%");
             });
         }
-    
-        $data = $query->paginate(4);
+        
+        $data = $query->paginate(10);
 
-        return view('branchb.secretary.maintenanceRequest.index', compact('data'));
+        return view('branchb.secretary.maintenanceRequest.index', compact('data','keyword'));
     }
 
     public function ViewData($id)
@@ -64,7 +66,7 @@ class MaintenanceBController extends Controller
                 ->orWhere('description', 'like', '%' . $search . '%');
         }
     
-        $data = $data->paginate(4);
+        $data = $data->paginate(10);
         return view('branchb.secretary.maintenanceRequest.accepted', compact('data'));
     }
 
@@ -76,7 +78,7 @@ class MaintenanceBController extends Controller
         ->where([
             ["role", "=", 3],
             ["status", "=", 1],
-            ["sched_status", "=", "available"],
+            //["sched_status", "=", "available"],
         ])
         ->get();
         $data = Maintenance::where('branch', 2)->take(5)->find($id);
@@ -133,7 +135,7 @@ class MaintenanceBController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required',
             'address' => 'required',
             'phone' => 'required',
@@ -141,19 +143,21 @@ class MaintenanceBController extends Controller
             'req_date' => 'required',
             'acceptd' => 'required',
             'status' => 'required',
-            
-            ]);
-
-            $data = Maintenance::find($id);
-            $data->name = $request->name;
-            $data->phone = $request->phone;
-            $data->address = $request->address;
-            $data->description = $request->description;
-            $data->req_date = $request->req_date;
-            $data->acceptd = $request->acceptd;
-            $data->status = $request->status;
-            $data->technician = $request->technician;
-            $data->save();
+            'technicianb_id' => 'required|exists:bayawan_users,id',
+        ]);
+    
+        $technician = BayawanUser::findOrFail($validatedData['technicianb_id']);
+    
+        $data = Maintenance::findOrFail($id);
+        $data->name = $validatedData['name'];
+        $data->phone = $validatedData['phone'];
+        $data->address = $validatedData['address'];
+        $data->description = $validatedData['description'];
+        $data->req_date = $validatedData['req_date'];
+        $data->acceptd = $validatedData['acceptd'];
+        $data->status = $validatedData['status'];
+        $data->technicianb_id = $technician->id;
+        $data->save();
             return redirect()->route('acceptb')
             ->with('success','Request accepted!');
        
@@ -175,7 +179,7 @@ class MaintenanceBController extends Controller
              ->where([
                  ["role", "=", 5],
                  ["status", "=", 1],
-                 ["sched_status", "=", "available"],
+                 //["sched_status", "=", "available"],
              ])
              ->get();
          $data = Maintenance::where('branch', 2)->take(5)->find($id);
@@ -199,7 +203,7 @@ class MaintenanceBController extends Controller
              });
          }
      
-         $data = $query->paginate(4);
+         $data = $query->paginate(10);
  
  
          return view('branchb.secretary.maintenanceRequest.mechanic.index', compact('data'));
@@ -262,7 +266,7 @@ class MaintenanceBController extends Controller
                  });
              }
          
-             $data = $query->paginate(4);
+             $data = $query->paginate(10);
  
          return view('branchb.secretary.maintenanceRequest.brownlines.index', compact('data'));
      }
@@ -288,10 +292,56 @@ class MaintenanceBController extends Controller
              ->where([
                  ["role", "=", 4],
                  ["status", "=", 1],
-                 ["sched_status", "=", "available"],
+                // ["sched_status", "=", "available"],
              ])
              ->get();
          $data = Maintenance::where('branch', 2)->take(5)->find($id);
          return view('branchb.secretary.maintenanceRequest.brownlines.editbrown', compact('data', 'technician'));
      }
+
+     
+
+    public function decline($id)
+    {
+        $data = Maintenance::where('branch', 2)->findOrFail($id);
+        return view('branchb.secretary.maintenanceRequest.decline', compact('data'));
+    }
+
+
+    
+    
+    public function declineRequest(Request $request, $id)
+    {
+        $request->validate([
+
+            'status' => 'required',
+            'message' => 'required',
+            'acceptd' => 'required',
+        ]);
+
+
+        $data = Maintenance::find($id);
+     
+        $data->status = $request->status;
+        $data->message = $request->message;
+        $data->acceptd = $request->acceptd;
+        $data->save();
+        return redirect()->route('bdeclined.list')
+            ->with('success', 'Request successfully declined!');
+    }
+
+
+        
+    public function getDeclinedRequest()
+    {
+
+
+        $data = Maintenance::select("*")
+            ->where([
+                ["branch", "=", 2],
+                ["acceptd", "=", 2]
+            ])
+            ->paginate(10);
+        return view('branchb.secretary.maintenanceRequest.declinedList', compact('data'));
+    }
 }

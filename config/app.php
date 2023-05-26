@@ -160,6 +160,7 @@ return [
          * Laravel Framework Service Providers...
          */
         //  Barryvdh\Debugbar\ServiceProvider::class,
+        Ichtrojan\Otp\OtpServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -212,6 +213,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Otp' => Ichtrojan\Otp\Otp::class,
     ])->toArray(),
 
 ];

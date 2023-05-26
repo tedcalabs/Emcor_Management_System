@@ -35,6 +35,8 @@
             <table class="table table-bordered">
                 <thead>
                   <tr>
+                    
+                    <th>Id</th>
                       <th>First Name</th>
                       <th>Last Name</th>
                       <th>Address</th>
@@ -49,6 +51,7 @@
     
                   @foreach ($customers as $customer)
                   <tr>
+                    <td>{{ $customer->id}}</td>
                       <td>{{ $customer->fname}}</td>
                       <td>{{ $customer->lname}}</td>
                       <td>{{ $customer->address}}</td>

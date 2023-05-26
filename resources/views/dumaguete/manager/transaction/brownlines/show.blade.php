@@ -24,7 +24,7 @@
                     <div class="col-md-6">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"><strong>NAME:</strong> {{ $data->name }}</li>
-                            <li class="list-group-item"><strong>Address:</strong> {{ $data->address }}</li>
+                            <li class="list-group-item"><strong>Address:</strong> {{ $data->house_no }}, {{ $data->purok }}, {{ $data->barangay }}, {{ $data->city_m }},  {{ $data->address }}</li>
                             <li class="list-group-item"><strong>Contact Number:</strong> {{ $data->phone }}</li>
                             <li class="list-group-item"><strong>Trouble:</strong> {{ $data->description }}</li>
                             <li class="list-group-item"><strong>Model:</strong> {{ $data->model }}</li>
@@ -39,6 +39,8 @@
                     </div>
                     <div class="col-md-6">
                         <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Warranty Status:</strong> {{ $data->w_stat }}</li>
+                            <li class="list-group-item"><strong>Payment Status:</strong> {{ $data->pay_stat }}</li>
                             <li class="list-group-item"><strong>Reference Number:</strong> {{ $data->reference_no }}</li>
                             <li class="list-group-item"><strong>Proof of Payment</strong> </li>
                         </ul>

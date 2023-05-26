@@ -20,11 +20,9 @@ class RepairController extends Controller
     {
         $user = Auth::user();
 
-    // Retrieve the maintenance tasks associated with the user as a technician
     $requests = $user->requests;
 
     foreach ($requests as $request) {
-        // Modify task properties if needed
         $request['description'] = strip_tags($request['description']);
         $request['description'] = preg_replace("/&#?[a-z0-9]+;/i", " ", $request['description']);
     }
@@ -82,7 +80,7 @@ class RepairController extends Controller
             'image' => $imageName,
         ];
 
-        // User::where(['id'=> 27])->update($userDetails);
+
 
         return response()->json(['message' => trans('/storage/test/' . $imageName)], 200);
     }
@@ -90,6 +88,7 @@ class RepairController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'pay_stat' => 'required',
             'reference_no' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Add validation for the image
         ]);
@@ -102,7 +101,7 @@ class RepairController extends Controller
             }
 
             $data->reference_no = $request->reference_no;
-
+            $data->pay_stat = $request->pay_stat;
             if ($request->hasFile('image')) {
           
                 $destination = 'uploads/proof/'. $data->image;
@@ -127,26 +126,5 @@ class RepairController extends Controller
 
 
 
-//     public function update(Request $request, $id)
-// {
-//     $request->validate([
-//         'reference_no' => 'required',
-//     ]);
-
-//     try {
-//         $data = Maintenance::find($id);
-
-//         if (!$data) {
-//             return response()->json(['error' => 'Maintenance data not found'], Response::HTTP_NOT_FOUND);
-//         }
-
-//         $data->reference_no = $request->reference_no;
-//         $data->save();
-
-//         return response()->json(['message' => 'Maintenance data updated successfully'], Response::HTTP_OK);
-//     } catch (\Exception $e) {
-//         return response()->json(['error' => 'Failed to update maintenance data'], Response::HTTP_INTERNAL_SERVER_ERROR);
-//     }
-// }
 
 }

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Secretary;
 
-use App\CentralLogic\Helpers;
 use Exception;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
+use App\CentralLogic\Helpers;
 use App\Http\Requests\MrRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MreqResource;
@@ -38,7 +39,7 @@ class MaintenanceController extends Controller
             });
         }
         
-        $data = $query->paginate(5);
+        $data = $query->paginate(10);
     
         return view('dumaguete.maintenance_request.index', compact('data','keyword'));
     }
@@ -78,7 +79,7 @@ class MaintenanceController extends Controller
             });
         }
         
-        $data = $query->paginate(5);
+        $data = $query->paginate(10);
     
         return view('dumaguete.maintenance_request.brownlines.index', compact('data'));
     }
@@ -120,7 +121,7 @@ class MaintenanceController extends Controller
             });
         }
         
-        $data = $query->paginate(5);
+        $data = $query->paginate(10);
 
         return view('dumaguete.maintenance_request.mechanic.index', compact('data'));
     }
@@ -147,12 +148,17 @@ public function store(MrRequest $mrRequest)
     // Create the maintenance record and associate it with the technician
     $saveData = $user->requests()->create([
         'name' => $mrRequest->name,
+        'house_no' => $mrRequest->house_no,
+        'purok' => $mrRequest->purok,
+        'barangay' => $mrRequest->barangay,
+        'city_m' => $mrRequest->city_m,
         'address' => $mrRequest->address,
         'phone' => $mrRequest->phone,
         'branch' => $mrRequest->branch,
         'description' => $mrRequest->description,
         'category' => $mrRequest->category,
         'acceptd' => $mrRequest->acceptd,
+        'w_stat' => $mrRequest->w_stat,
         'device_token' => $mrRequest->device_token,
     ]);
 
@@ -172,22 +178,29 @@ public function store(MrRequest $mrRequest)
 
     public function accept(Request $request)
     {
-        $search = $request->input('search');
+        $keyword = $request->input('search');
     
-        $data = Maintenance::select("*")
+        $query = Maintenance::select("maintenances.*", "users.fname as technician_fname", "users.lname as technician_lname")
+            ->leftJoin('users', 'maintenances.technician_id', '=', 'users.id')
             ->where([
-                ["branch", "=", 1],
-                ["acceptd", "=", 1]
+                ["maintenances.branch", "=", 1],
+                ["maintenances.acceptd", "=", 1],
+           
             ]);
-    
-        if ($search) {
-            $data->where('name', 'like', '%' . $search . '%')
-                ->orWhere('description', 'like', '%' . $search . '%');
+        
+        if ($keyword) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('maintenances.name', 'LIKE', "%$keyword%")
+                    ->orWhere('maintenances.description', 'LIKE', "%$keyword%")
+                    ->orWhere('users.fname', 'LIKE', "%$keyword%")
+                    ->orWhere('users.lname', 'LIKE', "%$keyword%");
+            });
         }
+        
+        $data = $query->paginate(10);
     
-        $data = $data->paginate(4);
     
-        return view('dumaguete.maintenance_request.accept', compact('data', 'search'));
+        return view('dumaguete.maintenance_request.accept', compact('data', 'keyword'));
     }
     
     public function getDeclinedRequest()
@@ -217,13 +230,15 @@ public function store(MrRequest $mrRequest)
 
 public function ViewDataAC($id)
 {
-    $data = Maintenance::select("*")
-    ->where([
-        ["branch", "=", 1],
-        ["acceptd", "=", 1]
-    ])
+
     
-    ->take(5)->find($id);
+    $data = Maintenance::select("maintenances.*", "users.fname as technician_fname", "users.lname as technician_lname")
+    ->leftJoin('users', 'maintenances.technician_id', '=', 'users.id')
+    ->where([
+        ["maintenances.branch", "=", 1],
+    ])->find($id);
+        
+   
     return view('dumaguete.maintenance_request.showaceted', compact('data'));
 }
 
@@ -235,19 +250,33 @@ public function ViewDataAC($id)
         return back();
     }
 
+    public function deleteReqAc($id)
+    {
+        $data = Maintenance::where('branch', 1)
+        ->where('acceptd', 1) 
+        ->findOrFail($id);
+        $data->delete();
+        return back();
+    }
+
     
     public function updateReq($id)
     {
-        $technicians = User::where('role', 3)->get();
-        $technician = User::select("*")
-            ->where([
-                ["role", "=", 3],
-                ["status", "=", 1],
-                ["sched_status", "=", "available"],
-            ])
-            ->get();
         $data = Maintenance::where('branch', 1)->take(5)->find($id);
-        return view('dumaguete.maintenance_request.edit', compact('data', 'technician','technicians'));
+    
+        $dueDate = $data->task_due_date; // Get the task due date from the $data object
+    
+        // Retrieve the start time from the "maintenances" table
+        $startTime = $data->req_date;
+    
+        // Set the current date/time to the start time from the "maintenances" table
+        $currentDateTime = Carbon::parse($startTime);
+    
+        $dueDateTime = Carbon::parse($dueDate);
+        $duration = $dueDateTime->diffInMinutes($currentDateTime);
+    
+        $technicians = $this->getAvailableWhitelinesTech($dueDate, $duration);
+        return view('dumaguete.maintenance_request.edit', compact('data','technicians'));
     }
 
 
@@ -265,23 +294,75 @@ public function ViewDataAC($id)
         return view('dumaguete.maintenance_request.editbrown', compact('data', 'technician'));
     }
 
+
+    public function getAvailableMechanic($dueDate, $duration)
+    {
+        $availableTechnicians = User::where('available', true)
+        ->where('role', 4)
+            ->whereDoesntHave('tasks', function ($query) use ($dueDate, $duration) {
+                $endTime = Carbon::parse($dueDate)->addMinutes($duration);
+    
+                $query->where(function ($query) use ($dueDate, $endTime) {
+                    $query->whereDate('task_due_date', '=', $dueDate)
+                          ->where('req_date', '<=', $endTime);
+                })->orWhere(function ($query) use ($endTime) {
+                    $query->where('task_due_date', '>=', $endTime);
+                });
+            })
+            ->get();
+    
+        return $availableTechnicians;
+    }
+    
+public function getAvailableWhitelinesTech($dueDate, $duration)
+{
+    $endTime = Carbon::parse($dueDate)->addMinutes($duration);
+
+    $availableTechnicians = User::where('available', true)
+        ->where('role', 3)
+        ->whereDoesntHave('tasks', function ($query) use ($dueDate, $endTime) {
+            $query->where(function ($query) use ($dueDate, $endTime) {
+                $query->whereDate('task_due_date', '=', $dueDate)
+                    ->where('req_date', '<=', $endTime);
+            })
+            ->orWhere(function ($query) use ($endTime) {
+                $query->where('task_due_date', '<=', $endTime);
+            });
+        })
+        ->get();
+
+    return $availableTechnicians;
+}
+
+    
+    
+    
+    
     public function updateMechReq($id)
     {
-    
-        $technician = User::select("*")
-            ->where([
-                ["role", "=", 4],
-                ["status", "=", 1],
-                //["sched_status", "=", "available"],
-            ])
-            ->get();
         $data = Maintenance::where('branch', 1)->take(5)->find($id);
-        return view('dumaguete.maintenance_request.mechanic.edit', compact('data', 'technician'));
+    
+        $dueDate = $data->task_due_date; // Get the task due date from the $data object
+    
+        // Retrieve the start time from the "maintenances" table
+        $startTime = $data->req_date;
+    
+        // Set the current date/time to the start time from the "maintenances" table
+        $currentDateTime = Carbon::parse($startTime);
+    
+        $dueDateTime = Carbon::parse($dueDate);
+        $duration = $dueDateTime->diffInMinutes($currentDateTime);
+    
+        $availableTechnicians = $this->getAvailableMechanic($dueDate, $duration);
+    
+        return view('dumaguete.maintenance_request.mechanic.edit', compact('data', 'availableTechnicians'));
     }
-
-
+    
     public function upReq($id)
     {
+
+
+
         $data = Maintenance::where('branch', 1)->take(5)->find($id);
         return view('dumaguete.maintenance_request.update', compact('data'));
     }
@@ -302,89 +383,7 @@ public function ViewDataAC($id)
         $data = Maintenance::where('branch', 1)->findOrFail($id);
         return view('dumaguete.maintenance_request.decline', compact('data'));
     }
-    // public function update(Request $request, $id)
-    // {
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'address' => 'required',
-    //         'phone' => 'required',
-    //         'description' => 'required',
-    //         'req_date' => 'required',
-    //         'acceptd' => 'required',
-    //         'status' => 'required',
-    //     ]);
-
-
-    //     $data = Maintenance::find($id);
-    //     $data->name = $request->name;
-    //     $data->phone = $request->phone;
-    //     $data->address = $request->address;
-    //     $data->description = $request->description;
-    //     $data->req_date = $request->req_date;
-    //     $data->acceptd = $request->acceptd;
-    //     $data->status = $request->status;
-    //     $data->technician = $request->technician;
-    //     $data->save();
-    //     return redirect()->route('accept')
-    //         ->with('success', 'Request accepted!');
-    // }
-
-    // public function update(Request $request, $id)
-    // {
-    //     // $request->validate([
-    //     //     'name' => 'required',
-    //     //     'address' => 'required',
-    //     //     'phone' => 'required',
-    //     //     'description' => 'required',
-    //     //     'req_date' => 'required',
-    //     //     'acceptd' => 'required',
-    //     //     'status' => 'required',
-    //     // ]);
-
-    //     $validatedData = $request->validate([
-    //         'name' => 'required',
-    //         'address' => 'required',
-    //         'phone' => 'required',
-    //         'description' => 'required',
-    //         'acceptd' => 'required',
-    //         'status' => 'required',
-    //         'task_id' => 'required|exists:tasks,id',
-    //         'technician_id' => 'required|exists:users,id,role,3',
-    //         'req_date' => 'required|date_format:Y-m-d H:i:s',
-    //     ]);
-
-
-       
-    //     $task = Maintenance::findOrFail($validatedData['task_id']);
-    //     $technician = User::findOrFail($validatedData['technician_id']);
-    
-    //     // Assign the task to the technician
-    //     $task->technician_id = $technician->id;
-    //     $task->req_date = $validatedData['req_date'];
-
-    //     $task->name = $validatedData['name'];
-    //     $task->phone = $validatedData['phone'];
-    //     $task->address = $validatedData['address'];
-    //     $task->description = $validatedData['description'];
-    //     $task->acceptd = $validatedData['acceptd'];
-    //     $task->status = $validatedData['status'];
-    //     $task->save();
-    
-
-
-    //     // $data = Maintenance::find($id);
-    //     // $data->name = $request->name;
-    //     // $data->phone = $request->phone;
-    //     // $data->address = $request->address;
-    //     // $data->description = $request->description;
-    //     // $data->req_date = $request->req_date;
-    //     // $data->acceptd = $request->acceptd;
-    //     // $data->status = $request->status;
-    //     // $data->technician = $request->technician;
-    //     // $data->save();
-    //     return redirect()->route('accept')
-    //         ->with('success', 'Request accepted!');
-    // }
+   
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
@@ -393,6 +392,7 @@ public function ViewDataAC($id)
             'phone' => 'required',
             'description' => 'required',
             'req_date' => 'required',
+            'task_due_date' => 'required',
             'acceptd' => 'required',
             'status' => 'required',
             'technician_id' => 'required|exists:users,id',
@@ -406,6 +406,7 @@ public function ViewDataAC($id)
         $data->address = $validatedData['address'];
         $data->description = $validatedData['description'];
         $data->req_date = $validatedData['req_date'];
+        $data->task_due_date = $validatedData['task_due_date'];
         $data->acceptd = $validatedData['acceptd'];
         $data->status = $validatedData['status'];
         $data->technician_id = $technician->id;
@@ -464,19 +465,22 @@ public function ViewDataAC($id)
             'name' => 'required',
             'address' => 'required',
             'phone' => 'required',
+            'purok' => 'required',
+            'barangay' => 'required',
+            'city_m' => 'required',
             'description' => 'required',
-            'req_date' => 'required',
-            'acceptd' => 'required',
+         
         ]);
 
         $data = Maintenance::find($id);
         $data->name = $request->name;
         $data->phone = $request->phone;
         $data->address = $request->address;
+        $data->house_no = $request->house_no;
+        $data->purok = $request->purok;
+        $data->barangay = $request->barangay;
+        $data->city_m = $request->city_m;
         $data->description = $request->description;
-        $data->req_date = $request->req_date;
-        $data->acceptd = $request->acceptd;
-        $data->technician = $request->technician;
         $data->save();
         return redirect()->route('mreq')
             ->with('success', 'Request Updated');

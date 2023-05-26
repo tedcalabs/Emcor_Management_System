@@ -9,7 +9,7 @@
     <div class="item item-21">
         <div class="row">
             <div class="col-4" style="">
-                <a href="{{ route('acceptb') }}" class="btn btn-info" style="float:left">Acceted Request</a>
+                <a href="{{ route('acceptb') }}" class="btn btn-primary edit-button" style="float:left">Accepted Request</a>
             </div>
             <div class="col-4" style="">
                     
@@ -71,16 +71,8 @@
                 
                    <td>
                        <div class=" ">
-                           <a href="{{ route('updateReqb', $item->id) }}" class="btn btn-info accept-button" style="margin-bottom: 5px">Accept</a>
-                           <form method="POST"
-                                   action=""
-                                   onsubmit="return confirm('Are you sure?');">
-                               @csrf
-                               @method('DELETE')
-
-                           <button type="submit" class="btn btn-danger">Decline</button>
-                           
-                       </form>
+                           <a href="{{ route('updateReqb', $item->id) }}" class="btn btn-primary accept-button" style="margin-bottom: 5px">Accept</a> <br>
+                           <a href="{{ route('bdecline.request', $item->id) }}" class="btn btn-danger" style="margin-bottom: 5px">Decline</a>
 
                        </div>
 
@@ -89,7 +81,7 @@
 
                 
                 <div class=" ">
-                    <a href="{{ route('upReqb', $item->id) }}" class="btn btn-info edit-button">Edit</a>
+                    <a href="{{ route('upReqb', $item->id) }}" class="btn btn-success edit-button">Edit</a>
                     <form method="POST" action="{{ route('deleteReqb',$item->id) }}">
                         @csrf
                         @method('DELETE')

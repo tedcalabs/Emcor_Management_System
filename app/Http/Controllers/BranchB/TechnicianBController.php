@@ -17,22 +17,25 @@ class TechnicianBController extends Controller
 {
     public function index()
     {
+
+        $technician = Auth::guard('bsec')->user();
+
         $allsched = DB::table('maintenances')->where([
             ["branch", "=", 2],
-            ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
+            ["technicianb_id", "=", $technician->id]
         ])
             ->count();
         $pending = DB::table('maintenances')->where([
             ["branch", "=", 2],
             ["acceptd", "=", 1],
             ["status", "=", "pending"],
-            ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
+            ["technicianb_id", "=", $technician->id]
         ])
             ->count();
         $completed = DB::table('maintenances')->where([
             ["branch", "=", 2],
             ["status", "=", "completed"],
-            ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
+            ["technicianb_id", "=", $technician->id]
         ])
         ->count();
         return view('branchb.technician.index',['allsched' => $allsched, 'pending' => $pending, 'completed' => $completed]);
@@ -134,6 +137,7 @@ class TechnicianBController extends Controller
 
 
         $user_id = Auth::guard('bsec')->user()->id;
+
         $user = BayawanUser::findOrFail($user_id);
 
         if ($request->hasFile('picture')) {
@@ -157,13 +161,16 @@ class TechnicianBController extends Controller
 
     public function getWhiteSched(Request $request)
     {
+        
+        $technician = Auth::guard('bsec')->user();
+
         $search = $request->input('search');
       
         $data = Maintenance::where([
             ["branch", "=", 2],
             ["acceptd", "=", 1],
             ["status", "=", "pending"],
-            ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
+         ["technicianb_id", "=", $technician->id]
         ])
         ->when($search, function ($query, $search) {
             $query->where(function ($query) use ($search) {

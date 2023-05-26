@@ -37,7 +37,7 @@
     </a>
         <div class="logout childs">
  
-          <form action="{{ route('logout')}}" method="post">
+          <form action="{{ route('bbrowntec.logout')}}" method="GET">
              @csrf
             
              <i class="fa-solid fa-right-from-bracket icons"></i><button class="lgbutton" type="submit">Logout</button>

@@ -57,7 +57,7 @@
     </a>
         <div class="logout childs">
  
-          <form action="{{ route('bbmanager.logout')}}" method="post">
+          <form action="{{ route('bbmanager.logout')}}" method="GET">
              @csrf
             
              <i class="fa-solid fa-right-from-bracket icons"></i><button class="lgbutton" type="submit">Logout</button>

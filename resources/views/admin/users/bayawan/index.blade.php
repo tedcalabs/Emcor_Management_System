@@ -19,7 +19,7 @@
             </a>
             <a href="{{ route('usersbyn.create')}}"><button class="btn btn-primary edit-button" type="submit">Create New User</button></a>
         </div>
-        <div class="col-4" style="margin-bottom: 1rem; margin-left: 8rem; width:15rem; float:right;">
+        <div class="col-4" style="margin-bottom: 5px; margin-left: 8rem; width:15rem; float:right;">
             <form action="{{ route('usersbyn.index') }}" method="get">
                 <div class="input-group">
                     <input type="text" name="q" class="form-control" placeholder="Search users...">

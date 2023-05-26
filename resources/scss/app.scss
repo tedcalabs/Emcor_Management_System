@@ -54,10 +54,11 @@
     bottom: 0;
     width: 100%;
     background-color:#0D0D0D;
-    height: 0.4in;
+    height: 25px;
     padding-bottom: .5rem;
     align-items: center;
 padding-left: 7rem;
+z-index: 1;
 }
 
 .fotext{
@@ -279,5 +280,10 @@ a {
     font-size: 30px;
     font-weight: bold;
     color: #323031;
+}
+
+.pagination-links{
+
+margin-bottom: 20rem;
 }
 

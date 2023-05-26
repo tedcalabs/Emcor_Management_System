@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="row mb-1">
                                     <div class="col">
-                                        <button type="submit" class="btn btn-primary float-end submit-button">Store</button>
+                                        <button type="submit" class="btn btn-grey float-end submit-button">Store</button>
                                     </div>
                                 </div>
                             </form>

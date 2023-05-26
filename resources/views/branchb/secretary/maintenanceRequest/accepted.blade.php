@@ -34,7 +34,8 @@
  
          <table class="table table-bordered">
              <thead>
-               <tr>             
+               <tr>        
+                  <th>Id</th>        
                    <th>Name</th>
                    <th>Address</th>
                    <th>Contact Number</th>
@@ -49,7 +50,7 @@
            <tbody> 
             @foreach ($data as $list)
                <tr>
-               
+                <td>{{ $list->id}}</td>
                    <td>{{ $list->name}}</td>
                    <td>{{ $list->address}}</td>
               
@@ -62,18 +63,36 @@
                    <td>{{ $list->status}}</td>
                    <td>
                     <div class=" ">
-                        <a href="{{ route('updateReq', $list->id) }}" class="btn btn-info edit-button"  style="margin-bottom: 5px">Edit</a>
-                        <form method="GET"
-                                action="{{ route('deleteReq', $list->id) }}"
-                                onsubmit="return confirm('Are you sure?');">
+                        <a href="{{ route('upReqb', $list->id) }}" class="btn btn-success edit-button">Edit</a>
+                        <form method="POST" action="{{ route('deleteReqb',$list->id) }}">
                             @csrf
                             @method('DELETE')
-
-                        <button type="submit" class="btn btn-danger" style="margin-bottom: 5px">Delete</button>
-                        
-                    </form>
-
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$list->id}}">
+                                Delete
+                            </button>
+                            <!-- Delete Modal -->
+                            <div class="modal fade" id="deleteModal{{$list->id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete this item?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
+
 
                 </td>
                </tr>

@@ -7,7 +7,7 @@
 
 @section('mectrans')
 <div class="container">
-  <div class="item item-9">
+  <div class="item item-15">
     <div class="row align-items-center">
       <div class="col-8">        
           <div class="head">
@@ -51,8 +51,8 @@
                   </td>
                     <td>{{ $wtrans->name}}</td>
                     <td>{{ $wtrans->address}}</td>
-                    <td>{{ $wtrans->reqdate}}</td>
-                    <td>{{ $wtrans->technician}}</td>
+                    <td>{{ $wtrans->req_date}}</td>
+                    <td>{{ $wtrans->technician_fname }} {{ $wtrans->technician_lname }}</td>
                 </tr>   
                 @endforeach
                   

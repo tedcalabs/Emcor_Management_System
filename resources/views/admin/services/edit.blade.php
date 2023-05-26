@@ -29,12 +29,21 @@
                                 <div class="mb-3">
                                     <label for="image" class="form-label">Image</label>
                                     <div>
-                                        <img src="{{ Storage::url($service->image) }}" width="70px" height="70px" alt="Image">
+                                        <img src="{{  asset('uploads/services/'.$service->image) }}" width="70px" height="70px" alt="Image">
                                     </div>
                                     <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror" />
                                     @error('image')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
+                                </div>
+                                <div class="row mb-1">
+                                    <div class="col">
+                                        <label for="price" class="form-label">Price</label>
+                                        <input type="number" min="0.00" max="50000.00" step="0.01" id="price" name="price" class="form-control @error('price') is-invalid @enderror" />
+                                        @error('price')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Description</label>

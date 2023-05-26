@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\Api\V1\InforController;
-use App\Http\Controllers\Api\V1\RepairController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Api\V1\InforController;
+use App\Http\Controllers\Api\V1\RepairController;
+use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Secretary\MaintenanceController;
 
 
@@ -20,6 +22,16 @@ Route::get('mreqs', [MaintenanceController::class, 'index']);
 Route::post('maintenance/{id}', [RepairController::class, 'update']);
 
 Route::post('upload', [RepairController::class, 'upload']);
+
+Route::get('/policies', [InforController::class, 'index']);
+//Route::post('sendPasswordResetLink', [InforController::class, 'sendResetLinkEmail']);
+//Route::post('resetPassword', 'App\Http\Controllers\ChangePasswordController@passwordResetProcess');
+
+Route::post('password/forgot-password',[ForgotPasswordController::class, 'forgotPassword']);
+Route::post('password/reset',[ResetPasswordController::class, 'passwordReset']);
+
+
+
 
 Route::middleware('auth:api')->group(function () {
     Route::get('profile', [ProfileController::class, 'show']);

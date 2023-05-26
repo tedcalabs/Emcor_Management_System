@@ -11,13 +11,14 @@ class MechanicBScheduleController extends Controller
 {
     public function Index(Request $request)
     {
+        $technician = Auth::guard('bsec')->user();
         $search = $request->input('search');
       
         $data = Maintenance::where([
             ["branch", "=", 2],
             ["acceptd", "=", 1],
             ["status", "=", "pending"],
-            ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
+            ["technicianb_id", "=", $technician->id],
         ])
         ->when($search, function ($query, $search) {
             $query->where(function ($query) use ($search) {
@@ -26,18 +27,19 @@ class MechanicBScheduleController extends Controller
                 // Add additional columns as needed
             });
         })
-        ->paginate(4);
+        ->paginate(10);
 
         return view('branchb.mechanic.shcedule.index', compact('data'));
     }
     public function getCompletedMec(Request $request)
     {
+        $technician = Auth::guard('bsec')->user();
         $search = $request->input('search');
     
         $data = Maintenance::where([
             ["branch", "=", 2],
             ["status", "=", "completed"],
-            ["technician", "=", Auth::guard('bsec')->user()->fname." ".Auth::guard('bsec')->user()->lname],
+            ["technicianb_id", "=", $technician->id],
         ])
         ->when($search, function ($query, $search) {
             $query->where(function ($query) use ($search) {
@@ -46,7 +48,7 @@ class MechanicBScheduleController extends Controller
                 // Add additional columns as needed
             });
         })
-        ->paginate(4);
+        ->paginate(10);
     
         return view('branchb.mechanic.shcedule.completed', compact('data', 'search'));
     }
@@ -66,7 +68,6 @@ class MechanicBScheduleController extends Controller
             'phone' => 'required',
             'model' => 'required',
             'unit_info' => 'required',
-            'technician' => 'required',
             'date_completed' => 'required',
             'description' => 'required',
             'status' => 'required',
@@ -81,7 +82,6 @@ class MechanicBScheduleController extends Controller
         $data->unit_info = $request->unit_info;
         $data->address = $request->address;
         $data->description = $request->description;
-        $data->technician = $request->technician;
         $data->assessment = $request->assessment;
         $data->date_completed = $request->date_completed;
         $data->status = $request->status;  

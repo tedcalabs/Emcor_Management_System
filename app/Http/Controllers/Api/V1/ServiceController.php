@@ -22,21 +22,17 @@ class ServiceController extends Controller
     {
         $query = $request->input('q');
     
-        $data = Service::when($query, function ($query, $search) {
+        $services = Service::when($query, function ($query, $search) {
             return $query->where('name', 'like', '%'.$search.'%');
         })
-        ->paginate(4);
+        ->paginate(10);
     
         $categories = Category::all();
     
-        return view('admin.services.index', compact('data', 'categories'));
+        return view('admin.services.index', compact('services', 'categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.PPPppPP
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $categories = Category::all();
@@ -82,12 +78,20 @@ class ServiceController extends Controller
     }
 
 
-    public function show(Service $service)
+    public function ViewData($id)
     {
-        $categories = Category::all();
-
-        return view('admin.services.index', compact('services', 'categories'));
+        $data = Service::take(5)->find($id);
+        return view('admin.services.show', compact('data'));
     }
+
+
+    // public function show(Service $service)
+    // {
+    
+    //     $categories = Category::all();
+
+    //     return view('admin.services.index', compact( 'categories'));
+    // }
 
     public function edit(Service $service)
     {

@@ -19,9 +19,9 @@ class BaywanUser extends Controller
             $data = BayawanUser::where('fname', 'like', "%$query%")
                         ->orWhere('email', 'like', "%$query%")
                         ->orWhere('role', 'like', "%$query%")
-                        ->paginate(5);
+                        ->paginate(10);
         } else {
-            $data = BayawanUser::paginate(5);
+            $data = BayawanUser::paginate(10);
 
         }
     

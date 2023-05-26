@@ -24,9 +24,9 @@ class UserController extends Controller
             $data = User::where('fname', 'like', "%$query%")
                         ->orWhere('lname', 'like', "%$query%")
                         ->orWhere('email', 'like', "%$query%")
-                        ->paginate(4);
+                        ->paginate(10);
         } else {
-            $data = User::paginate(4);
+            $data = User::paginate(10);
 
         }
     

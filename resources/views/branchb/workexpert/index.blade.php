@@ -7,14 +7,16 @@
 
 
 @section('WexpertDashboard')
-        
 
-<div class="container">
+<div class="container request5">
+    <div class="item total-request5"></div> 
+  </div>
+<div class="container request5">
+    <div class="item border-left-primary shadow  rounded total-request">All Technician and Mechanic Schedules<br> <br>{{ $allsched }}</div>
+    <div class="item border-left-primary shadow  rounded  pending-request">Pending Schedules<br> <br>{{ $pending }}</div>
+    <div class="item border-left-primary shadow  rounded accepted-request">Completed Services<br> <br>{{ $completed}}</div>
+  </div>
 
-    <div class="item item-8">
-        <h1>Work Expert Dashboard </h1>
-    </div>
-</div>
 
 
 

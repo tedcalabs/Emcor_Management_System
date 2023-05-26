@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\BranchB;
 
+
+use Illuminate\Support\Facades\DB;
+
 use App\Models\User;
 use App\Models\BayawanUser;
 use Illuminate\Http\Request;
@@ -15,7 +18,26 @@ class WorkExBController extends Controller
 {
     public function index()
     {
-        return view('branchb.workexpert.index');
+
+        $allsched = DB::table('maintenances')->where([
+            ["branch", "=", 2],
+         
+        ])
+            ->count();
+        $pending = DB::table('maintenances')->where([
+            ["branch", "=", 2],
+            ["acceptd", "=", 1],
+            ["status", "=", "pending"],
+         
+        ])
+            ->count();
+        $completed = DB::table('maintenances')->where([
+            ["branch", "=", 2],
+            ["status", "=", "completed"],
+           
+        ])
+        ->count();
+        return view('branchb.workexpert.index',['allsched' => $allsched, 'pending' => $pending, 'completed' => $completed]);
     }
 
 
@@ -35,7 +57,7 @@ class WorkExBController extends Controller
             'bdate' => 'required',
             'phone' => 'required',
             'gender' => 'required',
-            'email' => 'required|email|unique:users,email,' . Auth::guard('bsec')->user()->id,
+            'email' => 'required|unique:users,email,' . Auth::guard('bsec')->user()->id,
 
         ]);
 
@@ -111,6 +133,12 @@ class WorkExBController extends Controller
         }
         $user->update();
         return redirect()->back()->with('status','Ok');
+    }
+
+    public function BWexLogout()
+    {
+        Auth::guard('bsec')->logout();
+        return redirect()->route('userB_loginform')->with('success', 'Logout Successfully!');
     }
 
 }

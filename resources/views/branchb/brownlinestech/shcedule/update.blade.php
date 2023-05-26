@@ -4,50 +4,7 @@
 @include('branchb.brownlinestech.components.sidebar')
 @section('updateReqBl')
 
-{{-- <div class="container">
-    <div class="item item-6">
-    <div class="row">
-    
-        <div class="col">
-            <div class="card">
-                <div class="card-header font-bold text-2xl text-emerald-900">
-               
-                  <h2>Update Status</h2>
-                </div>
-                <div class="card-body">
-                
-                    <form method="POST" action=" {{ route('maintenancesbl.update',$data->id)}}" enctype="multipart/form-data">
-                      
-                        @csrf
-                        @method('PUT')
 
-
-                        <div class="sm:col-span-6">
-                            <label for="name" class="block text-sm font-medium text-gray-700">Status</label>
-                            <div class="mt-1">
-                                <textarea type="text" id="status" name="status" value="{{ $data->status}}"
-                                    class="" @error('name')@enderror"></textarea>
-                                </div>
-                            @error('name')
-                                <div class="text-sm text-red-400">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mt-6 p-4">
-                            <button type="submit"
-                                class="btn btn-info  float-left bg-slate-400">Accept</button>
-                        </div>
-
-                        
-                    </form>
-               
-                </div>
-            </div>
-        </div>
-   
-</div>
-                
-</div>  
-</div> --}}
 
 
 <div class="container">
@@ -129,6 +86,7 @@
                     <div class="col-12 form-group">
                         <label for="description" class="form-label">Trouble</label>
                         <div class="mt-1">
+                            <input type="hidden" value="completed" id="status" name="status">
                             <input type="text" id="description" name="description" value="{{$data->description}}"
                                    class="form-control @error('description') is-invalid @enderror" />
                         </div>
@@ -139,17 +97,6 @@
                 </div>
                 <div class="row">
 
-                    <div class="col-4 form-group">
-                        <label for="technician" class="form-label">Technician</label>
-                        <div class="mt-1">
-                            <input type="hidden" value="completed" id="status" name="status">
-                            <input type="technician" id="technician" name="technician" value="{{$data->technician}}"
-                                   class="form-control @error('technician') is-invalid @enderror" />
-                        </div>
-                        @error('technician')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
                     <div class="col-4 form-group">
                         <label for="req_date" class="form-label">Servicing Date</label>
                         <div class="mt-1">
@@ -186,7 +133,7 @@
                     
                 
                     <div class="card-button">
-                        <button type="submit" class="btn btn-info">Submit</button>
+                        <button type="submit" class="btn btn-grey submit-button">Submit</button>
                     </div>
                 </form>
                         

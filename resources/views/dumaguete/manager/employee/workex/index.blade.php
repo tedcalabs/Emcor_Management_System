@@ -46,9 +46,8 @@
                       <th>Gender</th>
                       <th>Birthday</th>
                       <th>Phone</th>
-                      <th>Email</th>
+                      <th>Username</th>
                       <th>Status</th>
-
                   </tr>
               </thead>
               <tbody> 
@@ -71,11 +70,7 @@
                         <span class="">{{$workex->status}}</span>
                       @endif</td>
                   </tr>
-                   
-                
                   @endforeach
-               
-                  
               </tbody>
             </table>
           </div>

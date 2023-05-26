@@ -42,8 +42,9 @@
       @yield ('categories')
       @yield ('usersbayawan')
       @yield ('updateReqD')
+      @yield ('ShowRequestW')
       @yield ('footer')
-     
+      
       </main> 
       @yield('script') 
     </body>

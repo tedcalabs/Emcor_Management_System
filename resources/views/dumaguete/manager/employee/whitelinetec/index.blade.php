@@ -42,7 +42,7 @@
                       <th>Gender</th>
                       <th>Birthday</th>
                       <th>Phone</th>
-                      <th>Email</th>
+                      <th>Username</th>
                       <th>Status</th>
 
                   </tr>

@@ -33,7 +33,7 @@ class ScheduleController extends Controller
                 // Add additional columns as needed
             });
         })
-        ->paginate(4); // Specify the number of items per page (e.g., 10)
+        ->paginate(10); // Specify the number of items per page (e.g., 10)
       
         return view('dumaguete.technician.shcedule.index', compact('data', 'search'));
     }
@@ -57,7 +57,7 @@ class ScheduleController extends Controller
                 // Add additional columns as needed
             });
         })
-        ->paginate(4);
+        ->paginate(10);
     
         return view('dumaguete.technician.shcedule.completed', compact('data', 'search'));
     }

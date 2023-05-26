@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\DumagueteB;
 
+
+use Illuminate\Support\Facades\DB;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,7 +17,25 @@ class WorkExpertController extends Controller
 {
     public function index()
     {
-        return view('dumaguete.workexpert.index');
+        $allsched = DB::table('maintenances')->where([
+            ["branch", "=", 1],
+         
+        ])
+            ->count();
+        $pending = DB::table('maintenances')->where([
+            ["branch", "=", 1],
+            ["acceptd", "=", 1],
+            ["status", "=", "pending"],
+         
+        ])
+            ->count();
+        $completed = DB::table('maintenances')->where([
+            ["branch", "=", 1],
+            ["status", "=", "completed"],
+           
+        ])
+        ->count();
+        return view('dumaguete.workexpert.index',['allsched' => $allsched, 'pending' => $pending, 'completed' => $completed]);
     }
 
 

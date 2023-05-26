@@ -25,11 +25,15 @@ class MrRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'purok' => 'required',
+            'barangay' => 'required',
+            'city_m' => 'required',
             'address' => 'required',
             'phone' => 'required',
             'branch' => 'required',
             'category' => 'required',
             'acceptd' => 'required',
+            'w_stat' => 'required',
             'device_token'=>'required',
         ];
     }
