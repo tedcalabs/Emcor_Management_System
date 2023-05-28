@@ -37,29 +37,29 @@ class RepairController extends Controller
     return response()->json($data, 200);
     }
 
-    public function ViewRepair($id)
-    {
-        $user = Auth::user();
-        $deviceToken = $user->device_token;
+    // public function ViewRepair($id)
+    // {
+    //     $user = Auth::user();
+    //     $deviceToken = $user->device_token;
 
-        $results  = Maintenance::select("*")
-            ->where('device_token', $deviceToken)
+    //     $results  = Maintenance::select("*")
+    //         ->where('device_token', $deviceToken)
 
-            ->take(5)->find($id);
-        foreach ($results as $item) {
-            $item['description'] = strip_tags($item['description']);
-            $item['description'] = $Content = preg_replace("/&#?[a-z0-9]+;/i", " ", $item['description']);
-        }
+    //         ->take(5)->find($id);
+    //     foreach ($results as $item) {
+    //         $item['description'] = strip_tags($item['description']);
+    //         $item['description'] = $Content = preg_replace("/&#?[a-z0-9]+;/i", " ", $item['description']);
+    //     }
 
-        $data =  [
-            'total_size' => $results->count(),
-            'category_id' => 9,
-            'offset' => 0,
-            'repairs' => $results
-        ];
+    //     $data =  [
+    //         'total_size' => $results->count(),
+    //         'category_id' => 9,
+    //         'offset' => 0,
+    //         'repairs' => $results
+    //     ];
 
-        return response()->json($data, 200);
-    }
+    //     return response()->json($data, 200);
+    // }
 
     public function upload(Request $request)
     {

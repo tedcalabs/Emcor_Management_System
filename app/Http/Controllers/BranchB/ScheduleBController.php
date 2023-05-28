@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BranchB;
 
 use App\Models\User;
+use App\Models\BayawanUser;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -37,6 +38,11 @@ class ScheduleBController extends Controller
             $data->date_completed = $request->date_completed;
             $data->status = $request->status;       
             $data->save();
+
+            $userId = Auth::guard('bsec')->id();
+            $user = BayawanUser::findOrFail($userId);
+            $user->available = true; // Set the technician as available
+            $user->save();
             return redirect()->route('whitebtech.sched')
             ->with('success','Updated Successfully!');
     }

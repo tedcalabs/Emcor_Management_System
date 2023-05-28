@@ -74,13 +74,7 @@ class MaintenanceBController extends Controller
     public function updateReq($id)
     {
         
-        $technician  = BayawanUser::select("*")
-        ->where([
-            ["role", "=", 3],
-            ["status", "=", 1],
-            //["sched_status", "=", "available"],
-        ])
-        ->get();
+        $technician = $this->getAvailableWhitelinesTech();
         $data = Maintenance::where('branch', 2)->take(5)->find($id);
         return view('branchb.secretary.maintenanceRequest.edit', compact('data', 'technician'));
     }
@@ -127,11 +121,7 @@ class MaintenanceBController extends Controller
         //
     }
 
-    // public function edit(Maintenance $maintenance)
-    // {
-    //     $maintenance = Maintenance::where('branch', 2)->take(5)->get();
-    //     return view('branchb.maintenance_request.edit', compact('maintenance'));
-    // }
+ 
 
     public function update(Request $request, $id)
     {
@@ -141,6 +131,7 @@ class MaintenanceBController extends Controller
             'phone' => 'required',
             'description' => 'required',
             'req_date' => 'required',
+            'task_due_date' => 'required',
             'acceptd' => 'required',
             'status' => 'required',
             'technicianb_id' => 'required|exists:bayawan_users,id',
@@ -155,9 +146,26 @@ class MaintenanceBController extends Controller
         $data->description = $validatedData['description'];
         $data->req_date = $validatedData['req_date'];
         $data->acceptd = $validatedData['acceptd'];
+        $data->task_due_date = $validatedData['task_due_date'];
         $data->status = $validatedData['status'];
         $data->technicianb_id = $technician->id;
         $data->save();
+
+        $makeAvailable = $request->input('make_available', 0);
+    
+        if ($makeAvailable == 1) {
+            // Set the technician as available
+            $technician->update([
+                'available' => true,
+                // Update any other relevant fields
+            ]);
+        } else {
+            // Set the technician as unavailable
+            $technician->update([
+                'available' => false,
+                // Update any other relevant fields
+            ]);
+        }
             return redirect()->route('acceptb')
             ->with('success','Request accepted!');
        
@@ -171,18 +179,39 @@ class MaintenanceBController extends Controller
      }
 
 
+     public function getAvailableMechanic()
+     {
+         $availableTechnicians = BayawanUser::where('available', true)
+         ->where('role', 5)
+         ->get();
+     
+     return $availableTechnicians;
+     }
+     
+  
+     public function getAvailableWhitelinesTech()
+     {
+         $availableTechnicians = BayawanUser::where('available', true)
+         ->where('role', 3)
+         ->get();
+     
+         return $availableTechnicians;
+     }
+     
+     public function getAvailableBrownlinesTech()
+     {
+         $availableTechnicians = BayawanUser::where('available', true)
+         ->where('role', 4)
+         ->get();
+     
+         return $availableTechnicians;
+     }
+
   
      public function updateMechReq($id)
      {
- 
-         $technician = BayawanUser::select("*")
-             ->where([
-                 ["role", "=", 5],
-                 ["status", "=", 1],
-                 //["sched_status", "=", "available"],
-             ])
-             ->get();
-         $data = Maintenance::where('branch', 2)->take(5)->find($id);
+        $technician = $this->getAvailableMechanic();
+        $data = Maintenance::where('branch', 2)->take(5)->find($id);
          return view('branchb.secretary.maintenanceRequest.mechanic.edit', compact('data', 'technician'));
      }   
      public function getMechanic(Request $request)
@@ -287,15 +316,9 @@ class MaintenanceBController extends Controller
      public function updateBrownReq($id)
      {
  
-         
-        $technician  = BayawanUser::select("*")
-             ->where([
-                 ["role", "=", 4],
-                 ["status", "=", 1],
-                // ["sched_status", "=", "available"],
-             ])
-             ->get();
-         $data = Maintenance::where('branch', 2)->take(5)->find($id);
+      
+        $technician = $this->getAvailableBrownlinesTech();
+        $data = Maintenance::where('branch', 2)->take(5)->find($id);
          return view('branchb.secretary.maintenanceRequest.brownlines.editbrown', compact('data', 'technician'));
      }
 

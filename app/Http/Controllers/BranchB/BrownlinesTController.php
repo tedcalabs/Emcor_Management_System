@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BranchB;
 
+use App\Models\BayawanUser;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -131,6 +132,11 @@ class BrownlinesTController extends Controller
             $data->date_completed = $request->date_completed;
             $data->status = $request->status;       
             $data->save();
+
+            $userId = Auth::guard('bsec')->id();
+            $user = BayawanUser::findOrFail($userId);
+            $user->available = true; // Set the technician as available
+            $user->save();
             return redirect()->route('getBrownSchedBl.sched')
             ->with('success','Updated Successfully!');
     }

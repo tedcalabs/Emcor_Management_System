@@ -93,7 +93,8 @@ class BaywanUser extends Controller
                 'phone' => 'required',
                 'email' => 'required',
                 'role' => 'required',
-                'status' => 'required'
+                'status' => 'required',
+                'password'=> 'required|confirmed'
             ]
         );
 
@@ -103,6 +104,7 @@ class BaywanUser extends Controller
             'lname' => $request->lname,
             'phone' => $request->phone,
             'email' => $request->email,
+            'password' => Hash::make($request->password),
             'role' => $request->role,
             'status' => $request->status,
         ]);

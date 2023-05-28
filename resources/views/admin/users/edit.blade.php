@@ -65,7 +65,7 @@
                             <div class="col-4  form-group">
                                 <label for="email" class="form-label"> Email/Username</label>
                                 <div class="mt-1">
-                                    <input type="email" id="email" name="email" value="{{ $user->email }}"
+                                    <input type="text" id="email" name="email" value="{{ $user->email }}"
                                     class="form-control @error('email') border-red-400 @enderror" />
                                 </div>
                                 @error('email')
@@ -73,33 +73,46 @@
                                 @enderror
                             </div>
                         </div>
-                         <div class="row">
-                            <div class="col-4  form-group">
-                                <label for="role" class="form-label">Role</label>
-                                <div class="mt-1">
-                                <input type="text" id="role" name="role" value="{{ $user->role}}"
-                                class="form-control @error('role') border-red-400 @enderror" />
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password">
+                                    @error('password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="password_confirmation">Confirm Password</label>
+                                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password">
+                                    @error('password_confirmation')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
-                            @error('role')
-                                <div class="text-sm text-red-400">{{ $message }}</div>
-                            @enderror
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="role">Role</label>
+                                    <input type="text" id="role" name="role" value="{{ $user->role }}" class="form-control @error('role') is-invalid @enderror" />
+                                    @error('role')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <input type="text" id="status" name="status" value="{{ $user->status }}" class="form-control @error('status') is-invalid @enderror" />
+                                    <div id="emailHelp" class="form-text">1 for Active, 0 for Not active</div>
+                                    @error('status')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
-                 
-                    <div class="col-4  form-group">
-                        <label for="role" class="form-label">Status</label>
-                        <div class="mt-1">
-                        <input type="text" id="status" name="status" value="{{ $user->status}}"
-                        class="form-control @error('status') border-red-400 @enderror" />
-                    </div>
-                    <div id="emailHelp" class="form-text">1 is Active 0 Not active</div>
-                    @error('status')
-                        <div class="text-sm text-red-400">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
+                        
                         <div class="card-button">
                             <button type="submit"
-                                class="btn btn-info ">Update</button>
+                                class="btn btn-grey submit-button ">Submit</button>
                         </div>
                     </form>
 </div>       

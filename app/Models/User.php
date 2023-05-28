@@ -32,6 +32,7 @@ class User extends Authenticatable
         'picture',
         'password',
         'role',
+        'available',
         'status',
         'sched_status',
         'device_token',

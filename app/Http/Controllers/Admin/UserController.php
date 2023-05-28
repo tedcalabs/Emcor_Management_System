@@ -96,7 +96,8 @@ class UserController extends Controller
                 'phone' => 'required',
                 'email' => 'required',
                 'role' => 'required',
-                'status' => 'required'
+                'status' => 'required',
+                'password'=> 'required|confirmed'
             ]
         );
 
@@ -107,7 +108,8 @@ class UserController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'role' => $request->role,
-            'status' => $request->status,
+            'password' => $request->password,
+
         ]);
         return to_route('users.index')->with('success', 'User updated successfully!');
     }

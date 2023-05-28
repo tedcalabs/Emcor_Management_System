@@ -27,6 +27,7 @@ return new class extends Migration
             $table->tinyInteger('role')->default(0);
             $table->tinyInteger('status')->default(0);
             $table->string('sched_status')->nullable();
+            $table->bool('available')->nullable();
             $table->rememberToken();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();

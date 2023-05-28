@@ -9,6 +9,7 @@ use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use App\CentralLogic\Helpers;
 use App\Http\Requests\MrRequest;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MreqResource;
 
@@ -260,108 +261,74 @@ public function ViewDataAC($id)
     }
 
     
-    public function updateReq($id)
-    {
-        $data = Maintenance::where('branch', 1)->take(5)->find($id);
-    
-        $dueDate = $data->task_due_date; // Get the task due date from the $data object
-    
-        // Retrieve the start time from the "maintenances" table
-        $startTime = $data->req_date;
-    
-        // Set the current date/time to the start time from the "maintenances" table
-        $currentDateTime = Carbon::parse($startTime);
-    
-        $dueDateTime = Carbon::parse($dueDate);
-        $duration = $dueDateTime->diffInMinutes($currentDateTime);
-    
-        $technicians = $this->getAvailableWhitelinesTech($dueDate, $duration);
-        return view('dumaguete.maintenance_request.edit', compact('data','technicians'));
-    }
+
 
 
     public function updateBrownReq($id)
     {
-        //$technicians = User::where('role', 3)->get();
-        $technician = User::select("*")
-            ->where([
-                ["role", "=", 5],
-                ["status", "=", 1],
-                //["sched_status", "=", "available"],
-            ])
-            ->get();
+      
+
+        $availableTechnicians = $this->getAvailableBrownlinesTech();
+
         $data = Maintenance::where('branch', 1)->take(5)->find($id);
-        return view('dumaguete.maintenance_request.editbrown', compact('data', 'technician'));
+
+        return view('dumaguete.maintenance_request.editbrown', compact('data', 'availableTechnicians'));
     }
 
 
-    public function getAvailableMechanic($dueDate, $duration)
-    {
-        $availableTechnicians = User::where('available', true)
-        ->where('role', 4)
-            ->whereDoesntHave('tasks', function ($query) use ($dueDate, $duration) {
-                $endTime = Carbon::parse($dueDate)->addMinutes($duration);
-    
-                $query->where(function ($query) use ($dueDate, $endTime) {
-                    $query->whereDate('task_due_date', '=', $dueDate)
-                          ->where('req_date', '<=', $endTime);
-                })->orWhere(function ($query) use ($endTime) {
-                    $query->where('task_due_date', '>=', $endTime);
-                });
-            })
+        public function getAvailableMechanic()
+        {
+            $availableTechnicians = User::where('available', true)
+            ->where('role', 4)
             ->get();
-    
+        
         return $availableTechnicians;
+        }
+        
+     
+        public function getAvailableWhitelinesTech()
+        {
+            $availableTechnicians = User::where('available', true)
+            ->where('role', 3)
+            ->get();
+        
+            return $availableTechnicians;
+        }
+        
+        public function getAvailableBrownlinesTech()
+        {
+            $availableTechnicians = User::where('available', true)
+            ->where('role', 5)
+            ->get();
+        
+            return $availableTechnicians;
+        }
+
+        
+    public function updateReq($id)
+    {
+        $data = Maintenance::where('branch', 1)->take(5)->find($id);
+
+        $availableTechnicians = $this->getAvailableWhitelinesTech();
+        return view('dumaguete.maintenance_request.edit', compact('data', 'availableTechnicians'));
     }
-    
-public function getAvailableWhitelinesTech($dueDate, $duration)
-{
-    $endTime = Carbon::parse($dueDate)->addMinutes($duration);
 
-    $availableTechnicians = User::where('available', true)
-        ->where('role', 3)
-        ->whereDoesntHave('tasks', function ($query) use ($dueDate, $endTime) {
-            $query->where(function ($query) use ($dueDate, $endTime) {
-                $query->whereDate('task_due_date', '=', $dueDate)
-                    ->where('req_date', '<=', $endTime);
-            })
-            ->orWhere(function ($query) use ($endTime) {
-                $query->where('task_due_date', '<=', $endTime);
-            });
-        })
-        ->get();
-
-    return $availableTechnicians;
-}
-
-    
-    
-    
     
     public function updateMechReq($id)
     {
+
         $data = Maintenance::where('branch', 1)->take(5)->find($id);
-    
-        $dueDate = $data->task_due_date; // Get the task due date from the $data object
-    
-        // Retrieve the start time from the "maintenances" table
-        $startTime = $data->req_date;
-    
-        // Set the current date/time to the start time from the "maintenances" table
-        $currentDateTime = Carbon::parse($startTime);
-    
-        $dueDateTime = Carbon::parse($dueDate);
-        $duration = $dueDateTime->diffInMinutes($currentDateTime);
-    
-        $availableTechnicians = $this->getAvailableMechanic($dueDate, $duration);
-    
+
+     $availableTechnicians = $this->getAvailableMechanic();
         return view('dumaguete.maintenance_request.mechanic.edit', compact('data', 'availableTechnicians'));
     }
     
+ 
+    
+    
+
     public function upReq($id)
     {
-
-
 
         $data = Maintenance::where('branch', 1)->take(5)->find($id);
         return view('dumaguete.maintenance_request.update', compact('data'));
@@ -383,7 +350,7 @@ public function getAvailableWhitelinesTech($dueDate, $duration)
         $data = Maintenance::where('branch', 1)->findOrFail($id);
         return view('dumaguete.maintenance_request.decline', compact('data'));
     }
-   
+    
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
@@ -412,10 +379,25 @@ public function getAvailableWhitelinesTech($dueDate, $duration)
         $data->technician_id = $technician->id;
         $data->save();
     
+        $makeAvailable = $request->input('make_available', 0);
+    
+        if ($makeAvailable == 1) {
+            // Set the technician as available
+            $technician->update([
+                'available' => true,
+                // Update any other relevant fields
+            ]);
+        } else {
+            // Set the technician as unavailable
+            $technician->update([
+                'available' => false,
+                // Update any other relevant fields
+            ]);
+        }
+    
         return redirect()->route('accept')->with('success', 'Request accepted!');
     }
     
-
 
     
     public function declineRequest(Request $request, $id)

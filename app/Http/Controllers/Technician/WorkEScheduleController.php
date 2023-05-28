@@ -62,7 +62,7 @@ class WorkEScheduleController extends Controller
     
         $data = $query->paginate(10);
     
-        return view('dumaguete.workexpert.shcedule.brownlines.index', compact('data'));
+        return view('dumaguete.workexpert.shcedule.brownlines.index', compact('data','keyword'));
     }
     
 

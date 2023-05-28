@@ -5,6 +5,7 @@ namespace App\Http\Controllers\BranchB;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\BayawanUser;
 use Illuminate\Support\Facades\Auth;
 
 class MechanicBScheduleController extends Controller
@@ -86,6 +87,11 @@ class MechanicBScheduleController extends Controller
         $data->date_completed = $request->date_completed;
         $data->status = $request->status;  
         $data->save();
+
+        $userId = Auth::guard('bsec')->id();
+        $user = BayawanUser::findOrFail($userId);
+        $user->available = true; // Set the technician as available
+        $user->save();
         return redirect()->route('mechanicbywn.sched')
             ->with('success', 'Updated Successfully!');
     }

@@ -23,17 +23,17 @@
     </a>
         <a href="{{ route('mec.sched') }}">
         <div class="messages childs">
-            <i class="fa-solid fa-envelope icons"></i><p class="text">Servicing Schedules</p>
+            <i class="fa-solid fa-calendar icons"></i><p class="text">Servicing Schedules</p>
         </div>
     </a>
     <a href="{{ route('completed.sched.mec') }}">
         <div class="messages childs">
-            <i class="fa-solid fa-envelope icons"></i><p class="text">Completed Services</p>
+            <i class="fa-solid fa-tools icons"></i><p class="text">Completed Services</p>
         </div>
     </a>
     <a href="{{ route('mechanic.profile') }}">
         <div class="messages childs">
-            <i class="fa-solid fa-envelope icons"></i><p class="text">Profile</p>
+            <i class="fa-solid fa-user icons"></i><p class="text">Profile</p>
         </div>
     </a>
         <div class="logout childs">

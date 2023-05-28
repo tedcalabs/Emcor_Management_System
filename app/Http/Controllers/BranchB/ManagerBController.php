@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BranchB;
 
+use App\Models\User;
 use App\Models\BayawanUser;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
@@ -254,7 +255,7 @@ class ManagerBController extends Controller
     public function getCustomerList(Request $request)
     {
         $keyword = $request->input('search');
-        $query = BayawanUser::select("*")
+        $query = User::select("*")
             ->where([
                 ["role", "=", 0],
             ]);

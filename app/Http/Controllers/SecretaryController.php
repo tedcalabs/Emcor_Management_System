@@ -71,7 +71,7 @@ class SecretaryController extends Controller
                 ->orWhere('email', 'like', "%$query%")
                 ->paginate(4);
         } else {
-            $data = User::paginate(4);
+            $data = User::paginate(10);
         }
 
         return view('dumaguete.secretary.techlist.index', compact('data'));
@@ -181,7 +181,7 @@ class SecretaryController extends Controller
                     ->orWhere('email', 'LIKE', "%$keyword%");
             });
         }
-        $data = $query->paginate(2);
+        $data = $query->paginate(10);
         return view('dumaguete.secretary.techlist.index', compact('data', 'keyword'));
     }
 
@@ -197,7 +197,7 @@ class SecretaryController extends Controller
                     ->orWhere('email', 'LIKE', "%$keyword%");
             });
         }
-        $wbl = $query->paginate(2);
+        $wbl = $query->paginate(10);
         return view('dumaguete.secretary.btechlist.index', compact('wbl', 'keyword'));
     }
 
@@ -215,7 +215,7 @@ class SecretaryController extends Controller
                     ->orWhere('email', 'LIKE', "%$keyword%");
             });
         }
-        $mec = $query->paginate(2);
+        $mec = $query->paginate(10);
         return view('dumaguete.secretary.mechlist.index', compact('mec', 'keyword'));
     }
 
@@ -232,7 +232,7 @@ class SecretaryController extends Controller
               ->orWhere('email', 'LIKE', "%$keyword%");
         });
     }
-    $customers = $query->paginate(2);
+    $customers = $query->paginate(10);
     return view('dumaguete.secretary.customer.index', compact('customers', 'keyword'));
 }
 }

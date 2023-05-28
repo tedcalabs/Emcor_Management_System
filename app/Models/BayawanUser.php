@@ -28,6 +28,7 @@ class BayawanUser extends Authenticatable
         'email',
         'picture',
         'password',
+        'available',
         'role',
         'status',
         'sched_status'

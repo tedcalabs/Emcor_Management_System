@@ -179,7 +179,7 @@ class TechnicianBController extends Controller
                 // Add additional columns as needed
             });
         })
-        ->paginate(4); // Specify the number of items per page (e.g., 10)
+        ->paginate(10); // Specify the number of items per page (e.g., 10)
       
         return view('branchb.technician.shcedule.index', compact('data', 'search'));
     }

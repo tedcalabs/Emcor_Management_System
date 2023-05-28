@@ -54,8 +54,8 @@
                                 </div>
                             </div>
         
-                            <div class="mb-3 row">
-                                <label for="req_date" class="col-sm-4 col-form-label">Date</label>
+                            <div class="row mb-3">
+                                <label for="req_date" class="col-sm-4 col-form-label">Servicing Date</label>
                                 <div class="col-sm-8">
                                     <input type="datetime-local" id="req_date" name="req_date"
                                         class="form-control @error('req_date') is-invalid @enderror" />
@@ -64,6 +64,16 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <label for="task_due_date" class="col-sm-4 col-form-label">Service Duration</label>
+                                <div class="col-sm-8">
+                                    <input type="datetime-local" id="task_due_date" name="task_due_date"
+                                        class="form-control @error('task_due_date') is-invalid @enderror" />
+                                    @error('task_due_date')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>   
         
                             <div class="mb-3 row">
                                 <label for="address" class="col-sm-4 col-form-label">Address</label>
@@ -83,6 +93,15 @@
                                     @error('description')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="make_available" class="col-sm-4 col-form-label">Make Technician Available</label>
+                                <div class="col-sm-8">
+                                    <select id="make_available" name="make_available" class="form-control">
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="mb-3 row">

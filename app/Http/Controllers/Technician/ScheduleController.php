@@ -96,9 +96,10 @@ class ScheduleController extends Controller
     }
 
 
-
     public function update(Request $request, $id)
     {
+        $technician = Auth::user();
+    
         $request->validate([
             'name' => 'required',
             'address' => 'required',
@@ -109,22 +110,27 @@ class ScheduleController extends Controller
             'description' => 'required',
             'status' => 'required',
             'assessment' => 'required',
-            ]);
+        ]);
+    
+        $data = Maintenance::findOrFail($id);
+        $data->name = $request->name;
+        $data->phone = $request->phone;
+        $data->model = $request->model;
+        $data->serial_no = $request->serial_no;
+        $data->unit_info = $request->unit_info;
+        $data->address = $request->address;
+        $data->description = $request->description;
+        $data->assessment = $request->assessment;
+        $data->date_completed = $request->date_completed;
+        $data->status = $request->status;
+        $data->save();
 
-            $data = Maintenance::find($id);
-            $data->name = $request->name;
-            $data->phone = $request->phone;
-            $data->model = $request->model;
-            $data->serial_no = $request->serial_no;
-            $data->unit_info = $request->unit_info;
-            $data->address = $request->address;
-            $data->description = $request->description;
-            $data->assessment = $request->assessment;
-            $data->date_completed = $request->date_completed;
-            $data->status = $request->status;       
-            $data->save();
-            return redirect()->route('tech.sched')
-            ->with('success','Updated Successfully!');
+        $userId = Auth::id();
+        $user = User::findOrFail($userId);
+        $user->available = true; // Set the technician as available
+        $user->save();
+    
+        return redirect()->route('tech.sched')->with('success', 'Updated Successfully!');
     }
     
     public function deleteReq($id)

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('picture')->nullable();
             $table->string('password');
+            $table->bool('available')->nullable();
             $table->tinyInteger('role')->default(0);
             $table->tinyInteger('status')->default(0);
             $table->string('sched_status')->nullable();

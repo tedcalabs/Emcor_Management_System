@@ -4,7 +4,7 @@
 @include('branchb.secretary.components.sidebar')
 @include('branchb.secretary.components.footer')
 
-@section('updateBrownReqB')
+@section('AcceptRequestWlb')
 
 <div class="container">
     <div class="item item-6">
@@ -24,7 +24,7 @@
                                 <div class="col-sm-8">
                                     <select class="form-select" id="technicianb_id" name="technicianb_id" aria-label="Choose Technician">
                                         @foreach ($technician as $tech)
-                                            <option value="{{ $tech->id }}">{{ $tech->fname }} {{ $tech->lname }}</option>
+                                            <option value=" {{ $tech->id}}">{{ $tech->fname }} {{ $tech->lname }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -55,7 +55,7 @@
                             </div>
         
                             <div class="row mb-3">
-                                <label for="req_date" class="col-sm-4 col-form-label">Date</label>
+                                <label for="req_date" class="col-sm-4 col-form-label">Servicing Date</label>
                                 <div class="col-sm-8">
                                     <input type="datetime-local" id="req_date" name="req_date"
                                         class="form-control @error('req_date') is-invalid @enderror" />
@@ -64,7 +64,16 @@
                                     @enderror
                                 </div>
                             </div>
-        
+                            <div class="row mb-3">
+                                <label for="task_due_date" class="col-sm-4 col-form-label">Service Duration</label>
+                                <div class="col-sm-8">
+                                    <input type="datetime-local" id="task_due_date" name="task_due_date"
+                                        class="form-control @error('task_due_date') is-invalid @enderror" />
+                                    @error('task_due_date')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>      
                             <div class="row mb-3">
                                 <label for="address" class="col-sm-4 col-form-label">Address</label>
                                 <div class="col-sm-8">
@@ -75,27 +84,35 @@
                                     @enderror
                                 </div>
                             </div>
-        
                             <div class="row mb-3">
                                 <label for="description" class="col-sm-4 col-form-label">Description</label>
                                 <div class="col-sm-8">
-                                    <input type="text" id="description"  name="description" value="{{ $data->description }}"
-                                    class="form-control @error('description') is-invalid @enderror" />
+                                    <input type="text" id="description" name="description" value="{{ $data->description }}"
+                                        class="form-control @error('description') is-invalid @enderror" />
                                     @error('description')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
-            
+                            <div class="row mb-3">
+                                <label for="make_available" class="col-sm-4 col-form-label">Make Technician Available</label>
+                                <div class="col-sm-8">
+                                    <select id="make_available" name="make_available" class="form-control">
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="row mt-4">
                                 <div class="col">
-                                    <button type="submit" class="btn btn-primary submit-button float-end">Submit</button>
+                                    <button type="submit" class="btn btn-primary float-end submit-button">Submit</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-            </div>             
+            </div>
+        </div>               
 </div>  
 </div>
 @endsection

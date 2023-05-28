@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Technician;
 
+use App\Models\User;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -117,6 +118,12 @@ class BlTechnicianScheduleController extends Controller
             $data->date_completed = $request->date_completed;
             $data->status = $request->status;       
             $data->save();
+            
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $user->available = true; // Set the technician as available
+            $user->save();
+            
             return redirect()->route('bl.sched')
             ->with('success','Updated Successfully!');
        

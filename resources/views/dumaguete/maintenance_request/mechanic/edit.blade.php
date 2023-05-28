@@ -22,7 +22,7 @@
                                 <label for="technician" class="col-sm-4 col-form-label">Choose Mechanic</label>
                                 <div class="col-sm-8">
                                     <select class="form-select" id="technician_id" name="technician_id" aria-label="Choose Mechanic">
-                                        <option value="">Select a technician</option>
+                                        <option value="">Select a Mechanic</option>
                                         @foreach ($availableTechnicians as $technician)
                                             <option value="{{ $technician->id }}">{{ $technician->fname }} {{ $technician->lname }}</option>
                                         @endforeach
@@ -65,7 +65,7 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="task_due_date" class="col-sm-4 col-form-label">Service Duration Date and Time</label>
+                                <label for="task_due_date" class="col-sm-4 col-form-label">Service Duration</label>
                                 <div class="col-sm-8">
                                     <input type="datetime-local" id="task_due_date" name="task_due_date"
                                         class="form-control @error('task_due_date') is-invalid @enderror" />
@@ -92,6 +92,15 @@
                                     @error('description')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="make_available" class="col-sm-4 col-form-label">Make Technician Available</label>
+                                <div class="col-sm-8">
+                                    <select id="make_available" name="make_available" class="form-control">
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="mb-3 row">
